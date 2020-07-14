@@ -25,15 +25,15 @@ extern "C"
     const char* LinearTimeWarp_name(LinearTimeWarp* self);
     void        LinearTimeWarp_set_name(LinearTimeWarp* self, const char* name);
     AnyDictionary* LinearTimeWarp_metadata(LinearTimeWarp* self);
-    _Bool          LinearTimeWarp_possibly_delete(LinearTimeWarp* self);
-    _Bool          LinearTimeWarp_to_json_file(
+    bool          LinearTimeWarp_possibly_delete(LinearTimeWarp* self);
+    bool          LinearTimeWarp_to_json_file(
                  LinearTimeWarp*  self,
                  const char*      file_name,
                  OTIOErrorStatus* error_status,
                  int              indent);
     const char* LinearTimeWarp_to_json_string(
         LinearTimeWarp* self, OTIOErrorStatus* error_status, int indent);
-    _Bool LinearTimeWarp_is_equivalent_to(
+    bool LinearTimeWarp_is_equivalent_to(
         LinearTimeWarp* self, SerializableObject* other);
     LinearTimeWarp*
                 LinearTimeWarp_clone(LinearTimeWarp* self, OTIOErrorStatus* error_status);

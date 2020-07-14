@@ -44,11 +44,11 @@ extern "C"
         return reinterpret_cast<Composable*>(new OTIO_NS::Composable(
             name, *reinterpret_cast<OTIO_NS::AnyDictionary*>(metadata)));
     }
-    _Bool Composable_visible(Composable* self)
+    bool Composable_visible(Composable* self)
     {
         return reinterpret_cast<OTIO_NS::Composable*>(self)->visible();
     }
-    _Bool Composable_overlapping(Composable* self)
+    bool Composable_overlapping(Composable* self)
     {
         return reinterpret_cast<OTIO_NS::Composable*>(self)->overlapping();
     }
@@ -81,11 +81,11 @@ extern "C"
         SerializableObjectWithMetadata_set_name(
             (SerializableObjectWithMetadata*) self, name);
     }
-    _Bool Composable_possibly_delete(Composable* self)
+    bool Composable_possibly_delete(Composable* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool Composable_to_json_file(
+    bool Composable_to_json_file(
         Composable*      self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -100,7 +100,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool
+    bool
     Composable_is_equivalent_to(Composable* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

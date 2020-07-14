@@ -19,7 +19,7 @@ extern "C"
     int                         EffectVector_max_size(EffectVector* self);
     int                         EffectVector_capacity(EffectVector* self);
     void                        EffectVector_resize(EffectVector* self, int n);
-    _Bool                       EffectVector_empty(EffectVector* self);
+    bool                       EffectVector_empty(EffectVector* self);
     void                        EffectVector_shrink_to_fit(EffectVector* self);
     void                        EffectVector_reserve(EffectVector* self, int n);
     void    EffectVector_swap(EffectVector* self, EffectVector* other);
@@ -41,9 +41,9 @@ extern "C"
     EffectVectorIterator*
             EffectVectorIterator_prev(EffectVectorIterator* iter, int dist);
     Effect* EffectVectorIterator_value(EffectVectorIterator* iter);
-    _Bool   EffectVectorIterator_equal(
+    bool   EffectVectorIterator_equal(
           EffectVectorIterator* lhs, EffectVectorIterator* rhs);
-    _Bool EffectVectorIterator_not_equal(
+    bool EffectVectorIterator_not_equal(
         EffectVectorIterator* lhs, EffectVectorIterator* rhs);
     void EffectVectorIterator_destroy(EffectVectorIterator* self);
 #ifdef __cplusplus

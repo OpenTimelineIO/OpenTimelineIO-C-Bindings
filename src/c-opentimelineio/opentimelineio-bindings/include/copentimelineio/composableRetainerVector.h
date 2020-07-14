@@ -23,7 +23,7 @@ extern "C"
     int  ComposableRetainerVector_max_size(ComposableRetainerVector* self);
     int  ComposableRetainerVector_capacity(ComposableRetainerVector* self);
     void ComposableRetainerVector_resize(ComposableRetainerVector* self, int n);
-    _Bool ComposableRetainerVector_empty(ComposableRetainerVector* self);
+    bool ComposableRetainerVector_empty(ComposableRetainerVector* self);
     void ComposableRetainerVector_shrink_to_fit(ComposableRetainerVector* self);
     void
          ComposableRetainerVector_reserve(ComposableRetainerVector* self, int n);
@@ -53,10 +53,10 @@ extern "C"
         ComposableRetainerVectorIterator* iter, int dist);
     RetainerComposable* ComposableRetainerVectorIterator_value(
         ComposableRetainerVectorIterator* iter);
-    _Bool ComposableRetainerVectorIterator_equal(
+    bool ComposableRetainerVectorIterator_equal(
         ComposableRetainerVectorIterator* lhs,
         ComposableRetainerVectorIterator* rhs);
-    _Bool ComposableRetainerVectorIterator_not_equal(
+    bool ComposableRetainerVectorIterator_not_equal(
         ComposableRetainerVectorIterator* lhs,
         ComposableRetainerVectorIterator* rhs);
     void ComposableRetainerVectorIterator_destroy(

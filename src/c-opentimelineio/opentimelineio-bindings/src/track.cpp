@@ -167,13 +167,13 @@ extern "C"
     {
         Composition_clear_children((Composition*) self);
     }
-    _Bool Track_set_children(
+    bool Track_set_children(
         Track* self, ComposableVector* children, OTIOErrorStatus* error_status)
     {
         return Composition_set_children(
             (Composition*) self, children, error_status);
     }
-    _Bool Track_insert_child(
+    bool Track_insert_child(
         Track*           self,
         int              index,
         Composable*      child,
@@ -182,7 +182,7 @@ extern "C"
         return Composition_insert_child(
             (Composition*) self, index, child, error_status);
     }
-    _Bool Track_set_child(
+    bool Track_set_child(
         Track*           self,
         int              index,
         Composable*      child,
@@ -191,19 +191,19 @@ extern "C"
         return Composition_set_child(
             (Composition*) self, index, child, error_status);
     }
-    _Bool
+    bool
     Track_remove_child(Track* self, int index, OTIOErrorStatus* error_status)
     {
         return Composition_remove_child(
             (Composition*) self, index, error_status);
     }
-    _Bool Track_append_child(
+    bool Track_append_child(
         Track* self, Composable* child, OTIOErrorStatus* error_status)
     {
         return Composition_append_child(
             (Composition*) self, child, error_status);
     }
-    _Bool Track_is_parent_of(Track* self, Composable* other)
+    bool Track_is_parent_of(Track* self, Composable* other)
     {
         return Composition_is_parent_of((Composition*) self, other);
     }
@@ -223,15 +223,15 @@ extern "C"
     {
         return Composition_trim_child_range((Composition*) self, child_range);
     }
-    _Bool Track_has_child(Track* self, Composable* child)
+    bool Track_has_child(Track* self, Composable* child)
     {
         return Composition_has_child((Composition*) self, child);
     }
-    _Bool Track_visible(Track* self)
+    bool Track_visible(Track* self)
     {
         return Composition_visible((Composition*) self);
     }
-    _Bool Track_overlapping(Track* self)
+    bool Track_overlapping(Track* self)
     {
         return Composition_overlapping((Composition*) self);
     }
@@ -307,11 +307,11 @@ extern "C"
     {
         return Composition_set_name((Composition*) self, name);
     }
-    _Bool Track_possibly_delete(Track* self)
+    bool Track_possibly_delete(Track* self)
     {
         return Composition_possibly_delete((Composition*) self);
     }
-    _Bool Track_to_json_file(
+    bool Track_to_json_file(
         Track*           self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -326,7 +326,7 @@ extern "C"
         return Composition_to_json_string(
             (Composition*) self, error_status, indent);
     }
-    _Bool Track_is_equivalent_to(Track* self, SerializableObject* other)
+    bool Track_is_equivalent_to(Track* self, SerializableObject* other)
     {
         return Composition_is_equivalent_to((Composition*) self, other);
     }

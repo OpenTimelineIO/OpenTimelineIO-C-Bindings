@@ -115,11 +115,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool Timeline_possibly_delete(Timeline* self)
+    bool Timeline_possibly_delete(Timeline* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool Timeline_to_json_file(
+    bool Timeline_to_json_file(
         Timeline*        self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -134,7 +134,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool Timeline_is_equivalent_to(Timeline* self, SerializableObject* other)
+    bool Timeline_is_equivalent_to(Timeline* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
             (SerializableObject*) self, other);

@@ -23,8 +23,8 @@ extern "C"
     void RetainerSerializableObject_managed_destroy(
         RetainerSerializableObject* self);
     SerializableObject* SerializableObject_create();
-    _Bool SerializableObject_possibly_delete(SerializableObject* self);
-    _Bool SerializableObject_to_json_file(
+    bool SerializableObject_possibly_delete(SerializableObject* self);
+    bool SerializableObject_to_json_file(
         SerializableObject* self,
         const char*         file_name,
         OTIOErrorStatus*    error_status,
@@ -35,12 +35,12 @@ extern "C"
         const char* file_name, OTIOErrorStatus* error_status);
     SerializableObject* SerializableObject_from_json_string(
         const char* input, OTIOErrorStatus* error_status);
-    _Bool SerializableObject_is_equivalent_to(
+    bool SerializableObject_is_equivalent_to(
         SerializableObject* self, SerializableObject* other);
     SerializableObject* SerializableObject_clone(
         SerializableObject* self, OTIOErrorStatus* error_status);
     /*AnyDictionary* SerializableObject_dynamic_fields(SerializableObject* self);*/
-    _Bool       SerializableObject_is_unknown_schema(SerializableObject* self);
+    bool        SerializableObject_is_unknown_schema(SerializableObject* self);
     const char* SerializableObject_schema_name(SerializableObject* self);
     int         SerializableObject_schema_version(SerializableObject* self);
 #ifdef __cplusplus

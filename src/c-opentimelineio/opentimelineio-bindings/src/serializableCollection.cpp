@@ -67,7 +67,7 @@ extern "C"
         reinterpret_cast<OTIO_NS::SerializableCollection*>(self)->insert_child(
             index, reinterpret_cast<OTIO_NS::SerializableObject*>(child));
     }
-    _Bool SerializableCollection_set_child(
+    bool SerializableCollection_set_child(
         SerializableCollection* self,
         int                     index,
         SerializableObject*     child,
@@ -79,7 +79,7 @@ extern "C"
                 reinterpret_cast<OTIO_NS::SerializableObject*>(child),
                 reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    _Bool SerializableCollection_remove_child(
+    bool SerializableCollection_remove_child(
         SerializableCollection* self, int index, OTIOErrorStatus* error_status)
     {
         return reinterpret_cast<OTIO_NS::SerializableCollection*>(self)
@@ -102,11 +102,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool SerializableCollection_possibly_delete(SerializableCollection* self)
+    bool SerializableCollection_possibly_delete(SerializableCollection* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool SerializableCollection_to_json_file(
+    bool SerializableCollection_to_json_file(
         SerializableCollection* self,
         const char*             file_name,
         OTIOErrorStatus*        error_status,
@@ -121,7 +121,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool SerializableCollection_is_equivalent_to(
+    bool SerializableCollection_is_equivalent_to(
         SerializableCollection* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

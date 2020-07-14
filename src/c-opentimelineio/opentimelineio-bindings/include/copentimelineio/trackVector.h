@@ -19,7 +19,7 @@ extern "C"
     int                        TrackVector_max_size(TrackVector* self);
     int                        TrackVector_capacity(TrackVector* self);
     void                       TrackVector_resize(TrackVector* self, int n);
-    _Bool                      TrackVector_empty(TrackVector* self);
+    bool                      TrackVector_empty(TrackVector* self);
     void                       TrackVector_shrink_to_fit(TrackVector* self);
     void                       TrackVector_reserve(TrackVector* self, int n);
     void   TrackVector_swap(TrackVector* self, TrackVector* other);
@@ -41,9 +41,9 @@ extern "C"
     TrackVectorIterator*
            TrackVectorIterator_prev(TrackVectorIterator* iter, int dist);
     Track* TrackVectorIterator_value(TrackVectorIterator* iter);
-    _Bool  TrackVectorIterator_equal(
+    bool  TrackVectorIterator_equal(
          TrackVectorIterator* lhs, TrackVectorIterator* rhs);
-    _Bool TrackVectorIterator_not_equal(
+    bool TrackVectorIterator_not_equal(
         TrackVectorIterator* lhs, TrackVectorIterator* rhs);
     void TrackVectorIterator_destroy(TrackVectorIterator* self);
 #ifdef __cplusplus

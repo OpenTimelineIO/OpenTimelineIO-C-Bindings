@@ -53,7 +53,7 @@ extern "C"
     {
         reinterpret_cast<MarkerRetainerVectorDef*>(self)->resize(n);
     }
-    _Bool MarkerRetainerVector_empty(MarkerRetainerVector* self)
+    bool MarkerRetainerVector_empty(MarkerRetainerVector* self)
     {
         return reinterpret_cast<MarkerRetainerVectorDef*>(self)->empty();
     }
@@ -153,13 +153,13 @@ extern "C"
             **reinterpret_cast<MarkerRetainerVectorIteratorDef*>(iter);
         return reinterpret_cast<RetainerMarker*>(new MarkerRetainer(obj));
     }
-    _Bool MarkerRetainerVectorIterator_equal(
+    bool MarkerRetainerVectorIterator_equal(
         MarkerRetainerVectorIterator* lhs, MarkerRetainerVectorIterator* rhs)
     {
         return *reinterpret_cast<MarkerRetainerVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<MarkerRetainerVectorIteratorDef*>(rhs);
     }
-    _Bool MarkerRetainerVectorIterator_not_equal(
+    bool MarkerRetainerVectorIterator_not_equal(
         MarkerRetainerVectorIterator* lhs, MarkerRetainerVectorIterator* rhs)
     {
         return *reinterpret_cast<MarkerRetainerVectorIteratorDef*>(lhs) !=

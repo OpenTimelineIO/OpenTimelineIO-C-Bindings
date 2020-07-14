@@ -30,8 +30,8 @@ extern "C"
         EffectVector*  effects,
         MarkerVector*  markers,
         AnyDictionary* metadata);
-    _Bool      Gap_visible(Gap* self);
-    _Bool      Gap_overlapping(Gap* self);
+    bool      Gap_visible(Gap* self);
+    bool      Gap_overlapping(Gap* self);
     TimeRange* Gap_source_range(Gap* self);
     void       Gap_set_source_range(Gap* self, TimeRange* source_range);
     EffectRetainerVector* Gap_effects(Gap* self);
@@ -57,15 +57,15 @@ extern "C"
     const char*    Gap_name(Gap* self);
     AnyDictionary* Gap_metadata(Gap* self);
     void           Gap_set_name(Gap* self, const char* name);
-    _Bool          Gap_possibly_delete(Gap* self);
-    _Bool          Gap_to_json_file(
+    bool          Gap_possibly_delete(Gap* self);
+    bool          Gap_to_json_file(
                  Gap*             self,
                  const char*      file_name,
                  OTIOErrorStatus* error_status,
                  int              indent);
     const char*
                 Gap_to_json_string(Gap* self, OTIOErrorStatus* error_status, int indent);
-    _Bool       Gap_is_equivalent_to(Gap* self, SerializableObject* other);
+    bool       Gap_is_equivalent_to(Gap* self, SerializableObject* other);
     Gap*        Gap_clone(Gap* self, OTIOErrorStatus* error_status);
     const char* Gap_schema_name(Gap* self);
     int         Gap_schema_version(Gap* self);

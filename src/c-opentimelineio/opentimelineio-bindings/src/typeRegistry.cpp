@@ -11,7 +11,7 @@ extern "C"
         return reinterpret_cast<TypeRegistry*>(
             &OTIO_NS::TypeRegistry::instance());
     }
-    /*_Bool TypeRegistry_register_type(
+    /*bool TypeRegistry_register_type(
         TypeRegistry*              self,
         const char*                schema_name,
         int                        schema_version,
@@ -27,7 +27,7 @@ extern "C"
             create_func,
             class_name);
     }*/
-    _Bool TypeRegistry_register_type_from_existing_type(
+    bool TypeRegistry_register_type_from_existing_type(
         TypeRegistry*    self,
         const char*      schema_name,
         int              schema_version,
@@ -41,7 +41,7 @@ extern "C"
                 existing_schema_name,
                 reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    //    _Bool TypeRegistry_register_upgrade_function(
+    //    bool TypeRegistry_register_upgrade_function(
     //        TypeRegistry*               self,
     //        const char*                 schema_name,
     //        int                         version_to_upgrade_to,
@@ -62,7 +62,7 @@ extern "C"
                     *reinterpret_cast<OTIO_NS::AnyDictionary*>(dict),
                     reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status)));
     }
-    _Bool TypeRegistry_set_type_record(
+    bool TypeRegistry_set_type_record(
         TypeRegistry*       self,
         SerializableObject* var1,
         const char*         schema_name,

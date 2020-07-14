@@ -19,7 +19,7 @@ extern "C"
     int                       ComposableVector_max_size(ComposableVector* self);
     int                       ComposableVector_capacity(ComposableVector* self);
     void  ComposableVector_resize(ComposableVector* self, int n);
-    _Bool ComposableVector_empty(ComposableVector* self);
+    bool ComposableVector_empty(ComposableVector* self);
     void  ComposableVector_shrink_to_fit(ComposableVector* self);
     void  ComposableVector_reserve(ComposableVector* self, int n);
     void ComposableVector_swap(ComposableVector* self, ComposableVector* other);
@@ -42,9 +42,9 @@ extern "C"
     ComposableVectorIterator*
                 ComposableVectorIterator_prev(ComposableVectorIterator* iter, int dist);
     Composable* ComposableVectorIterator_value(ComposableVectorIterator* iter);
-    _Bool       ComposableVectorIterator_equal(
+    bool       ComposableVectorIterator_equal(
               ComposableVectorIterator* lhs, ComposableVectorIterator* rhs);
-    _Bool ComposableVectorIterator_not_equal(
+    bool ComposableVectorIterator_not_equal(
         ComposableVectorIterator* lhs, ComposableVectorIterator* rhs);
     void ComposableVectorIterator_destroy(ComposableVectorIterator* self);
 #ifdef __cplusplus

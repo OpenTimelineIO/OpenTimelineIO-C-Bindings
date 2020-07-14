@@ -21,7 +21,7 @@ extern "C"
     int  SerializableObjectVector_max_size(SerializableObjectVector* self);
     int  SerializableObjectVector_capacity(SerializableObjectVector* self);
     void SerializableObjectVector_resize(SerializableObjectVector* self, int n);
-    _Bool SerializableObjectVector_empty(SerializableObjectVector* self);
+    bool SerializableObjectVector_empty(SerializableObjectVector* self);
     void SerializableObjectVector_shrink_to_fit(SerializableObjectVector* self);
     void
          SerializableObjectVector_reserve(SerializableObjectVector* self, int n);
@@ -51,10 +51,10 @@ extern "C"
         SerializableObjectVectorIterator* iter, int dist);
     SerializableObject* SerializableObjectVectorIterator_value(
         SerializableObjectVectorIterator* iter);
-    _Bool SerializableObjectVectorIterator_equal(
+    bool SerializableObjectVectorIterator_equal(
         SerializableObjectVectorIterator* lhs,
         SerializableObjectVectorIterator* rhs);
-    _Bool SerializableObjectVectorIterator_not_equal(
+    bool SerializableObjectVectorIterator_not_equal(
         SerializableObjectVectorIterator* lhs,
         SerializableObjectVectorIterator* rhs);
     void SerializableObjectVectorIterator_destroy(

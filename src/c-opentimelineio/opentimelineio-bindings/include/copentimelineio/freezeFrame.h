@@ -20,15 +20,15 @@ extern "C"
     const char*    FreezeFrame_name(FreezeFrame* self);
     void           FreezeFrame_set_name(FreezeFrame* self, const char* name);
     AnyDictionary* FreezeFrame_metadata(FreezeFrame* self);
-    _Bool          FreezeFrame_possibly_delete(FreezeFrame* self);
-    _Bool          FreezeFrame_to_json_file(
+    bool           FreezeFrame_possibly_delete(FreezeFrame* self);
+    bool           FreezeFrame_to_json_file(
                  FreezeFrame*     self,
                  const char*      file_name,
                  OTIOErrorStatus* error_status,
                  int              indent);
     const char* FreezeFrame_to_json_string(
         FreezeFrame* self, OTIOErrorStatus* error_status, int indent);
-    _Bool
+    bool
     FreezeFrame_is_equivalent_to(FreezeFrame* self, SerializableObject* other);
     FreezeFrame*
                 FreezeFrame_clone(FreezeFrame* self, OTIOErrorStatus* error_status);

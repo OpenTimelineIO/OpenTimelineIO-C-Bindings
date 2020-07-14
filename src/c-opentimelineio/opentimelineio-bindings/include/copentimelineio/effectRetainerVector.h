@@ -21,7 +21,7 @@ extern "C"
     int   EffectRetainerVector_max_size(EffectRetainerVector* self);
     int   EffectRetainerVector_capacity(EffectRetainerVector* self);
     void  EffectRetainerVector_resize(EffectRetainerVector* self, int n);
-    _Bool EffectRetainerVector_empty(EffectRetainerVector* self);
+    bool EffectRetainerVector_empty(EffectRetainerVector* self);
     void  EffectRetainerVector_shrink_to_fit(EffectRetainerVector* self);
     void  EffectRetainerVector_reserve(EffectRetainerVector* self, int n);
     void  EffectRetainerVector_swap(
@@ -50,9 +50,9 @@ extern "C"
         EffectRetainerVectorIterator* iter, int dist);
     RetainerEffect*
           EffectRetainerVectorIterator_value(EffectRetainerVectorIterator* iter);
-    _Bool EffectRetainerVectorIterator_equal(
+    bool EffectRetainerVectorIterator_equal(
         EffectRetainerVectorIterator* lhs, EffectRetainerVectorIterator* rhs);
-    _Bool EffectRetainerVectorIterator_not_equal(
+    bool EffectRetainerVectorIterator_not_equal(
         EffectRetainerVectorIterator* lhs, EffectRetainerVectorIterator* rhs);
     void
     EffectRetainerVectorIterator_destroy(EffectRetainerVectorIterator* self);

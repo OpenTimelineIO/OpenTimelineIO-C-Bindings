@@ -15,20 +15,20 @@ extern "C"
     struct TypeRegistry;
     typedef struct TypeRegistry TypeRegistry;
     TypeRegistry*               TypeRegistry_instance();
-    /*_Bool                       TypeRegistry_register_type(
+    /*bool                       TypeRegistry_register_type(
                               TypeRegistry*              self,
                               const char*                schema_name,
                               int                        schema_version,
                               TypeInfo*                  type,
                               TypeRegistryCreateFunction create, //unable to cast this function pointer to std::function because of the wrapped return type
                               const char*                class_name);*/
-    _Bool TypeRegistry_register_type_from_existing_type(
+    bool TypeRegistry_register_type_from_existing_type(
         TypeRegistry*    self,
         const char*      schema_name,
         int              schema_version,
         const char*      existing_schema_name,
         OTIOErrorStatus* error_status);
-    /*_Bool TypeRegistry_register_upgrade_function(
+    /*bool TypeRegistry_register_upgrade_function(
         TypeRegistry*               self,
         const char*                 schema_name,
         int                         version_to_upgrade_to,
@@ -39,7 +39,7 @@ extern "C"
         int              schema_version,
         AnyDictionary*   dict,
         OTIOErrorStatus* error_status);
-    _Bool TypeRegistry_set_type_record(
+    bool TypeRegistry_set_type_record(
         TypeRegistry*       self,
         SerializableObject* var1,
         const char*         schema_name,

@@ -47,7 +47,7 @@ extern "C"
     {
         reinterpret_cast<ComposableVectorDef*>(self)->resize(n);
     }
-    _Bool ComposableVector_empty(ComposableVector* self)
+    bool ComposableVector_empty(ComposableVector* self)
     {
         return reinterpret_cast<ComposableVectorDef*>(self)->empty();
     }
@@ -141,13 +141,13 @@ extern "C"
             **reinterpret_cast<ComposableVectorIteratorDef*>(iter);
         return reinterpret_cast<Composable*>(obj);
     }
-    _Bool ComposableVectorIterator_equal(
+    bool ComposableVectorIterator_equal(
         ComposableVectorIterator* lhs, ComposableVectorIterator* rhs)
     {
         return *reinterpret_cast<ComposableVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<ComposableVectorIteratorDef*>(rhs);
     }
-    _Bool ComposableVectorIterator_not_equal(
+    bool ComposableVectorIterator_not_equal(
         ComposableVectorIterator* lhs, ComposableVectorIterator* rhs)
     {
         return *reinterpret_cast<ComposableVectorIteratorDef*>(lhs) !=

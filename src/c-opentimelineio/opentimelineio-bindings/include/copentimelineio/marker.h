@@ -41,15 +41,15 @@ extern "C"
     const char* Marker_name(Marker* self);
     void        Marker_set_name(Marker* self, const char* name);
     AnyDictionary* Marker_metadata(Marker* self);
-    _Bool          Marker_possibly_delete(Marker* self);
-    _Bool          Marker_to_json_file(
+    bool          Marker_possibly_delete(Marker* self);
+    bool          Marker_to_json_file(
                  Marker*          self,
                  const char*      file_name,
                  OTIOErrorStatus* error_status,
                  int              indent);
     const char* Marker_to_json_string(
         Marker* self, OTIOErrorStatus* error_status, int indent);
-    _Bool   Marker_is_equivalent_to(Marker* self, SerializableObject* other);
+    bool   Marker_is_equivalent_to(Marker* self, SerializableObject* other);
     Marker* Marker_clone(Marker* self, OTIOErrorStatus* error_status);
     const char* Marker_schema_name(Marker* self);
     int         Marker_schema_version(Marker* self);

@@ -13,16 +13,16 @@ extern "C"
                       const char* original_schema_name, int original_schema_version);
     const char* UnknownSchema_original_schema_name(UnknownSchema* self);
     int         UnknownSchema_original_schema_version(UnknownSchema* self);
-    _Bool       UnknownSchema_is_unknown_schema(UnknownSchema* self);
-    _Bool       UnknownSchema_possibly_delete(UnknownSchema* self);
-    _Bool       UnknownSchema_to_json_file(
+    bool       UnknownSchema_is_unknown_schema(UnknownSchema* self);
+    bool       UnknownSchema_possibly_delete(UnknownSchema* self);
+    bool       UnknownSchema_to_json_file(
               UnknownSchema*   self,
               const char*      file_name,
               OTIOErrorStatus* error_status,
               int              indent);
     const char* UnknownSchema_to_json_string(
         UnknownSchema* self, OTIOErrorStatus* error_status, int indent);
-    _Bool UnknownSchema_is_equivalent_to(
+    bool UnknownSchema_is_equivalent_to(
         UnknownSchema* self, SerializableObject* other);
     UnknownSchema*
                 UnknownSchema_clone(UnknownSchema* self, OTIOErrorStatus* error_status);

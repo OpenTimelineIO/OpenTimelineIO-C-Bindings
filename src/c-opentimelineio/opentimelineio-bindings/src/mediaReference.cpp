@@ -52,7 +52,7 @@ extern "C"
         reinterpret_cast<OTIO_NS::MediaReference*>(self)->set_available_range(
             timeRangeOptional);
     }
-    _Bool MediaReference_is_missing_reference(MediaReference* self)
+    bool MediaReference_is_missing_reference(MediaReference* self)
     {
         return reinterpret_cast<OTIO_NS::MediaReference*>(self)
             ->is_missing_reference();
@@ -72,11 +72,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool MediaReference_possibly_delete(MediaReference* self)
+    bool MediaReference_possibly_delete(MediaReference* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool MediaReference_to_json_file(
+    bool MediaReference_to_json_file(
         MediaReference*  self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -91,7 +91,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool MediaReference_is_equivalent_to(
+    bool MediaReference_is_equivalent_to(
         MediaReference* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

@@ -33,25 +33,25 @@ extern "C"
     const char*               Composition_composition_kind(Composition* self);
     ComposableRetainerVector* Composition_children(Composition* self);
     void                      Composition_clear_children(Composition* self);
-    _Bool                     Composition_set_children(
+    bool                      Composition_set_children(
                             Composition*      self,
                             ComposableVector* children,
                             OTIOErrorStatus*  error_status);
-    _Bool Composition_insert_child(
+    bool Composition_insert_child(
         Composition*     self,
         int              index,
         Composable*      child,
         OTIOErrorStatus* error_status);
-    _Bool Composition_set_child(
+    bool Composition_set_child(
         Composition*     self,
         int              index,
         Composable*      child,
         OTIOErrorStatus* error_status);
-    _Bool Composition_remove_child(
+    bool Composition_remove_child(
         Composition* self, int index, OTIOErrorStatus* error_status);
-    _Bool Composition_append_child(
+    bool Composition_append_child(
         Composition* self, Composable* child, OTIOErrorStatus* error_status);
-    _Bool Composition_is_parent_of(Composition* self, Composable* other);
+    bool Composition_is_parent_of(Composition* self, Composable* other);
     OptionalPairRationalTime* Composition_handles_of_child(
         Composition* self, Composable* child, OTIOErrorStatus* error_status);
     TimeRange* Composition_range_of_child_at_index(
@@ -64,12 +64,12 @@ extern "C"
         Composition* self, Composable* child, OTIOErrorStatus* error_status);
     TimeRange*
           Composition_trim_child_range(Composition* self, TimeRange* child_range);
-    _Bool Composition_has_child(Composition* self, Composable* child);
+    bool Composition_has_child(Composition* self, Composable* child);
     MapComposableTimeRange* Composition_range_of_all_children(
         Composition* self, OTIOErrorStatus* error_status);
 
-    _Bool      Composition_visible(Composition* self);
-    _Bool      Composition_overlapping(Composition* self);
+    bool      Composition_visible(Composition* self);
+    bool      Composition_overlapping(Composition* self);
     TimeRange* Composition_source_range(Composition* self);
     void
                           Composition_set_source_range(Composition* self, TimeRange* source_range);
@@ -101,15 +101,15 @@ extern "C"
     const char*    Composition_name(Composition* self);
     AnyDictionary* Composition_metadata(Composition* self);
     void           Composition_set_name(Composition* self, const char* name);
-    _Bool          Composition_possibly_delete(Composition* self);
-    _Bool          Composition_to_json_file(
+    bool           Composition_possibly_delete(Composition* self);
+    bool           Composition_to_json_file(
                  Composition*     self,
                  const char*      file_name,
                  OTIOErrorStatus* error_status,
                  int              indent);
     const char* Composition_to_json_string(
         Composition* self, OTIOErrorStatus* error_status, int indent);
-    _Bool
+    bool
     Composition_is_equivalent_to(Composition* self, SerializableObject* other);
     Composition*
                 Composition_clone(Composition* self, OTIOErrorStatus* error_status);

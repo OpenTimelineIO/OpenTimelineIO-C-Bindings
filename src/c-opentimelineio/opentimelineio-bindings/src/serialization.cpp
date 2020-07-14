@@ -17,7 +17,7 @@ extern "C"
         strcpy(charPtr, returnStr.c_str());
         return charPtr;
     }
-    _Bool serialize_json_to_file(
+    bool serialize_json_to_file(
         Any*             value,
         const char*      file_name,
         OTIOErrorStatus* error_status,

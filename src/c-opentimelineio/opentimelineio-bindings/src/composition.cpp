@@ -96,7 +96,7 @@ extern "C"
     {
         reinterpret_cast<OTIO_NS::Composition*>(self)->clear_children();
     }
-    _Bool Composition_set_children(
+    bool Composition_set_children(
         Composition*      self,
         ComposableVector* children,
         OTIOErrorStatus*  error_status)
@@ -105,7 +105,7 @@ extern "C"
             *reinterpret_cast<ComposableVectorDef*>(children),
             reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    _Bool Composition_insert_child(
+    bool Composition_insert_child(
         Composition*     self,
         int              index,
         Composable*      child,
@@ -116,7 +116,7 @@ extern "C"
             reinterpret_cast<OTIO_NS::Composable*>(child),
             reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    _Bool Composition_set_child(
+    bool Composition_set_child(
         Composition*     self,
         int              index,
         Composable*      child,
@@ -127,20 +127,20 @@ extern "C"
             reinterpret_cast<OTIO_NS::Composable*>(child),
             reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    _Bool Composition_remove_child(
+    bool Composition_remove_child(
         Composition* self, int index, OTIOErrorStatus* error_status)
     {
         return reinterpret_cast<OTIO_NS::Composition*>(self)->remove_child(
             index, reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    _Bool Composition_append_child(
+    bool Composition_append_child(
         Composition* self, Composable* child, OTIOErrorStatus* error_status)
     {
         return reinterpret_cast<OTIO_NS::Composition*>(self)->append_child(
             reinterpret_cast<OTIO_NS::Composable*>(child),
             reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
     }
-    _Bool Composition_is_parent_of(Composition* self, Composable* other)
+    bool Composition_is_parent_of(Composition* self, Composable* other)
     {
         return reinterpret_cast<OTIO_NS::Composition*>(self)->is_parent_of(
             reinterpret_cast<OTIO_NS::Composable*>(other));
@@ -206,7 +206,7 @@ extern "C"
         return reinterpret_cast<TimeRange*>(
             new opentime::TimeRange(timeRangeOptional.value()));
     }
-    _Bool Composition_has_child(Composition* self, Composable* child)
+    bool Composition_has_child(Composition* self, Composable* child)
     {
         return reinterpret_cast<OTIO_NS::Composition*>(self)->has_child(
             reinterpret_cast<OTIO_NS::Composable*>(child));
@@ -221,11 +221,11 @@ extern "C"
         return reinterpret_cast<MapComposableTimeRange*>(new MapDef(mapDef));
     }
 
-    _Bool Composition_visible(Composition* self)
+    bool Composition_visible(Composition* self)
     {
         return Item_visible((Item*) self);
     }
-    _Bool Composition_overlapping(Composition* self)
+    bool Composition_overlapping(Composition* self)
     {
         return Item_overlapping((Item*) self);
     }
@@ -313,11 +313,11 @@ extern "C"
         SerializableObjectWithMetadata_set_name(
             (SerializableObjectWithMetadata*) self, name);
     }
-    _Bool Composition_possibly_delete(Composition* self)
+    bool Composition_possibly_delete(Composition* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool Composition_to_json_file(
+    bool Composition_to_json_file(
         Composition*     self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -332,7 +332,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool
+    bool
     Composition_is_equivalent_to(Composition* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

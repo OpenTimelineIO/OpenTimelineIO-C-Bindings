@@ -31,7 +31,7 @@ extern "C"
             new OTIO_NS::MissingReference(
                 name_str, timeRangeOptional, metadataDictionary));
     }
-    _Bool MissingReference_is_missing_reference(MissingReference* self)
+    bool MissingReference_is_missing_reference(MissingReference* self)
     {
         return reinterpret_cast<OTIO_NS::MissingReference*>(self)
             ->is_missing_reference();
@@ -60,11 +60,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool MissingReference_possibly_delete(MissingReference* self)
+    bool MissingReference_possibly_delete(MissingReference* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool MissingReference_to_json_file(
+    bool MissingReference_to_json_file(
         MissingReference* self,
         const char*       file_name,
         OTIOErrorStatus*  error_status,
@@ -79,7 +79,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool MissingReference_is_equivalent_to(
+    bool MissingReference_is_equivalent_to(
         MissingReference* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

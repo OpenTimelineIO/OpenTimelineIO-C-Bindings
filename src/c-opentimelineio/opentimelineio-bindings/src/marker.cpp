@@ -108,11 +108,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool Marker_possibly_delete(Marker* self)
+    bool Marker_possibly_delete(Marker* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool Marker_to_json_file(
+    bool Marker_to_json_file(
         Marker*          self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -127,7 +127,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool Marker_is_equivalent_to(Marker* self, SerializableObject* other)
+    bool Marker_is_equivalent_to(Marker* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
             (SerializableObject*) self, other);

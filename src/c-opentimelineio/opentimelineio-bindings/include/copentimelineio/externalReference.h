@@ -21,19 +21,19 @@ extern "C"
     TimeRange* ExternalReference_available_range(ExternalReference* self);
     void       ExternalReference_set_available_range(
               ExternalReference* self, TimeRange* available_range);
-    _Bool       ExternalReference_is_missing_reference(ExternalReference* self);
+    bool       ExternalReference_is_missing_reference(ExternalReference* self);
     const char* ExternalReference_name(ExternalReference* self);
     void ExternalReference_set_name(ExternalReference* self, const char* name);
     AnyDictionary* ExternalReference_metadata(ExternalReference* self);
-    _Bool          ExternalReference_possibly_delete(ExternalReference* self);
-    _Bool          ExternalReference_to_json_file(
+    bool          ExternalReference_possibly_delete(ExternalReference* self);
+    bool          ExternalReference_to_json_file(
                  ExternalReference* self,
                  const char*        file_name,
                  OTIOErrorStatus*   error_status,
                  int                indent);
     const char* ExternalReference_to_json_string(
         ExternalReference* self, OTIOErrorStatus* error_status, int indent);
-    _Bool ExternalReference_is_equivalent_to(
+    bool ExternalReference_is_equivalent_to(
         ExternalReference* self, SerializableObject* other);
     ExternalReference* ExternalReference_clone(
         ExternalReference* self, OTIOErrorStatus* error_status);

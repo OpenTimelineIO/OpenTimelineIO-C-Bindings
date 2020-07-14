@@ -76,11 +76,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool Effect_possibly_delete(Effect* self)
+    bool Effect_possibly_delete(Effect* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool Effect_to_json_file(
+    bool Effect_to_json_file(
         Effect*          self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -95,7 +95,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool Effect_is_equivalent_to(Effect* self, SerializableObject* other)
+    bool Effect_is_equivalent_to(Effect* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
             (SerializableObject*) self, other);

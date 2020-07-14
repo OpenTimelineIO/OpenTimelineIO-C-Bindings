@@ -110,8 +110,8 @@ extern "C"
         return Item_transformed_time_range(
             (Item*) self, time_range, to_item, error_status);
     }
-    _Bool Clip_visible(Clip* self) { return Item_visible((Item*) self); }
-    _Bool Clip_overlapping(Clip* self)
+    bool Clip_visible(Clip* self) { return Item_visible((Item*) self); }
+    bool Clip_overlapping(Clip* self)
     {
         return Item_overlapping((Item*) self);
     }
@@ -134,11 +134,11 @@ extern "C"
         SerializableObjectWithMetadata_set_name(
             (SerializableObjectWithMetadata*) self, name);
     }
-    _Bool Clip_possibly_delete(Clip* self)
+    bool Clip_possibly_delete(Clip* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool Clip_to_json_file(
+    bool Clip_to_json_file(
         Clip*            self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -153,7 +153,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool Clip_is_equivalent_to(Clip* self, SerializableObject* other)
+    bool Clip_is_equivalent_to(Clip* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
             (SerializableObject*) self, (SerializableObject*) other);

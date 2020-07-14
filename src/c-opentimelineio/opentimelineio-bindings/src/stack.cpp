@@ -104,13 +104,13 @@ extern "C"
     {
         Composition_clear_children((Composition*) self);
     }
-    _Bool Stack_set_children(
+    bool Stack_set_children(
         Stack* self, ComposableVector* children, OTIOErrorStatus* error_status)
     {
         return Composition_set_children(
             (Composition*) self, children, error_status);
     }
-    _Bool Stack_insert_child(
+    bool Stack_insert_child(
         Stack*           self,
         int              index,
         Composable*      child,
@@ -119,7 +119,7 @@ extern "C"
         return Composition_insert_child(
             (Composition*) self, index, child, error_status);
     }
-    _Bool Stack_set_child(
+    bool Stack_set_child(
         Stack*           self,
         int              index,
         Composable*      child,
@@ -128,19 +128,19 @@ extern "C"
         return Composition_set_child(
             (Composition*) self, index, child, error_status);
     }
-    _Bool
+    bool
     Stack_remove_child(Stack* self, int index, OTIOErrorStatus* error_status)
     {
         return Composition_remove_child(
             (Composition*) self, index, error_status);
     }
-    _Bool Stack_append_child(
+    bool Stack_append_child(
         Stack* self, Composable* child, OTIOErrorStatus* error_status)
     {
         return Composition_append_child(
             (Composition*) self, child, error_status);
     }
-    _Bool Stack_is_parent_of(Stack* self, Composable* other)
+    bool Stack_is_parent_of(Stack* self, Composable* other)
     {
         return Composition_is_parent_of((Composition*) self, other);
     }
@@ -166,15 +166,15 @@ extern "C"
     {
         return Composition_trim_child_range((Composition*) self, child_range);
     }
-    _Bool Stack_has_child(Stack* self, Composable* child)
+    bool Stack_has_child(Stack* self, Composable* child)
     {
         return Composition_has_child((Composition*) self, child);
     }
-    _Bool Stack_visible(Stack* self)
+    bool Stack_visible(Stack* self)
     {
         return Composition_visible((Composition*) self);
     }
-    _Bool Stack_overlapping(Stack* self)
+    bool Stack_overlapping(Stack* self)
     {
         return Composition_overlapping((Composition*) self);
     }
@@ -250,11 +250,11 @@ extern "C"
     {
         Composition_set_name((Composition*) self, name);
     }
-    _Bool Stack_possibly_delete(Stack* self)
+    bool Stack_possibly_delete(Stack* self)
     {
         return Composition_possibly_delete((Composition*) self);
     }
-    _Bool Stack_to_json_file(
+    bool Stack_to_json_file(
         Stack*           self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -269,7 +269,7 @@ extern "C"
         return Composition_to_json_string(
             (Composition*) self, error_status, indent);
     }
-    _Bool Stack_is_equivalent_to(Stack* self, SerializableObject* other)
+    bool Stack_is_equivalent_to(Stack* self, SerializableObject* other)
     {
         return Composition_is_equivalent_to((Composition*) self, other);
     }

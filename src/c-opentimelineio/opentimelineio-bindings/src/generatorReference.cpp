@@ -80,7 +80,7 @@ extern "C"
         MediaReference_set_available_range(
             (MediaReference*) self, available_range);
     }
-    _Bool GeneratorReference_is_missing_reference(GeneratorReference* self)
+    bool GeneratorReference_is_missing_reference(GeneratorReference* self)
     {
         return MediaReference_is_missing_reference((MediaReference*) self);
     }
@@ -99,11 +99,11 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    _Bool GeneratorReference_possibly_delete(GeneratorReference* self)
+    bool GeneratorReference_possibly_delete(GeneratorReference* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool GeneratorReference_to_json_file(
+    bool GeneratorReference_to_json_file(
         GeneratorReference* self,
         const char*         file_name,
         OTIOErrorStatus*    error_status,
@@ -118,7 +118,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool GeneratorReference_is_equivalent_to(
+    bool GeneratorReference_is_equivalent_to(
         GeneratorReference* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

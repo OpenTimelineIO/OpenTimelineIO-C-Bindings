@@ -25,20 +25,20 @@ extern "C"
     TimeRange*     GeneratorReference_available_range(GeneratorReference* self);
     void           GeneratorReference_set_available_range(
                   GeneratorReference* self, TimeRange* available_range);
-    _Bool GeneratorReference_is_missing_reference(GeneratorReference* self);
+    bool GeneratorReference_is_missing_reference(GeneratorReference* self);
     const char* GeneratorReference_name(GeneratorReference* self);
     void
                    GeneratorReference_set_name(GeneratorReference* self, const char* name);
     AnyDictionary* GeneratorReference_metadata(GeneratorReference* self);
-    _Bool          GeneratorReference_possibly_delete(GeneratorReference* self);
-    _Bool          GeneratorReference_to_json_file(
+    bool          GeneratorReference_possibly_delete(GeneratorReference* self);
+    bool          GeneratorReference_to_json_file(
                  GeneratorReference* self,
                  const char*         file_name,
                  OTIOErrorStatus*    error_status,
                  int                 indent);
     const char* GeneratorReference_to_json_string(
         GeneratorReference* self, OTIOErrorStatus* error_status, int indent);
-    _Bool GeneratorReference_is_equivalent_to(
+    bool GeneratorReference_is_equivalent_to(
         GeneratorReference* self, SerializableObject* other);
     GeneratorReference* GeneratorReference_clone(
         GeneratorReference* self, OTIOErrorStatus* error_status);

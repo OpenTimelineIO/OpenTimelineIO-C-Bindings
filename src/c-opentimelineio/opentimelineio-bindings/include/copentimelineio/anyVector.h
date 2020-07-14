@@ -21,7 +21,7 @@ extern "C"
     int                                   AnyVector_max_size(AnyVector* self);
     int                                   AnyVector_capacity(AnyVector* self);
     void  AnyVector_resize(AnyVector* self, int n);
-    _Bool AnyVector_empty(AnyVector* self);
+    bool AnyVector_empty(AnyVector* self);
     void  AnyVector_shrink_to_fit(AnyVector* self);
     void  AnyVector_reserve(AnyVector* self, int n);
     void  AnyVector_swap(AnyVector* self, AnyVector* other);
@@ -40,9 +40,9 @@ extern "C"
     AnyVectorIterator*
     AnyVectorIterator_prev(AnyVectorIterator* iter, int dist);
     Any* AnyVectorIterator_value(AnyVectorIterator* iter);
-    _Bool
+    bool
     AnyVectorIterator_equal(AnyVectorIterator* lhs, AnyVectorIterator* rhs);
-    _Bool
+    bool
                             AnyVectorIterator_not_equal(AnyVectorIterator* lhs, AnyVectorIterator* rhs);
     void                    AnyVectorIterator_destroy(AnyVectorIterator* self);
     AnyVectorMutationStamp* MutationStamp_create(AnyVector* v);

@@ -76,7 +76,7 @@ extern "C"
     {
         return reinterpret_cast<MapDef*>(self)->max_size();
     }
-    _Bool MapComposableTimeRange_empty(MapComposableTimeRange* self)
+    bool MapComposableTimeRange_empty(MapComposableTimeRange* self)
     {
         return reinterpret_cast<MapDef*>(self)->empty();
     }
@@ -125,14 +125,14 @@ extern "C"
             (*reinterpret_cast<MapIterator*>(iter))->second;
         return reinterpret_cast<TimeRange*>(new opentime::TimeRange(timeRange));
     }
-    _Bool MapComposableTimeRangeIterator_equal(
+    bool MapComposableTimeRangeIterator_equal(
         MapComposableTimeRangeIterator* lhs,
         MapComposableTimeRangeIterator* rhs)
     {
         return *reinterpret_cast<MapIterator*>(lhs) ==
                *reinterpret_cast<MapIterator*>(rhs);
     }
-    _Bool MapComposableTimeRangeIterator_not_equal(
+    bool MapComposableTimeRangeIterator_not_equal(
         MapComposableTimeRangeIterator* lhs,
         MapComposableTimeRangeIterator* rhs)
     {

@@ -65,7 +65,7 @@ extern "C"
     {
         reinterpret_cast<SerializableObjectRetainerVectorDef*>(self)->resize(n);
     }
-    _Bool SerializableObjectRetainerVector_empty(
+    bool SerializableObjectRetainerVector_empty(
         SerializableObjectRetainerVector* self)
     {
         return reinterpret_cast<SerializableObjectRetainerVectorDef*>(self)
@@ -198,7 +198,7 @@ extern "C"
         return reinterpret_cast<RetainerSerializableObject*>(
             new SerializableObjectRetainer(obj));
     }
-    _Bool SerializableObjectRetainerVectorIterator_equal(
+    bool SerializableObjectRetainerVectorIterator_equal(
         SerializableObjectRetainerVectorIterator* lhs,
         SerializableObjectRetainerVectorIterator* rhs)
     {
@@ -207,7 +207,7 @@ extern "C"
                *reinterpret_cast<SerializableObjectRetainerVectorIteratorDef*>(
                    rhs);
     }
-    _Bool SerializableObjectRetainerVectorIterator_not_equal(
+    bool SerializableObjectRetainerVectorIterator_not_equal(
         SerializableObjectRetainerVectorIterator* lhs,
         SerializableObjectRetainerVectorIterator* rhs)
     {

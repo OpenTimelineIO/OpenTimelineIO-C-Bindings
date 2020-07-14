@@ -47,7 +47,7 @@ extern "C"
     {
         reinterpret_cast<TrackVectorDef*>(self)->resize(n);
     }
-    _Bool TrackVector_empty(TrackVector* self)
+    bool TrackVector_empty(TrackVector* self)
     {
         return reinterpret_cast<TrackVectorDef*>(self)->empty();
     }
@@ -138,13 +138,13 @@ extern "C"
         OTIO_NS::Track* obj = **reinterpret_cast<TrackVectorIteratorDef*>(iter);
         return reinterpret_cast<Track*>(obj);
     }
-    _Bool TrackVectorIterator_equal(
+    bool TrackVectorIterator_equal(
         TrackVectorIterator* lhs, TrackVectorIterator* rhs)
     {
         return *reinterpret_cast<TrackVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<TrackVectorIteratorDef*>(rhs);
     }
-    _Bool TrackVectorIterator_not_equal(
+    bool TrackVectorIterator_not_equal(
         TrackVectorIterator* lhs, TrackVectorIterator* rhs)
     {
         return *reinterpret_cast<TrackVectorIteratorDef*>(lhs) !=

@@ -60,11 +60,11 @@ extern "C"
             effectsVector,
             markersVector));
     }
-    _Bool Item_visible(Item* self)
+    bool Item_visible(Item* self)
     {
         return reinterpret_cast<OTIO_NS::Item*>(self)->visible();
     }
-    _Bool Item_overlapping(Item* self)
+    bool Item_overlapping(Item* self)
     {
         return reinterpret_cast<OTIO_NS::Item*>(self)->overlapping();
     }
@@ -192,11 +192,11 @@ extern "C"
     {
         return Composable_set_name((Composable*) self, name);
     }
-    _Bool Item_possibly_delete(Item* self)
+    bool Item_possibly_delete(Item* self)
     {
         return Composable_possibly_delete((Composable*) self);
     }
-    _Bool Item_to_json_file(
+    bool Item_to_json_file(
         Item*            self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -211,7 +211,7 @@ extern "C"
         return Composable_to_json_string(
             (Composable*) self, error_status, indent);
     }
-    _Bool Item_is_equivalent_to(Item* self, SerializableObject* other)
+    bool Item_is_equivalent_to(Item* self, SerializableObject* other)
     {
         return Composable_is_equivalent_to((Composable*) self, other);
     }

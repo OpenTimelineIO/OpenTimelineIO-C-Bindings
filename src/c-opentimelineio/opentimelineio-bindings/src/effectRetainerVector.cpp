@@ -53,7 +53,7 @@ extern "C"
     {
         reinterpret_cast<EffectRetainerVectorDef*>(self)->resize(n);
     }
-    _Bool EffectRetainerVector_empty(EffectRetainerVector* self)
+    bool EffectRetainerVector_empty(EffectRetainerVector* self)
     {
         return reinterpret_cast<EffectRetainerVectorDef*>(self)->empty();
     }
@@ -153,13 +153,13 @@ extern "C"
             **reinterpret_cast<EffectRetainerVectorIteratorDef*>(iter);
         return reinterpret_cast<RetainerEffect*>(new EffectRetainer(obj));
     }
-    _Bool EffectRetainerVectorIterator_equal(
+    bool EffectRetainerVectorIterator_equal(
         EffectRetainerVectorIterator* lhs, EffectRetainerVectorIterator* rhs)
     {
         return *reinterpret_cast<EffectRetainerVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<EffectRetainerVectorIteratorDef*>(rhs);
     }
-    _Bool EffectRetainerVectorIterator_not_equal(
+    bool EffectRetainerVectorIterator_not_equal(
         EffectRetainerVectorIterator* lhs, EffectRetainerVectorIterator* rhs)
     {
         return *reinterpret_cast<EffectRetainerVectorIteratorDef*>(lhs) !=

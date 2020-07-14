@@ -19,9 +19,9 @@ extern "C"
         SerializableObjectWithMetadata* self, const char* name);
     AnyDictionary* SerializableObjectWithMetadata_metadata(
         SerializableObjectWithMetadata* self);
-    _Bool SerializableObjectWithMetadata_possibly_delete(
+    bool SerializableObjectWithMetadata_possibly_delete(
         SerializableObjectWithMetadata* self);
-    _Bool SerializableObjectWithMetadata_to_json_file(
+    bool SerializableObjectWithMetadata_to_json_file(
         SerializableObjectWithMetadata* self,
         const char*                     file_name,
         OTIOErrorStatus*                error_status,
@@ -30,11 +30,11 @@ extern "C"
         SerializableObjectWithMetadata* self,
         OTIOErrorStatus*                error_status,
         int                             indent);
-    _Bool SerializableObjectWithMetadata_is_equivalent_to(
+    bool SerializableObjectWithMetadata_is_equivalent_to(
         SerializableObjectWithMetadata* self, SerializableObject* other);
     SerializableObjectWithMetadata* SerializableObjectWithMetadata_clone(
         SerializableObjectWithMetadata* self, OTIOErrorStatus* error_status);
-    _Bool SerializableObjectWithMetadata_is_unknown_schema(
+    bool SerializableObjectWithMetadata_is_unknown_schema(
         SerializableObjectWithMetadata* self);
     const char* SerializableObjectWithMetadata_schema_name(
         SerializableObjectWithMetadata* self);

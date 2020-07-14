@@ -42,7 +42,7 @@ extern "C"
     {
         reinterpret_cast<OTIO_NS::AnyVector*>(self)->resize(n);
     }
-    _Bool AnyVector_empty(AnyVector* self)
+    bool AnyVector_empty(AnyVector* self)
     {
         return reinterpret_cast<OTIO_NS::AnyVector*>(self)->empty();
     }
@@ -121,13 +121,13 @@ extern "C"
         OTIO_NS::any value = *reinterpret_cast<VectorIterator*>(iter);
         return reinterpret_cast<Any*>(new OTIO_NS::any(value));
     }
-    _Bool
+    bool
     AnyVectorIterator_equal(AnyVectorIterator* lhs, AnyVectorIterator* rhs)
     {
         return *reinterpret_cast<VectorIterator*>(lhs) ==
                *reinterpret_cast<VectorIterator*>(rhs);
     }
-    _Bool
+    bool
     AnyVectorIterator_not_equal(AnyVectorIterator* lhs, AnyVectorIterator* rhs)
     {
         return *reinterpret_cast<VectorIterator*>(lhs) ==

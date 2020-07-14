@@ -21,7 +21,7 @@ extern "C"
     int   MarkerRetainerVector_max_size(MarkerRetainerVector* self);
     int   MarkerRetainerVector_capacity(MarkerRetainerVector* self);
     void  MarkerRetainerVector_resize(MarkerRetainerVector* self, int n);
-    _Bool MarkerRetainerVector_empty(MarkerRetainerVector* self);
+    bool  MarkerRetainerVector_empty(MarkerRetainerVector* self);
     void  MarkerRetainerVector_shrink_to_fit(MarkerRetainerVector* self);
     void  MarkerRetainerVector_reserve(MarkerRetainerVector* self, int n);
     void  MarkerRetainerVector_swap(
@@ -49,11 +49,11 @@ extern "C"
     MarkerRetainerVectorIterator* MarkerRetainerVectorIterator_prev(
         MarkerRetainerVectorIterator* iter, int dist);
     RetainerMarker*
-          MarkerRetainerVectorIterator_value(MarkerRetainerVectorIterator* iter);
-    _Bool MarkerRetainerVectorIterator_equal(
-        MarkerRetainerVectorIterator* lhs, MarkerRetainerVectorIterator* rhs);
-    _Bool MarkerRetainerVectorIterator_not_equal(
-        MarkerRetainerVectorIterator* lhs, MarkerRetainerVectorIterator* rhs);
+         MarkerRetainerVectorIterator_value(MarkerRetainerVectorIterator* iter);
+    bool MarkerRetainerVectorIterator_equal(
+            MarkerRetainerVectorIterator* lhs, MarkerRetainerVectorIterator* rhs);
+    bool MarkerRetainerVectorIterator_not_equal(
+            MarkerRetainerVectorIterator* lhs, MarkerRetainerVectorIterator* rhs);
     void
     MarkerRetainerVectorIterator_destroy(MarkerRetainerVectorIterator* self);
 #ifdef __cplusplus

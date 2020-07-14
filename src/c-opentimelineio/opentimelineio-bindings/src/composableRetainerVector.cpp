@@ -54,7 +54,7 @@ extern "C"
     {
         reinterpret_cast<ComposableRetainerVectorDef*>(self)->resize(n);
     }
-    _Bool ComposableRetainerVector_empty(ComposableRetainerVector* self)
+    bool ComposableRetainerVector_empty(ComposableRetainerVector* self)
     {
         return reinterpret_cast<ComposableRetainerVectorDef*>(self)->empty();
     }
@@ -160,14 +160,14 @@ extern "C"
         return reinterpret_cast<RetainerComposable*>(
             new ComposableRetainer(obj));
     }
-    _Bool ComposableRetainerVectorIterator_equal(
+    bool ComposableRetainerVectorIterator_equal(
         ComposableRetainerVectorIterator* lhs,
         ComposableRetainerVectorIterator* rhs)
     {
         return *reinterpret_cast<ComposableRetainerVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<ComposableRetainerVectorIteratorDef*>(rhs);
     }
-    _Bool ComposableRetainerVectorIterator_not_equal(
+    bool ComposableRetainerVectorIterator_not_equal(
         ComposableRetainerVectorIterator* lhs,
         ComposableRetainerVectorIterator* rhs)
     {

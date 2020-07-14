@@ -69,7 +69,7 @@ extern "C"
     {
         return reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->max_size();
     }
-    _Bool AnyDictionary_empty(AnyDictionary* self)
+    bool AnyDictionary_empty(AnyDictionary* self)
     {
         return reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->empty();
     }
@@ -125,13 +125,13 @@ extern "C"
             (*reinterpret_cast<DictionaryIterator*>(iter))->second;
         return reinterpret_cast<Any*>(new OTIO_NS::any(value));
     }
-    _Bool AnyDictionaryIterator_equal(
+    bool AnyDictionaryIterator_equal(
         AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs)
     {
         return *reinterpret_cast<DictionaryIterator*>(lhs) ==
                *reinterpret_cast<DictionaryIterator*>(rhs);
     }
-    _Bool AnyDictionaryIterator_not_equal(
+    bool AnyDictionaryIterator_not_equal(
         AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs)
     {
         return *reinterpret_cast<DictionaryIterator*>(lhs) !=

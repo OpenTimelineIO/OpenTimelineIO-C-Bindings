@@ -23,14 +23,14 @@ extern "C"
     TimeRange_clamped_with_rational_time(TimeRange* self, RationalTime* other);
     TimeRange*
     TimeRange_clamped_with_time_range(TimeRange* self, TimeRange* other);
-    _Bool
+    bool
           TimeRange_contains_rational_time(TimeRange* self, RationalTime* other);
-    _Bool TimeRange_contains_time_range(TimeRange* self, TimeRange* other);
-    _Bool
+    bool TimeRange_contains_time_range(TimeRange* self, TimeRange* other);
+    bool
                TimeRange_overlaps_rational_time(TimeRange* self, RationalTime* other);
-    _Bool      TimeRange_overlaps_time_range(TimeRange* self, TimeRange* other);
-    _Bool      TimeRange_equal(TimeRange* lhs, TimeRange* rhs);
-    _Bool      TimeRange_not_equal(TimeRange* lhs, TimeRange* rhs);
+    bool      TimeRange_overlaps_time_range(TimeRange* self, TimeRange* other);
+    bool      TimeRange_equal(TimeRange* lhs, TimeRange* rhs);
+    bool      TimeRange_not_equal(TimeRange* lhs, TimeRange* rhs);
     TimeRange* TimeRange_range_from_start_end_time(
         RationalTime* start_time, RationalTime* end_time_exclusive);
     void TimeRange_destroy(TimeRange* self);

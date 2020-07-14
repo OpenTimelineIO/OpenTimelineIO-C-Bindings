@@ -23,20 +23,20 @@ extern "C"
     void SerializableCollection_clear_children(SerializableCollection* self);
     void SerializableCollection_insert_child(
         SerializableCollection* self, int index, SerializableObject* child);
-    _Bool SerializableCollection_set_child(
+    bool SerializableCollection_set_child(
         SerializableCollection* self,
         int                     index,
         SerializableObject*     child,
         OTIOErrorStatus*        error_status);
-    _Bool SerializableCollection_remove_child(
+    bool SerializableCollection_remove_child(
         SerializableCollection* self, int index, OTIOErrorStatus* error_status);
     const char* SerializableCollection_name(SerializableCollection* self);
     void        SerializableCollection_set_name(
                SerializableCollection* self, const char* name);
     AnyDictionary*
           SerializableCollection_metadata(SerializableCollection* self);
-    _Bool SerializableCollection_possibly_delete(SerializableCollection* self);
-    _Bool SerializableCollection_to_json_file(
+    bool SerializableCollection_possibly_delete(SerializableCollection* self);
+    bool SerializableCollection_to_json_file(
         SerializableCollection* self,
         const char*             file_name,
         OTIOErrorStatus*        error_status,
@@ -45,7 +45,7 @@ extern "C"
         SerializableCollection* self,
         OTIOErrorStatus*        error_status,
         int                     indent);
-    _Bool SerializableCollection_is_equivalent_to(
+    bool SerializableCollection_is_equivalent_to(
         SerializableCollection* self, SerializableObject* other);
     SerializableCollection* SerializableCollection_clone(
         SerializableCollection* self, OTIOErrorStatus* error_status);

@@ -49,7 +49,7 @@ extern "C"
             out_offset_rt,
             metadataDictionary));
     }
-    _Bool Transition_overlapping(Transition* self)
+    bool Transition_overlapping(Transition* self)
     {
         return reinterpret_cast<OTIO_NS::Transition*>(self)->overlapping();
     }
@@ -145,15 +145,15 @@ extern "C"
     {
         reinterpret_cast<OTIO_NS::Transition*>(self)->set_name(name);
     }
-    _Bool Transition_visible(Transition* self)
+    bool Transition_visible(Transition* self)
     {
         return Composable_visible((Composable*) self);
     }
-    _Bool Transition_possibly_delete(Transition* self)
+    bool Transition_possibly_delete(Transition* self)
     {
         return Composable_possibly_delete((Composable*) self);
     }
-    _Bool Transition_to_json_file(
+    bool Transition_to_json_file(
         Transition*      self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -168,7 +168,7 @@ extern "C"
         return Composable_to_json_string(
             (Composable*) self, error_status, indent);
     }
-    _Bool
+    bool
     Transition_is_equivalent_to(Transition* self, SerializableObject* other)
     {
         return Composable_is_equivalent_to((Composable*) self, other);

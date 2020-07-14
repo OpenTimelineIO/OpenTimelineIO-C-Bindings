@@ -8,9 +8,9 @@
 extern "C"
 {
 #endif
-    _Bool deserialize_json_from_string(
+    bool deserialize_json_from_string(
         const char* input, Any* destination, OTIOErrorStatus* error_status);
-    _Bool deserialize_json_from_file(
+    bool deserialize_json_from_file(
         const char* file_name, Any* destination, OTIOErrorStatus* error_status);
 #ifdef __cplusplus
 }

@@ -18,7 +18,7 @@ extern "C"
     } OpenTime_IsDropFrameRate_;
     typedef int   OpenTime_IsDropFrameRate;
     RationalTime* RationalTime_create(double value, double rate);
-    _Bool         RationalTime_is_invalid_time(RationalTime* self);
+    bool         RationalTime_is_invalid_time(RationalTime* self);
     double        RationalTime_value(RationalTime* self);
     double        RationalTime_rate(RationalTime* self);
     RationalTime* RationalTime_rescaled_to(RationalTime* self, double new_rate);
@@ -28,11 +28,11 @@ extern "C"
            RationalTime_value_rescaled_to_rate(RationalTime* self, double new_rate);
     double RationalTime_value_rescaled_to_rational_time(
         RationalTime* self, RationalTime* rt);
-    _Bool RationalTime_almost_equal(
+    bool RationalTime_almost_equal(
         RationalTime* self, RationalTime* other, double delta);
     RationalTime* RationalTime_duration_from_start_end_time(
         RationalTime* start_time, RationalTime* end_time_exclusive);
-    _Bool         RationalTime_is_valid_timecode_rate(double rate);
+    bool         RationalTime_is_valid_timecode_rate(double rate);
     RationalTime* RationalTime_from_frames(double frame, double rate);
     RationalTime* RationalTime_from_seconds(double seconds);
     RationalTime* RationalTime_from_timecode(
@@ -53,8 +53,8 @@ extern "C"
     RationalTime* RationalTime_add(RationalTime* lhs, RationalTime* rhs);
     RationalTime* RationalTime_subtract(RationalTime* lhs, RationalTime* rhs);
     RationalTime* RationalTime_compare(RationalTime* lhs, RationalTime* rhs);
-    _Bool         RationalTime_equal(RationalTime* lhs, RationalTime* rhs);
-    _Bool         RationalTime_not_equal(RationalTime* lhs, RationalTime* rhs);
+    bool         RationalTime_equal(RationalTime* lhs, RationalTime* rhs);
+    bool         RationalTime_not_equal(RationalTime* lhs, RationalTime* rhs);
     void          RationalTime_destroy(RationalTime* self);
 #ifdef __cplusplus
 }

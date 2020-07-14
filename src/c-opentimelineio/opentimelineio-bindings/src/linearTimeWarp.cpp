@@ -58,11 +58,11 @@ extern "C"
     {
         return Effect_metadata((Effect*) self);
     }
-    _Bool LinearTimeWarp_possibly_delete(LinearTimeWarp* self)
+    bool LinearTimeWarp_possibly_delete(LinearTimeWarp* self)
     {
         return Effect_possibly_delete((Effect*) self);
     }
-    _Bool LinearTimeWarp_to_json_file(
+    bool LinearTimeWarp_to_json_file(
         LinearTimeWarp*  self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -76,7 +76,7 @@ extern "C"
     {
         return Effect_to_json_string((Effect*) self, error_status, indent);
     }
-    _Bool LinearTimeWarp_is_equivalent_to(
+    bool LinearTimeWarp_is_equivalent_to(
         LinearTimeWarp* self, SerializableObject* other)
     {
         return Effect_is_equivalent_to((Effect*) self, other);

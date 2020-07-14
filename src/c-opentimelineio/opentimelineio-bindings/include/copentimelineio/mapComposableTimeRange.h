@@ -34,7 +34,7 @@ extern "C"
         MapComposableTimeRange* self, Composable* key);
     int   MapComposableTimeRange_size(MapComposableTimeRange* self);
     int   MapComposableTimeRange_max_size(MapComposableTimeRange* self);
-    _Bool MapComposableTimeRange_empty(MapComposableTimeRange* self);
+    bool  MapComposableTimeRange_empty(MapComposableTimeRange* self);
     MapComposableTimeRangeIterator*
                                     MapComposableTimeRange_find(MapComposableTimeRange* self, Composable* key);
     MapComposableTimeRangeIterator* MapComposableTimeRange_insert(
@@ -47,10 +47,10 @@ extern "C"
         MapComposableTimeRangeIterator* iter, int dist);
     TimeRange*
           MapComposableTimeRangeIterator_value(MapComposableTimeRangeIterator* iter);
-    _Bool MapComposableTimeRangeIterator_equal(
+    bool  MapComposableTimeRangeIterator_equal(
         MapComposableTimeRangeIterator* lhs,
         MapComposableTimeRangeIterator* rhs);
-    _Bool MapComposableTimeRangeIterator_not_equal(
+    bool  MapComposableTimeRangeIterator_not_equal(
         MapComposableTimeRangeIterator* lhs,
         MapComposableTimeRangeIterator* rhs);
     void MapComposableTimeRangeIterator_destroy(

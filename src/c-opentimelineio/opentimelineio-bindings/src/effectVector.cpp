@@ -47,7 +47,7 @@ extern "C"
     {
         reinterpret_cast<EffectVectorDef*>(self)->resize(n);
     }
-    _Bool EffectVector_empty(EffectVector* self)
+    bool EffectVector_empty(EffectVector* self)
     {
         return reinterpret_cast<EffectVectorDef*>(self)->empty();
     }
@@ -139,13 +139,13 @@ extern "C"
             **reinterpret_cast<EffectVectorIteratorDef*>(iter);
         return reinterpret_cast<Effect*>(obj);
     }
-    _Bool EffectVectorIterator_equal(
+    bool EffectVectorIterator_equal(
         EffectVectorIterator* lhs, EffectVectorIterator* rhs)
     {
         return *reinterpret_cast<EffectVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<EffectVectorIteratorDef*>(rhs);
     }
-    _Bool EffectVectorIterator_not_equal(
+    bool EffectVectorIterator_not_equal(
         EffectVectorIterator* lhs, EffectVectorIterator* rhs)
     {
         return *reinterpret_cast<EffectVectorIteratorDef*>(lhs) !=

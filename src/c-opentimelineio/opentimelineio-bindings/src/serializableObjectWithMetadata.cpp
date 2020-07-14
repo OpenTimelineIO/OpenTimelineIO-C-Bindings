@@ -46,12 +46,12 @@ extern "C"
         return reinterpret_cast<AnyDictionary*>(
             new OTIO_NS::AnyDictionary(anyDictionary));
     }
-    _Bool SerializableObjectWithMetadata_possibly_delete(
+    bool SerializableObjectWithMetadata_possibly_delete(
         SerializableObjectWithMetadata* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool SerializableObjectWithMetadata_to_json_file(
+    bool SerializableObjectWithMetadata_to_json_file(
         SerializableObjectWithMetadata* self,
         const char*                     file_name,
         OTIOErrorStatus*                error_status,
@@ -68,7 +68,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool SerializableObjectWithMetadata_is_equivalent_to(
+    bool SerializableObjectWithMetadata_is_equivalent_to(
         SerializableObjectWithMetadata* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
@@ -80,7 +80,7 @@ extern "C"
         return (SerializableObjectWithMetadata*) SerializableObject_clone(
             (SerializableObject*) self, error_status);
     }
-    _Bool SerializableObjectWithMetadata_is_unknown_schema(
+    bool SerializableObjectWithMetadata_is_unknown_schema(
         SerializableObjectWithMetadata* self)
     {
         return SerializableObject_is_unknown_schema((SerializableObject*) self);

@@ -28,7 +28,7 @@ extern "C"
     int   AnyDictionary_erase_key(AnyDictionary* self, const char* key);
     int   AnyDictionary_size(AnyDictionary* self);
     int   AnyDictionary_max_size(AnyDictionary* self);
-    _Bool AnyDictionary_empty(AnyDictionary* self);
+    bool AnyDictionary_empty(AnyDictionary* self);
     AnyDictionaryIterator*
     AnyDictionary_find(AnyDictionary* self, const char* key);
     AnyDictionaryIterator*
@@ -40,9 +40,9 @@ extern "C"
                 AnyDictionaryIterator_prev(AnyDictionaryIterator* iter, int dist);
     const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter);
     Any*        AnyDictionaryIterator_value(AnyDictionaryIterator* iter);
-    _Bool       AnyDictionaryIterator_equal(
+    bool       AnyDictionaryIterator_equal(
               AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);
-    _Bool AnyDictionaryIterator_not_equal(
+    bool AnyDictionaryIterator_not_equal(
         AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);
     void AnyDictionaryIterator_destroy(AnyDictionaryIterator* self);
     AnyDictionaryMutationStamp*

@@ -16,7 +16,7 @@ extern "C"
 {
 #endif
 
-    Any* create_safely_typed_any_bool(_Bool boolValue)
+    Any* create_safely_typed_any_bool(bool boolValue)
     {
         OTIO_NS::any anyValue =
             OTIO_NS::create_safely_typed_any(std::move(boolValue));
@@ -88,7 +88,7 @@ extern "C"
         return reinterpret_cast<Any*>(new OTIO_NS::any(anyValue));
     }
 
-    _Bool safely_cast_bool_any(Any* a)
+    bool safely_cast_bool_any(Any* a)
     {
         return OTIO_NS::safely_cast_bool_any(
             *reinterpret_cast<OTIO_NS::any*>(a));

@@ -47,7 +47,7 @@ extern "C"
     {
         reinterpret_cast<MarkerVectorDef*>(self)->resize(n);
     }
-    _Bool MarkerVector_empty(MarkerVector* self)
+    bool MarkerVector_empty(MarkerVector* self)
     {
         return reinterpret_cast<MarkerVectorDef*>(self)->empty();
     }
@@ -139,13 +139,13 @@ extern "C"
             **reinterpret_cast<MarkerVectorIteratorDef*>(iter);
         return reinterpret_cast<Marker*>(obj);
     }
-    _Bool MarkerVectorIterator_equal(
+    bool MarkerVectorIterator_equal(
         MarkerVectorIterator* lhs, MarkerVectorIterator* rhs)
     {
         return *reinterpret_cast<MarkerVectorIteratorDef*>(lhs) ==
                *reinterpret_cast<MarkerVectorIteratorDef*>(rhs);
     }
-    _Bool MarkerVectorIterator_not_equal(
+    bool MarkerVectorIterator_not_equal(
         MarkerVectorIterator* lhs, MarkerVectorIterator* rhs)
     {
         return *reinterpret_cast<MarkerVectorIteratorDef*>(lhs) !=

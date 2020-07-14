@@ -8,7 +8,7 @@ extern "C"
 #endif
     struct OTIOErrorStatus;
     typedef struct OTIOErrorStatus OTIOErrorStatus;
-    struct SerializableObject;
+    struct SerializableObject;  /// @TODO This should be an abstract type with a unique name, not an existing C++ class
     typedef struct SerializableObject SerializableObject;
 
     typedef enum

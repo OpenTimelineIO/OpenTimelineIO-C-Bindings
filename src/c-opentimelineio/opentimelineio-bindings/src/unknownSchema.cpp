@@ -26,16 +26,16 @@ extern "C"
         return reinterpret_cast<OTIO_NS::UnknownSchema*>(self)
             ->original_schema_version();
     }
-    _Bool UnknownSchema_is_unknown_schema(UnknownSchema* self)
+    bool UnknownSchema_is_unknown_schema(UnknownSchema* self)
     {
         return reinterpret_cast<OTIO_NS::UnknownSchema*>(self)
             ->is_unknown_schema();
     }
-    _Bool UnknownSchema_possibly_delete(UnknownSchema* self)
+    bool UnknownSchema_possibly_delete(UnknownSchema* self)
     {
         return SerializableObject_possibly_delete((SerializableObject*) self);
     }
-    _Bool UnknownSchema_to_json_file(
+    bool UnknownSchema_to_json_file(
         UnknownSchema*   self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -50,7 +50,7 @@ extern "C"
         return SerializableObject_to_json_string(
             (SerializableObject*) self, error_status, indent);
     }
-    _Bool UnknownSchema_is_equivalent_to(
+    bool UnknownSchema_is_equivalent_to(
         UnknownSchema* self, SerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(

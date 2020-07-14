@@ -30,7 +30,7 @@ extern "C"
         SerializableObjectRetainerVector* self);
     void SerializableObjectRetainerVector_resize(
         SerializableObjectRetainerVector* self, int n);
-    _Bool SerializableObjectRetainerVector_empty(
+    bool SerializableObjectRetainerVector_empty(
         SerializableObjectRetainerVector* self);
     void SerializableObjectRetainerVector_shrink_to_fit(
         SerializableObjectRetainerVector* self);
@@ -72,10 +72,10 @@ extern "C"
         SerializableObjectRetainerVectorIterator* iter, int dist);
     RetainerSerializableObject* SerializableObjectRetainerVectorIterator_value(
         SerializableObjectRetainerVectorIterator* iter);
-    _Bool SerializableObjectRetainerVectorIterator_equal(
+    bool SerializableObjectRetainerVectorIterator_equal(
         SerializableObjectRetainerVectorIterator* lhs,
         SerializableObjectRetainerVectorIterator* rhs);
-    _Bool SerializableObjectRetainerVectorIterator_not_equal(
+    bool SerializableObjectRetainerVectorIterator_not_equal(
         SerializableObjectRetainerVectorIterator* lhs,
         SerializableObjectRetainerVectorIterator* rhs);
     void SerializableObjectRetainerVectorIterator_destroy(

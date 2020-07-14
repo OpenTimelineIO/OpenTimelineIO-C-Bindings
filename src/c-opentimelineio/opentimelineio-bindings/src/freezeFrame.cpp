@@ -49,11 +49,11 @@ extern "C"
     {
         return Effect_metadata((Effect*) self);
     }
-    _Bool FreezeFrame_possibly_delete(FreezeFrame* self)
+    bool FreezeFrame_possibly_delete(FreezeFrame* self)
     {
         return Effect_possibly_delete((Effect*) self);
     }
-    _Bool FreezeFrame_to_json_file(
+    bool FreezeFrame_to_json_file(
         FreezeFrame*     self,
         const char*      file_name,
         OTIOErrorStatus* error_status,
@@ -67,7 +67,7 @@ extern "C"
     {
         return Effect_to_json_string((Effect*) self, error_status, indent);
     }
-    _Bool
+    bool
     FreezeFrame_is_equivalent_to(FreezeFrame* self, SerializableObject* other)
     {
         return Effect_is_equivalent_to((Effect*) self, other);

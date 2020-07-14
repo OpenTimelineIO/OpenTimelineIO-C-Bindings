@@ -19,7 +19,7 @@ extern "C"
     int                         MarkerVector_max_size(MarkerVector* self);
     int                         MarkerVector_capacity(MarkerVector* self);
     void                        MarkerVector_resize(MarkerVector* self, int n);
-    _Bool                       MarkerVector_empty(MarkerVector* self);
+    bool                        MarkerVector_empty(MarkerVector* self);
     void                        MarkerVector_shrink_to_fit(MarkerVector* self);
     void                        MarkerVector_reserve(MarkerVector* self, int n);
     void    MarkerVector_swap(MarkerVector* self, MarkerVector* other);
@@ -41,9 +41,9 @@ extern "C"
     MarkerVectorIterator*
             MarkerVectorIterator_prev(MarkerVectorIterator* iter, int dist);
     Marker* MarkerVectorIterator_value(MarkerVectorIterator* iter);
-    _Bool   MarkerVectorIterator_equal(
+    bool    MarkerVectorIterator_equal(
           MarkerVectorIterator* lhs, MarkerVectorIterator* rhs);
-    _Bool MarkerVectorIterator_not_equal(
+    bool  MarkerVectorIterator_not_equal(
         MarkerVectorIterator* lhs, MarkerVectorIterator* rhs);
     void MarkerVectorIterator_destroy(MarkerVectorIterator* self);
 #ifdef __cplusplus

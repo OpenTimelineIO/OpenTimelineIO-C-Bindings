@@ -19,15 +19,15 @@ extern "C"
     const char*    TimeEffect_name(TimeEffect* self);
     void           TimeEffect_set_name(TimeEffect* self, const char* name);
     AnyDictionary* TimeEffect_metadata(TimeEffect* self);
-    _Bool          TimeEffect_possibly_delete(TimeEffect* self);
-    _Bool          TimeEffect_to_json_file(
+    bool          TimeEffect_possibly_delete(TimeEffect* self);
+    bool          TimeEffect_to_json_file(
                  TimeEffect*      self,
                  const char*      file_name,
                  OTIOErrorStatus* error_status,
                  int              indent);
     const char* TimeEffect_to_json_string(
         TimeEffect* self, OTIOErrorStatus* error_status, int indent);
-    _Bool
+    bool
     TimeEffect_is_equivalent_to(TimeEffect* self, SerializableObject* other);
     TimeEffect*
                 TimeEffect_clone(TimeEffect* self, OTIOErrorStatus* error_status);

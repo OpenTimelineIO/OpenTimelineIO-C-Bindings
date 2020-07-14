@@ -15,7 +15,7 @@ extern "C"
 {
 #endif
 
-    Any* create_safely_typed_any_bool(_Bool boolValue);
+    Any* create_safely_typed_any_bool(bool boolValue);
     Any* create_safely_typed_any_int(int intValue);
     Any* create_safely_typed_any_int64(int64_t int64Value);
     Any* create_safely_typed_any_double(double doubleValue);
@@ -30,7 +30,7 @@ extern "C"
     Any* create_safely_typed_any_serializable_object(
         SerializableObject* serializableObjectValue);
 
-    _Bool               safely_cast_bool_any(Any* a);
+    bool               safely_cast_bool_any(Any* a);
     int                 safely_cast_int_any(Any* a);
     int64_t             safely_cast_int64_any(Any* a);
     double              safely_cast_double_any(Any* a);

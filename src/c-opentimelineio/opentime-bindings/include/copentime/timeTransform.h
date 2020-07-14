@@ -20,8 +20,8 @@ extern "C"
     TimeTransform_applied_to_time_transform(TimeTransform* self, TimeTransform* other);
     RationalTime*
           TimeTransform_applied_to_rational_time(TimeTransform* self, RationalTime* other);
-    _Bool TimeTransform_equal(TimeTransform* lhs, TimeTransform* rhs);
-    _Bool TimeTransform_not_equal(TimeTransform* lhs, TimeTransform* rhs);
+    bool TimeTransform_equal(TimeTransform* lhs, TimeTransform* rhs);
+    bool TimeTransform_not_equal(TimeTransform* lhs, TimeTransform* rhs);
     void  TimeTransform_destroy(TimeTransform* self);
 #ifdef __cplusplus
 }

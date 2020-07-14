@@ -38,12 +38,12 @@ extern "C"
         return reinterpret_cast<SerializableObject*>(
             new OTIO_NS::SerializableObject());
     }
-    _Bool SerializableObject_possibly_delete(SerializableObject* self)
+    bool SerializableObject_possibly_delete(SerializableObject* self)
     {
         return reinterpret_cast<OTIO_NS::SerializableObject*>(self)
             ->possibly_delete();
     }
-    _Bool SerializableObject_to_json_file(
+    bool SerializableObject_to_json_file(
         SerializableObject* self,
         const char*         file_name,
         OTIOErrorStatus*    error_status,
@@ -84,7 +84,7 @@ extern "C"
                 input, reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
         return reinterpret_cast<SerializableObject*>(obj);
     }
-    _Bool SerializableObject_is_equivalent_to(
+    bool SerializableObject_is_equivalent_to(
         SerializableObject* self, SerializableObject* other)
     {
         return reinterpret_cast<OTIO_NS::SerializableObject*>(self)
@@ -105,7 +105,7 @@ extern "C"
             reinterpret_cast<OTIO_NS::SerializableObject*>(self)
                 ->dynamic_fields());
     }*/
-    _Bool SerializableObject_is_unknown_schema(SerializableObject* self)
+    bool SerializableObject_is_unknown_schema(SerializableObject* self)
     {
         return reinterpret_cast<OTIO_NS::SerializableObject*>(self)
             ->is_unknown_schema();
