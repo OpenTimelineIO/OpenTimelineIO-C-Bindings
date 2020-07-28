@@ -4,7 +4,7 @@
 extern "C"
 {
 #endif
-    struct OpenTimeErrorStatus;
+    typedef struct OpenTimeErrorStatus;
     typedef struct ErrorStatus ErrorStatus;
 
     typedef enum
