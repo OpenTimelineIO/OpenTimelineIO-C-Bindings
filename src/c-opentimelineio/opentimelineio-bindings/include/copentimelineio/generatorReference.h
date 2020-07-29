@@ -31,7 +31,6 @@ OTIO_API const char* GeneratorReference_name(GeneratorReference* self);
 OTIO_API void
                GeneratorReference_set_name(GeneratorReference* self, const char* name);
 OTIO_API AnyDictionary* GeneratorReference_metadata(GeneratorReference* self);
-OTIO_API bool          GeneratorReference_possibly_delete(GeneratorReference* self);
 OTIO_API bool          GeneratorReference_to_json_file(
              GeneratorReference* self,
              const char*         file_name,

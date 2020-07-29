@@ -247,10 +247,7 @@ OTIO_API void Stack_set_name(Stack* self, const char* name)
 {
     Composition_set_name((Composition*) self, name);
 }
-OTIO_API bool Stack_possibly_delete(Stack* self)
-{
-    return Composition_possibly_delete((Composition*) self);
-}
+
 OTIO_API bool Stack_to_json_file(
     Stack*           self,
     const char*      file_name,

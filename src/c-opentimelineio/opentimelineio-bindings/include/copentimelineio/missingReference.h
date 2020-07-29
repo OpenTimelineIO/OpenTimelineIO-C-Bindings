@@ -21,7 +21,6 @@ extern "C"
     const char* MissingReference_name(MissingReference* self);
     void MissingReference_set_name(MissingReference* self, const char* name);
     AnyDictionary* MissingReference_metadata(MissingReference* self);
-    bool          MissingReference_possibly_delete(MissingReference* self);
     bool          MissingReference_to_json_file(
                  MissingReference* self,
                  const char*       file_name,

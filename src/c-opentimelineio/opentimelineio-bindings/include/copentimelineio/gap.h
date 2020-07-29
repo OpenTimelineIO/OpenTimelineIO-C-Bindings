@@ -57,7 +57,6 @@ extern "C"
     const char*    Gap_name(Gap* self);
     AnyDictionary* Gap_metadata(Gap* self);
     void           Gap_set_name(Gap* self, const char* name);
-    bool          Gap_possibly_delete(Gap* self);
     bool          Gap_to_json_file(
                  Gap*             self,
                  const char*      file_name,

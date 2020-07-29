@@ -304,10 +304,6 @@ OTIO_API void Track_set_name(Track* self, const char* name)
 {
     return Composition_set_name((Composition*) self, name);
 }
-OTIO_API bool Track_possibly_delete(Track* self)
-{
-    return Composition_possibly_delete((Composition*) self);
-}
 OTIO_API bool Track_to_json_file(
     Track*           self,
     const char*      file_name,

@@ -20,7 +20,6 @@ extern "C"
     const char*    FreezeFrame_name(FreezeFrame* self);
     void           FreezeFrame_set_name(FreezeFrame* self, const char* name);
     AnyDictionary* FreezeFrame_metadata(FreezeFrame* self);
-    bool           FreezeFrame_possibly_delete(FreezeFrame* self);
     bool           FreezeFrame_to_json_file(
                  FreezeFrame*     self,
                  const char*      file_name,

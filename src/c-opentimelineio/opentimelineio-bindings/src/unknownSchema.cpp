@@ -31,10 +31,7 @@ extern "C"
         return reinterpret_cast<OTIO_NS::UnknownSchema*>(self)
             ->is_unknown_schema();
     }
-    bool UnknownSchema_possibly_delete(UnknownSchema* self)
-    {
-        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-    }
+
     bool UnknownSchema_to_json_file(
         UnknownSchema*   self,
         const char*      file_name,

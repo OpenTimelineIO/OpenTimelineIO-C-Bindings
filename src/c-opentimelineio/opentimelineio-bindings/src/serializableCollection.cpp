@@ -118,12 +118,6 @@ SerializableCollection_metadata(SerializableCollection* self)
 }
 
 OTIO_API bool
-SerializableCollection_possibly_delete(SerializableCollection* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
-
-OTIO_API bool
 SerializableCollection_to_json_file(
     SerializableCollection* self,
     const char*             file_name,

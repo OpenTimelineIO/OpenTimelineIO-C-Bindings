@@ -151,10 +151,7 @@ extern "C"
     {
         Composable_set_name((Composable*) self, name);
     }
-    bool Gap_possibly_delete(Gap* self)
-    {
-        return Composable_possibly_delete((Composable*) self);
-    }
+
     bool Gap_to_json_file(
         Gap*             self,
         const char*      file_name,

@@ -49,11 +49,7 @@ OTIO_API AnyDictionary* SerializableObjectWithMetadata_metadata(
     return reinterpret_cast<AnyDictionary*>(
         new OTIO_NS::AnyDictionary(anyDictionary));
 }
-OTIO_API bool SerializableObjectWithMetadata_possibly_delete(
-    SerializableObjectWithMetadata* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
+
 OTIO_API bool SerializableObjectWithMetadata_to_json_file(
     SerializableObjectWithMetadata* self,
     const char*                     file_name,

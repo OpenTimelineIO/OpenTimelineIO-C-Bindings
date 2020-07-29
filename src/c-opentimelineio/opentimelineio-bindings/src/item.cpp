@@ -188,10 +188,7 @@ OTIO_API void Item_set_name(Item* self, const char* name)
 {
     return Composable_set_name((Composable*) self, name);
 }
-OTIO_API bool Item_possibly_delete(Item* self)
-{
-    return Composable_possibly_delete((Composable*) self);
-}
+
 OTIO_API bool Item_to_json_file(
     Item*            self,
     const char*      file_name,

@@ -14,7 +14,6 @@ extern "C"
     const char* UnknownSchema_original_schema_name(UnknownSchema* self);
     int         UnknownSchema_original_schema_version(UnknownSchema* self);
     bool       UnknownSchema_is_unknown_schema(UnknownSchema* self);
-    bool       UnknownSchema_possibly_delete(UnknownSchema* self);
     bool       UnknownSchema_to_json_file(
               UnknownSchema*   self,
               const char*      file_name,

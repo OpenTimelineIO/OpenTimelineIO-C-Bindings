@@ -56,10 +56,7 @@ OTIO_API AnyDictionary* MissingReference_metadata(MissingReference* self)
     return SerializableObjectWithMetadata_metadata(
         (SerializableObjectWithMetadata*) self);
 }
-OTIO_API bool MissingReference_possibly_delete(MissingReference* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
+
 OTIO_API bool MissingReference_to_json_file(
     MissingReference* self,
     const char*       file_name,

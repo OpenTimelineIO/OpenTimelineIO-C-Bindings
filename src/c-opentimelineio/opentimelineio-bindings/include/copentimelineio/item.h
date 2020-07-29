@@ -54,7 +54,6 @@ OTIO_API Composition*   Item_parent(Item* self);
 OTIO_API const char*    Item_name(Item* self);
 OTIO_API AnyDictionary* Item_metadata(Item* self);
 OTIO_API void           Item_set_name(Item* self, const char* name);
-OTIO_API bool          Item_possibly_delete(Item* self);
 OTIO_API bool          Item_to_json_file(
              Item*            self,
              const char*      file_name,

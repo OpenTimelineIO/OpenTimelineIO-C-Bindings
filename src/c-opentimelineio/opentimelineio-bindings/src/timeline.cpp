@@ -115,10 +115,7 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    bool Timeline_possibly_delete(Timeline* self)
-    {
-        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-    }
+
     bool Timeline_to_json_file(
         Timeline*        self,
         const char*      file_name,

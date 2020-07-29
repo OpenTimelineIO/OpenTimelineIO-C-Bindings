@@ -34,7 +34,6 @@ OTIO_API TrackVector*   Timeline_video_tracks(Timeline* self);
 OTIO_API const char*    Timeline_name(Timeline* self);
 OTIO_API void           Timeline_set_name(Timeline* self, const char* name);
 OTIO_API AnyDictionary* Timeline_metadata(Timeline* self);
-OTIO_API bool          Timeline_possibly_delete(Timeline* self);
 OTIO_API bool          Timeline_to_json_file(
              Timeline*        self,
              const char*      file_name,

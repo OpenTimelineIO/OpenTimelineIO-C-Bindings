@@ -23,7 +23,6 @@ OTIO_API bool       MediaReference_is_missing_reference(MediaReference* self);
 OTIO_API const char* MediaReference_name(MediaReference* self);
 OTIO_API void        MediaReference_set_name(MediaReference* self, const char* name);
 OTIO_API AnyDictionary* MediaReference_metadata(MediaReference* self);
-OTIO_API bool          MediaReference_possibly_delete(MediaReference* self);
 OTIO_API bool          MediaReference_to_json_file(
              MediaReference*  self,
              const char*      file_name,

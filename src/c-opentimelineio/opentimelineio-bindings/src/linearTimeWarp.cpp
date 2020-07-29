@@ -54,10 +54,7 @@ OTIO_API AnyDictionary* LinearTimeWarp_metadata(LinearTimeWarp* self)
 {
     return Effect_metadata((Effect*) self);
 }
-OTIO_API bool LinearTimeWarp_possibly_delete(LinearTimeWarp* self)
-{
-    return Effect_possibly_delete((Effect*) self);
-}
+
 OTIO_API bool LinearTimeWarp_to_json_file(
     LinearTimeWarp*  self,
     const char*      file_name,

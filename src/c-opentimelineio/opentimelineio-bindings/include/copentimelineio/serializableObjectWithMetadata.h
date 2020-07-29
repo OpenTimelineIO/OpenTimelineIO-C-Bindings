@@ -22,8 +22,6 @@ SerializableObjectWithMetadata_set_name(SerializableObjectWithMetadata* self, co
 OTIO_API AnyDictionary*
 SerializableObjectWithMetadata_metadata(SerializableObjectWithMetadata* self);
 OTIO_API bool
-SerializableObjectWithMetadata_possibly_delete(SerializableObjectWithMetadata* self);
-OTIO_API bool
 SerializableObjectWithMetadata_to_json_file(
     SerializableObjectWithMetadata* self,
     const char*                     file_name,

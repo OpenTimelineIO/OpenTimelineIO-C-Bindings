@@ -166,13 +166,6 @@ Clip_set_name(Clip* self, const char* name)
 }
 
 OTIO_API bool
-Clip_possibly_delete(Clip* self)
-{
-    return SerializableObject_possibly_delete(
-                reinterpret_cast<OTIOSerializableObject*>(self));
-}
-
-OTIO_API bool
 Clip_to_json_file(
     Clip*            self,
     const char*      file_name,

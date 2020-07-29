@@ -37,7 +37,6 @@ OTIO_API void        SerializableCollection_set_name(
            SerializableCollection* self, const char* name);
 OTIO_API AnyDictionary*
       SerializableCollection_metadata(SerializableCollection* self);
-OTIO_API bool SerializableCollection_possibly_delete(SerializableCollection* self);
 OTIO_API bool SerializableCollection_to_json_file(
     SerializableCollection* self,
     const char*             file_name,

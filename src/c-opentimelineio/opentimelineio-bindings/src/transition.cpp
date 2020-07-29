@@ -146,10 +146,7 @@ OTIO_API bool Transition_visible(Transition* self)
 {
     return Composable_visible((Composable*) self);
 }
-OTIO_API bool Transition_possibly_delete(Transition* self)
-{
-    return Composable_possibly_delete((Composable*) self);
-}
+
 OTIO_API bool Transition_to_json_file(
     Transition*      self,
     const char*      file_name,

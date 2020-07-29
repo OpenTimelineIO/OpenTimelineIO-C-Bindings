@@ -19,7 +19,6 @@ OTIO_API void TimeEffect_set_effect_name(TimeEffect* self, const char* effect_na
 OTIO_API const char*    TimeEffect_name(TimeEffect* self);
 OTIO_API void           TimeEffect_set_name(TimeEffect* self, const char* name);
 OTIO_API AnyDictionary* TimeEffect_metadata(TimeEffect* self);
-OTIO_API bool          TimeEffect_possibly_delete(TimeEffect* self);
 OTIO_API bool          TimeEffect_to_json_file(
              TimeEffect*      self,
              const char*      file_name,

@@ -313,10 +313,7 @@ extern "C"
         SerializableObjectWithMetadata_set_name(
             (SerializableObjectWithMetadata*) self, name);
     }
-    bool Composition_possibly_delete(Composition* self)
-    {
-        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-    }
+
     bool Composition_to_json_file(
         Composition*     self,
         const char*      file_name,

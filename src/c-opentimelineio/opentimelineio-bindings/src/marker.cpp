@@ -104,10 +104,7 @@ AnyDictionary* Marker_metadata(Marker* self)
     return SerializableObjectWithMetadata_metadata(
         (SerializableObjectWithMetadata*) self);
 }
-OTIO_API bool Marker_possibly_delete(Marker* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
+
 OTIO_API bool Marker_to_json_file(
     Marker*          self,
     const char*      file_name,

@@ -112,7 +112,6 @@ OTIO_API Composition*   Track_parent(Track* self);
 OTIO_API const char*    Track_name(Track* self);
 OTIO_API AnyDictionary* Track_metadata(Track* self);
 OTIO_API void           Track_set_name(Track* self, const char* name);
-OTIO_API bool          Track_possibly_delete(Track* self);
 OTIO_API bool          Track_to_json_file(
              Track*           self,
              const char*      file_name,

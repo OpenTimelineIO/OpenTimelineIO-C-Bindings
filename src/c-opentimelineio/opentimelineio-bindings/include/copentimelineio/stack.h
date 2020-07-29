@@ -93,7 +93,6 @@ OTIO_API Composition*   Stack_parent(Stack* self);
 OTIO_API const char*    Stack_name(Stack* self);
 OTIO_API AnyDictionary* Stack_metadata(Stack* self);
 OTIO_API void           Stack_set_name(Stack* self, const char* name);
-OTIO_API bool          Stack_possibly_delete(Stack* self);
 OTIO_API bool          Stack_to_json_file(
              Stack*           self,
              const char*      file_name,

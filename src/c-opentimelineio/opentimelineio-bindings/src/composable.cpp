@@ -101,12 +101,6 @@ Composable_set_name(Composable* self, const char* name)
 }
 
 OTIO_API bool
-Composable_possibly_delete(Composable* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
-
-OTIO_API bool
 Composable_to_json_file(
     Composable*      self,
     const char*      file_name,

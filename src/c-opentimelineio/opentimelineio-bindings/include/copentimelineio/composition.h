@@ -101,7 +101,6 @@ extern "C"
     const char*    Composition_name(Composition* self);
     AnyDictionary* Composition_metadata(Composition* self);
     void           Composition_set_name(Composition* self, const char* name);
-    bool           Composition_possibly_delete(Composition* self);
     bool           Composition_to_json_file(
                  Composition*     self,
                  const char*      file_name,

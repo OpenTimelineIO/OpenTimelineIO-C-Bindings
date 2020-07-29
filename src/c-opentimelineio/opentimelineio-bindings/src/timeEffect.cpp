@@ -31,10 +31,7 @@ OTIO_API AnyDictionary* TimeEffect_metadata(TimeEffect* self)
 {
     return Effect_metadata((Effect*) self);
 }
-OTIO_API bool TimeEffect_possibly_delete(TimeEffect* self)
-{
-    return Effect_possibly_delete((Effect*) self);
-}
+
 OTIO_API bool TimeEffect_to_json_file(
     TimeEffect*      self,
     const char*      file_name,

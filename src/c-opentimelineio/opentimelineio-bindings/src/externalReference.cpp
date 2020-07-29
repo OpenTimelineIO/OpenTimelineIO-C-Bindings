@@ -78,10 +78,7 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    bool ExternalReference_possibly_delete(ExternalReference* self)
-    {
-        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-    }
+
     bool ExternalReference_to_json_file(
         ExternalReference* self,
         const char*        file_name,

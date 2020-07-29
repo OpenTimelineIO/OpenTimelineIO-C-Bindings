@@ -96,10 +96,7 @@ OTIO_API AnyDictionary* GeneratorReference_metadata(GeneratorReference* self)
     return SerializableObjectWithMetadata_metadata(
         (SerializableObjectWithMetadata*) self);
 }
-OTIO_API bool GeneratorReference_possibly_delete(GeneratorReference* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
+
 OTIO_API bool GeneratorReference_to_json_file(
     GeneratorReference* self,
     const char*         file_name,

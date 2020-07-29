@@ -25,7 +25,6 @@ extern "C"
     const char* LinearTimeWarp_name(LinearTimeWarp* self);
     void        LinearTimeWarp_set_name(LinearTimeWarp* self, const char* name);
     AnyDictionary* LinearTimeWarp_metadata(LinearTimeWarp* self);
-    bool          LinearTimeWarp_possibly_delete(LinearTimeWarp* self);
     bool          LinearTimeWarp_to_json_file(
                  LinearTimeWarp*  self,
                  const char*      file_name,

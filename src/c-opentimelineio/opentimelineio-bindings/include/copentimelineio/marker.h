@@ -41,7 +41,6 @@ extern "C"
     const char* Marker_name(Marker* self);
     void        Marker_set_name(Marker* self, const char* name);
     AnyDictionary* Marker_metadata(Marker* self);
-    bool          Marker_possibly_delete(Marker* self);
     bool          Marker_to_json_file(
                  Marker*          self,
                  const char*      file_name,

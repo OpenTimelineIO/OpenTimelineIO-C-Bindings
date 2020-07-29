@@ -49,10 +49,7 @@ extern "C"
     {
         return Effect_metadata((Effect*) self);
     }
-    bool FreezeFrame_possibly_delete(FreezeFrame* self)
-    {
-        return Effect_possibly_delete((Effect*) self);
-    }
+
     bool FreezeFrame_to_json_file(
         FreezeFrame*     self,
         const char*      file_name,

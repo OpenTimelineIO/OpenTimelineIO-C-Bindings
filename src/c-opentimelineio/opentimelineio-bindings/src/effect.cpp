@@ -76,10 +76,7 @@ extern "C"
         return SerializableObjectWithMetadata_metadata(
             (SerializableObjectWithMetadata*) self);
     }
-    bool Effect_possibly_delete(Effect* self)
-    {
-        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-    }
+
     bool Effect_to_json_file(
         Effect*          self,
         const char*      file_name,

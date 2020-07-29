@@ -43,7 +43,6 @@ OTIO_API AnyDictionary* Transition_metadata(Transition* self);
 OTIO_API Composition*   Transition_parent(Transition* self);
 OTIO_API bool          Transition_visible(Transition* self);
 OTIO_API void           Transition_set_name(Transition* self, const char* name);
-OTIO_API bool          Transition_possibly_delete(Transition* self);
 OTIO_API bool          Transition_to_json_file(
              Transition*      self,
              const char*      file_name,

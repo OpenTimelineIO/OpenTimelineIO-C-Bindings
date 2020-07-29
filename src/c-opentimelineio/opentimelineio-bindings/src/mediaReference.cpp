@@ -68,10 +68,7 @@ OTIO_API AnyDictionary* MediaReference_metadata(MediaReference* self)
     return SerializableObjectWithMetadata_metadata(
         (SerializableObjectWithMetadata*) self);
 }
-OTIO_API bool MediaReference_possibly_delete(MediaReference* self)
-{
-    return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
-}
+
 OTIO_API bool MediaReference_to_json_file(
     MediaReference*  self,
     const char*      file_name,

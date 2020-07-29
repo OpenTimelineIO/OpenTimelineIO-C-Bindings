@@ -25,7 +25,6 @@ extern "C"
     const char* ExternalReference_name(ExternalReference* self);
     void ExternalReference_set_name(ExternalReference* self, const char* name);
     AnyDictionary* ExternalReference_metadata(ExternalReference* self);
-    bool          ExternalReference_possibly_delete(ExternalReference* self);
     bool          ExternalReference_to_json_file(
                  ExternalReference* self,
                  const char*        file_name,

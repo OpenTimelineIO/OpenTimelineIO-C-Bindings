@@ -34,7 +34,6 @@ OTIO_API RationalTime*
 OTIO_API const char*    Composable_name(Composable* self);
 OTIO_API AnyDictionary* Composable_metadata(Composable* self);
 OTIO_API void           Composable_set_name(Composable* self, const char* name);
-OTIO_API bool          Composable_possibly_delete(Composable* self);
 OTIO_API bool          Composable_to_json_file(
              Composable*      self,
              const char*      file_name,

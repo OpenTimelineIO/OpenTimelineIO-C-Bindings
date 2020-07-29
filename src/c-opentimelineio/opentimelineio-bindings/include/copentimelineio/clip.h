@@ -51,7 +51,6 @@ extern "C"
     const char*    Clip_name(Clip* self);
     AnyDictionary* Clip_metadata(Clip* self);
     void           Clip_set_name(Clip* self, const char* name);
-    bool          Clip_possibly_delete(Clip* self);
     bool          Clip_to_json_file(
                  Clip*            self,
                  const char*      file_name,

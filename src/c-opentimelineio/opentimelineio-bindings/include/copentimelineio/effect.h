@@ -24,7 +24,6 @@ extern "C"
     const char* Effect_name(Effect* self);
     void        Effect_set_name(Effect* self, const char* name);
     AnyDictionary* Effect_metadata(Effect* self);
-    bool          Effect_possibly_delete(Effect* self);
     bool          Effect_to_json_file(
                  Effect*          self,
                  const char*      file_name,

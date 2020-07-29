@@ -41,13 +41,6 @@ SerializableObject_create()
 }
 
 OTIO_API bool
-SerializableObject_possibly_delete(OTIOSerializableObject* self)
-{
-    return reinterpret_cast<OTIO_NS::SerializableObject*>(self)
-        ->possibly_delete();
-}
-
-OTIO_API bool
 SerializableObject_to_json_file(
     OTIOSerializableObject* self,
     const char*         file_name,
