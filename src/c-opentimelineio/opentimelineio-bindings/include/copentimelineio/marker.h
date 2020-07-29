@@ -49,7 +49,7 @@ extern "C"
                  int              indent);
     const char* Marker_to_json_string(
         Marker* self, OTIOErrorStatus* error_status, int indent);
-    bool   Marker_is_equivalent_to(Marker* self, SerializableObject* other);
+    bool   Marker_is_equivalent_to(Marker* self, OTIOSerializableObject* other);
     Marker* Marker_clone(Marker* self, OTIOErrorStatus* error_status);
     const char* Marker_schema_name(Marker* self);
     int         Marker_schema_version(Marker* self);

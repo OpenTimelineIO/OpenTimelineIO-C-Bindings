@@ -34,7 +34,7 @@ extern "C"
     const char* ExternalReference_to_json_string(
         ExternalReference* self, OTIOErrorStatus* error_status, int indent);
     bool ExternalReference_is_equivalent_to(
-        ExternalReference* self, SerializableObject* other);
+        ExternalReference* self, OTIOSerializableObject* other);
     ExternalReference* ExternalReference_clone(
         ExternalReference* self, OTIOErrorStatus* error_status);
     const char* ExternalReference_schema_name(ExternalReference* self);

@@ -34,7 +34,7 @@ extern "C"
     const char* LinearTimeWarp_to_json_string(
         LinearTimeWarp* self, OTIOErrorStatus* error_status, int indent);
     bool LinearTimeWarp_is_equivalent_to(
-        LinearTimeWarp* self, SerializableObject* other);
+        LinearTimeWarp* self, OTIOSerializableObject* other);
     LinearTimeWarp*
                 LinearTimeWarp_clone(LinearTimeWarp* self, OTIOErrorStatus* error_status);
     const char* LinearTimeWarp_schema_name(LinearTimeWarp* self);

@@ -110,7 +110,7 @@ extern "C"
     const char* Composition_to_json_string(
         Composition* self, OTIOErrorStatus* error_status, int indent);
     bool
-    Composition_is_equivalent_to(Composition* self, SerializableObject* other);
+    Composition_is_equivalent_to(Composition* self, OTIOSerializableObject* other);
     Composition*
                 Composition_clone(Composition* self, OTIOErrorStatus* error_status);
     const char* Composition_schema_name(Composition* self);

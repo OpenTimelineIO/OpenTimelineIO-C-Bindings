@@ -59,7 +59,7 @@ extern "C"
                  int              indent);
     const char*
                 Clip_to_json_string(Clip* self, OTIOErrorStatus* error_status, int indent);
-    bool       Clip_is_equivalent_to(Clip* self, SerializableObject* other);
+    bool       Clip_is_equivalent_to(Clip* self, OTIOSerializableObject* other);
     Clip*       Clip_clone(Clip* self, OTIOErrorStatus* error_status);
     const char* Clip_schema_name(Clip* self);
     int         Clip_schema_version(Clip* self);

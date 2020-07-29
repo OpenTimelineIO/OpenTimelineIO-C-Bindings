@@ -32,7 +32,7 @@ extern "C"
                  int              indent);
     const char* Effect_to_json_string(
         Effect* self, OTIOErrorStatus* error_status, int indent);
-    bool   Effect_is_equivalent_to(Effect* self, SerializableObject* other);
+    bool   Effect_is_equivalent_to(Effect* self, OTIOSerializableObject* other);
     Effect* Effect_clone(Effect* self, OTIOErrorStatus* error_status);
     const char* Effect_schema_name(Effect* self);
     int         Effect_schema_version(Effect* self);

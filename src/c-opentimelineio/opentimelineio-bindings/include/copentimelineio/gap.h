@@ -65,7 +65,7 @@ extern "C"
                  int              indent);
     const char*
                 Gap_to_json_string(Gap* self, OTIOErrorStatus* error_status, int indent);
-    bool       Gap_is_equivalent_to(Gap* self, SerializableObject* other);
+    bool       Gap_is_equivalent_to(Gap* self, OTIOSerializableObject* other);
     Gap*        Gap_clone(Gap* self, OTIOErrorStatus* error_status);
     const char* Gap_schema_name(Gap* self);
     int         Gap_schema_version(Gap* self);

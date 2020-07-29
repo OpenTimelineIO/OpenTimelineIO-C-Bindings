@@ -4,45 +4,41 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct RetainerSerializableObject;
-    typedef struct RetainerSerializableObject RetainerSerializableObject;
-    struct SerializableObject;
-    typedef struct SerializableObject SerializableObject;
-    struct OTIOErrorStatus;
-    typedef struct OTIOErrorStatus OTIOErrorStatus;
 
-    RetainerSerializableObject*
-    RetainerSerializableObject_create(SerializableObject* obj);
-    SerializableObject*
+typedef struct RetainerSerializableObject RetainerSerializableObject;
+typedef struct OTIOSerializableObject OTIOSerializableObject;
+typedef struct OTIOErrorStatus OTIOErrorStatus;
+
+OTIO_API RetainerSerializableObject*
+    RetainerSerializableObject_create(OTIOSerializableObject* obj);
+OTIO_API OTIOSerializableObject*
     RetainerSerializableObject_take_value(RetainerSerializableObject* self);
-    SerializableObject*
-         RetainerSerializableObject_value(RetainerSerializableObject* self);
-    void RetainerSerializableObject_managed_destroy(
-        RetainerSerializableObject* self);
-    SerializableObject* SerializableObject_create();
-    bool SerializableObject_possibly_delete(SerializableObject* self);
-    bool SerializableObject_to_json_file(
-        SerializableObject* self,
-        const char*         file_name,
-        OTIOErrorStatus*    error_status,
-        int                 indent);
-    const char* SerializableObject_to_json_string(
-        SerializableObject* self, OTIOErrorStatus* error_status, int indent);
-    SerializableObject* SerializableObject_from_json_file(
-        const char* file_name, OTIOErrorStatus* error_status);
-    SerializableObject* SerializableObject_from_json_string(
-        const char* input, OTIOErrorStatus* error_status);
-    bool SerializableObject_is_equivalent_to(
-        SerializableObject* self, SerializableObject* other);
-    SerializableObject* SerializableObject_clone(
-        SerializableObject* self, OTIOErrorStatus* error_status);
-    /*AnyDictionary* SerializableObject_dynamic_fields(SerializableObject* self);*/
-    bool        SerializableObject_is_unknown_schema(SerializableObject* self);
-    const char* SerializableObject_schema_name(SerializableObject* self);
-    int         SerializableObject_schema_version(SerializableObject* self);
-#ifdef __cplusplus
-}
-#endif
+OTIO_API OTIOSerializableObject*
+     RetainerSerializableObject_value(RetainerSerializableObject* self);
+OTIO_API void RetainerSerializableObject_managed_destroy(
+    RetainerSerializableObject* self);
+OTIO_API OTIOSerializableObject* SerializableObject_create();
+OTIO_API bool SerializableObject_possibly_delete(OTIOSerializableObject* self);
+OTIO_API bool SerializableObject_to_json_file(
+    OTIOSerializableObject* self,
+    const char*         file_name,
+    OTIOErrorStatus*    error_status,
+    int                 indent);
+OTIO_API const char* SerializableObject_to_json_string(
+    OTIOSerializableObject* self, OTIOErrorStatus* error_status, int indent);
+OTIO_API OTIOSerializableObject* SerializableObject_from_json_file(
+    const char* file_name, OTIOErrorStatus* error_status);
+OTIO_API OTIOSerializableObject* SerializableObject_from_json_string(
+    const char* input, OTIOErrorStatus* error_status);
+OTIO_API bool SerializableObject_is_equivalent_to(
+    OTIOSerializableObject* self, OTIOSerializableObject* other);
+OTIO_API OTIOSerializableObject* SerializableObject_clone(
+    OTIOSerializableObject* self, OTIOErrorStatus* error_status);
+/*AnyDictionary* SerializableObject_dynamic_fields(OTIOSerializableObject* self);*/
+OTIO_API bool        SerializableObject_is_unknown_schema(OTIOSerializableObject* self);
+OTIO_API const char* SerializableObject_schema_name(OTIOSerializableObject* self);
+OTIO_API int         SerializableObject_schema_version(OTIOSerializableObject* self);

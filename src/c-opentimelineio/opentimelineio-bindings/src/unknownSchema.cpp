@@ -33,7 +33,7 @@ extern "C"
     }
     bool UnknownSchema_possibly_delete(UnknownSchema* self)
     {
-        return SerializableObject_possibly_delete((SerializableObject*) self);
+        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
     }
     bool UnknownSchema_to_json_file(
         UnknownSchema*   self,
@@ -42,33 +42,33 @@ extern "C"
         int              indent)
     {
         return SerializableObject_to_json_file(
-            (SerializableObject*) self, file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject*>(self), file_name, error_status, indent);
     }
     const char* UnknownSchema_to_json_string(
         UnknownSchema* self, OTIOErrorStatus* error_status, int indent)
     {
         return SerializableObject_to_json_string(
-            (SerializableObject*) self, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject*>(self), error_status, indent);
     }
     bool UnknownSchema_is_equivalent_to(
-        UnknownSchema* self, SerializableObject* other)
+        UnknownSchema* self, OTIOSerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
-            (SerializableObject*) self, other);
+            reinterpret_cast<OTIOSerializableObject*>(self), other);
     }
     UnknownSchema*
     UnknownSchema_clone(UnknownSchema* self, OTIOErrorStatus* error_status)
     {
         return (UnknownSchema*) SerializableObject_clone(
-            (SerializableObject*) self, error_status);
+            reinterpret_cast<OTIOSerializableObject*>(self), error_status);
     }
     const char* UnknownSchema_schema_name(UnknownSchema* self)
     {
-        return SerializableObject_schema_name((SerializableObject*) self);
+        return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject*>(self));
     }
     int UnknownSchema_schema_version(UnknownSchema* self)
     {
-        return SerializableObject_schema_version((SerializableObject*) self);
+        return SerializableObject_schema_version(reinterpret_cast<OTIOSerializableObject*>(self));
     }
 #ifdef __cplusplus
 }

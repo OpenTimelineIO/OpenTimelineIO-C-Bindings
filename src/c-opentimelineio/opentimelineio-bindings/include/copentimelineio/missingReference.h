@@ -30,7 +30,7 @@ extern "C"
     const char* MissingReference_to_json_string(
         MissingReference* self, OTIOErrorStatus* error_status, int indent);
     bool MissingReference_is_equivalent_to(
-        MissingReference* self, SerializableObject* other);
+        MissingReference* self, OTIOSerializableObject* other);
     MissingReference* MissingReference_clone(
         MissingReference* self, OTIOErrorStatus* error_status);
     const char* MissingReference_schema_name(MissingReference* self);

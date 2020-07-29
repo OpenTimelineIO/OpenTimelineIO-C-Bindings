@@ -117,7 +117,7 @@ extern "C"
     }
     bool Timeline_possibly_delete(Timeline* self)
     {
-        return SerializableObject_possibly_delete((SerializableObject*) self);
+        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
     }
     bool Timeline_to_json_file(
         Timeline*        self,
@@ -126,31 +126,31 @@ extern "C"
         int              indent)
     {
         return SerializableObject_to_json_file(
-            (SerializableObject*) self, file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject*>(self), file_name, error_status, indent);
     }
     const char* Timeline_to_json_string(
         Timeline* self, OTIOErrorStatus* error_status, int indent)
     {
         return SerializableObject_to_json_string(
-            (SerializableObject*) self, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject*>(self), error_status, indent);
     }
-    bool Timeline_is_equivalent_to(Timeline* self, SerializableObject* other)
+    bool Timeline_is_equivalent_to(Timeline* self, OTIOSerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
-            (SerializableObject*) self, other);
+            reinterpret_cast<OTIOSerializableObject*>(self), other);
     }
     Timeline* Timeline_clone(Timeline* self, OTIOErrorStatus* error_status)
     {
         return (Timeline*) SerializableObject_clone(
-            (SerializableObject*) self, error_status);
+            reinterpret_cast<OTIOSerializableObject*>(self), error_status);
     }
     const char* Timeline_schema_name(Timeline* self)
     {
-        return SerializableObject_schema_name((SerializableObject*) self);
+        return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject*>(self));
     }
     int Timeline_schema_version(Timeline* self)
     {
-        return SerializableObject_schema_version((SerializableObject*) self);
+        return SerializableObject_schema_version(reinterpret_cast<OTIOSerializableObject*>(self));
     }
 #ifdef __cplusplus
 }

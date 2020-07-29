@@ -170,7 +170,7 @@ extern "C"
         return Composable_to_json_string(
             (Composable*) self, error_status, indent);
     }
-    bool Gap_is_equivalent_to(Gap* self, SerializableObject* other)
+    bool Gap_is_equivalent_to(Gap* self, OTIOSerializableObject* other)
     {
         return Composable_is_equivalent_to((Composable*) self, other);
     }

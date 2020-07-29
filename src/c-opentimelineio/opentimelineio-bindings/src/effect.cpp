@@ -78,7 +78,7 @@ extern "C"
     }
     bool Effect_possibly_delete(Effect* self)
     {
-        return SerializableObject_possibly_delete((SerializableObject*) self);
+        return SerializableObject_possibly_delete(reinterpret_cast<OTIOSerializableObject*>(self));
     }
     bool Effect_to_json_file(
         Effect*          self,
@@ -87,31 +87,31 @@ extern "C"
         int              indent)
     {
         return SerializableObject_to_json_file(
-            (SerializableObject*) self, file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject*>(self), file_name, error_status, indent);
     }
     const char* Effect_to_json_string(
         Effect* self, OTIOErrorStatus* error_status, int indent)
     {
         return SerializableObject_to_json_string(
-            (SerializableObject*) self, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject*>(self), error_status, indent);
     }
-    bool Effect_is_equivalent_to(Effect* self, SerializableObject* other)
+    bool Effect_is_equivalent_to(Effect* self, OTIOSerializableObject* other)
     {
         return SerializableObject_is_equivalent_to(
-            (SerializableObject*) self, other);
+            reinterpret_cast<OTIOSerializableObject*>(self), other);
     }
     Effect* Effect_clone(Effect* self, OTIOErrorStatus* error_status)
     {
         return (Effect*) SerializableObject_clone(
-            (SerializableObject*) self, error_status);
+            reinterpret_cast<OTIOSerializableObject*>(self), error_status);
     }
     const char* Effect_schema_name(Effect* self)
     {
-        return SerializableObject_schema_name((SerializableObject*) self);
+        return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject*>(self));
     }
     int Effect_schema_version(Effect* self)
     {
-        return SerializableObject_schema_version((SerializableObject*) self);
+        return SerializableObject_schema_version(reinterpret_cast<OTIOSerializableObject*>(self));
     }
 #ifdef __cplusplus
 }

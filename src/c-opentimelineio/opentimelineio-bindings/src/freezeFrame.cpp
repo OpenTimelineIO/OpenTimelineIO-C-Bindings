@@ -68,7 +68,7 @@ extern "C"
         return Effect_to_json_string((Effect*) self, error_status, indent);
     }
     bool
-    FreezeFrame_is_equivalent_to(FreezeFrame* self, SerializableObject* other)
+    FreezeFrame_is_equivalent_to(FreezeFrame* self, OTIOSerializableObject* other)
     {
         return Effect_is_equivalent_to((Effect*) self, other);
     }

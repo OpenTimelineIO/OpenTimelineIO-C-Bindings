@@ -3,53 +3,49 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
 
-    struct AnyDictionaryIterator;
-    typedef struct AnyDictionaryIterator AnyDictionaryIterator;
-    struct AnyDictionary;
-    typedef struct AnyDictionary AnyDictionary;
-    struct AnyDictionaryMutationStamp;
-    typedef struct AnyDictionaryMutationStamp AnyDictionaryMutationStamp;
-    AnyDictionary*                            AnyDictionary_create();
-    void                   AnyDictionary_destroy(AnyDictionary* self);
-    void                   AnyDictionary_clear(AnyDictionary* self);
-    AnyDictionaryIterator* AnyDictionary_begin(AnyDictionary* self);
-    AnyDictionaryIterator* AnyDictionary_end(AnyDictionary* self);
-    void AnyDictionary_swap(AnyDictionary* self, AnyDictionary* other);
-    AnyDictionaryIterator*
-                           AnyDictionary_erase(AnyDictionary* self, AnyDictionaryIterator* pos);
-    AnyDictionaryIterator* AnyDictionary_erase_range(
-        AnyDictionary*         self,
-        AnyDictionaryIterator* first,
-        AnyDictionaryIterator* last);
-    int   AnyDictionary_erase_key(AnyDictionary* self, const char* key);
-    int   AnyDictionary_size(AnyDictionary* self);
-    int   AnyDictionary_max_size(AnyDictionary* self);
-    bool AnyDictionary_empty(AnyDictionary* self);
-    AnyDictionaryIterator*
+typedef struct AnyDictionaryIterator AnyDictionaryIterator;
+typedef struct AnyDictionary AnyDictionary;
+typedef struct AnyDictionaryMutationStamp AnyDictionaryMutationStamp;
+
+OTIO_API AnyDictionary*                            AnyDictionary_create();
+OTIO_API void                   AnyDictionary_destroy(AnyDictionary* self);
+OTIO_API void                   AnyDictionary_clear(AnyDictionary* self);
+OTIO_API AnyDictionaryIterator* AnyDictionary_begin(AnyDictionary* self);
+OTIO_API AnyDictionaryIterator* AnyDictionary_end(AnyDictionary* self);
+OTIO_API void AnyDictionary_swap(AnyDictionary* self, AnyDictionary* other);
+OTIO_API AnyDictionaryIterator*
+                       AnyDictionary_erase(AnyDictionary* self, AnyDictionaryIterator* pos);
+OTIO_API AnyDictionaryIterator* AnyDictionary_erase_range(
+    AnyDictionary*         self,
+    AnyDictionaryIterator* first,
+    AnyDictionaryIterator* last);
+OTIO_API int   AnyDictionary_erase_key(AnyDictionary* self, const char* key);
+OTIO_API int   AnyDictionary_size(AnyDictionary* self);
+OTIO_API int   AnyDictionary_max_size(AnyDictionary* self);
+OTIO_API bool AnyDictionary_empty(AnyDictionary* self);
+OTIO_API AnyDictionaryIterator*
     AnyDictionary_find(AnyDictionary* self, const char* key);
-    AnyDictionaryIterator*
-         AnyDictionary_insert(AnyDictionary* self, const char* key, Any* anyObj);
-    void AnyDictionaryIterator_advance(AnyDictionaryIterator* iter, int dist);
-    AnyDictionaryIterator*
+OTIO_API AnyDictionaryIterator*
+    AnyDictionary_insert(AnyDictionary* self, const char* key, Any* anyObj);
+OTIO_API void AnyDictionaryIterator_advance(AnyDictionaryIterator* iter, int dist);
+OTIO_API AnyDictionaryIterator*
     AnyDictionaryIterator_next(AnyDictionaryIterator* iter, int dist);
-    AnyDictionaryIterator*
-                AnyDictionaryIterator_prev(AnyDictionaryIterator* iter, int dist);
-    const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter);
-    Any*        AnyDictionaryIterator_value(AnyDictionaryIterator* iter);
-    bool       AnyDictionaryIterator_equal(
-              AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);
-    bool AnyDictionaryIterator_not_equal(
-        AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);
-    void AnyDictionaryIterator_destroy(AnyDictionaryIterator* self);
-    AnyDictionaryMutationStamp*
-         AnyDictionaryMutationStamp_create(AnyDictionary* d);
-    void AnyDictionaryMutationStamp_destroy(AnyDictionaryMutationStamp* self);
-    AnyDictionaryMutationStamp*
+OTIO_API AnyDictionaryIterator*
+            AnyDictionaryIterator_prev(AnyDictionaryIterator* iter, int dist);
+OTIO_API const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter);
+OTIO_API Any*        AnyDictionaryIterator_value(AnyDictionaryIterator* iter);
+OTIO_API bool       AnyDictionaryIterator_equal(
+          AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);
+OTIO_API bool AnyDictionaryIterator_not_equal(
+    AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);
+OTIO_API void AnyDictionaryIterator_destroy(AnyDictionaryIterator* self);
+OTIO_API AnyDictionaryMutationStamp*
+     AnyDictionaryMutationStamp_create(AnyDictionary* d);
+OTIO_API void AnyDictionaryMutationStamp_destroy(AnyDictionaryMutationStamp* self);
+OTIO_API AnyDictionaryMutationStamp*
     AnyDictionary_get_or_create_mutation_stamp(AnyDictionary* self);
-#ifdef __cplusplus
-}
-#endif

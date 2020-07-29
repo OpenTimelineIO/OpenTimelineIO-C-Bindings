@@ -29,7 +29,7 @@ extern "C"
     const char* FreezeFrame_to_json_string(
         FreezeFrame* self, OTIOErrorStatus* error_status, int indent);
     bool
-    FreezeFrame_is_equivalent_to(FreezeFrame* self, SerializableObject* other);
+    FreezeFrame_is_equivalent_to(FreezeFrame* self, OTIOSerializableObject* other);
     FreezeFrame*
                 FreezeFrame_clone(FreezeFrame* self, OTIOErrorStatus* error_status);
     const char* FreezeFrame_schema_name(FreezeFrame* self);

@@ -7,51 +7,50 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct SerializableCollection;
-    typedef struct SerializableCollection SerializableCollection;
-    SerializableCollection*               SerializableCollection_create(
-                      const char*               name,
-                      SerializableObjectVector* children,
-                      AnyDictionary*            metadata);
-    SerializableObjectRetainerVector*
-         SerializableCollection_children(SerializableCollection* self);
-    void SerializableCollection_set_children(
-        SerializableCollection* self, SerializableObjectVector* children);
-    void SerializableCollection_clear_children(SerializableCollection* self);
-    void SerializableCollection_insert_child(
-        SerializableCollection* self, int index, SerializableObject* child);
-    bool SerializableCollection_set_child(
-        SerializableCollection* self,
-        int                     index,
-        SerializableObject*     child,
-        OTIOErrorStatus*        error_status);
-    bool SerializableCollection_remove_child(
-        SerializableCollection* self, int index, OTIOErrorStatus* error_status);
-    const char* SerializableCollection_name(SerializableCollection* self);
-    void        SerializableCollection_set_name(
-               SerializableCollection* self, const char* name);
-    AnyDictionary*
-          SerializableCollection_metadata(SerializableCollection* self);
-    bool SerializableCollection_possibly_delete(SerializableCollection* self);
-    bool SerializableCollection_to_json_file(
-        SerializableCollection* self,
-        const char*             file_name,
-        OTIOErrorStatus*        error_status,
-        int                     indent);
-    const char* SerializableCollection_to_json_string(
-        SerializableCollection* self,
-        OTIOErrorStatus*        error_status,
-        int                     indent);
-    bool SerializableCollection_is_equivalent_to(
-        SerializableCollection* self, SerializableObject* other);
-    SerializableCollection* SerializableCollection_clone(
-        SerializableCollection* self, OTIOErrorStatus* error_status);
-    const char*
-        SerializableCollection_schema_name(SerializableCollection* self);
-    int SerializableCollection_schema_version(SerializableCollection* self);
-#ifdef __cplusplus
-}
-#endif
+
+typedef struct SerializableCollection SerializableCollection;
+
+OTIO_API SerializableCollection*               SerializableCollection_create(
+                  const char*               name,
+                  SerializableObjectVector* children,
+                  AnyDictionary*            metadata);
+OTIO_API SerializableObjectRetainerVector*
+     SerializableCollection_children(SerializableCollection* self);
+OTIO_API void SerializableCollection_set_children(
+    SerializableCollection* self, SerializableObjectVector* children);
+OTIO_API void SerializableCollection_clear_children(SerializableCollection* self);
+OTIO_API void SerializableCollection_insert_child(
+    SerializableCollection* self, int index, OTIOSerializableObject* child);
+OTIO_API bool SerializableCollection_set_child(
+    SerializableCollection* self,
+    int                     index,
+    OTIOSerializableObject*     child,
+    OTIOErrorStatus*        error_status);
+OTIO_API bool SerializableCollection_remove_child(
+    SerializableCollection* self, int index, OTIOErrorStatus* error_status);
+OTIO_API const char* SerializableCollection_name(SerializableCollection* self);
+OTIO_API void        SerializableCollection_set_name(
+           SerializableCollection* self, const char* name);
+OTIO_API AnyDictionary*
+      SerializableCollection_metadata(SerializableCollection* self);
+OTIO_API bool SerializableCollection_possibly_delete(SerializableCollection* self);
+OTIO_API bool SerializableCollection_to_json_file(
+    SerializableCollection* self,
+    const char*             file_name,
+    OTIOErrorStatus*        error_status,
+    int                     indent);
+OTIO_API const char* SerializableCollection_to_json_string(
+    SerializableCollection* self,
+    OTIOErrorStatus*        error_status,
+    int                     indent);
+OTIO_API bool SerializableCollection_is_equivalent_to(
+    SerializableCollection* self, OTIOSerializableObject* other);
+OTIO_API SerializableCollection* SerializableCollection_clone(
+    SerializableCollection* self, OTIOErrorStatus* error_status);
+OTIO_API const char*
+    SerializableCollection_schema_name(SerializableCollection* self);
+OTIO_API int SerializableCollection_schema_version(SerializableCollection* self);

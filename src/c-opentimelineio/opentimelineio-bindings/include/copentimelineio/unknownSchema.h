@@ -23,7 +23,7 @@ extern "C"
     const char* UnknownSchema_to_json_string(
         UnknownSchema* self, OTIOErrorStatus* error_status, int indent);
     bool UnknownSchema_is_equivalent_to(
-        UnknownSchema* self, SerializableObject* other);
+        UnknownSchema* self, OTIOSerializableObject* other);
     UnknownSchema*
                 UnknownSchema_clone(UnknownSchema* self, OTIOErrorStatus* error_status);
     const char* UnknownSchema_schema_name(UnknownSchema* self);
