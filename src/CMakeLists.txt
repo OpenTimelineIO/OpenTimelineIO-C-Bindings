@@ -1,0 +1,2 @@
+add_subdirectory(copentime)
+add_subdirectory(copentimelineio)
