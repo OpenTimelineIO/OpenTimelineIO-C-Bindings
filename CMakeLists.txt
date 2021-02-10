@@ -13,7 +13,11 @@ set(COTIO_AUTHOR "Contributors to the OpenTimelineIO project")
 set(COTIO_AUTHOR_EMAIL "opentimelineio@pixar.com")
 set(COTIO_LICENSE "Modified Apache 2.0 License")
 
-project(copentimelineio VERSION 0.14 LANGUAGES CXX C)
+project(copentimelineio VERSION ${COTIO_VERSION} LANGUAGES CXX C)
+
+if (POLICY CMP0077)
+    cmake_policy(SET CMP0077 NEW)
+endif()
 
 #------------------------------------------------------------------------------
 # Global language settings
