@@ -1,6 +1,6 @@
 set(TESTS
     openTimeTests
-#    OTIOComposableTests
+    OTIOComposableTests
     OTIOClipTests
 #    OTIOCompositionTests
 #    OTIOEffectTests

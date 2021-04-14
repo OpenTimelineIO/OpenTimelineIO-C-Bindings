@@ -21,20 +21,6 @@ static int teardownRationalTimeTests(void **state) {
     return 0;
 }
 
-//class OpenTimeTimeRangeTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-//
-//class OpenTimeTimeTransformTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-
 double DBL_EPSILON = 5.82077e-11;
 
 static void opentime_rational_time_invalid_time_test(void **state) {
