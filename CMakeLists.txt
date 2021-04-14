@@ -15,9 +15,7 @@ set(COTIO_LICENSE "Modified Apache 2.0 License")
 
 project(copentimelineio VERSION ${COTIO_VERSION} LANGUAGES CXX C)
 
-if (POLICY CMP0077)
-    cmake_policy(SET CMP0077 NEW)
-endif()
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 
 #------------------------------------------------------------------------------
 # Global language settings
@@ -86,9 +84,12 @@ set(OTIO_CXX_INSTALL OFF)
 set(OTIO_DEPENDENCIES_INSTALL OFF)
 set(OTIO_INSTALL_COMMANDLINE_TOOLS OFF)
 set(OTIO_SHARED_LIBS OFF) # build otio as a static lib
+set(WITH_EXAMPLES OFF)
+set(UNIT_TESTING OFF)
 
 enable_testing()
 
 add_subdirectory(OpenTimelineIO)
 add_subdirectory(src)
+add_subdirectory(cmocka)
 add_subdirectory(tests)
