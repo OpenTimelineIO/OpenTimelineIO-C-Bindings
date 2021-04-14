@@ -1,4 +1,3 @@
-//#include "gtest/gtest.h"
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -19,13 +18,6 @@
 #include <copentimelineio/serializableObject.h>
 #include <copentimelineio/serializableObjectWithMetadata.h>
 #include <copentimelineio/serialization.h>
-
-//class OTIOClipTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
 
 static void otio_clip_constructor_test(void **state) {
     const char *name = "test";
