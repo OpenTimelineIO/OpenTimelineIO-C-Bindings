@@ -3,7 +3,7 @@ set(TESTS
     OTIOComposableTests
     OTIOClipTests
 #    OTIOCompositionTests
-#    OTIOEffectTests
+    OTIOEffectTests
 #    OTIOGeneratorReferenceTests
 #    OTIOMarkerTests
 #    OTIOMediaReferenceTests
@@ -18,7 +18,7 @@ set(TESTS
 #    OTIOMultithreadingTests
 )
 foreach(TEST ${TESTS})
-    add_executable(C${TEST} ${TEST}.c)
+    add_executable(C${TEST} ${TEST}.c epsilon.h)
     target_include_directories(C${TEST} PRIVATE
         "${PROJECT_SOURCE_DIR}/include"
         "${PROJECT_SOURCE_DIR}/OpenTimelineIO/src/deps"

@@ -3,12 +3,13 @@
 #include <stdint.h>
 #include <setjmp.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <cmocka.h>
+#include "epsilon.h"
 
 #include <copentime/rationalTime.h>
 #include <copentime/timeRange.h>
 #include <copentime/timeTransform.h>
-#include <malloc.h>
 
 static int setupRationalTimeTests(void **state) {
     RationalTime *rationalTime = RationalTime_create(48, 24);
@@ -20,8 +21,6 @@ static int teardownRationalTimeTests(void **state) {
     RationalTime_destroy(*state);
     return 0;
 }
-
-double DBL_EPSILON = 5.82077e-11;
 
 static void opentime_rational_time_invalid_time_test(void **state) {
     RationalTime *rationalTime = *state;
