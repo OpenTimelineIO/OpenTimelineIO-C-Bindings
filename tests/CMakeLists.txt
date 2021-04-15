@@ -8,7 +8,7 @@ set(TESTS
     OTIOMarkerTests
     OTIOMediaReferenceTests
     OTIOTransitionTests
-#    OTIOUnknownSchemaTests
+    OTIOUnknownSchemaTests
     OTIOSerializableCollectionTests
 #    OTIOItemTests not working
 #    OTIOSerializableObjectTests
