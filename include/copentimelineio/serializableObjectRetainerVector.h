@@ -1,7 +1,6 @@
 #pragma once
 
 #include "serializableObject.h"
-#include <vector>
 
 #ifdef __cplusplus
 extern "C"

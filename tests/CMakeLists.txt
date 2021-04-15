@@ -9,13 +9,12 @@ set(TESTS
     OTIOMediaReferenceTests
 #    OTIOTransitionTests
 #    OTIOUnknownSchemaTests
-#    OTIOSerializableCollectionTests
+    OTIOSerializableCollectionTests
 #    OTIOItemTests not working
 #    OTIOSerializableObjectTests
 #    OTIOTimelineTests
 #    OTIOStackAlgoTests not working
 #    OTIOTrackAlgoTests
-#    OTIOMultithreadingTests
 )
 foreach(TEST ${TESTS})
     add_executable(C${TEST} ${TEST}.c epsilon.h)
