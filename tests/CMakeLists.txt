@@ -6,7 +6,7 @@ set(TESTS
     OTIOEffectTests
     OTIOGeneratorReferenceTests
     OTIOMarkerTests
-#    OTIOMediaReferenceTests
+    OTIOMediaReferenceTests
 #    OTIOTransitionTests
 #    OTIOUnknownSchemaTests
 #    OTIOSerializableCollectionTests
