@@ -1,4 +1,10 @@
-#include "gtest/gtest.h"
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <setjmp.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <cmocka.h>
 
 #include <copentime/rationalTime.h>
 #include <copentime/timeRange.h>
@@ -20,63 +26,70 @@
 #define xstr(s) str(s)
 #define str(s) #s
 
-class OTIOGeneratorReferenceTests : public ::testing::Test
-{
-protected:
-    void SetUp() override
-    {
-        RationalTime* start_time = RationalTime_create(0, 24);
-        RationalTime* duration   = RationalTime_create(100, 24);
-        TimeRange*    available_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
-
-        AnyDictionary* metadata  = AnyDictionary_create();
-        Any*           value_any = create_safely_typed_any_string("bar");
-        AnyDictionaryIterator* it =
-            AnyDictionary_insert(metadata, "foo", value_any);
-
-        AnyDictionaryIterator_destroy(it);
-        it = NULL;
-        Any_destroy(value_any);
-        value_any = NULL;
-
-        AnyDictionary* parameters = AnyDictionary_create();
-        value_any                 = create_safely_typed_any_double(5.0);
-        it = AnyDictionary_insert(parameters, "test_param", value_any);
-
-        AnyDictionaryIterator_destroy(it);
-        it = NULL;
-        Any_destroy(value_any);
-        value_any = NULL;
-
-        gen = GeneratorReference_create(
-            "SMPTEBars", "SMPTEBars", available_range, parameters, metadata);
-        gen_r = RetainerSerializableObject_create(reinterpret_cast<OTIOSerializableObject*>(gen));
-
-        RationalTime_destroy(start_time);
-        start_time = NULL;
-        RationalTime_destroy(duration);
-        duration = NULL;
-        TimeRange_destroy(available_range);
-        available_range = NULL;
-        AnyDictionary_destroy(metadata);
-        metadata = NULL;
-        AnyDictionary_destroy(parameters);
-        parameters = NULL;
-
-        sample_data_dir = xstr(SAMPLE_DATA_DIR);
-    }
-    void TearDown() override
-    {
-        RetainerSerializableObject_managed_destroy(gen_r);
-        gen_r = NULL;
-        gen = NULL;
-    }
-
+struct GeneratorReferenceTestState{
     GeneratorReference* gen;
     RetainerSerializableObject* gen_r;
     const char*         sample_data_dir;
 };
+
+static int setupGeneratorReferenceTests(void **state) {
+    RationalTime* start_time = RationalTime_create(0, 24);
+    RationalTime* duration   = RationalTime_create(100, 24);
+    TimeRange*    available_range =
+            TimeRange_create_with_start_time_and_duration(start_time, duration);
+
+    AnyDictionary* metadata  = AnyDictionary_create();
+    Any*           value_any = create_safely_typed_any_string("bar");
+    AnyDictionaryIterator* it =
+            AnyDictionary_insert(metadata, "foo", value_any);
+
+    AnyDictionaryIterator_destroy(it);
+    it = NULL;
+    Any_destroy(value_any);
+    value_any = NULL;
+
+    AnyDictionary* parameters = AnyDictionary_create();
+    value_any                 = create_safely_typed_any_double(5.0);
+    it = AnyDictionary_insert(parameters, "test_param", value_any);
+
+    AnyDictionaryIterator_destroy(it);
+    it = NULL;
+    Any_destroy(value_any);
+    value_any = NULL;
+
+    struct GeneratorReferenceTestState *testState = malloc(sizeof (struct GeneratorReferenceTestState));
+
+    testState->gen = GeneratorReference_create(
+            "SMPTEBars", "SMPTEBars", available_range, parameters, metadata);
+    testState->gen_r = RetainerSerializableObject_create((OTIOSerializableObject*)testState->gen);
+
+    RationalTime_destroy(start_time);
+    start_time = NULL;
+    RationalTime_destroy(duration);
+    duration = NULL;
+    TimeRange_destroy(available_range);
+    available_range = NULL;
+    AnyDictionary_destroy(metadata);
+    metadata = NULL;
+    AnyDictionary_destroy(parameters);
+    parameters = NULL;
+
+    testState->sample_data_dir = xstr(SAMPLE_DATA_DIR);
+    *state = testState;
+    return 0;
+}
+
+static int teardownGeneratorReferenceTests(void **state) {
+    struct GeneratorReferenceTestState *testState = *state;
+
+    RetainerSerializableObject_managed_destroy(testState->gen_r);
+    testState->gen_r = NULL;
+    testState->gen = NULL;
+    free((char*)testState->sample_data_dir);
+    free(testState);
+
+    return 0;
+}
 
 TEST_F(OTIOGeneratorReferenceTests, ConstructorTest)
 {

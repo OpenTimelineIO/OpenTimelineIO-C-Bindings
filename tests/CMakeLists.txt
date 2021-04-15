@@ -4,7 +4,7 @@ set(TESTS
     OTIOClipTests
 #    OTIOCompositionTests
     OTIOEffectTests
-#    OTIOGeneratorReferenceTests
+    OTIOGeneratorReferenceTests
 #    OTIOMarkerTests
 #    OTIOMediaReferenceTests
 #    OTIOTransitionTests
