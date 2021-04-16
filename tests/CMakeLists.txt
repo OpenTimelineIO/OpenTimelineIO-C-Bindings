@@ -14,7 +14,7 @@ set(TESTS
     OTIOSerializableObjectTests
 #    OTIOTimelineTests
 #    OTIOStackAlgoTests not working
-#    OTIOTrackAlgoTests
+    OTIOTrackAlgoTests
 )
 foreach(TEST ${TESTS})
     add_executable(C${TEST} ${TEST}.c epsilon.h)
