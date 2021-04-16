@@ -11,7 +11,7 @@ set(TESTS
     OTIOUnknownSchemaTests
     OTIOSerializableCollectionTests
 #    OTIOItemTests not working
-#    OTIOSerializableObjectTests
+    OTIOSerializableObjectTests
 #    OTIOTimelineTests
 #    OTIOStackAlgoTests not working
 #    OTIOTrackAlgoTests
