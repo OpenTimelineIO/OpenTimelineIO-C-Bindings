@@ -12,7 +12,7 @@ set(TESTS
     OTIOSerializableCollectionTests
 #    OTIOItemTests not working
     OTIOSerializableObjectTests
-#    OTIOTimelineTests
+    OTIOTimelineTests
 #    OTIOStackAlgoTests not working
     OTIOTrackAlgoTests
 )
