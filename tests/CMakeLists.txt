@@ -10,7 +10,7 @@ set(TESTS
     OTIOTransitionTests
     OTIOUnknownSchemaTests
     OTIOSerializableCollectionTests
-#    OTIOItemTests not working
+    OTIOItemTests
     OTIOSerializableObjectTests
     OTIOTimelineTests
 #    OTIOStackAlgoTests not working
