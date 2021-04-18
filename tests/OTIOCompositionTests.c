@@ -32,51 +32,6 @@
 #define xstr(s) str(s)
 #define str(s) #s
 
-//class OTIOCompositionTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-//
-//class OTIOStackTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-//
-//class OTIOTrackTests : public ::testing::Test
-//{
-//protected:
-//    void        SetUp() override { sample_data_dir = xstr(SAMPLE_DATA_DIR); }
-//    void        TearDown() override {}
-//    const char* sample_data_dir;
-//};
-//
-//class OTIOEdgeCases : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-//
-//class OTIONestingTest : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//
-//    struct ClipWrapperPair
-//    {
-//        Clip*  clip;
-//        Stack* wrapper;
-//    };
-//    typedef struct ClipWrapperPair ClipWrapperPair;
-//
-
-//};
-
 struct ClipWrapperPair {
     Clip *clip;
     Stack *wrapper;

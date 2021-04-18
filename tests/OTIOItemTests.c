@@ -19,20 +19,6 @@
 #include <copentimelineio/track.h>
 #include <copentimelineio/transition.h>
 
-//class OTIOGapTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-//
-//class OTIOItemTests : public ::testing::Test
-//{
-//protected:
-//    void SetUp() override {}
-//    void TearDown() override {}
-//};
-
 static void otio_gap_serialize_test(void **state) {
     Gap *gap = Gap_create_with_duration(NULL, NULL, NULL, NULL, NULL);
     OTIO_RETAIN(gap);
