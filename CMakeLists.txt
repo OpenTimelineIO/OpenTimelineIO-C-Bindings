@@ -1,8 +1,4 @@
-if (WINDOWS)
-    cmake_minimum_required(VERSION 3.17.0 FATAL_ERROR)
-else ()
-    cmake_minimum_required(VERSION 3.9.4 FATAL_ERROR)
-endif ()
+cmake_minimum_required(VERSION 3.13.0 FATAL_ERROR)
 
 set(COTIO_VERSION_MAJOR "0")
 set(COTIO_VERSION_MINOR "14")
