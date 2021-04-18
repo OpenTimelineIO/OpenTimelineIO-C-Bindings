@@ -13,7 +13,7 @@ set(TESTS
     OTIOItemTests
     OTIOSerializableObjectTests
     OTIOTimelineTests
-#    OTIOStackAlgoTests not working
+    OTIOStackAlgoTests
     OTIOTrackAlgoTests
 )
 foreach(TEST ${TESTS})
