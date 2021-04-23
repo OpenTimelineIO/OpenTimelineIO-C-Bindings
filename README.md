@@ -41,6 +41,12 @@ Prerequisites
 - CMake 3.17.0+ (Windows) or CMake 3.9.4+ (Linux and macOS)
 - Compiler with C++11 support
 
+Dependencies
+-----------
+
+- [OpenTimelineIO](http://opentimeline.io/): OpenTimelineIO-C-Bindings is a C-wrapper over the OpenTimelineIO C++ core
+- [cmocka](https://cmocka.org/): It is a unit testing framework for C used here to test the bindings.
+
 Building OpenTimelineIO-C-Bindings
 ------------------------
 
