@@ -7,22 +7,25 @@
 extern "C"
 {
 #endif
-    struct TimeTransform;
+    struct TimeTransform {
+        RationalTime offset;
+        double scale;
+        double rate;
+    };
     typedef struct TimeTransform TimeTransform;
-    TimeTransform* TimeTransform_create();
-    TimeTransform*
-                  TimeTransform_create_with_offset_scale_rate(RationalTime* offset, double scale, double rate);
-    RationalTime* TimeTransform_offset(TimeTransform* self);
-    double        TimeTransform_scale(TimeTransform* self);
-    double        TimeTransform_rate(TimeTransform* self);
-    TimeRange* TimeTransform_applied_to_time_range(TimeTransform* self, TimeRange* other);
-    TimeTransform*
-    TimeTransform_applied_to_time_transform(TimeTransform* self, TimeTransform* other);
-    RationalTime*
-          TimeTransform_applied_to_rational_time(TimeTransform* self, RationalTime* other);
-    bool TimeTransform_equal(TimeTransform* lhs, TimeTransform* rhs);
-    bool TimeTransform_not_equal(TimeTransform* lhs, TimeTransform* rhs);
-    void  TimeTransform_destroy(TimeTransform* self);
+    TimeTransform TimeTransform_create();
+    TimeTransform
+                  TimeTransform_create_with_offset_scale_rate(RationalTime offset, double scale, double rate);
+    RationalTime TimeTransform_offset(TimeTransform self);
+    double        TimeTransform_scale(TimeTransform self);
+    double        TimeTransform_rate(TimeTransform self);
+    TimeRange TimeTransform_applied_to_time_range(TimeTransform self, TimeRange other);
+    TimeTransform
+    TimeTransform_applied_to_time_transform(TimeTransform self, TimeTransform other);
+    RationalTime
+          TimeTransform_applied_to_rational_time(TimeTransform self, RationalTime other);
+    bool TimeTransform_equal(TimeTransform lhs, TimeTransform rhs);
+    bool TimeTransform_not_equal(TimeTransform lhs, TimeTransform rhs);
 #ifdef __cplusplus
 }
 #endif

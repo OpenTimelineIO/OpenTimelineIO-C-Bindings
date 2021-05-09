@@ -650,140 +650,91 @@ static void opentime_time_range_distant_time_ranges_test(void **state) {
     assert_true(TimeRange_equal(full, r2Extendedr1));
 }
 
-//static void opentime_time_transform_identity_transform_test(void **state) {
-//    RationalTime *tstart = RationalTime_create(12, 25);
-//    TimeTransform *txform = TimeTransform_create();
-//    RationalTime *transformedTime =
-//            TimeTransform_applied_to_rational_time(txform, tstart);
-//    assert_true(RationalTime_equal(transformedTime, tstart));
-//    RationalTime_destroy(transformedTime);
-//    TimeTransform_destroy(txform);
-//    transformedTime = NULL;
-//    txform = NULL;
-//
-//    RationalTime *blank = RationalTime_create(0, 1);
-//    txform = TimeTransform_create_with_offset_scale_rate(blank, 1, 50);
-//    transformedTime = TimeTransform_applied_to_rational_time(txform, tstart);
-//    assert_double_equal(RationalTime_value(transformedTime), 24, DBL_EPSILON);
-//    RationalTime_destroy(blank);
-//    RationalTime_destroy(transformedTime);
-//    TimeTransform_destroy(txform);
-//    txform = NULL;
-//    blank = transformedTime = NULL;
-//}
-//
-//static void opentime_time_transform_offset_test(void **state) {
-//    RationalTime *tstart = RationalTime_create(12, 25);
-//    RationalTime *toffset = RationalTime_create(10, 25);
-//    TimeTransform *txform =
-//            TimeTransform_create_with_offset_scale_rate(toffset, 1, -1);
-//    RationalTime *tstart_plus_offset = RationalTime_add(tstart, toffset);
-//    RationalTime *transformedTime =
-//            TimeTransform_applied_to_rational_time(txform, tstart);
-//
-//    assert_true(RationalTime_equal(tstart_plus_offset, transformedTime));
-//
-//    TimeRange *tr =
-//            TimeRange_create_with_start_time_and_duration(tstart, tstart);
-//    TimeRange *transformedRange =
-//            TimeTransform_applied_to_time_range(txform, tr);
-//    TimeRange *baseRange = TimeRange_create_with_start_time_and_duration(
-//            tstart_plus_offset, tstart);
-//
-//    assert_true(TimeRange_equal(transformedRange, baseRange));
-//
-//    RationalTime_destroy(tstart);
-//    RationalTime_destroy(toffset);
-//    RationalTime_destroy(tstart_plus_offset);
-//    RationalTime_destroy(transformedTime);
-//    TimeTransform_destroy(txform);
-//    TimeRange_destroy(tr);
-//    TimeRange_destroy(transformedRange);
-//    TimeRange_destroy(baseRange);
-//    txform = NULL;
-//    tstart = toffset = tstart_plus_offset = transformedTime = NULL;
-//    tr = transformedRange = baseRange = NULL;
-//}
-//
-//static void opentime_time_transform_scale_test(void **state) {
-//    RationalTime *tstart = RationalTime_create(12, 25);
-//    RationalTime *blank = RationalTime_create(0, 1);
-//    TimeTransform *txform =
-//            TimeTransform_create_with_offset_scale_rate(blank, 2, -1);
-//    RationalTime *baseTime = RationalTime_create(24, 25);
-//    RationalTime *transformedTime =
-//            TimeTransform_applied_to_rational_time(txform, tstart);
-//
-//    assert_true(RationalTime_equal(baseTime, transformedTime));
-//
-//    TimeRange *tr =
-//            TimeRange_create_with_start_time_and_duration(tstart, tstart);
-//    TimeRange *transformedRange =
-//            TimeTransform_applied_to_time_range(txform, tr);
-//    TimeRange *baseRange =
-//            TimeRange_create_with_start_time_and_duration(baseTime, baseTime);
-//
-//    assert_true(TimeRange_equal(baseRange, transformedRange));
-//
-//    RationalTime_destroy(tstart);
-//    RationalTime_destroy(blank);
-//    RationalTime_destroy(baseTime);
-//    RationalTime_destroy(transformedTime);
-//    TimeTransform_destroy(txform);
-//    TimeRange_destroy(tr);
-//    TimeRange_destroy(transformedRange);
-//    TimeRange_destroy(baseRange);
-//    txform = NULL;
-//    tstart = blank = baseTime = transformedTime = NULL;
-//    tr = transformedRange = baseRange = NULL;
-//}
-//
-//static void opentime_time_transform_rate_test(void **state) {
-//    RationalTime *blank = RationalTime_create(0, 1);
-//    TimeTransform *txform1 = TimeTransform_create();
-//    TimeTransform *txform2 =
-//            TimeTransform_create_with_offset_scale_rate(blank, 1, 50);
-//    TimeTransform *transformedTransform =
-//            TimeTransform_applied_to_time_transform(txform1, txform2);
-//
-//    assert_double_equal(TimeTransform_rate(txform2), TimeTransform_rate(transformedTransform), DBL_EPSILON);
-//
-//    RationalTime_destroy(blank);
-//    TimeTransform_destroy(txform1);
-//    TimeTransform_destroy(txform2);
-//    TimeTransform_destroy(transformedTransform);
-//    blank = NULL;
-//    txform1 = txform2 = NULL;
-//}
-//
-//static void opentime_time_transform_comparison_test(void **state) {
-//    RationalTime *tstart = RationalTime_create(12, 25);
-//    TimeTransform *txform =
-//            TimeTransform_create_with_offset_scale_rate(tstart, 2, -1);
-//    TimeTransform *txform2 =
-//            TimeTransform_create_with_offset_scale_rate(tstart, 2, -1);
-//
-//    assert_true(TimeTransform_equal(txform, txform2));
-//
-//    assert_false(TimeTransform_not_equal(txform, txform2));
-//
-//    RationalTime_destroy(tstart);
-//    tstart = NULL;
-//    tstart = RationalTime_create(23, 25);
-//    TimeTransform *txform3 =
-//            TimeTransform_create_with_offset_scale_rate(tstart, 2, -1);
-//
-//    assert_true(TimeTransform_not_equal(txform, txform3));
-//
-//    assert_false(TimeTransform_equal(txform, txform3));
-//
-//    RationalTime_destroy(tstart);
-//    TimeTransform_destroy(txform);
-//    TimeTransform_destroy(txform2);
-//    TimeTransform_destroy(txform3);
-//    tstart = NULL;
-//    txform = txform2 = txform3 = NULL;
-//}
+static void opentime_time_transform_identity_transform_test(void **state) {
+    RationalTime tstart = RationalTime_create(12, 25);
+    TimeTransform txform = TimeTransform_create();
+    RationalTime transformedTime =
+            TimeTransform_applied_to_rational_time(txform, tstart);
+    assert_true(RationalTime_equal(transformedTime, tstart));
+
+    RationalTime blank = RationalTime_create(0, 1);
+    txform = TimeTransform_create_with_offset_scale_rate(blank, 1, 50);
+    transformedTime = TimeTransform_applied_to_rational_time(txform, tstart);
+    assert_double_equal(RationalTime_value(transformedTime), 24, DBL_EPSILON);
+}
+
+static void opentime_time_transform_offset_test(void **state) {
+    RationalTime tstart = RationalTime_create(12, 25);
+    RationalTime toffset = RationalTime_create(10, 25);
+    TimeTransform txform =
+            TimeTransform_create_with_offset_scale_rate(toffset, 1, -1);
+    RationalTime tstart_plus_offset = RationalTime_add(tstart, toffset);
+    RationalTime transformedTime =
+            TimeTransform_applied_to_rational_time(txform, tstart);
+
+    assert_true(RationalTime_equal(tstart_plus_offset, transformedTime));
+
+    TimeRange tr =
+            TimeRange_create_with_start_time_and_duration(tstart, tstart);
+    TimeRange transformedRange =
+            TimeTransform_applied_to_time_range(txform, tr);
+    TimeRange baseRange = TimeRange_create_with_start_time_and_duration(
+            tstart_plus_offset, tstart);
+
+    assert_true(TimeRange_equal(transformedRange, baseRange));
+}
+
+static void opentime_time_transform_scale_test(void **state) {
+    RationalTime tstart = RationalTime_create(12, 25);
+    RationalTime blank = RationalTime_create(0, 1);
+    TimeTransform txform =
+            TimeTransform_create_with_offset_scale_rate(blank, 2, -1);
+    RationalTime baseTime = RationalTime_create(24, 25);
+    RationalTime transformedTime =
+            TimeTransform_applied_to_rational_time(txform, tstart);
+
+    assert_true(RationalTime_equal(baseTime, transformedTime));
+
+    TimeRange tr =
+            TimeRange_create_with_start_time_and_duration(tstart, tstart);
+    TimeRange transformedRange =
+            TimeTransform_applied_to_time_range(txform, tr);
+    TimeRange baseRange =
+            TimeRange_create_with_start_time_and_duration(baseTime, baseTime);
+
+    assert_true(TimeRange_equal(baseRange, transformedRange));
+}
+
+static void opentime_time_transform_rate_test(void **state) {
+    RationalTime blank = RationalTime_create(0, 1);
+    TimeTransform txform1 = TimeTransform_create();
+    TimeTransform txform2 =
+            TimeTransform_create_with_offset_scale_rate(blank, 1, 50);
+    TimeTransform transformedTransform =
+            TimeTransform_applied_to_time_transform(txform1, txform2);
+
+    assert_double_equal(TimeTransform_rate(txform2), TimeTransform_rate(transformedTransform), DBL_EPSILON);
+}
+
+static void opentime_time_transform_comparison_test(void **state) {
+    RationalTime tstart = RationalTime_create(12, 25);
+    TimeTransform txform =
+            TimeTransform_create_with_offset_scale_rate(tstart, 2, -1);
+    TimeTransform txform2 =
+            TimeTransform_create_with_offset_scale_rate(tstart, 2, -1);
+
+    assert_true(TimeTransform_equal(txform, txform2));
+
+    assert_false(TimeTransform_not_equal(txform, txform2));
+
+    tstart = RationalTime_create(23, 25);
+    TimeTransform txform3 =
+            TimeTransform_create_with_offset_scale_rate(tstart, 2, -1);
+
+    assert_true(TimeTransform_not_equal(txform, txform3));
+
+    assert_false(TimeTransform_equal(txform, txform3));
+}
 
 int main(void) {
     const struct CMUnitTest tests[] = {
@@ -843,11 +794,11 @@ int main(void) {
             cmocka_unit_test(opentime_time_range_range_from_start_end_time_test),
             cmocka_unit_test(opentime_time_range_adjacent_time_ranges_test),
             cmocka_unit_test(opentime_time_range_distant_time_ranges_test),
-//            cmocka_unit_test(opentime_time_transform_identity_transform_test),
-//            cmocka_unit_test(opentime_time_transform_offset_test),
-//            cmocka_unit_test(opentime_time_transform_scale_test),
-//            cmocka_unit_test(opentime_time_transform_rate_test),
-//            cmocka_unit_test(opentime_time_transform_comparison_test),
+            cmocka_unit_test(opentime_time_transform_identity_transform_test),
+            cmocka_unit_test(opentime_time_transform_offset_test),
+            cmocka_unit_test(opentime_time_transform_scale_test),
+            cmocka_unit_test(opentime_time_transform_rate_test),
+            cmocka_unit_test(opentime_time_transform_comparison_test),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);

@@ -16,10 +16,10 @@ TimeRange TimeRange_create_with_start_time(RationalTime start_time) {
 
 TimeRange TimeRange_create_with_start_time_and_duration(
         RationalTime start_time, RationalTime duration) {
-    opentime::RationalTime ot_startTime = _COTRationalTime_to_OTRationalTime(start_time);
-    opentime::RationalTime ot_duration = _COTRationalTime_to_OTRationalTime(duration);
-    opentime::TimeRange ot_timeRange(ot_startTime, ot_duration);
-    return _OTTimeRange_to_COTTimeRange(ot_timeRange);
+    TimeRange timeRange;
+    timeRange.start_time = start_time;
+    timeRange.duration = duration;
+    return timeRange;
 }
 
 RationalTime TimeRange_start_time(TimeRange self) {
