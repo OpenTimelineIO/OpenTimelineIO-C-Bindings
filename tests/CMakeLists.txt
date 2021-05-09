@@ -1,20 +1,20 @@
 set(TESTS
     openTimeTests
-    OTIOComposableTests
-    OTIOClipTests
-    OTIOCompositionTests
-    OTIOEffectTests
-    OTIOGeneratorReferenceTests
-    OTIOMarkerTests
-    OTIOMediaReferenceTests
-    OTIOTransitionTests
-    OTIOUnknownSchemaTests
-    OTIOSerializableCollectionTests
-    OTIOItemTests
-    OTIOSerializableObjectTests
-    OTIOTimelineTests
-    OTIOStackAlgoTests
-    OTIOTrackAlgoTests
+#    OTIOComposableTests
+#    OTIOClipTests
+#    OTIOCompositionTests
+#    OTIOEffectTests
+#    OTIOGeneratorReferenceTests
+#    OTIOMarkerTests
+#    OTIOMediaReferenceTests
+#    OTIOTransitionTests
+#    OTIOUnknownSchemaTests
+#    OTIOSerializableCollectionTests
+#    OTIOItemTests
+#    OTIOSerializableObjectTests
+#    OTIOTimelineTests
+#    OTIOStackAlgoTests
+#    OTIOTrackAlgoTests
 )
 foreach(TEST ${TESTS})
     add_executable(C${TEST} ${TEST}.c epsilon.h)
