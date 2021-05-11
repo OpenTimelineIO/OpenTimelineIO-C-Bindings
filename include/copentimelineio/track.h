@@ -33,11 +33,7 @@ extern const char *TrackKind_Audio;
 
 OTIO_API Track *Track_create(
         const char *name,
-        const char *kind,
-        AnyDictionary *metadata);
-OTIO_API Track *Track_create_with_source_range(
-        const char *name,
-        TimeRange source_range,
+        OptionalTimeRange source_range,
         const char *kind,
         AnyDictionary *metadata);
 OTIO_API const char *Track_kind(Track *self);
@@ -81,15 +77,14 @@ OTIO_API bool Track_append_child(
 OTIO_API bool Track_is_parent_of(Track *self, Composable *other);
 OTIO_API TimeRange Track_range_of_child(
         Track *self, Composable *child, OTIOErrorStatus *error_status);
-OTIO_API bool Track_trimmed_range_of_child(
-        Track *self, Composable *child, TimeRange &trimmed_range_of_child, OTIOErrorStatus *error_status);
-OTIO_API bool Track_trim_child_range(Track *self, TimeRange child_range, TimeRange &trimmed_range);
+OTIO_API OptionalTimeRange Track_trimmed_range_of_child(
+        Track *self, Composable *child, OTIOErrorStatus *error_status);
+OTIO_API OptionalTimeRange Track_trim_child_range(Track *self, TimeRange child_range);
 OTIO_API bool Track_has_child(Track *self, Composable *child);
-
 OTIO_API bool Track_visible(Track *self);
 OTIO_API bool Track_overlapping(Track *self);
-OTIO_API bool Track_source_range(Track *self, TimeRange &source_range);
-OTIO_API void Track_set_source_range(Track *self, TimeRange source_range);
+OTIO_API OptionalTimeRange Track_source_range(Track *self);
+OTIO_API void Track_set_source_range(Track *self, OptionalTimeRange source_range);
 OTIO_API EffectRetainerVector *Track_effects(Track *self);
 OTIO_API MarkerRetainerVector *Track_markers(Track *self);
 OTIO_API RationalTime Track_duration(Track *self, OTIOErrorStatus *error_status);
@@ -97,8 +92,8 @@ OTIO_API TimeRange
 Track_available_range(Track *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Track_trimmed_range(Track *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Track_visible_range(Track *self, OTIOErrorStatus *error_status);
-OTIO_API bool
-Track_trimmed_range_in_parent(Track *self, TimeRange &trimmed_range_in_parent, OTIOErrorStatus *error_status);
+OTIO_API OptionalTimeRange
+Track_trimmed_range_in_parent(Track *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange
 Track_range_in_parent(Track *self, OTIOErrorStatus *error_status);
 OTIO_API RationalTime Track_transformed_time(

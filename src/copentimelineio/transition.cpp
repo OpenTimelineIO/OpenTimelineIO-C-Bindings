@@ -16,6 +16,8 @@ const char *TransitionType_Custom = OTIO_NS::Transition::Type::Custom;
 OTIO_API Transition *Transition_create(
         const char *name,
         const char *transition_type,
+        OptionalRationalTime in_offset,
+        OptionalRationalTime out_offset,
         AnyDictionary *metadata) {
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -23,87 +25,12 @@ OTIO_API Transition *Transition_create(
     std::string transition_type_str = std::string();
     if (transition_type != NULL) transition_type_str = transition_type;
 
-    OTIO_NS::RationalTime in_offset_rt = OTIO_NS::RationalTime();
-    OTIO_NS::RationalTime out_offset_rt = OTIO_NS::RationalTime();
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    return reinterpret_cast<Transition *>(new OTIO_NS::Transition(
-            name_str,
-            transition_type_str,
-            in_offset_rt,
-            out_offset_rt,
-            metadataDictionary));
-}
-OTIO_API Transition *Transition_create_with_in_offset(
-        const char *name,
-        const char *transition_type,
-        RationalTime in_offset,
-        AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    std::string transition_type_str = std::string();
-    if (transition_type != NULL) transition_type_str = transition_type;
-
-    OTIO_NS::RationalTime in_offset_rt = _COTRationalTime_to_OTRationalTime(in_offset);
-    OTIO_NS::RationalTime out_offset_rt = OTIO_NS::RationalTime();
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    return reinterpret_cast<Transition *>(new OTIO_NS::Transition(
-            name_str,
-            transition_type_str,
-            in_offset_rt,
-            out_offset_rt,
-            metadataDictionary));
-}
-OTIO_API Transition *Transition_create_with_out_offset(
-        const char *name,
-        const char *transition_type,
-        RationalTime out_offset,
-        AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    std::string transition_type_str = std::string();
-    if (transition_type != NULL) transition_type_str = transition_type;
-
-    OTIO_NS::RationalTime in_offset_rt = OTIO_NS::RationalTime();
-    OTIO_NS::RationalTime out_offset_rt = _COTRationalTime_to_OTRationalTime(out_offset);
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    return reinterpret_cast<Transition *>(new OTIO_NS::Transition(
-            name_str,
-            transition_type_str,
-            in_offset_rt,
-            out_offset_rt,
-            metadataDictionary));
-}
-OTIO_API Transition *Transition_create_with_in_offset_and_out_offset(
-        const char *name,
-        const char *transition_type,
-        RationalTime in_offset,
-        RationalTime out_offset,
-        AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    std::string transition_type_str = std::string();
-    if (transition_type != NULL) transition_type_str = transition_type;
-
-    OTIO_NS::RationalTime in_offset_rt = _COTRationalTime_to_OTRationalTime(in_offset);
-    OTIO_NS::RationalTime out_offset_rt = _COTRationalTime_to_OTRationalTime(out_offset);
+    OTIO_NS::RationalTime in_offset_rt = opentime::RationalTime();
+    OTIO_NS::RationalTime out_offset_rt = opentime::RationalTime();
+    if (in_offset.valid)
+        in_offset_rt = _COTRationalTime_to_OTRationalTime(in_offset.value);
+    if (out_offset.valid)
+        out_offset_rt = _COTRationalTime_to_OTRationalTime(out_offset.value);
 
     OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
     if (metadata != NULL)
@@ -157,24 +84,22 @@ Transition_duration(Transition *self, OTIOErrorStatus *error_status) {
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
     return _OTRationalTime_to_COTRationalTime(rationalTime);
 }
-OTIO_API bool
-Transition_range_in_parent(Transition *self, TimeRange &range_in_parent, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange
+Transition_range_in_parent(Transition *self, OTIOErrorStatus *error_status) {
     nonstd::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Transition *>(self)->range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return false;
-    range_in_parent = _OTTimeRange_to_COTTimeRange(timeRangeOptional.value());
-    return true;
+    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
 }
-OTIO_API bool Transition_trimmed_range_in_parent(
-        Transition *self, TimeRange &trimmed_range_in_parent, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
+        Transition *self, OTIOErrorStatus *error_status) {
     nonstd::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Transition *>(self)
                     ->trimmed_range_in_parent(
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return false;
-    trimmed_range_in_parent = _OTTimeRange_to_COTTimeRange(timeRangeOptional.value());
-    return true;
+    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
 }
 OTIO_API const char *Transition_name(Transition *self) {
     std::string returnStr =

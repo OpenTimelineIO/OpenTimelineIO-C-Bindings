@@ -13,6 +13,7 @@
 #include "markerRetainerVector.h"
 #include "markerVector.h"
 #include "optionalPairRationalTime.h"
+#include "copentime/optionalOpenTime.h"
 #include <stdbool.h>
 
 #ifdef __cplusplus
@@ -28,12 +29,7 @@ typedef struct Item Item;
 
 OTIO_API Composition *Composition_create(
         const char *name,
-        AnyDictionary *metadata,
-        EffectVector *effects,
-        MarkerVector *markers);
-OTIO_API Composition *Composition_create_with_source_range(
-        const char *name,
-        TimeRange source_range,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers);
@@ -67,14 +63,12 @@ OTIO_API TimeRange Composition_trimmed_range_of_child_at_index(
         Composition *self, int index, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Composition_range_of_child(
         Composition *self, Composable *child, OTIOErrorStatus *error_status);
-OTIO_API bool Composition_trimmed_range_of_child(
+OTIO_API OptionalTimeRange Composition_trimmed_range_of_child(
         Composition *self,
         Composable *child,
-        TimeRange &trimmed_range_of_child,
         OTIOErrorStatus *error_status);
-OTIO_API bool Composition_trim_child_range(Composition *self,
-                                           TimeRange child_range,
-                                           TimeRange &trimmed_range);
+OTIO_API OptionalTimeRange Composition_trim_child_range(Composition *self,
+                                           TimeRange child_range);
 OTIO_API bool Composition_has_child(Composition *self, Composable *child);
 
 OTIO_API MapComposableTimeRange *Composition_range_of_all_children(
@@ -82,9 +76,8 @@ OTIO_API MapComposableTimeRange *Composition_range_of_all_children(
 
 OTIO_API bool Composition_visible(Composition *self);
 OTIO_API bool Composition_overlapping(Composition *self);
-OTIO_API bool Composition_source_range(Composition *self, TimeRange &source_range);
-OTIO_API void Composition_set_source_range(Composition *self, TimeRange source_range);
-OTIO_API void Composition_set_source_range_null(Composition *self);
+OTIO_API OptionalTimeRange Composition_source_range(Composition *self);
+OTIO_API void Composition_set_source_range(Composition *self, OptionalTimeRange source_range);
 OTIO_API EffectRetainerVector *Composition_effects(Composition *self);
 OTIO_API MarkerRetainerVector *Composition_markers(Composition *self);
 OTIO_API RationalTime
@@ -95,8 +88,8 @@ OTIO_API TimeRange
 Composition_trimmed_range(Composition *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange
 Composition_visible_range(Composition *self, OTIOErrorStatus *error_status);
-OTIO_API bool Composition_trimmed_range_in_parent(
-        Composition *self, TimeRange &trimmed_range_in_parent, OTIOErrorStatus *error_status);
+OTIO_API OptionalTimeRange Composition_trimmed_range_in_parent(
+        Composition *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Composition_range_in_parent(
         Composition *self, OTIOErrorStatus *error_status);
 OTIO_API RationalTime Composition_transformed_time(

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "anyDictionary.h"
 #include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
+#include "anyDictionary.h"
 #include "errorStatus.h"
 #include <stdbool.h>
 
@@ -15,14 +16,10 @@ struct MediaReference;
 typedef struct MediaReference MediaReference;
 
 OTIO_API MediaReference *MediaReference_create(
-        const char *name, AnyDictionary *metadata);
-OTIO_API MediaReference *MediaReference_create_with_available_range(
-        const char *name, TimeRange available_range, AnyDictionary *metadata);
-OTIO_API bool MediaReference_available_range(MediaReference *self, TimeRange &timeRange);
+        const char *name, OptionalTimeRange available_range, AnyDictionary *metadata);
+OTIO_API OptionalTimeRange MediaReference_available_range(MediaReference *self);
 OTIO_API void MediaReference_set_available_range(
-        MediaReference *self, TimeRange available_range);
-OTIO_API void MediaReference_set_available_range_null(
-        MediaReference *self);
+        MediaReference *self, OptionalTimeRange available_range);
 OTIO_API bool MediaReference_is_missing_reference(MediaReference *self);
 OTIO_API const char *MediaReference_name(MediaReference *self);
 OTIO_API void MediaReference_set_name(MediaReference *self, const char *name);

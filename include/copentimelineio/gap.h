@@ -21,26 +21,14 @@ struct Gap;
 typedef struct Gap Gap;
 
 OTIO_API Gap *Gap_create_with_source_range(
-        TimeRange source_range,
-        const char *name,
-        EffectVector *effects,
-        MarkerVector *markers,
-        AnyDictionary *metadata);
-
-OTIO_API Gap *Gap_create_with_source_range_zero(
+        OptionalTimeRange source_range,
         const char *name,
         EffectVector *effects,
         MarkerVector *markers,
         AnyDictionary *metadata);
 
 OTIO_API Gap *Gap_create_with_duration(
-        RationalTime duration,
-        const char *name,
-        EffectVector *effects,
-        MarkerVector *markers,
-        AnyDictionary *metadata);
-
-OTIO_API Gap *Gap_create_with_duration_zero(
+        OptionalRationalTime duration,
         const char *name,
         EffectVector *effects,
         MarkerVector *markers,
@@ -50,11 +38,9 @@ OTIO_API bool Gap_visible(Gap *self);
 
 OTIO_API bool Gap_overlapping(Gap *self);
 
-OTIO_API bool Gap_source_range(Gap *self, TimeRange &source_range);
+OTIO_API OptionalTimeRange Gap_source_range(Gap *self);
 
-OTIO_API void Gap_set_source_range(Gap *self, TimeRange source_range);
-
-OTIO_API void Gap_set_source_range_null(Gap *self);
+OTIO_API void Gap_set_source_range(Gap *self, OptionalTimeRange source_range);
 
 OTIO_API EffectRetainerVector *Gap_effects(Gap *self);
 
@@ -68,9 +54,8 @@ OTIO_API TimeRange Gap_trimmed_range(Gap *self, OTIOErrorStatus *error_status);
 
 OTIO_API TimeRange Gap_visible_range(Gap *self, OTIOErrorStatus *error_status);
 
-OTIO_API bool Gap_trimmed_range_in_parent(Gap *self,
-                                          TimeRange &trimmed_range_in_parent,
-                                          OTIOErrorStatus *error_status);
+OTIO_API OptionalTimeRange Gap_trimmed_range_in_parent(Gap *self,
+                                                       OTIOErrorStatus *error_status);
 
 OTIO_API TimeRange Gap_range_in_parent(Gap *self, OTIOErrorStatus *error_status);
 

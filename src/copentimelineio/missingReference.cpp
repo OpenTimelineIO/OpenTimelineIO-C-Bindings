@@ -8,23 +8,11 @@
 #include <opentimelineio/missingReference.h>
 
 OTIO_API MissingReference *MissingReference_create(
-        const char *name, AnyDictionary *metadata) {
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-    return reinterpret_cast<MissingReference *>(
-            new OTIO_NS::MissingReference(
-                    name_str, nonstd::nullopt, metadataDictionary));
-}
-OTIO_API MissingReference *MissingReference_create_with_available_range(
-        const char *name, TimeRange available_range, AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
-            nonstd::optional<opentime::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(available_range));
+        const char *name, OptionalTimeRange available_range, AnyDictionary *metadata) {
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (available_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(available_range.value));
     OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
     if (metadata != NULL)
         metadataDictionary =
@@ -40,16 +28,13 @@ OTIO_API bool MissingReference_is_missing_reference(MissingReference *self) {
     return reinterpret_cast<OTIO_NS::MissingReference *>(self)
             ->is_missing_reference();
 }
-OTIO_API bool MissingReference_available_range(MissingReference *self, TimeRange &availableRange) {
-    return MediaReference_available_range((MediaReference *) self, availableRange);
+OTIO_API OptionalTimeRange MissingReference_available_range(MissingReference *self) {
+    return MediaReference_available_range((MediaReference *) self);
 }
 OTIO_API void MissingReference_set_available_range(
-        MissingReference *self, TimeRange available_range) {
+        MissingReference *self, OptionalTimeRange available_range) {
     MediaReference_set_available_range(
             (MediaReference *) self, available_range);
-}
-OTIO_API void MissingReference_set_available_range_null(MissingReference *self) {
-    MediaReference_set_available_range_null((MediaReference *) self);
 }
 OTIO_API const char *MissingReference_name(MissingReference *self) {
     return MediaReference_name((MediaReference *) self);

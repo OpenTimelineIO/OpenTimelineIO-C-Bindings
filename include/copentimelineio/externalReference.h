@@ -1,7 +1,8 @@
 #pragma once
 
-#include "anyDictionary.h"
 #include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
+#include "anyDictionary.h"
 #include "errorStatus.h"
 #include <stdbool.h>
 
@@ -16,11 +17,7 @@ typedef struct ExternalReference ExternalReference;
 
 OTIO_API ExternalReference *ExternalReference_create(
         const char *target_url,
-        AnyDictionary *metadata);
-
-OTIO_API ExternalReference *ExternalReference_create_with_available_range(
-        const char *target_url,
-        TimeRange available_range,
+        OptionalTimeRange available_range,
         AnyDictionary *metadata);
 
 OTIO_API const char *ExternalReference_target_url(ExternalReference *self);
@@ -28,13 +25,10 @@ OTIO_API const char *ExternalReference_target_url(ExternalReference *self);
 OTIO_API void ExternalReference_set_target_url(
         ExternalReference *self, const char *target_url);
 
-OTIO_API bool ExternalReference_available_range(ExternalReference *self,
-                                                TimeRange &availableRange);
+OTIO_API OptionalTimeRange ExternalReference_available_range(ExternalReference *self);
 
 OTIO_API void ExternalReference_set_available_range(
-        ExternalReference *self, TimeRange available_range);
-
-OTIO_API void ExternalReference_set_available_range_null(ExternalReference *self);
+        ExternalReference *self, OptionalTimeRange available_range);
 
 OTIO_API bool ExternalReference_is_missing_reference(ExternalReference *self);
 

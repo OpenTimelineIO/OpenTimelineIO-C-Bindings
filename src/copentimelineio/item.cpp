@@ -19,44 +19,16 @@ typedef std::vector<OTIO_NS::Marker::Retainer<OTIO_NS::Marker>>
 typedef std::vector<OTIO_NS::Marker::Retainer<OTIO_NS::Marker>>::iterator
         MarkerRetainerVectorIteratorDef;
 
-OTIO_API Item *Item_create_with_source_range(
-        const char *name,
-        TimeRange source_range,
-        AnyDictionary *metadata,
-        EffectVector *effects,
-        MarkerVector *markers) {
-    nonstd::optional<OTIO_NS::TimeRange> source_range_optional =
-            nonstd::optional<OTIO_NS::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(source_range));
-
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL) {
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-    }
-
-    EffectVectorDef effectsVector = EffectVectorDef();
-    if (effects != NULL) { effectsVector = *reinterpret_cast<EffectVectorDef *>(effects); }
-
-    MarkerVectorDef markersVector = MarkerVectorDef();
-    if (markers != NULL) { markersVector = *reinterpret_cast<MarkerVectorDef *>(markers); }
-
-    return reinterpret_cast<Item *>(new OTIO_NS::Item(
-            name_str,
-            source_range_optional,
-            metadataDictionary,
-            effectsVector,
-            markersVector));
-}
 OTIO_API Item *Item_create(
         const char *name,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers) {
     nonstd::optional<OTIO_NS::TimeRange> source_range_optional = nonstd::nullopt;
+    if (source_range.valid)
+        source_range_optional = nonstd::optional<OTIO_NS::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -86,23 +58,20 @@ OTIO_API bool Item_visible(Item *self) {
 OTIO_API bool Item_overlapping(Item *self) {
     return reinterpret_cast<OTIO_NS::Item *>(self)->overlapping();
 }
-OTIO_API bool Item_source_range(Item *self, TimeRange &timeRange) {
+OTIO_API OptionalTimeRange Item_source_range(Item *self) {
     nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Item *>(self)->source_range();
-    if (timeRangeOptional == nonstd::nullopt) return false;
-    timeRange = _OTTimeRange_to_COTTimeRange(timeRangeOptional.value());
-    return true;
+    if (timeRangeOptional == nonstd::nullopt)
+        return OptionalTimeRange_create_null();
+    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
 }
-OTIO_API void Item_set_source_range(Item *self, TimeRange source_range) {
-    nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional =
-            nonstd::optional<OTIO_NS::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(source_range));
+OTIO_API void Item_set_source_range(Item *self, OptionalTimeRange source_range) {
+    nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (source_range.valid)
+        timeRangeOptional = nonstd::optional<OTIO_NS::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(source_range.value));
     reinterpret_cast<OTIO_NS::Item *>(self)->set_source_range(
             timeRangeOptional);
-}
-OTIO_API void Item_set_source_range_null(Item *self) {
-    reinterpret_cast<OTIO_NS::Item *>(self)->set_source_range(
-            nonstd::nullopt);
 }
 OTIO_API EffectRetainerVector *Item_effects(Item *self) {
     EffectRetainerVectorDef effectRetainerVector =
@@ -140,14 +109,13 @@ OTIO_API TimeRange Item_visible_range(Item *self, OTIOErrorStatus *error_status)
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
     return _OTTimeRange_to_COTTimeRange(timeRange);
 }
-OTIO_API bool
-Item_trimmed_range_in_parent(Item *self, TimeRange &timeRange, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange
+Item_trimmed_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
     nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Item *>(self)->trimmed_range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return false;
-    timeRange = _OTTimeRange_to_COTTimeRange(timeRangeOptional.value());
-    return true;
+    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
 }
 OTIO_API TimeRange Item_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
     OTIO_NS::TimeRange timeRange =

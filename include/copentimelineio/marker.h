@@ -1,7 +1,8 @@
 #pragma once
 
-#include "anyDictionary.h"
 #include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
+#include "anyDictionary.h"
 #include "errorStatus.h"
 
 #ifdef __cplusplus
@@ -33,11 +34,7 @@ OTIO_API void RetainerMarker_managed_destroy(RetainerMarker *self);
 
 OTIO_API Marker *Marker_create(
         const char *name,
-        const char *color,
-        AnyDictionary *metadata);
-OTIO_API Marker *Marker_create_with_marked_range(
-        const char *name,
-        TimeRange marked_range,
+        OptionalTimeRange marked_range,
         const char *color,
         AnyDictionary *metadata);
 OTIO_API const char *Marker_color(Marker *self);

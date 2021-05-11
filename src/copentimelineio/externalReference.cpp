@@ -10,26 +10,12 @@
 
 OTIO_API ExternalReference *ExternalReference_create(
         const char *target_url,
+        OptionalTimeRange available_range,
         AnyDictionary *metadata) {
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    std::string target_url_str = std::string();
-    if (target_url != NULL) target_url_str = target_url;
-    return reinterpret_cast<ExternalReference *>(
-            new OTIO_NS::ExternalReference(
-                    target_url_str, nonstd::nullopt, metadataDictionary));
-}
-
-OTIO_API ExternalReference *ExternalReference_create_with_available_range(
-        const char *target_url,
-        TimeRange available_range,
-        AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
-            nonstd::optional<opentime::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(available_range));
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (available_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(available_range.value));
 
     OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
     if (metadata != NULL)
@@ -57,18 +43,14 @@ OTIO_API void ExternalReference_set_target_url(
             target_url);
 }
 
-OTIO_API bool ExternalReference_available_range(ExternalReference *self, TimeRange &availableRange) {
-    return MediaReference_available_range((MediaReference *) self, availableRange);
+OTIO_API OptionalTimeRange ExternalReference_available_range(ExternalReference *self) {
+    return MediaReference_available_range((MediaReference *) self);
 }
 
 OTIO_API void ExternalReference_set_available_range(
-        ExternalReference *self, TimeRange available_range) {
+        ExternalReference *self, OptionalTimeRange available_range) {
     MediaReference_set_available_range(
             (MediaReference *) self, available_range);
-}
-
-OTIO_API void ExternalReference_set_available_range_null(ExternalReference *self) {
-    MediaReference_set_available_range_null((MediaReference *) self);
 }
 
 OTIO_API bool ExternalReference_is_missing_reference(ExternalReference *self) {

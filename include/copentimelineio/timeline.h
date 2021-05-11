@@ -1,8 +1,7 @@
 #pragma once
 
 #include "anyDictionary.h"
-#include "copentime/rationalTime.h"
-#include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
 #include "errorStatus.h"
 #include "stack.h"
 #include "trackVector.h"
@@ -18,18 +17,13 @@ typedef struct Timeline Timeline;
 
 OTIO_API Timeline *Timeline_create(
         const char *name,
-        AnyDictionary *metadata);
-OTIO_API Timeline *Timeline_create_with_global_start_time(
-        const char *name,
-        RationalTime global_start_time,
+        OptionalRationalTime global_start_time,
         AnyDictionary *metadata);
 OTIO_API Stack *Timeline_tracks(Timeline *self);
 OTIO_API void Timeline_set_tracks(Timeline *self, Stack *stack);
-OTIO_API bool Timeline_global_start_time(Timeline *self, RationalTime &global_start_time);
+OTIO_API OptionalRationalTime Timeline_global_start_time(Timeline *self);
 OTIO_API void Timeline_set_global_start_time(
-        Timeline *self, RationalTime global_start_time);
-OTIO_API void Timeline_set_global_start_time_null(
-        Timeline *self);
+        Timeline *self, OptionalRationalTime global_start_time);
 OTIO_API RationalTime
 Timeline_duration(Timeline *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Timeline_range_of_child(

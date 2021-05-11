@@ -10,41 +10,14 @@ typedef std::vector<OTIO_NS::Marker *> MarkerVectorDef;
 typedef std::vector<OTIO_NS::Marker *>::iterator MarkerVectorIteratorDef;
 
 OTIO_API Gap *Gap_create_with_source_range(
-        TimeRange source_range,
+        OptionalTimeRange source_range,
         const char *name,
         EffectVector *effects,
         MarkerVector *markers,
         AnyDictionary *metadata) {
-    OTIO_NS::TimeRange source_range_tr =
-            _COTTimeRange_to_OTTimeRange(source_range);
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-    EffectVectorDef effectVectorDef = EffectVectorDef();
-    if (effects != NULL)
-        effectVectorDef = *reinterpret_cast<EffectVectorDef *>(effects);
-    MarkerVectorDef markerVectorDef = MarkerVectorDef();
-    if (markers != NULL)
-        markerVectorDef = *reinterpret_cast<MarkerVectorDef *>(markers);
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    return reinterpret_cast<Gap *>(new OTIO_NS::Gap(
-            source_range_tr,
-            name_str,
-            effectVectorDef,
-            markerVectorDef,
-            metadataDictionary));
-}
-
-OTIO_API Gap *Gap_create_with_source_range_zero(
-        const char *name,
-        EffectVector *effects,
-        MarkerVector *markers,
-        AnyDictionary *metadata) {
-    OTIO_NS::TimeRange source_range_tr =
-            opentime::TimeRange();
+    OTIO_NS::TimeRange source_range_tr = opentime::TimeRange();
+    if (source_range.valid)
+        source_range_tr = _COTTimeRange_to_OTTimeRange(source_range.value);
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
     EffectVectorDef effectVectorDef = EffectVectorDef();
@@ -67,40 +40,14 @@ OTIO_API Gap *Gap_create_with_source_range_zero(
 }
 
 OTIO_API Gap *Gap_create_with_duration(
-        RationalTime duration,
+        OptionalRationalTime duration,
         const char *name,
         EffectVector *effects,
         MarkerVector *markers,
         AnyDictionary *metadata) {
-    opentime::RationalTime duration_rt =
-            _COTRationalTime_to_OTRationalTime(duration);
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-    EffectVectorDef effectVectorDef = EffectVectorDef();
-    if (effects != NULL)
-        effectVectorDef = *reinterpret_cast<EffectVectorDef *>(effects);
-    MarkerVectorDef markerVectorDef = MarkerVectorDef();
-    if (markers != NULL)
-        markerVectorDef = *reinterpret_cast<MarkerVectorDef *>(markers);
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-    return reinterpret_cast<Gap *>(new OTIO_NS::Gap(
-            duration_rt,
-            name_str,
-            effectVectorDef,
-            markerVectorDef,
-            metadataDictionary));
-}
-
-OTIO_API Gap *Gap_create_with_duration_zero(
-        const char *name,
-        EffectVector *effects,
-        MarkerVector *markers,
-        AnyDictionary *metadata) {
-    opentime::RationalTime duration_rt =
-            opentime::RationalTime();
+    opentime::RationalTime duration_rt = opentime::RationalTime();
+    if (duration.valid)
+        duration_rt = _COTRationalTime_to_OTRationalTime(duration.value);
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
     EffectVectorDef effectVectorDef = EffectVectorDef();
@@ -127,16 +74,12 @@ OTIO_API bool Gap_visible(Gap *self) {
 
 OTIO_API bool Gap_overlapping(Gap *self) { return Item_overlapping((Item *) self); }
 
-OTIO_API bool Gap_source_range(Gap *self, TimeRange &source_range) {
-    return Item_source_range((Item *) self, source_range);
+OTIO_API OptionalTimeRange Gap_source_range(Gap *self) {
+    return Item_source_range((Item *) self);
 }
 
-OTIO_API void Gap_set_source_range(Gap *self, TimeRange source_range) {
+OTIO_API void Gap_set_source_range(Gap *self, OptionalTimeRange source_range) {
     Item_set_source_range((Item *) self, source_range);
-}
-
-OTIO_API void Gap_set_source_range_null(Gap *self) {
-    Item_set_source_range_null((Item *) self);
 }
 
 OTIO_API EffectRetainerVector *Gap_effects(Gap *self) {
@@ -163,9 +106,9 @@ OTIO_API TimeRange Gap_visible_range(Gap *self, OTIOErrorStatus *error_status) {
     return Item_visible_range((Item *) self, error_status);
 }
 
-OTIO_API bool
-Gap_trimmed_range_in_parent(Gap *self, TimeRange &trimmed_range_in_parent, OTIOErrorStatus *error_status) {
-    return Item_trimmed_range_in_parent((Item *) self, trimmed_range_in_parent, error_status);
+OTIO_API OptionalTimeRange
+Gap_trimmed_range_in_parent(Gap *self, OTIOErrorStatus *error_status) {
+    return Item_trimmed_range_in_parent((Item *) self, error_status);
 }
 
 OTIO_API TimeRange Gap_range_in_parent(Gap *self, OTIOErrorStatus *error_status) {

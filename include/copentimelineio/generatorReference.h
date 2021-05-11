@@ -1,7 +1,8 @@
 #pragma once
 
-#include "anyDictionary.h"
 #include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
+#include "anyDictionary.h"
 #include "errorStatus.h"
 #include <stdbool.h>
 
@@ -16,24 +17,16 @@ typedef struct GeneratorReference GeneratorReference;
 OTIO_API GeneratorReference *GeneratorReference_create(
         const char *name,
         const char *generator_kind,
-        AnyDictionary *parameters,
-        AnyDictionary *metadata);
-OTIO_API GeneratorReference *GeneratorReference_create_with_available_range(
-        const char *name,
-        const char *generator_kind,
-        TimeRange available_range,
+        OptionalTimeRange available_range,
         AnyDictionary *parameters,
         AnyDictionary *metadata);
 OTIO_API const char *GeneratorReference_generator_kind(GeneratorReference *self);
 OTIO_API void GeneratorReference_set_generator_kind(
         GeneratorReference *self, const char *generator_kind);
 OTIO_API AnyDictionary *GeneratorReference_parameters(GeneratorReference *self);
-OTIO_API bool GeneratorReference_available_range(GeneratorReference *self,
-                                                 TimeRange &availableRange);
+OTIO_API OptionalTimeRange GeneratorReference_available_range(GeneratorReference *self);
 OTIO_API void GeneratorReference_set_available_range(
-        GeneratorReference *self, TimeRange available_range);
-OTIO_API void GeneratorReference_set_available_range_null(
-        GeneratorReference *self);
+        GeneratorReference *self, OptionalTimeRange available_range);
 OTIO_API bool GeneratorReference_is_missing_reference(GeneratorReference *self);
 OTIO_API const char *GeneratorReference_name(GeneratorReference *self);
 OTIO_API void

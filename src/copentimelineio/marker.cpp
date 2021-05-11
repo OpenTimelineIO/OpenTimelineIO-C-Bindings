@@ -40,34 +40,15 @@ OTIO_API void RetainerMarker_managed_destroy(RetainerMarker *self) {
 
 OTIO_API Marker *Marker_create(
         const char *name,
+        OptionalTimeRange marked_range,
         const char *color,
         AnyDictionary *metadata) {
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
 
     opentime::TimeRange marked_range_tr = opentime::TimeRange();
-
-    std::string color_str = OTIO_NS::Marker::Color::green;
-    if (color != NULL) color_str = color;
-
-    OTIO_NS::AnyDictionary metdata_dictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metdata_dictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    return reinterpret_cast<Marker *>(new OTIO_NS::Marker(
-            name_str, marked_range_tr, color_str, metdata_dictionary));
-}
-OTIO_API Marker *Marker_create_with_marked_range(
-        const char *name,
-        TimeRange marked_range,
-        const char *color,
-        AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    opentime::TimeRange marked_range_tr =
-            _COTTimeRange_to_OTTimeRange(marked_range);
+    if (marked_range.valid)
+        marked_range_tr = _COTTimeRange_to_OTTimeRange(marked_range.value);
 
     std::string color_str = OTIO_NS::Marker::Color::green;
     if (color != NULL) color_str = color;

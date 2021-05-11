@@ -1,6 +1,6 @@
 #pragma once
 
-#include "copentime/rationalTime.h"
+#include "copentime/optionalOpenTime.h"
 
 #ifdef __cplusplus
 # define OTIO_API extern "C"
@@ -12,12 +12,12 @@ struct OptionalPairRationalTime;
 typedef struct OptionalPairRationalTime OptionalPairRationalTime;
 
 OTIO_API OptionalPairRationalTime *
-OptionalPairRationalTime_create(RationalTime *first, RationalTime *second);
+OptionalPairRationalTime_create(OptionalRationalTime first, OptionalRationalTime second);
 
-OTIO_API bool
-OptionalPairRationalTime_first(OptionalPairRationalTime *self, RationalTime &first);
+OTIO_API OptionalRationalTime
+OptionalPairRationalTime_first(OptionalPairRationalTime *self);
 
-OTIO_API bool
-OptionalPairRationalTime_second(OptionalPairRationalTime *self, RationalTime &second);
+OTIO_API OptionalRationalTime
+OptionalPairRationalTime_second(OptionalPairRationalTime *self);
 
 OTIO_API void OptionalPairRationalTime_destroy(OptionalPairRationalTime *self);

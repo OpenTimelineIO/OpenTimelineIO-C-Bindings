@@ -13,30 +13,12 @@ OTIO_API Clip *
 Clip_create(
         const char *name,
         MediaReference *media_reference,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-    return reinterpret_cast<Clip *>(new OTIO_NS::Clip(
-            name_str,
-            reinterpret_cast<OTIO_NS::MediaReference *>(media_reference),
-            nonstd::nullopt,
-            metadataDictionary));
-}
-
-OTIO_API Clip *
-Clip_create_with_source_range(
-        const char *name,
-        MediaReference *media_reference,
-        TimeRange source_range,
-        AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
-            nonstd::optional<opentime::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(source_range));
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (source_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -72,19 +54,14 @@ Clip_available_range(Clip *self, OTIOErrorStatus *error_status) {
     return _OTTimeRange_to_COTTimeRange(timeRange);
 }
 
-OTIO_API bool
-Clip_source_range(Clip *self, TimeRange &source_range) {
-    return Item_source_range((Item *) self, source_range);
+OTIO_API OptionalTimeRange
+Clip_source_range(Clip *self) {
+    return Item_source_range((Item *) self);
 }
 
 OTIO_API void
-Clip_set_source_range(Clip *self, TimeRange source_range) {
+Clip_set_source_range(Clip *self, OptionalTimeRange source_range) {
     Item_set_source_range((Item *) self, source_range);
-}
-
-OTIO_API void
-Clip_set_source_range_null(Clip *self) {
-    Item_set_source_range_null((Item *) self);
 }
 
 OTIO_API EffectRetainerVector *
@@ -112,11 +89,10 @@ Clip_visible_range(Clip *self, OTIOErrorStatus *error_status) {
     return Item_visible_range((Item *) self, error_status);
 }
 
-OTIO_API bool
+OTIO_API OptionalTimeRange
 Clip_trimmed_range_in_parent(Clip *self,
-                             TimeRange &trimmed_range_in_parent,
                              OTIOErrorStatus *error_status) {
-    return Item_trimmed_range_in_parent((Item *) self, trimmed_range_in_parent, error_status);
+    return Item_trimmed_range_in_parent((Item *) self, error_status);
 }
 
 OTIO_API TimeRange

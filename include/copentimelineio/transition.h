@@ -2,8 +2,7 @@
 
 #include "anyDictionary.h"
 #include "composition.h"
-#include "copentime/rationalTime.h"
-#include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
 #include "errorStatus.h"
 #include <stdbool.h>
 
@@ -21,22 +20,8 @@ typedef struct Transition Transition;
 OTIO_API Transition *Transition_create(
         const char *name,
         const char *transition_type,
-        AnyDictionary *metadata);
-OTIO_API Transition *Transition_create_with_in_offset(
-        const char *name,
-        const char *transition_type,
-        RationalTime in_offset,
-        AnyDictionary *metadata);
-OTIO_API Transition *Transition_create_with_out_offset(
-        const char *name,
-        const char *transition_type,
-        RationalTime out_offset,
-        AnyDictionary *metadata);
-OTIO_API Transition *Transition_create_with_in_offset_and_out_offset(
-        const char *name,
-        const char *transition_type,
-        RationalTime in_offset,
-        RationalTime out_offset,
+        OptionalRationalTime in_offset,
+        OptionalRationalTime out_offset,
         AnyDictionary *metadata);
 OTIO_API bool Transition_overlapping(Transition *self);
 OTIO_API const char *Transition_transition_type(Transition *self);
@@ -48,13 +33,11 @@ OTIO_API RationalTime Transition_out_offset(Transition *self);
 OTIO_API void Transition_set_out_offset(Transition *self, RationalTime out_offset);
 OTIO_API RationalTime
 Transition_duration(Transition *self, OTIOErrorStatus *error_status);
-OTIO_API bool
+OTIO_API OptionalTimeRange
 Transition_range_in_parent(Transition *self,
-                           TimeRange &range_in_parent,
                            OTIOErrorStatus *error_status);
-OTIO_API bool Transition_trimmed_range_in_parent(
+OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
         Transition *self,
-        TimeRange &trimmed_range_in_parent,
         OTIOErrorStatus *error_status);
 OTIO_API const char *Transition_name(Transition *self);
 OTIO_API AnyDictionary *Transition_metadata(Transition *self);

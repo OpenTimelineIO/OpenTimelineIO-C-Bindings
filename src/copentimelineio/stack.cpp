@@ -18,40 +18,14 @@ typedef std::map<OTIO_NS::Composable *, opentime::TimeRange>::iterator
 
 OTIO_API Stack *Stack_create(
         const char *name,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL) {
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-    }
-
-    EffectVectorDef effectsVector = EffectVectorDef();
-    if (effects != NULL) { effectsVector = *reinterpret_cast<EffectVectorDef *>(effects); }
-
-    MarkerVectorDef markersVector = MarkerVectorDef();
-    if (markers != NULL) { markersVector = *reinterpret_cast<MarkerVectorDef *>(markers); }
-
-    return reinterpret_cast<Stack *>(new OTIO_NS::Stack(
-            name_str,
-            nonstd::nullopt,
-            metadataDictionary,
-            effectsVector,
-            markersVector));
-}
-OTIO_API Stack *Stack_create_with_source_range(
-        const char *name,
-        TimeRange source_range,
-        AnyDictionary *metadata,
-        EffectVector *effects,
-        MarkerVector *markers) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
-            nonstd::optional<opentime::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(source_range));
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (source_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -157,13 +131,13 @@ OTIO_API TimeRange Stack_range_of_child(
     return Composition_range_of_child(
             (Composition *) self, child, error_status);
 }
-OTIO_API bool Stack_trimmed_range_of_child(
-        Stack *self, Composable *child, TimeRange &trimmed_range_of_child, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange Stack_trimmed_range_of_child(
+        Stack *self, Composable *child, OTIOErrorStatus *error_status) {
     return Composition_trimmed_range_of_child(
-            (Composition *) self, child, trimmed_range_of_child, error_status);
+            (Composition *) self, child, error_status);
 }
-OTIO_API bool Stack_trim_child_range(Stack *self, TimeRange child_range, TimeRange &trimmed_range) {
-    return Composition_trim_child_range((Composition *) self, child_range, trimmed_range);
+OTIO_API OptionalTimeRange Stack_trim_child_range(Stack *self, TimeRange child_range) {
+    return Composition_trim_child_range((Composition *) self, child_range);
 }
 OTIO_API bool Stack_has_child(Stack *self, Composable *child) {
     return Composition_has_child((Composition *) self, child);
@@ -174,14 +148,11 @@ OTIO_API bool Stack_visible(Stack *self) {
 OTIO_API bool Stack_overlapping(Stack *self) {
     return Composition_overlapping((Composition *) self);
 }
-OTIO_API bool Stack_source_range(Stack *self, TimeRange &source_range) {
-    return Composition_source_range((Composition *) self, source_range);
+OTIO_API OptionalTimeRange Stack_source_range(Stack *self) {
+    return Composition_source_range((Composition *) self);
 }
-OTIO_API void Stack_set_source_range(Stack *self, TimeRange source_range) {
+OTIO_API void Stack_set_source_range(Stack *self, OptionalTimeRange source_range) {
     Composition_set_source_range((Composition *) self, source_range);
-}
-OTIO_API void Stack_set_source_range_null(Stack *self) {
-    Composition_set_source_range_null((Composition *) self);
 }
 OTIO_API EffectRetainerVector *Stack_effects(Stack *self) {
     return Composition_effects((Composition *) self);
@@ -198,10 +169,10 @@ OTIO_API TimeRange Stack_trimmed_range(Stack *self, OTIOErrorStatus *error_statu
 OTIO_API TimeRange Stack_visible_range(Stack *self, OTIOErrorStatus *error_status) {
     return Composition_visible_range((Composition *) self, error_status);
 }
-OTIO_API bool
-Stack_trimmed_range_in_parent(Stack *self, TimeRange &trimmed_range, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange
+Stack_trimmed_range_in_parent(Stack *self, OTIOErrorStatus *error_status) {
     return Composition_trimmed_range_in_parent(
-            (Composition *) self, trimmed_range, error_status);
+            (Composition *) self, error_status);
 }
 OTIO_API TimeRange Stack_range_in_parent(Stack *self, OTIOErrorStatus *error_status) {
     return Composition_range_in_parent((Composition *) self, error_status);

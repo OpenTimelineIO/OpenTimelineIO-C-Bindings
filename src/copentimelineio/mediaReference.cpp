@@ -7,23 +7,11 @@
 #include <opentimelineio/mediaReference.h>
 
 OTIO_API MediaReference *MediaReference_create(
-        const char *name, AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-
-    return reinterpret_cast<MediaReference *>(new OTIO_NS::MediaReference(
-            name_str, nonstd::nullopt, metadataDictionary));
-}
-OTIO_API MediaReference *MediaReference_create_with_available_range(
-        const char *name, TimeRange available_range, AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
-            nonstd::optional<opentime::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(available_range));
+        const char *name, OptionalTimeRange available_range, AnyDictionary *metadata) {
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (available_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(available_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -36,25 +24,20 @@ OTIO_API MediaReference *MediaReference_create_with_available_range(
     return reinterpret_cast<MediaReference *>(new OTIO_NS::MediaReference(
             name_str, timeRangeOptional, metadataDictionary));
 }
-OTIO_API bool MediaReference_available_range(MediaReference *self, TimeRange &timeRange) {
+OTIO_API OptionalTimeRange MediaReference_available_range(MediaReference *self) {
     nonstd::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::MediaReference *>(self)->available_range();
-    if (timeRangeOptional == nonstd::nullopt) return false;
-    timeRange = _OTTimeRange_to_COTTimeRange(timeRangeOptional.value());
-    return true;
+    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
 }
 OTIO_API void MediaReference_set_available_range(
-        MediaReference *self, TimeRange available_range) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
-            nonstd::optional<opentime::TimeRange>(
-                    _COTTimeRange_to_OTTimeRange(available_range));
+        MediaReference *self, OptionalTimeRange available_range) {
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (available_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(available_range.value));
     reinterpret_cast<OTIO_NS::MediaReference *>(self)->set_available_range(
             timeRangeOptional);
-}
-OTIO_API void MediaReference_set_available_range_null(
-        MediaReference *self) {
-    reinterpret_cast<OTIO_NS::MediaReference *>(self)->set_available_range(
-            nonstd::nullopt);
 }
 OTIO_API bool MediaReference_is_missing_reference(MediaReference *self) {
     return reinterpret_cast<OTIO_NS::MediaReference *>(self)

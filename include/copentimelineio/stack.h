@@ -12,6 +12,7 @@
 #include "markerRetainerVector.h"
 #include "markerVector.h"
 #include "optionalPairRationalTime.h"
+#include "copentime/optionalOpenTime.h"
 #include <stdbool.h>
 
 #ifdef __cplusplus
@@ -22,14 +23,9 @@
 
 typedef struct Stack Stack;
 
-OTIO_API Stack *Stack_create(
-        const char *name,
-        AnyDictionary *metadata,
-        EffectVector *effects,
-        MarkerVector *markers);
 OTIO_API Stack *Stack_create_with_source_range(
         const char *name,
-        TimeRange source_range,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers);
@@ -66,23 +62,22 @@ OTIO_API OptionalPairRationalTime *Stack_handles_of_child(
         Stack *self, Composable *child, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Stack_range_of_child(
         Stack *self, Composable *child, OTIOErrorStatus *error_status);
-OTIO_API bool Stack_trimmed_range_of_child(
-        Stack *self, Composable *child, TimeRange &trimmed_range_of_child, OTIOErrorStatus *error_status);
-OTIO_API bool Stack_trim_child_range(Stack *self, TimeRange child_range, TimeRange &trimmed_range);
+OTIO_API OptionalTimeRange Stack_trimmed_range_of_child(
+        Stack *self, Composable *child, OTIOErrorStatus *error_status);
+OTIO_API OptionalTimeRange Stack_trim_child_range(Stack *self, TimeRange child_range);
 OTIO_API bool Stack_has_child(Stack *self, Composable *child);
 
 OTIO_API bool Stack_visible(Stack *self);
 OTIO_API bool Stack_overlapping(Stack *self);
-OTIO_API bool Stack_source_range(Stack *self, TimeRange &source_range);
-OTIO_API bool Stack_source_range_null(Stack *self, TimeRange &source_range);
-OTIO_API void Stack_set_source_range(Stack *self, TimeRange source_range);
+OTIO_API OptionalTimeRange Stack_source_range(Stack *self);
+OTIO_API void Stack_set_source_range(Stack *self, OptionalTimeRange source_range);
 OTIO_API EffectRetainerVector *Stack_effects(Stack *self);
 OTIO_API MarkerRetainerVector *Stack_markers(Stack *self);
 OTIO_API RationalTime Stack_duration(Stack *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Stack_trimmed_range(Stack *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Stack_visible_range(Stack *self, OTIOErrorStatus *error_status);
-OTIO_API bool
-Stack_trimmed_range_in_parent(Stack *self, TimeRange &trimmed_range_in_parent, OTIOErrorStatus *error_status);
+OTIO_API OptionalTimeRange
+Stack_trimmed_range_in_parent(Stack *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange
 Stack_range_in_parent(Stack *self, OTIOErrorStatus *error_status);
 OTIO_API RationalTime Stack_transformed_time(

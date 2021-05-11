@@ -1,7 +1,8 @@
 #pragma once
 
-#include "anyDictionary.h"
 #include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
+#include "anyDictionary.h"
 #include "errorStatus.h"
 #include <stdbool.h>
 
@@ -15,20 +16,14 @@ struct MissingReference;
 typedef struct MissingReference MissingReference;
 
 OTIO_API MissingReference *MissingReference_create(
-        const char *name, AnyDictionary *metadata);
-
-OTIO_API MissingReference *MissingReference_create_with_available_range(
-        const char *name, TimeRange available_range, AnyDictionary *metadata);
+        const char *name, OptionalTimeRange available_range, AnyDictionary *metadata);
 
 OTIO_API bool MissingReference_is_missing_reference(MissingReference *self);
 
-OTIO_API bool MissingReference_available_range(MissingReference *self, TimeRange &availableRange);
+OTIO_API OptionalTimeRange MissingReference_available_range(MissingReference *self);
 
 OTIO_API void MissingReference_set_available_range(
-        MissingReference *self, TimeRange available_range);
-
-OTIO_API void MissingReference_set_available_range_null(
-        MissingReference *self);
+        MissingReference *self, OptionalTimeRange available_range);
 
 OTIO_API const char *MissingReference_name(MissingReference *self);
 

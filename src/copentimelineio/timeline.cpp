@@ -14,21 +14,7 @@ typedef std::vector<OTIO_NS::Track *>::iterator TrackVectorIteratorDef;
 
 OTIO_API Timeline *Timeline_create(
         const char *name,
-        AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL)
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-    return reinterpret_cast<Timeline *>(new OTIO_NS::Timeline(
-            name_str, nonstd::nullopt, metadataDictionary));
-}
-
-OTIO_API Timeline *Timeline_create_with_global_start_time(
-        const char *name,
-        RationalTime global_start_time,
+        OptionalRationalTime global_start_time,
         AnyDictionary *metadata) {
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -38,9 +24,10 @@ OTIO_API Timeline *Timeline_create_with_global_start_time(
         metadataDictionary =
                 *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
 
-    nonstd::optional<opentime::RationalTime> rationalTimeOptional =
-            nonstd::optional<opentime::RationalTime>(
-                    _COTRationalTime_to_OTRationalTime(global_start_time));
+    nonstd::optional<opentime::RationalTime> rationalTimeOptional = nonstd::nullopt;
+    if (global_start_time.valid)
+        rationalTimeOptional = nonstd::optional<opentime::RationalTime>(
+                _COTRationalTime_to_OTRationalTime(global_start_time.value));
     return reinterpret_cast<Timeline *>(new OTIO_NS::Timeline(
             name_str, rationalTimeOptional, metadataDictionary));
 }
@@ -55,26 +42,21 @@ OTIO_API void Timeline_set_tracks(Timeline *self, Stack *stack) {
             reinterpret_cast<OTIO_NS::Stack *>(stack));
 }
 
-OTIO_API bool Timeline_global_start_time(Timeline *self, RationalTime &global_start_time) {
+OTIO_API OptionalRationalTime Timeline_global_start_time(Timeline *self) {
     nonstd::optional<opentime::RationalTime> rationalTimeOptional =
             reinterpret_cast<OTIO_NS::Timeline *>(self)->global_start_time();
-    if (rationalTimeOptional == nonstd::nullopt) return false;
-    global_start_time = _OTRationalTime_to_COTRationalTime(rationalTimeOptional.value());
-    return false;
+    if (rationalTimeOptional == nonstd::nullopt) return OptionalRationalTime_create_null();
+    return OptionalRationalTime_create(_OTRationalTime_to_COTRationalTime(rationalTimeOptional.value()));
 }
 
 OTIO_API void Timeline_set_global_start_time(
-        Timeline *self, RationalTime global_start_time) {
-    nonstd::optional<opentime::RationalTime> rationalTimeOptional =
-            nonstd::optional<opentime::RationalTime>(
-                    _COTRationalTime_to_OTRationalTime(global_start_time));
+        Timeline *self, OptionalRationalTime global_start_time) {
+    nonstd::optional<opentime::RationalTime> rationalTimeOptional = nonstd::nullopt;
+    if (global_start_time.valid)
+        rationalTimeOptional = nonstd::optional<opentime::RationalTime>(
+                _COTRationalTime_to_OTRationalTime(global_start_time.value));
     reinterpret_cast<OTIO_NS::Timeline *>(self)->set_global_start_time(
             rationalTimeOptional);
-}
-
-OTIO_API void Timeline_set_global_start_time_null(Timeline *self) {
-    reinterpret_cast<OTIO_NS::Timeline *>(self)->set_global_start_time(
-            nonstd::nullopt);
 }
 
 OTIO_API RationalTime

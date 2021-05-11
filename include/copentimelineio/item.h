@@ -4,6 +4,7 @@
 #include "composition.h"
 #include "copentime/rationalTime.h"
 #include "copentime/timeRange.h"
+#include "copentime/optionalOpenTime.h"
 #include "effectRetainerVector.h"
 #include "effectVector.h"
 #include "errorStatus.h"
@@ -21,31 +22,23 @@ typedef struct Effect Effect;
 typedef struct Marker Marker;
 
 OTIO_API Item *
-Item_create_with_source_range(
-        const char *name,
-        TimeRange source_range,
-        AnyDictionary *metadata,
-        EffectVector *effects,
-        MarkerVector *markers);
-OTIO_API Item *
 Item_create(
         const char *name,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers);
 OTIO_API bool Item_visible(Item *self);
 OTIO_API bool Item_overlapping(Item *self);
-OTIO_API bool Item_source_range(Item *self, TimeRange &timeRange);
-OTIO_API void Item_set_source_range(Item *self, TimeRange source_range);
-OTIO_API void Item_set_source_range_null(Item *self);
+OTIO_API OptionalTimeRange Item_source_range(Item *self);
+OTIO_API void Item_set_source_range(Item *self, OptionalTimeRange source_range);
 OTIO_API EffectRetainerVector *Item_effects(Item *self);
 OTIO_API MarkerRetainerVector *Item_markers(Item *self);
 OTIO_API RationalTime Item_duration(Item *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Item_available_range(Item *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Item_trimmed_range(Item *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Item_visible_range(Item *self, OTIOErrorStatus *error_status);
-OTIO_API bool Item_trimmed_range_in_parent(Item *self,
-                                           TimeRange &timeRange,
+OTIO_API OptionalTimeRange Item_trimmed_range_in_parent(Item *self,
                                            OTIOErrorStatus *error_status);
 OTIO_API TimeRange Item_range_in_parent(Item *self, OTIOErrorStatus *error_status);
 OTIO_API RationalTime Item_transformed_time(

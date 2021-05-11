@@ -41,30 +41,13 @@ const char *TrackKind_Audio = OTIO_NS::Track::Kind::audio;
 
 OTIO_API Track *Track_create(
         const char *name,
+        OptionalTimeRange source_range,
         const char *kind,
         AnyDictionary *metadata) {
-    std::string name_str = std::string();
-    if (name != NULL) name_str = name;
-
-    std::string kind_str = TrackKind_Video;
-    if (kind != NULL) kind_str = kind;
-
-    OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
-    if (metadata != NULL) {
-        metadataDictionary =
-                *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
-    }
-
-    return reinterpret_cast<Track *>(new OTIO_NS::Track(
-            name_str, nonstd::nullopt, kind_str, metadataDictionary));
-}
-OTIO_API Track *Track_create_with_source_range(
-        const char *name,
-        TimeRange source_range,
-        const char *kind,
-        AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::optional<opentime::TimeRange>(
-            _COTTimeRange_to_OTTimeRange(source_range));
+    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    if (source_range.valid)
+        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+                _COTTimeRange_to_OTTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -202,13 +185,13 @@ OTIO_API TimeRange Track_range_of_child(
     return Composition_range_of_child(
             (Composition *) self, child, error_status);
 }
-OTIO_API bool Track_trimmed_range_of_child(
-        Track *self, Composable *child, TimeRange &trimmed_range_of_child, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange Track_trimmed_range_of_child(
+        Track *self, Composable *child, OTIOErrorStatus *error_status) {
     return Composition_trimmed_range_of_child(
-            (Composition *) self, child, trimmed_range_of_child, error_status);
+            (Composition *) self, child, error_status);
 }
-OTIO_API bool Track_trim_child_range(Track *self, TimeRange child_range, TimeRange &trimmed_range) {
-    return Composition_trim_child_range((Composition *) self, child_range, trimmed_range);
+OTIO_API OptionalTimeRange Track_trim_child_range(Track *self, TimeRange child_range) {
+    return Composition_trim_child_range((Composition *) self, child_range);
 }
 OTIO_API bool Track_has_child(Track *self, Composable *child) {
     return Composition_has_child((Composition *) self, child);
@@ -219,14 +202,11 @@ OTIO_API bool Track_visible(Track *self) {
 OTIO_API bool Track_overlapping(Track *self) {
     return Composition_overlapping((Composition *) self);
 }
-OTIO_API bool Track_source_range(Track *self, TimeRange &source_range) {
-    return Composition_source_range((Composition *) self, source_range);
+OTIO_API OptionalTimeRange Track_source_range(Track *self) {
+    return Composition_source_range((Composition *) self);
 }
-OTIO_API void Track_set_source_range(Track *self, TimeRange source_range) {
+OTIO_API void Track_set_source_range(Track *self, OptionalTimeRange source_range) {
     Composition_set_source_range((Composition *) self, source_range);
-}
-OTIO_API void Track_set_source_range_null(Track *self) {
-    Composition_set_source_range_null((Composition *) self);
 }
 OTIO_API EffectRetainerVector *Track_effects(Track *self) {
     return Composition_effects((Composition *) self);
@@ -243,10 +223,10 @@ OTIO_API TimeRange Track_trimmed_range(Track *self, OTIOErrorStatus *error_statu
 OTIO_API TimeRange Track_visible_range(Track *self, OTIOErrorStatus *error_status) {
     return Composition_visible_range((Composition *) self, error_status);
 }
-OTIO_API bool
-Track_trimmed_range_in_parent(Track *self, TimeRange &trimmed_range_in_parent, OTIOErrorStatus *error_status) {
+OTIO_API OptionalTimeRange
+Track_trimmed_range_in_parent(Track *self, OTIOErrorStatus *error_status) {
     return Composition_trimmed_range_in_parent(
-            (Composition *) self, trimmed_range_in_parent, error_status);
+            (Composition *) self, error_status);
 }
 OTIO_API TimeRange Track_range_in_parent(Track *self, OTIOErrorStatus *error_status) {
     return Composition_range_in_parent((Composition *) self, error_status);

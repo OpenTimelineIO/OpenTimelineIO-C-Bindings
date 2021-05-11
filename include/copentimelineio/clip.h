@@ -8,6 +8,7 @@
 #include "item.h"
 #include "markerRetainerVector.h"
 #include "mediaReference.h"
+#include "copentime/optionalOpenTime.h"
 #include <stdbool.h>
 
 #ifdef __cplusplus
@@ -22,25 +23,19 @@ typedef struct Clip Clip;
 OTIO_API Clip *Clip_create(
         const char *name,
         MediaReference *media_reference,
-        AnyDictionary *metadata);
-OTIO_API Clip *Clip_create_with_source_range(
-        const char *name,
-        MediaReference *media_reference,
-        TimeRange source_range,
+        OptionalTimeRange source_range,
         AnyDictionary *metadata);
 OTIO_API void Clip_set_media_reference(Clip *self, MediaReference *media_reference);
 OTIO_API MediaReference *Clip_media_reference(Clip *self);
 OTIO_API TimeRange Clip_available_range(Clip *self, OTIOErrorStatus *error_status);
-OTIO_API bool Clip_source_range(Clip *self, TimeRange &source_range);
-OTIO_API void Clip_set_source_range(Clip *self, TimeRange source_range);
-OTIO_API void Clip_set_source_range_null(Clip *self);
+OTIO_API OptionalTimeRange Clip_source_range(Clip *self);
+OTIO_API void Clip_set_source_range(Clip *self, OptionalTimeRange source_range);
 OTIO_API EffectRetainerVector *Clip_effects(Clip *self);
 OTIO_API MarkerRetainerVector *Clip_markers(Clip *self);
 OTIO_API RationalTime Clip_duration(Clip *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Clip_trimmed_range(Clip *self, OTIOErrorStatus *error_status);
 OTIO_API TimeRange Clip_visible_range(Clip *self, OTIOErrorStatus *error_status);
-OTIO_API bool Clip_trimmed_range_in_parent(Clip *self,
-                                           TimeRange &trimmed_range_in_parent,
+OTIO_API OptionalTimeRange Clip_trimmed_range_in_parent(Clip *self,
                                            OTIOErrorStatus *error_status);
 OTIO_API TimeRange Clip_range_in_parent(Clip *self, OTIOErrorStatus *error_status);
 OTIO_API RationalTime Clip_transformed_time(
