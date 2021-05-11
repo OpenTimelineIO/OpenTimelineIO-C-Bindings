@@ -6,14 +6,12 @@
 #include "trackVector.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
 
-    Track* flatten_stack(Stack* in_stack, OTIOErrorStatus* error_status);
-    Track* flatten_stack_track_vector(
-        TrackVector* tracks, OTIOErrorStatus* error_status);
+OTIO_API Track *flatten_stack(Stack *in_stack, OTIOErrorStatus *error_status);
 
-#ifdef __cplusplus
-}
-#endif
+OTIO_API Track *flatten_stack_track_vector(
+        TrackVector *tracks, OTIOErrorStatus *error_status);

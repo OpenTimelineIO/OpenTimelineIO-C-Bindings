@@ -42,7 +42,8 @@ set(COPENTIMELINEIO_HEADER_FILES
         ${PROJECT_SOURCE_DIR}/include/copentimelineio/timeline.h
         ${PROJECT_SOURCE_DIR}/include/copentimelineio/stackAlgorithm.h
         ${PROJECT_SOURCE_DIR}/include/copentimelineio/trackAlgorithm.h
-        ${PROJECT_SOURCE_DIR}/include/copentimelineio/safely_typed_any.h)
+        ${PROJECT_SOURCE_DIR}/include/copentimelineio/safely_typed_any.h
+        )
 
 add_library(copentimelineio ${COTIO_SHARED_OR_STATIC_LIB}
         any.cpp

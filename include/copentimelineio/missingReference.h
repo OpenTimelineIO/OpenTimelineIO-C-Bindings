@@ -6,34 +6,51 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct MissingReference;
-    typedef struct MissingReference MissingReference;
 
-    MissingReference* MissingReference_create(
-        const char* name, TimeRange* available_range, AnyDictionary* metadata);
-    bool      MissingReference_is_missing_reference(MissingReference* self);
-    TimeRange* MissingReference_available_range(MissingReference* self);
-    void       MissingReference_set_available_range(
-              MissingReference* self, TimeRange* available_range);
-    const char* MissingReference_name(MissingReference* self);
-    void MissingReference_set_name(MissingReference* self, const char* name);
-    AnyDictionary* MissingReference_metadata(MissingReference* self);
-    bool          MissingReference_to_json_file(
-                 MissingReference* self,
-                 const char*       file_name,
-                 OTIOErrorStatus*  error_status,
-                 int               indent);
-    const char* MissingReference_to_json_string(
-        MissingReference* self, OTIOErrorStatus* error_status, int indent);
-    bool MissingReference_is_equivalent_to(
-        MissingReference* self, OTIOSerializableObject* other);
-    MissingReference* MissingReference_clone(
-        MissingReference* self, OTIOErrorStatus* error_status);
-    const char* MissingReference_schema_name(MissingReference* self);
-    int         MissingReference_schema_version(MissingReference* self);
-#ifdef __cplusplus
-}
-#endif
+struct MissingReference;
+typedef struct MissingReference MissingReference;
+
+OTIO_API MissingReference *MissingReference_create(
+        const char *name, AnyDictionary *metadata);
+
+OTIO_API MissingReference *MissingReference_create_with_available_range(
+        const char *name, TimeRange available_range, AnyDictionary *metadata);
+
+OTIO_API bool MissingReference_is_missing_reference(MissingReference *self);
+
+OTIO_API bool MissingReference_available_range(MissingReference *self, TimeRange &availableRange);
+
+OTIO_API void MissingReference_set_available_range(
+        MissingReference *self, TimeRange available_range);
+
+OTIO_API void MissingReference_set_available_range_null(
+        MissingReference *self);
+
+OTIO_API const char *MissingReference_name(MissingReference *self);
+
+OTIO_API void MissingReference_set_name(MissingReference *self, const char *name);
+
+OTIO_API AnyDictionary *MissingReference_metadata(MissingReference *self);
+
+OTIO_API bool MissingReference_to_json_file(
+        MissingReference *self,
+        const char *file_name,
+        OTIOErrorStatus *error_status,
+        int indent);
+
+OTIO_API const char *MissingReference_to_json_string(
+        MissingReference *self, OTIOErrorStatus *error_status, int indent);
+
+OTIO_API bool MissingReference_is_equivalent_to(
+        MissingReference *self, OTIOSerializableObject *other);
+
+OTIO_API MissingReference *MissingReference_clone(
+        MissingReference *self, OTIOErrorStatus *error_status);
+
+OTIO_API const char *MissingReference_schema_name(MissingReference *self);
+
+OTIO_API int MissingReference_schema_version(MissingReference *self);

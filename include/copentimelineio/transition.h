@@ -13,46 +13,64 @@
 # define OTIO_API
 #endif
 
-extern const char* TransitionType_SMPTE_Dissolve;
-extern const char* TransitionType_Custom;
+extern const char *TransitionType_SMPTE_Dissolve;
+extern const char *TransitionType_Custom;
 
 typedef struct Transition Transition;
 
-OTIO_API Transition* Transition_create(
-    const char*    name,
-    const char*    transition_type,
-    RationalTime*  in_offset,
-    RationalTime*  out_offset,
-    AnyDictionary* metadata);
-OTIO_API bool       Transition_overlapping(Transition* self);
-OTIO_API const char* Transition_transition_type(Transition* self);
-OTIO_API void        Transition_set_transition_type(
-           Transition* self, const char* transition_type);
-OTIO_API RationalTime* Transition_in_offset(Transition* self);
-OTIO_API void Transition_set_in_offset(Transition* self, RationalTime* in_offset);
-OTIO_API RationalTime* Transition_out_offset(Transition* self);
-OTIO_API void Transition_set_out_offset(Transition* self, RationalTime* out_offset);
-OTIO_API RationalTime*
-    Transition_duration(Transition* self, OTIOErrorStatus* error_status);
-OTIO_API TimeRange*
-           Transition_range_in_parent(Transition* self, OTIOErrorStatus* error_status);
-OTIO_API TimeRange* Transition_trimmed_range_in_parent(
-    Transition* self, OTIOErrorStatus* error_status);
-OTIO_API const char*    Transition_name(Transition* self);
-OTIO_API AnyDictionary* Transition_metadata(Transition* self);
-OTIO_API Composition*   Transition_parent(Transition* self);
-OTIO_API bool          Transition_visible(Transition* self);
-OTIO_API void           Transition_set_name(Transition* self, const char* name);
-OTIO_API bool          Transition_to_json_file(
-             Transition*      self,
-             const char*      file_name,
-             OTIOErrorStatus* error_status,
-             int              indent);
-OTIO_API const char* Transition_to_json_string(
-    Transition* self, OTIOErrorStatus* error_status, int indent);
+OTIO_API Transition *Transition_create(
+        const char *name,
+        const char *transition_type,
+        AnyDictionary *metadata);
+OTIO_API Transition *Transition_create_with_in_offset(
+        const char *name,
+        const char *transition_type,
+        RationalTime in_offset,
+        AnyDictionary *metadata);
+OTIO_API Transition *Transition_create_with_out_offset(
+        const char *name,
+        const char *transition_type,
+        RationalTime out_offset,
+        AnyDictionary *metadata);
+OTIO_API Transition *Transition_create_with_in_offset_and_out_offset(
+        const char *name,
+        const char *transition_type,
+        RationalTime in_offset,
+        RationalTime out_offset,
+        AnyDictionary *metadata);
+OTIO_API bool Transition_overlapping(Transition *self);
+OTIO_API const char *Transition_transition_type(Transition *self);
+OTIO_API void Transition_set_transition_type(
+        Transition *self, const char *transition_type);
+OTIO_API RationalTime Transition_in_offset(Transition *self);
+OTIO_API void Transition_set_in_offset(Transition *self, RationalTime in_offset);
+OTIO_API RationalTime Transition_out_offset(Transition *self);
+OTIO_API void Transition_set_out_offset(Transition *self, RationalTime out_offset);
+OTIO_API RationalTime
+Transition_duration(Transition *self, OTIOErrorStatus *error_status);
 OTIO_API bool
-Transition_is_equivalent_to(Transition* self, OTIOSerializableObject* other);
-OTIO_API Transition*
-            Transition_clone(Transition* self, OTIOErrorStatus* error_status);
-OTIO_API const char* Transition_schema_name(Transition* self);
-OTIO_API int         Transition_schema_version(Transition* self);
+Transition_range_in_parent(Transition *self,
+                           TimeRange &range_in_parent,
+                           OTIOErrorStatus *error_status);
+OTIO_API bool Transition_trimmed_range_in_parent(
+        Transition *self,
+        TimeRange &trimmed_range_in_parent,
+        OTIOErrorStatus *error_status);
+OTIO_API const char *Transition_name(Transition *self);
+OTIO_API AnyDictionary *Transition_metadata(Transition *self);
+OTIO_API Composition *Transition_parent(Transition *self);
+OTIO_API bool Transition_visible(Transition *self);
+OTIO_API void Transition_set_name(Transition *self, const char *name);
+OTIO_API bool Transition_to_json_file(
+        Transition *self,
+        const char *file_name,
+        OTIOErrorStatus *error_status,
+        int indent);
+OTIO_API const char *Transition_to_json_string(
+        Transition *self, OTIOErrorStatus *error_status, int indent);
+OTIO_API bool
+Transition_is_equivalent_to(Transition *self, OTIOSerializableObject *other);
+OTIO_API Transition *
+Transition_clone(Transition *self, OTIOErrorStatus *error_status);
+OTIO_API const char *Transition_schema_name(Transition *self);
+OTIO_API int Transition_schema_version(Transition *self);

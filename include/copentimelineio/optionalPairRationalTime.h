@@ -3,20 +3,21 @@
 #include "copentime/rationalTime.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct OptionalPairRationalTime;
-    typedef struct OptionalPairRationalTime OptionalPairRationalTime;
 
-    OptionalPairRationalTime*
-    OptionalPairRationalTime_create(RationalTime* first, RationalTime* second);
-    RationalTime*
-    OptionalPairRationalTime_first(OptionalPairRationalTime* self);
-    RationalTime*
-         OptionalPairRationalTime_second(OptionalPairRationalTime* self);
-    void OptionalPairRationalTime_destroy(OptionalPairRationalTime* self);
+struct OptionalPairRationalTime;
+typedef struct OptionalPairRationalTime OptionalPairRationalTime;
 
-#ifdef __cplusplus
-}
-#endif
+OTIO_API OptionalPairRationalTime *
+OptionalPairRationalTime_create(RationalTime *first, RationalTime *second);
+
+OTIO_API bool
+OptionalPairRationalTime_first(OptionalPairRationalTime *self, RationalTime &first);
+
+OTIO_API bool
+OptionalPairRationalTime_second(OptionalPairRationalTime *self, RationalTime &second);
+
+OTIO_API void OptionalPairRationalTime_destroy(OptionalPairRationalTime *self);
