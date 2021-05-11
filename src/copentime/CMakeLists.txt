@@ -10,6 +10,7 @@ add_library(copentime ${COTIO_SHARED_OR_STATIC_LIB}
         rationalTime.cpp
         timeRange.cpp
         timeTransform.cpp
+        optionalOpenTime.cpp
         ${PROJECT_SOURCE_DIR}/include/copentime/util.h
         ${COPENTIME_HEADER_FILES})
 

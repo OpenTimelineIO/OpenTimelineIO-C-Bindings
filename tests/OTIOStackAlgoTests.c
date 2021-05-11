@@ -389,7 +389,8 @@ static void otio_stack_algo_flatten_single_track_test(void **state) {
     const char *trackgFgStr = testState->trackgFgStr;
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(stack);
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackABC, errorStatus));
 
@@ -428,7 +429,8 @@ static void otio_stack_algo_flatten_obscured_track_test(void **state) {
     const char *trackgFgStr = testState->trackgFgStr;
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(stack);
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackABC, errorStatus));
     assert_true(Stack_insert_child(stack, 1, (Composable *) trackZ, errorStatus));
@@ -444,7 +446,7 @@ static void otio_stack_algo_flatten_obscured_track_test(void **state) {
     OTIO_RELEASE(stack);
     stack = NULL;
 
-    stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackZ, errorStatus));
     assert_true(Stack_insert_child(stack, 1, (Composable *) trackABC, errorStatus));
     flattenedStack = flatten_stack(stack, errorStatus);
@@ -473,7 +475,8 @@ static void otio_stack_algo_flatten_gaps_test(void **state) {
     const char *trackgFgStr = testState->trackgFgStr;
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(stack);
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackABC, errorStatus));
     assert_true(Stack_insert_child(stack, 1, (Composable *) trackDgE, errorStatus));
@@ -552,7 +555,7 @@ static void otio_stack_algo_flatten_gaps_test(void **state) {
             (OTIOSerializableObject *) trackDgE_2));
 
     OTIO_RELEASE(stack);
-    stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
 //    OTIO_RETAIN(stack); TODO: Fix error: redefinition of ‘stack_r’
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackABC, errorStatus));
     assert_true(Stack_insert_child(stack, 1, (Composable *) trackgFg, errorStatus));
@@ -625,7 +628,8 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
     const char *trackgFgStr = testState->trackgFgStr;
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(stack);
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackZ, errorStatus));
     assert_true(Stack_insert_child(stack, 1, (Composable *) trackDgE, errorStatus));
@@ -675,27 +679,24 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
             (OTIOSerializableObject *) flattenedStack_0,
             (OTIOSerializableObject *) trackDgE_0));
     assert_string_equal(Composable_name(flattenedStack_1), "Z");
-    RationalTime *start = RationalTime_create(50, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *tr =
+    RationalTime start = RationalTime_create(50, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    TimeRange tr =
             TimeRange_create_with_start_time_and_duration(start, duration);
-    TimeRange *flattenedStack_1_source_range =
+    OptionalTimeRange flattenedStack_1_source_range =
             Clip_source_range((Clip *) flattenedStack_1);
-    assert_true(TimeRange_equal(tr, flattenedStack_1_source_range));
+    assert_true(OptionalTimeRange_valid(flattenedStack_1_source_range));
+    assert_true(TimeRange_equal(tr, OptionalTimeRange_value(flattenedStack_1_source_range)));
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) flattenedStack_2,
             (OTIOSerializableObject *) trackDgE_2));
-    TimeRange_destroy(tr);
-    TimeRange_destroy(flattenedStack_1_source_range);
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
 
     OTIO_RELEASE(stack);
     stack = NULL;
     OTIO_RELEASE(flattenedStack);
     flattenedStack = NULL;
 
-    stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
 //    OTIO_RETAIN(stack); TODO: fix error: redefinition of ‘stack_r’
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackZ, errorStatus));
     assert_true(Stack_insert_child(stack, 1, (Composable *) trackgFg, errorStatus));
@@ -737,15 +738,10 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
     start = RationalTime_create(0, 24);
     duration = RationalTime_create(50, 24);
     tr = TimeRange_create_with_start_time_and_duration(start, duration);
-    TimeRange *flattenedStack_0_source_range =
+    OptionalTimeRange flattenedStack_0_source_range =
             Clip_source_range((Clip *) flattenedStack_0);
-    assert_true(TimeRange_equal(tr, flattenedStack_0_source_range));
-    TimeRange_destroy(tr);
-    tr = NULL;
-    TimeRange_destroy(flattenedStack_0_source_range);
-    flattenedStack_0_source_range = NULL;
-    RationalTime_destroy(start);
-    start = NULL;
+    assert_true(OptionalTimeRange_valid(flattenedStack_0_source_range));
+    assert_true(TimeRange_equal(tr, OptionalTimeRange_value(flattenedStack_0_source_range)));
 
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) flattenedStack_1,
@@ -753,17 +749,10 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
     assert_string_equal(Composable_name(flattenedStack_2), "Z");
     start = RationalTime_create(100, 24);
     tr = TimeRange_create_with_start_time_and_duration(start, duration);
-    TimeRange *flattenedStack_2_source_range =
+    OptionalTimeRange flattenedStack_2_source_range =
             Clip_source_range((Clip *) flattenedStack_2);
-    assert_true(TimeRange_equal(tr, flattenedStack_2_source_range));
-    TimeRange_destroy(tr);
-    tr = NULL;
-    TimeRange_destroy(flattenedStack_2_source_range);
-    flattenedStack_2_source_range = NULL;
-    RationalTime_destroy(start);
-    start = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
+    assert_true(OptionalTimeRange_valid(flattenedStack_2_source_range));
+    assert_true(TimeRange_equal(tr, OptionalTimeRange_value(flattenedStack_2_source_range)));
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
@@ -1008,20 +997,18 @@ static void otio_stack_algo_flatten_with_transition_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    RationalTime *in_offset = RationalTime_create(10, 24);
-    RationalTime *out_offset = RationalTime_create(15, 24);
+    OptionalRationalTime in_offset = OptionalRationalTime_create(RationalTime_create(10, 24));
+    OptionalRationalTime out_offset = OptionalRationalTime_create(RationalTime_create(15, 24));
 
     Transition *transition =
             Transition_create("test_transition", NULL, in_offset, out_offset, NULL);
     OTIO_RETAIN(transition);
 
-    RationalTime_destroy(in_offset);
-    RationalTime_destroy(out_offset);
-    in_offset = out_offset = NULL;
-
     assert_true(Track_insert_child(trackDgE, 1, (Composable *) transition, errorStatus));
 
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(stack);
     assert_true(Stack_insert_child(stack, 0, (Composable *) trackABC, errorStatus));
     assert_true(Stack_insert_child(stack, 2, (Composable *) trackDgE, errorStatus));

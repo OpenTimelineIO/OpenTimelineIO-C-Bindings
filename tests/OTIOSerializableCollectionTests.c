@@ -29,8 +29,9 @@ struct SerializableCollectionTestState {
 static int setupSerializableCollectionTests(void **state) {
     struct SerializableCollectionTestState *testState = malloc(sizeof(struct SerializableCollectionTestState));
 
-    testState->testClip = Clip_create("testClip", NULL, NULL, NULL);
-    testState->missingReference = MissingReference_create(NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    testState->testClip = Clip_create("testClip", NULL, nullRange, NULL);
+    testState->missingReference = MissingReference_create(NULL, nullRange, NULL);
     testState->children = SerializableObjectVector_create();
     SerializableObjectVector_push_back(
             testState->children, (OTIOSerializableObject *) testState->testClip);

@@ -23,7 +23,7 @@
 
 typedef struct Stack Stack;
 
-OTIO_API Stack *Stack_create_with_source_range(
+OTIO_API Stack *Stack_create(
         const char *name,
         OptionalTimeRange source_range,
         AnyDictionary *metadata,

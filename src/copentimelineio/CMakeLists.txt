@@ -100,7 +100,8 @@ target_include_directories(copentimelineio PUBLIC
 
 target_link_libraries(copentimelineio
         opentime
-        opentimelineio)
+        opentimelineio
+        copentime)
 
 set_target_properties(copentimelineio PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib"
         MACOSX_RPATH true WINDOWS_EXPORT_ALL_SYMBOLS true)

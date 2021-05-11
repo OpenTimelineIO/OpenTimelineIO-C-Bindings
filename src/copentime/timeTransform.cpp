@@ -4,12 +4,12 @@
 #include <opentime/timeRange.h>
 #include <opentime/timeTransform.h>
 
-TimeTransform TimeTransform_create() {
+OTIO_API TimeTransform TimeTransform_create() {
     opentime::TimeTransform timeTransform;
     return _OTTimeTransform_to_COTTimeTransform(timeTransform);
 }
 
-TimeTransform TimeTransform_create_with_offset_scale_rate(
+OTIO_API TimeTransform TimeTransform_create_with_offset_scale_rate(
         RationalTime offset, double scale, double rate) {
     TimeTransform timeTransform;
     timeTransform.offset = offset;
@@ -18,19 +18,19 @@ TimeTransform TimeTransform_create_with_offset_scale_rate(
     return timeTransform;
 }
 
-RationalTime TimeTransform_offset(TimeTransform self) {
+OTIO_API RationalTime TimeTransform_offset(TimeTransform self) {
     return self.offset;
 }
 
-double TimeTransform_scale(TimeTransform self) {
+OTIO_API double TimeTransform_scale(TimeTransform self) {
     return self.scale;
 }
 
-double TimeTransform_rate(TimeTransform self) {
+OTIO_API double TimeTransform_rate(TimeTransform self) {
     return self.rate;
 }
 
-TimeRange
+OTIO_API TimeRange
 TimeTransform_applied_to_time_range(TimeTransform self, TimeRange other) {
     opentime::TimeTransform ot_self = _COTTimeTransform_to_OTTimeTransform(self);
     opentime::TimeRange ot_other = _COTTimeRange_to_OTTimeRange(other);
@@ -38,7 +38,7 @@ TimeTransform_applied_to_time_range(TimeTransform self, TimeRange other) {
     return _OTTimeRange_to_COTTimeRange(ot_result);
 }
 
-TimeTransform TimeTransform_applied_to_time_transform(
+OTIO_API TimeTransform TimeTransform_applied_to_time_transform(
         TimeTransform self, TimeTransform other) {
     opentime::TimeTransform ot_self = _COTTimeTransform_to_OTTimeTransform(self);
     opentime::TimeTransform ot_other = _COTTimeTransform_to_OTTimeTransform(other);
@@ -46,7 +46,7 @@ TimeTransform TimeTransform_applied_to_time_transform(
     return _OTTimeTransform_to_COTTimeTransform(ot_result);
 }
 
-RationalTime TimeTransform_applied_to_rational_time(
+OTIO_API RationalTime TimeTransform_applied_to_rational_time(
         TimeTransform self, RationalTime other) {
     opentime::TimeTransform ot_self = _COTTimeTransform_to_OTTimeTransform(self);
     opentime::RationalTime ot_other = _COTRationalTime_to_OTRationalTime(other);
@@ -54,13 +54,13 @@ RationalTime TimeTransform_applied_to_rational_time(
     return _OTRationalTime_to_COTRationalTime(ot_result);
 }
 
-bool TimeTransform_equal(TimeTransform lhs, TimeTransform rhs) {
+OTIO_API bool TimeTransform_equal(TimeTransform lhs, TimeTransform rhs) {
     opentime::TimeTransform ot_lhs = _COTTimeTransform_to_OTTimeTransform(lhs);
     opentime::TimeTransform ot_rhs = _COTTimeTransform_to_OTTimeTransform(rhs);
     return ot_lhs == ot_rhs;
 }
 
-bool TimeTransform_not_equal(TimeTransform lhs, TimeTransform rhs) {
+OTIO_API bool TimeTransform_not_equal(TimeTransform lhs, TimeTransform rhs) {
     opentime::TimeTransform ot_lhs = _COTTimeTransform_to_OTTimeTransform(lhs);
     opentime::TimeTransform ot_rhs = _COTTimeTransform_to_OTTimeTransform(rhs);
     return ot_lhs != ot_rhs;

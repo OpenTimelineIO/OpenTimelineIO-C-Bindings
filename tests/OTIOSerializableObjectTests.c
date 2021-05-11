@@ -21,7 +21,7 @@
 #include <copentimelineio/transition.h>
 
 static void opentime_type_serializer_serialize_test(void **state) {
-    RationalTime *rt = RationalTime_create(15, 24);
+    RationalTime rt = RationalTime_create(15, 24);
 
     Any *rt_any = create_safely_typed_any_rational_time(rt);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
@@ -32,14 +32,14 @@ static void opentime_type_serializer_serialize_test(void **state) {
     bool decoded_successfully =
             deserialize_json_from_string(encoded, decoded, errorStatus);
     assert_true(decoded_successfully);
-    RationalTime *decoded_rt = safely_cast_rational_time_any(decoded);
+    RationalTime decoded_rt = safely_cast_rational_time_any(decoded);
 
     assert_true(RationalTime_equal(rt, decoded_rt));
     Any_destroy(decoded);
     decoded = NULL;
 
-    RationalTime *rt_dur = RationalTime_create(10, 20);
-    TimeRange *tr = TimeRange_create_with_start_time_and_duration(rt, rt_dur);
+    RationalTime rt_dur = RationalTime_create(10, 20);
+    TimeRange tr = TimeRange_create_with_start_time_and_duration(rt, rt_dur);
     Any *tr_any = create_safely_typed_any_time_range(tr);
     encoded = serialize_json_to_string(tr_any, errorStatus, 4);
     decoded = /* allocate memory for destinantion */
@@ -48,13 +48,13 @@ static void opentime_type_serializer_serialize_test(void **state) {
     decoded_successfully =
             deserialize_json_from_string(encoded, decoded, errorStatus);
     assert_true(decoded_successfully);
-    TimeRange *decoded_tr = safely_cast_time_range_any(decoded);
+    TimeRange decoded_tr = safely_cast_time_range_any(decoded);
 
     assert_true(TimeRange_equal(tr, decoded_tr));
     Any_destroy(decoded);
     decoded = NULL;
 
-    TimeTransform *tt =
+    TimeTransform tt =
             TimeTransform_create_with_offset_scale_rate(rt, 1.5, 24);
     Any *tt_any = create_safely_typed_any_time_transform(tt);
     encoded = serialize_json_to_string(tt_any, errorStatus, 4);
@@ -64,7 +64,7 @@ static void opentime_type_serializer_serialize_test(void **state) {
     decoded_successfully =
             deserialize_json_from_string(encoded, decoded, errorStatus);
     assert_true(decoded_successfully);
-    TimeTransform *decoded_tt = safely_cast_time_transform_any(decoded);
+    TimeTransform decoded_tt = safely_cast_time_transform_any(decoded);
 
     assert_true(TimeTransform_equal(tt, decoded_tt));
     Any_destroy(decoded);
@@ -72,20 +72,6 @@ static void opentime_type_serializer_serialize_test(void **state) {
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
-    RationalTime_destroy(rt);
-    rt = NULL;
-    RationalTime_destroy(rt_dur);
-    rt_dur = NULL;
-    RationalTime_destroy(decoded_rt);
-    decoded_rt = NULL;
-    TimeRange_destroy(tr);
-    tr = NULL;
-    TimeRange_destroy(decoded_tr);
-    decoded_tr = NULL;
-    TimeTransform_destroy(tt);
-    tt = NULL;
-    TimeTransform_destroy(decoded_tt);
-    decoded_tt = NULL;
 }
 
 static void otio_serializable_object_constructor_test(void **state) {

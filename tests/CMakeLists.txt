@@ -1,20 +1,20 @@
 set(TESTS
     openTimeTests
-#    OTIOComposableTests
-#    OTIOClipTests
+    OTIOComposableTests
+    OTIOClipTests
 #    OTIOCompositionTests
-#    OTIOEffectTests
-#    OTIOGeneratorReferenceTests
-#    OTIOMarkerTests
-#    OTIOMediaReferenceTests
-#    OTIOTransitionTests
-#    OTIOUnknownSchemaTests
-#    OTIOSerializableCollectionTests
+    OTIOEffectTests
+    OTIOGeneratorReferenceTests
+    OTIOMarkerTests
+    OTIOMediaReferenceTests
+    OTIOTransitionTests
+    OTIOUnknownSchemaTests
+    OTIOSerializableCollectionTests
 #    OTIOItemTests
-#    OTIOSerializableObjectTests
+    OTIOSerializableObjectTests
 #    OTIOTimelineTests
-#    OTIOStackAlgoTests
-#    OTIOTrackAlgoTests
+    OTIOStackAlgoTests
+    OTIOTrackAlgoTests
 )
 foreach(TEST ${TESTS})
     add_executable(C${TEST} ${TEST}.c epsilon.h)
@@ -26,7 +26,7 @@ foreach(TEST ${TESTS})
     target_link_libraries(C${TEST} PUBLIC
         cmocka
         copentime
-#        copentimelineio
+        copentimelineio
         pthread)
     target_compile_definitions(C${TEST} PRIVATE
         SAMPLE_DATA_DIR=${CMAKE_CURRENT_SOURCE_DIR}/sample_data/)

@@ -3,18 +3,18 @@
 #include <opentime/rationalTime.h>
 #include <opentime/timeRange.h>
 
-TimeRange TimeRange_create() {
+OTIO_API TimeRange TimeRange_create() {
     opentime::TimeRange ot_timeRange;
     return _OTTimeRange_to_COTTimeRange(ot_timeRange);
 }
 
-TimeRange TimeRange_create_with_start_time(RationalTime start_time) {
+OTIO_API TimeRange TimeRange_create_with_start_time(RationalTime start_time) {
     opentime::RationalTime ot_startTime(start_time.value, start_time.rate);
     opentime::TimeRange ot_timeRange(ot_startTime);
     return _OTTimeRange_to_COTTimeRange(ot_timeRange);
 }
 
-TimeRange TimeRange_create_with_start_time_and_duration(
+OTIO_API TimeRange TimeRange_create_with_start_time_and_duration(
         RationalTime start_time, RationalTime duration) {
     TimeRange timeRange;
     timeRange.start_time = start_time;
@@ -22,15 +22,15 @@ TimeRange TimeRange_create_with_start_time_and_duration(
     return timeRange;
 }
 
-RationalTime TimeRange_start_time(TimeRange self) {
+OTIO_API RationalTime TimeRange_start_time(TimeRange self) {
     return self.start_time;
 }
 
-RationalTime TimeRange_duration(TimeRange self) {
+OTIO_API RationalTime TimeRange_duration(TimeRange self) {
     return self.duration;
 }
 
-RationalTime TimeRange_end_time_inclusive(TimeRange self) {
+OTIO_API RationalTime TimeRange_end_time_inclusive(TimeRange self) {
     opentime::RationalTime ot_startTime = _COTRationalTime_to_OTRationalTime(self.start_time);
     opentime::RationalTime ot_duration = _COTRationalTime_to_OTRationalTime(self.duration);
     opentime::TimeRange ot_self(ot_startTime, ot_duration);
@@ -38,13 +38,13 @@ RationalTime TimeRange_end_time_inclusive(TimeRange self) {
     return _OTRationalTime_to_COTRationalTime(ot_result);
 }
 
-RationalTime TimeRange_end_time_exclusive(TimeRange self) {
+OTIO_API RationalTime TimeRange_end_time_exclusive(TimeRange self) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::RationalTime ot_result = ot_self.end_time_exclusive();
     return _OTRationalTime_to_COTRationalTime(ot_result);
 }
 
-TimeRange
+OTIO_API TimeRange
 TimeRange_duration_extended_by(TimeRange self, RationalTime other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::RationalTime ot_other = _COTRationalTime_to_OTRationalTime(other);
@@ -52,14 +52,14 @@ TimeRange_duration_extended_by(TimeRange self, RationalTime other) {
     return _OTTimeRange_to_COTTimeRange(ot_result);
 }
 
-TimeRange TimeRange_extended_by(TimeRange self, TimeRange other) {
+OTIO_API TimeRange TimeRange_extended_by(TimeRange self, TimeRange other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::TimeRange ot_other = _COTTimeRange_to_OTTimeRange(other);
     opentime::TimeRange ot_result = ot_self.extended_by(ot_other);
     return _OTTimeRange_to_COTTimeRange(ot_result);
 }
 
-RationalTime
+OTIO_API RationalTime
 TimeRange_clamped_with_rational_time(TimeRange self, RationalTime other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::RationalTime ot_other = _COTRationalTime_to_OTRationalTime(other);
@@ -67,7 +67,7 @@ TimeRange_clamped_with_rational_time(TimeRange self, RationalTime other) {
     return _OTRationalTime_to_COTRationalTime(ot_result);
 }
 
-TimeRange
+OTIO_API TimeRange
 TimeRange_clamped_with_time_range(TimeRange self, TimeRange other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::TimeRange ot_other = _COTTimeRange_to_OTTimeRange(other);
@@ -75,43 +75,43 @@ TimeRange_clamped_with_time_range(TimeRange self, TimeRange other) {
     return _OTTimeRange_to_COTTimeRange(ot_result);
 }
 
-bool TimeRange_contains_rational_time(TimeRange self, RationalTime other) {
+OTIO_API bool TimeRange_contains_rational_time(TimeRange self, RationalTime other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::RationalTime ot_other = _COTRationalTime_to_OTRationalTime(other);
     return ot_self.contains(ot_other);
 }
 
-bool TimeRange_contains_time_range(TimeRange self, TimeRange other) {
+OTIO_API bool TimeRange_contains_time_range(TimeRange self, TimeRange other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::TimeRange ot_other = _COTTimeRange_to_OTTimeRange(other);
     return ot_self.contains(ot_other);
 }
 
-bool TimeRange_overlaps_rational_time(TimeRange self, RationalTime other) {
+OTIO_API bool TimeRange_overlaps_rational_time(TimeRange self, RationalTime other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::RationalTime ot_other = _COTRationalTime_to_OTRationalTime(other);
     return ot_self.overlaps(ot_other);
 }
 
-bool TimeRange_overlaps_time_range(TimeRange self, TimeRange other) {
+OTIO_API bool TimeRange_overlaps_time_range(TimeRange self, TimeRange other) {
     opentime::TimeRange ot_self = _COTTimeRange_to_OTTimeRange(self);
     opentime::TimeRange ot_other = _COTTimeRange_to_OTTimeRange(other);
     return ot_self.overlaps(ot_other);
 }
 
-bool TimeRange_equal(TimeRange lhs, TimeRange rhs) {
+OTIO_API bool TimeRange_equal(TimeRange lhs, TimeRange rhs) {
     opentime::TimeRange ot_lhs = _COTTimeRange_to_OTTimeRange(lhs);
     opentime::TimeRange ot_rhs = _COTTimeRange_to_OTTimeRange(rhs);
     return ot_lhs == ot_rhs;
 }
 
-bool TimeRange_not_equal(TimeRange lhs, TimeRange rhs) {
+OTIO_API bool TimeRange_not_equal(TimeRange lhs, TimeRange rhs) {
     opentime::TimeRange ot_lhs = _COTTimeRange_to_OTTimeRange(lhs);
     opentime::TimeRange ot_rhs = _COTTimeRange_to_OTTimeRange(rhs);
     return ot_lhs != ot_rhs;
 }
 
-TimeRange TimeRange_range_from_start_end_time(
+OTIO_API TimeRange TimeRange_range_from_start_end_time(
         RationalTime start_time, RationalTime end_time_exclusive) {
     opentime::RationalTime ot_startTime = _COTRationalTime_to_OTRationalTime(start_time);
     opentime::RationalTime ot_endTimeExclusive = _COTRationalTime_to_OTRationalTime(end_time_exclusive);

@@ -4,30 +4,25 @@
 #include "timeRange.h"
 #include "timeTransform.h"
 
+#ifdef __cplusplus
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
+#endif
+
 struct OptionalRationalTime {
     RationalTime value;
     bool valid;
 };
 typedef struct OptionalRationalTime OptionalRationalTime;
 
-inline OptionalRationalTime OptionalRationalTime_create(RationalTime rationalTime) {
-    OptionalRationalTime optionalRationalTime;
-    optionalRationalTime.value = rationalTime;
-    optionalRationalTime.valid = true;
-}
+OTIO_API OptionalRationalTime OptionalRationalTime_create(RationalTime rationalTime);
 
-inline OptionalRationalTime OptionalRationalTime_create_null() {
-    OptionalRationalTime optionalRationalTime;
-    optionalRationalTime.valid = false;
-}
+OTIO_API OptionalRationalTime OptionalRationalTime_create_null();
 
-inline bool OptionalRationalTime_valid(OptionalRationalTime optionalRationalTime) {
-    return optionalRationalTime.valid;
-}
+OTIO_API bool OptionalRationalTime_valid(OptionalRationalTime optionalRationalTime);
 
-inline RationalTime OptionalRationalTime_value(OptionalRationalTime optionalRationalTime) {
-    return optionalRationalTime.value;
-}
+OTIO_API RationalTime OptionalRationalTime_value(OptionalRationalTime optionalRationalTime);
 
 struct OptionalTimeRange {
     TimeRange value;
@@ -35,21 +30,10 @@ struct OptionalTimeRange {
 };
 typedef struct OptionalTimeRange OptionalTimeRange;
 
-inline OptionalTimeRange OptionalTimeRange_create(TimeRange timeRange) {
-    OptionalTimeRange optionalTimeRange;
-    optionalTimeRange.value = timeRange;
-    optionalTimeRange.valid = true;
-}
+OTIO_API OptionalTimeRange OptionalTimeRange_create(TimeRange timeRange);
 
-inline OptionalTimeRange OptionalTimeRange_create_null() {
-    OptionalTimeRange optionalTimeRange;
-    optionalTimeRange.valid = false;
-}
+OTIO_API OptionalTimeRange OptionalTimeRange_create_null();
 
-inline bool OptionalTimeRange_valid(OptionalTimeRange optionalTimeRange) {
-    return optionalTimeRange.valid;
-}
+OTIO_API bool OptionalTimeRange_valid(OptionalTimeRange optionalTimeRange);
 
-inline TimeRange OptionalTimeRange_value(OptionalTimeRange optionalTimeRange) {
-    return optionalTimeRange.value;
-}
+OTIO_API TimeRange OptionalTimeRange_value(OptionalTimeRange optionalTimeRange);
