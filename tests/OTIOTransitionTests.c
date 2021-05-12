@@ -19,7 +19,8 @@ static void otio_transition_constructor_test(void **state) {
     AnyDictionaryIterator *it =
             AnyDictionary_insert(metadata, "foo", value_any);
 
-    Transition *trx = Transition_create("AtoB", "SMPTE.Dissolve", NULL, NULL, metadata);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Transition *trx = Transition_create("AtoB", "SMPTE.Dissolve", nullTime, nullTime, metadata);
     OTIO_RETAIN(trx);
 
     AnyDictionaryIterator_destroy(it);

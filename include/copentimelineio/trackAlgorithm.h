@@ -5,13 +5,10 @@
 #include "track.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
 
-    Track* track_trimmed_to_range(
-        Track* in_track, TimeRange* trim_range, OTIOErrorStatus* error_status);
-
-#ifdef __cplusplus
-}
-#endif
+OTIO_API Track *track_trimmed_to_range(
+        Track *in_track, TimeRange trim_range, OTIOErrorStatus *error_status);

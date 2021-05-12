@@ -1,28 +1,41 @@
 #pragma once
+
 #include "rationalTime.h"
 #include "timeRange.h"
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct TimeTransform;
-    typedef struct TimeTransform TimeTransform;
-    TimeTransform* TimeTransform_create();
-    TimeTransform*
-                  TimeTransform_create_with_offset_scale_rate(RationalTime* offset, double scale, double rate);
-    RationalTime* TimeTransform_offset(TimeTransform* self);
-    double        TimeTransform_scale(TimeTransform* self);
-    double        TimeTransform_rate(TimeTransform* self);
-    TimeRange* TimeTransform_applied_to_time_range(TimeTransform* self, TimeRange* other);
-    TimeTransform*
-    TimeTransform_applied_to_time_transform(TimeTransform* self, TimeTransform* other);
-    RationalTime*
-          TimeTransform_applied_to_rational_time(TimeTransform* self, RationalTime* other);
-    bool TimeTransform_equal(TimeTransform* lhs, TimeTransform* rhs);
-    bool TimeTransform_not_equal(TimeTransform* lhs, TimeTransform* rhs);
-    void  TimeTransform_destroy(TimeTransform* self);
-#ifdef __cplusplus
-}
-#endif
+
+struct TimeTransform {
+    RationalTime offset;
+    double scale;
+    double rate;
+};
+typedef struct TimeTransform TimeTransform;
+
+OTIO_API TimeTransform TimeTransform_create();
+
+OTIO_API TimeTransform
+TimeTransform_create_with_offset_scale_rate(RationalTime offset, double scale, double rate);
+
+OTIO_API RationalTime TimeTransform_offset(TimeTransform self);
+
+OTIO_API double TimeTransform_scale(TimeTransform self);
+
+OTIO_API double TimeTransform_rate(TimeTransform self);
+
+OTIO_API TimeRange TimeTransform_applied_to_time_range(TimeTransform self, TimeRange other);
+
+OTIO_API TimeTransform
+TimeTransform_applied_to_time_transform(TimeTransform self, TimeTransform other);
+
+OTIO_API RationalTime
+TimeTransform_applied_to_rational_time(TimeTransform self, RationalTime other);
+
+OTIO_API bool TimeTransform_equal(TimeTransform lhs, TimeTransform rhs);
+
+OTIO_API bool TimeTransform_not_equal(TimeTransform lhs, TimeTransform rhs);

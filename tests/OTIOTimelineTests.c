@@ -22,25 +22,23 @@
 #include <copentimelineio/transition.h>
 
 static void otio_timeline_init_test(void **state) {
-    RationalTime *rt = RationalTime_create(12, 24);
+    OptionalRationalTime rt = OptionalRationalTime_create(RationalTime_create(12, 24));
     Timeline *tl = Timeline_create("test_timeline", rt, NULL);
     OTIO_RETAIN(tl);
 
     assert_string_equal(Timeline_name(tl), "test_timeline");
 
-    RationalTime *tl_global_start_time = Timeline_global_start_time(tl);
-    assert_true(RationalTime_equal(rt, tl_global_start_time));
+    OptionalRationalTime tl_global_start_time = Timeline_global_start_time(tl);
+    assert_true(OptionalRationalTime_valid(tl_global_start_time));
+    assert_true(RationalTime_equal(OptionalRationalTime_value(rt),
+                                   OptionalRationalTime_value(tl_global_start_time)));
 
-    RationalTime_destroy(rt);
-    rt = NULL;
-    RationalTime_destroy(tl_global_start_time);
-    tl_global_start_time = NULL;
     OTIO_RELEASE(tl);
     tl = NULL;
 }
 
 static void otio_timeline_metadata_test(void **state) {
-    RationalTime *rt = RationalTime_create(12, 24);
+    OptionalRationalTime rt = OptionalRationalTime_create(RationalTime_create(12, 24));
     AnyDictionary *metadata = AnyDictionary_create();
     Any *barAny = create_safely_typed_any_string("bar");
     AnyDictionaryIterator *it = AnyDictionary_insert(metadata, "foo", barAny);
@@ -82,8 +80,6 @@ static void otio_timeline_metadata_test(void **state) {
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
-    RationalTime_destroy(rt);
-    rt = NULL;
     AnyDictionary_destroy(metadata);
     metadata = NULL;
     Any_destroy(barAny);
@@ -95,20 +91,16 @@ static void otio_timeline_metadata_test(void **state) {
 }
 
 static void otio_timeline_range_test(void **state) {
-    RationalTime *start = RationalTime_create(5, 24);
-    RationalTime *duration = RationalTime_create(15, 24);
-    TimeRange *tr =
-            TimeRange_create_with_start_time_and_duration(start, duration);
+    RationalTime start = RationalTime_create(5, 24);
+    RationalTime duration = RationalTime_create(15, 24);
+    OptionalTimeRange tr = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start, duration));
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
 
     ExternalReference *mr =
             ExternalReference_create("/var/tmp/test.mov", tr, NULL);
 
-    TimeRange *clip_tr =
-            TimeRange_create_with_start_time_and_duration(NULL, start);
-
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
-    start = duration = NULL;
+    OptionalTimeRange clip_tr = OptionalTimeRange_create(TimeRange_create_with_duration(start));
 
     Clip *cl = Clip_create("test clip1", (MediaReference *) mr, clip_tr, NULL);
     Clip *cl2 = Clip_create("test clip2", (MediaReference *) mr, clip_tr, NULL);
@@ -116,58 +108,49 @@ static void otio_timeline_range_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    Track *track = Track_create("test_track", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *track = Track_create("test_track", nullRange, NULL, NULL);
 
     assert_true(Track_insert_child(track, 0, (Composable *) cl, errorStatus));
     assert_true(Track_insert_child(track, 1, (Composable *) cl2, errorStatus));
     assert_true(Track_insert_child(track, 2, (Composable *) cl3, errorStatus));
 
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     assert_true(Stack_insert_child(stack, 0, (Composable *) track, errorStatus));
 
-    Timeline *tl = Timeline_create("test_timeline", NULL, NULL);
+    Timeline *tl = Timeline_create("test_timeline", nullTime, NULL);
     OTIO_RETAIN(tl);
     Timeline_set_tracks(tl, stack);
 
-    RationalTime *rtx3 = RationalTime_create(15, 24);
-    RationalTime *tl_duration = Timeline_duration(tl, errorStatus);
+    RationalTime rtx3 = RationalTime_create(15, 24);
+    RationalTime tl_duration = Timeline_duration(tl, errorStatus);
     assert_true(RationalTime_equal(rtx3, tl_duration));
 
-    TimeRange *tl_range_of_child_cl =
+    TimeRange tl_range_of_child_cl =
             Timeline_range_of_child(tl, (Composable *) cl, errorStatus);
-    TimeRange *track_range_of_child_0 =
+    TimeRange track_range_of_child_0 =
             Track_range_of_child_at_index(track, 0, errorStatus);
     assert_true(TimeRange_equal(tl_range_of_child_cl, track_range_of_child_0));
 
-    TimeRange_destroy(tl_range_of_child_cl);
-    tl_range_of_child_cl = NULL;
-    TimeRange_destroy(track_range_of_child_0);
-    track_range_of_child_0 = NULL;
-    TimeRange_destroy(clip_tr);
-    clip_tr = NULL;
-    TimeRange_destroy(tr);
-    tr = NULL;
-    RationalTime_destroy(tl_duration);
-    tl_duration = NULL;
-    RationalTime_destroy(rtx3);
-    rtx3 = NULL;
     OTIO_RELEASE(tl);
     tl = NULL;
 }
 
 static void otio_timeline_serialize_test(void **state) {
-    MissingReference *mr = MissingReference_create(NULL, NULL, NULL);
-    Clip *clip = Clip_create("test_clip", (MediaReference *) mr, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    MissingReference *mr = MissingReference_create(NULL, nullRange, NULL);
+    Clip *clip = Clip_create("test_clip", (MediaReference *) mr, nullRange, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    Track *track = Track_create("test_track", NULL, NULL, NULL);
+    Track *track = Track_create("test_track", nullRange, NULL, NULL);
 
     assert_true(Track_insert_child(track, 0, (Composable *) clip, errorStatus));
 
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     assert_true(Stack_insert_child(stack, 0, (Composable *) track, errorStatus));
 
-    Timeline *tl = Timeline_create("test_timeline", NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Timeline *tl = Timeline_create("test_timeline", nullTime, NULL);
     OTIO_RETAIN(tl);
 
     Timeline_set_tracks(tl, stack);
@@ -196,19 +179,21 @@ static void otio_timeline_serialize_test(void **state) {
 }
 
 static void otio_timeline_serialization_of_subclasses_test(void **state) {
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
     ExternalReference *mr =
-            ExternalReference_create("/tmp/foo.mov", NULL, NULL);
-    Clip *clip1 = Clip_create("Test Clip", (MediaReference *) mr, NULL, NULL);
+            ExternalReference_create("/tmp/foo.mov", nullRange, NULL);
+    Clip *clip1 = Clip_create("Test Clip", (MediaReference *) mr, nullRange, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    Track *track = Track_create("Test Track", NULL, NULL, NULL);
+    Track *track = Track_create("Test Track", nullRange, NULL, NULL);
 
     assert_true(Track_insert_child(track, 0, (Composable *) clip1, errorStatus));
 
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
     assert_true(Stack_insert_child(stack, 0, (Composable *) track, errorStatus));
 
-    Timeline *tl = Timeline_create("Testing Serialization", NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Timeline *tl = Timeline_create("Testing Serialization", nullTime, NULL);
     OTIO_RETAIN(tl);
     Timeline_set_tracks(tl, stack);
 
@@ -302,12 +287,13 @@ static void otio_timeline_serialization_of_subclasses_test(void **state) {
 }
 
 static void otio_timeline_tracks_test(void **state) {
-    Track *V1 = Track_create("V1", NULL, TrackKind_Video, NULL);
-    Track *V2 = Track_create("V2", NULL, TrackKind_Video, NULL);
-    Track *A1 = Track_create("A1", NULL, TrackKind_Audio, NULL);
-    Track *A2 = Track_create("A2", NULL, TrackKind_Audio, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *V1 = Track_create("V1", nullRange, TrackKind_Video, NULL);
+    Track *V2 = Track_create("V2", nullRange, TrackKind_Video, NULL);
+    Track *A1 = Track_create("A1", nullRange, TrackKind_Audio, NULL);
+    Track *A2 = Track_create("A2", nullRange, TrackKind_Audio, NULL);
 
-    Stack *stack = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    Stack *stack = Stack_create(NULL, nullRange, NULL, NULL, NULL);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -316,7 +302,8 @@ static void otio_timeline_tracks_test(void **state) {
     assert_true(Stack_insert_child(stack, 2, (Composable *) A1, errorStatus));
     assert_true(Stack_insert_child(stack, 3, (Composable *) A2, errorStatus));
 
-    Timeline *tl = Timeline_create(NULL, NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Timeline *tl = Timeline_create(NULL, nullTime, NULL);
     OTIO_RETAIN(tl);
     Timeline_set_tracks(tl, stack);
 

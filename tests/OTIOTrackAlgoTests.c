@@ -123,6 +123,8 @@ static int setupTrackAlgoTests(void **state) {
     errorStatus = NULL;
 
     *state = testState;
+
+    return 0;
 }
 
 static int teardownTrackAlgoTests(void **state) {
@@ -135,6 +137,8 @@ static int teardownTrackAlgoTests(void **state) {
     }
 
     free(testState);
+
+    return 0;
 }
 
 static void otio_track_algo_trim_to_existing_range_test(void **state) {
@@ -143,14 +147,14 @@ static void otio_track_algo_trim_to_existing_range_test(void **state) {
     RetainerSerializableObject *sample_track_r = testState->sample_track_r;
     const char *sample_track_str = testState->sample_track_str;
 
-    RationalTime *start = RationalTime_create(0, 24);
-    RationalTime *duration = RationalTime_create(150, 24);
-    TimeRange *trimmed_range =
+    RationalTime start = RationalTime_create(0, 24);
+    RationalTime duration = RationalTime_create(150, 24);
+    TimeRange trimmed_range =
             TimeRange_create_with_start_time_and_duration(start, duration);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    TimeRange *sample_track_trimmed_range =
+    TimeRange sample_track_trimmed_range =
             Track_trimmed_range(sample_track, errorStatus);
     assert_true(TimeRange_equal(trimmed_range, sample_track_trimmed_range));
 
@@ -160,17 +164,6 @@ static void otio_track_algo_trim_to_existing_range_test(void **state) {
 
     /* It shouldn't have changed at all */
     assert_true(Track_is_equivalent_to(sample_track, trimmed_track));
-
-    RationalTime_destroy(start);
-    start = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(trimmed_range);
-    trimmed_range = NULL;
-    TimeRange_destroy(sample_track_trimmed_range);
-    sample_track_trimmed_range = NULL;
-    RetainerSerializableObject_managed_destroy(trimmed_track_r);
-    trimmed_range = NULL;
 }
 
 static void otio_track_algo_trim_to_longer_range_test(void **state) {
@@ -179,9 +172,9 @@ static void otio_track_algo_trim_to_longer_range_test(void **state) {
     RetainerSerializableObject *sample_track_r = testState->sample_track_r;
     const char *sample_track_str = testState->sample_track_str;
 
-    RationalTime *start = RationalTime_create(-10, 24);
-    RationalTime *duration = RationalTime_create(160, 24);
-    TimeRange *trimmed_range =
+    RationalTime start = RationalTime_create(-10, 24);
+    RationalTime duration = RationalTime_create(160, 24);
+    TimeRange trimmed_range =
             TimeRange_create_with_start_time_and_duration(start, duration);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
@@ -193,15 +186,6 @@ static void otio_track_algo_trim_to_longer_range_test(void **state) {
     /* It shouldn't have changed at all */
     assert_true(Track_is_equivalent_to(
             sample_track, (OTIOSerializableObject *) trimmed_track));
-
-    RationalTime_destroy(start);
-    start = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(trimmed_range);
-    trimmed_range = NULL;
-    RetainerSerializableObject_managed_destroy(trimmed_track_r);
-    trimmed_range = NULL;
 }
 
 static void otio_track_algo_trim_front_test(void **state) {
@@ -210,9 +194,9 @@ static void otio_track_algo_trim_front_test(void **state) {
     RetainerSerializableObject *sample_track_r = testState->sample_track_r;
     const char *sample_track_str = testState->sample_track_str;
 
-    RationalTime *start = RationalTime_create(60, 24);
-    RationalTime *duration = RationalTime_create(90, 24);
-    TimeRange *trimmed_range =
+    RationalTime start = RationalTime_create(60, 24);
+    RationalTime duration = RationalTime_create(90, 24);
+    TimeRange trimmed_range =
             TimeRange_create_with_start_time_and_duration(start, duration);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
@@ -227,22 +211,15 @@ static void otio_track_algo_trim_front_test(void **state) {
             Track_children(trimmed_track);
     assert_int_equal(ComposableRetainerVector_size(trimmed_track_children), 2);
 
-    TimeRange *trimmed_track_trimmed_range =
+    TimeRange trimmed_track_trimmed_range =
             Track_trimmed_range(trimmed_track, errorStatus);
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
+
     start = RationalTime_create(0, 24);
     duration = RationalTime_create(90, 24);
-    TimeRange *trimmed_track_trimmed_range_compare =
+    TimeRange trimmed_track_trimmed_range_compare =
             TimeRange_create_with_start_time_and_duration(start, duration);
     assert_true(TimeRange_equal(
             trimmed_track_trimmed_range, trimmed_track_trimmed_range_compare));
-    TimeRange_destroy(trimmed_track_trimmed_range);
-    trimmed_track_trimmed_range = NULL;
-    TimeRange_destroy(trimmed_track_trimmed_range_compare);
-    trimmed_track_trimmed_range_compare = NULL;
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
 
     /* did clip B get trimmed? */
     ComposableRetainerVectorIterator *it =
@@ -255,18 +232,14 @@ static void otio_track_algo_trim_front_test(void **state) {
             ComposableRetainerVectorIterator_value(it);
     Clip *C = (Clip *) RetainerComposable_value(clipC_retainer);
     assert_string_equal(Clip_name(B), "B");
-    TimeRange *clipB_trimmed_range = Clip_trimmed_range(B, errorStatus);
+    TimeRange clipB_trimmed_range = Clip_trimmed_range(B, errorStatus);
     start = RationalTime_create(10, 24);
     duration = RationalTime_create(40, 24);
-    TimeRange *clipB_trimmed_range_compare =
+    TimeRange clipB_trimmed_range_compare =
             TimeRange_create_with_start_time_and_duration(start, duration);
     assert_true(TimeRange_equal(clipB_trimmed_range, clipB_trimmed_range_compare));
     ComposableRetainerVectorIterator_destroy(it);
     it = NULL;
-    TimeRange_destroy(clipB_trimmed_range_compare);
-    clipB_trimmed_range_compare = NULL;
-    TimeRange_destroy(clipB_trimmed_range);
-    clipB_trimmed_range = NULL;
 
     ComposableRetainerVector *sample_track_children =
             Track_children(sample_track);
@@ -289,16 +262,9 @@ static void otio_track_algo_trim_front_test(void **state) {
     assert_false(Track_is_equivalent_to(
             sample_track, (OTIOSerializableObject *) trimmed_track));
 
-    RationalTime_destroy(start);
-    start = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(trimmed_range);
-    trimmed_range = NULL;
     ComposableRetainerVector_destroy(trimmed_track_children);
     trimmed_track_children = NULL;
     RetainerSerializableObject_managed_destroy(trimmed_track_r);
-    trimmed_range = NULL;
 }
 
 static void otio_track_algo_trim_end_test(void **state) {
@@ -307,9 +273,9 @@ static void otio_track_algo_trim_end_test(void **state) {
     RetainerSerializableObject *sample_track_r = testState->sample_track_r;
     const char *sample_track_str = testState->sample_track_str;
 
-    RationalTime *start = RationalTime_create(0, 24);
-    RationalTime *duration = RationalTime_create(90, 24);
-    TimeRange *trimmed_range =
+    RationalTime start = RationalTime_create(0, 24);
+    RationalTime duration = RationalTime_create(90, 24);
+    TimeRange trimmed_range =
             TimeRange_create_with_start_time_and_duration(start, duration);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
@@ -324,22 +290,15 @@ static void otio_track_algo_trim_end_test(void **state) {
             Track_children(trimmed_track);
     assert_int_equal(ComposableRetainerVector_size(trimmed_track_children), 2);
 
-    TimeRange *trimmed_track_trimmed_range =
+    TimeRange trimmed_track_trimmed_range =
             Track_trimmed_range(trimmed_track, errorStatus);
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
+
     start = RationalTime_create(0, 24);
     duration = RationalTime_create(90, 24);
-    TimeRange *trimmed_track_trimmed_range_compare =
+    TimeRange trimmed_track_trimmed_range_compare =
             TimeRange_create_with_start_time_and_duration(start, duration);
     assert_true(TimeRange_equal(
             trimmed_track_trimmed_range, trimmed_track_trimmed_range_compare));
-    TimeRange_destroy(trimmed_track_trimmed_range);
-    trimmed_track_trimmed_range = NULL;
-    TimeRange_destroy(trimmed_track_trimmed_range_compare);
-    trimmed_track_trimmed_range_compare = NULL;
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
 
     ComposableRetainerVectorIterator *it =
             ComposableRetainerVector_begin(trimmed_track_children);
@@ -374,29 +333,18 @@ static void otio_track_algo_trim_end_test(void **state) {
     /* did clip B get trimmed? */
     assert_string_equal(Composable_name(trimmed_1), "B");
 
-    TimeRange *trimmed_1_track_trimmed_range =
+    TimeRange trimmed_1_track_trimmed_range =
             Clip_trimmed_range((Clip *) trimmed_1, errorStatus);
     start = RationalTime_create(0, 24);
     duration = RationalTime_create(40, 24);
-    TimeRange *trimmed_1_track_trimmed_range_compare =
+    TimeRange trimmed_1_track_trimmed_range_compare =
             TimeRange_create_with_start_time_and_duration(start, duration);
     assert_true(TimeRange_equal(
             trimmed_1_track_trimmed_range, trimmed_1_track_trimmed_range_compare));
-    TimeRange_destroy(trimmed_1_track_trimmed_range_compare);
-    trimmed_1_track_trimmed_range_compare = NULL;
-    TimeRange_destroy(trimmed_track_trimmed_range_compare);
-    trimmed_track_trimmed_range_compare = NULL;
 
     assert_false(Track_is_equivalent_to(
             sample_track, (OTIOSerializableObject *) (trimmed_track)));
-    RationalTime_destroy(start);
-    start = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(trimmed_range);
-    trimmed_range = NULL;
-    RetainerSerializableObject_managed_destroy(trimmed_track_r);
-    trimmed_range = NULL;
+
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
 }
@@ -409,21 +357,19 @@ static void otio_track_algo_trim_with_transition_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    RationalTime *sample_track_duration_compare = RationalTime_create(150, 24);
-    RationalTime *sample_track_duration =
+    RationalTime sample_track_duration_compare = RationalTime_create(150, 24);
+    RationalTime sample_track_duration =
             Track_duration(sample_track, errorStatus);
     assert_true(RationalTime_equal(
             sample_track_duration, sample_track_duration_compare));
-    RationalTime_destroy(sample_track_duration);
-    RationalTime_destroy(sample_track_duration_compare);
 
     ComposableRetainerVector *sample_track_children =
             Track_children(sample_track);
     assert_int_equal(ComposableRetainerVector_size(sample_track_children), 3);
     ComposableRetainerVector_destroy(sample_track_children);
     sample_track_children = NULL;
-    RationalTime *in_offset = RationalTime_create(12, 24);
-    RationalTime *out_offset = RationalTime_create(20, 24);
+    OptionalRationalTime in_offset = OptionalRationalTime_create(RationalTime_create(12, 24));
+    OptionalRationalTime out_offset = OptionalRationalTime_create(RationalTime_create(20, 24));
     Transition *transition = Transition_create(NULL, NULL, in_offset, out_offset, NULL);
     RetainerSerializableObject *transition_r = RetainerSerializableObject_create(
             (OTIOSerializableObject *) (transition));
@@ -439,21 +385,16 @@ static void otio_track_algo_trim_with_transition_test(void **state) {
     sample_track_duration = Track_duration(sample_track, errorStatus);
     assert_true(RationalTime_equal(
             sample_track_duration, sample_track_duration_compare));
-    RationalTime_destroy(sample_track_duration);
-    RationalTime_destroy(sample_track_duration_compare);
 
-    RationalTime *start = RationalTime_create(5, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *trimmed_range =
+    RationalTime start = RationalTime_create(5, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    TimeRange trimmed_range =
             TimeRange_create_with_start_time_and_duration(start, duration);
     Track *trimmed_track =
             track_trimmed_to_range(sample_track, trimmed_range, errorStatus);
     assert_ptr_equal(trimmed_track, (Track *) NULL);
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 23);
     OTIOErrorStatus_destroy(errorStatus);
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(trimmed_range);
 
     errorStatus = OTIOErrorStatus_create();
     start = RationalTime_create(45, 24);
@@ -465,9 +406,6 @@ static void otio_track_algo_trim_with_transition_test(void **state) {
     assert_ptr_equal(trimmed_track, (Track *) NULL);
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 23);
     OTIOErrorStatus_destroy(errorStatus);
-    RationalTime_destroy(start);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(trimmed_range);
 
     errorStatus = OTIOErrorStatus_create();
     start = RationalTime_create(25, 24);
@@ -480,12 +418,6 @@ static void otio_track_algo_trim_with_transition_test(void **state) {
             (OTIOSerializableObject *) trimmed_track);
     assert_false(Track_is_equivalent_to(
             sample_track, (OTIOSerializableObject *) trimmed_track));
-    RationalTime_destroy(start);
-    start = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(trimmed_range);
-    trimmed_range = NULL;
 
     const char *expected_str =
             "{\n"
