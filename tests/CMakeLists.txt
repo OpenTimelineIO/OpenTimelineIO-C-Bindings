@@ -2,7 +2,7 @@ set(TESTS
     openTimeTests
     OTIOComposableTests
     OTIOClipTests
-#    OTIOCompositionTests
+    OTIOCompositionTests
     OTIOEffectTests
     OTIOGeneratorReferenceTests
     OTIOMarkerTests
@@ -10,9 +10,9 @@ set(TESTS
     OTIOTransitionTests
     OTIOUnknownSchemaTests
     OTIOSerializableCollectionTests
-#    OTIOItemTests
+    OTIOItemTests
     OTIOSerializableObjectTests
-#    OTIOTimelineTests
+    OTIOTimelineTests
     OTIOStackAlgoTests
     OTIOTrackAlgoTests
 )

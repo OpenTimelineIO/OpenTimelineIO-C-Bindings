@@ -19,6 +19,8 @@ OTIO_API TimeRange TimeRange_create();
 
 OTIO_API TimeRange TimeRange_create_with_start_time(RationalTime start_time);
 
+OTIO_API TimeRange TimeRange_create_with_duration(RationalTime duration);
+
 OTIO_API TimeRange TimeRange_create_with_start_time_and_duration(
         RationalTime start_time, RationalTime duration);
 

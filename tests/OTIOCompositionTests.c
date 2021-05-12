@@ -48,7 +48,8 @@ struct ClipWrapperPair _nest(Clip *item, int index) {
 
     if (parent == NULL) { return clipWrapperPair; }
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
-    Stack *wrapper = Stack_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *wrapper = Stack_create(NULL, nullRange, NULL, NULL, NULL);
 
     Clip *clip = (Clip *) SerializableObject_clone(
             (OTIOSerializableObject *) item, errorStatus);
@@ -67,9 +68,10 @@ struct ClipWrapperPair _nest(Clip *item, int index) {
 }
 
 static void otio_composition_constructor_test(void **state) {
-    Item *it = Item_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Item *it = Item_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(it);
-    Composition *co = Composition_create("test", NULL, NULL, NULL, NULL);
+    Composition *co = Composition_create("test", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co);
     ComposableVector *composableVector = ComposableVector_create();
     ComposableVector_push_back(composableVector, (Composable *) it);
@@ -135,17 +137,18 @@ static void otio_composition_constructor_test(void **state) {
 }
 
 static void otio_composition_equality_test(void **state) {
-    Composition *co0 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Composition *co0 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co0);
-    Composition *co00 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Composition *co00 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co00);
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) co0, (OTIOSerializableObject *) co00));
 
-    Item *a = Item_create("A", NULL, NULL, NULL, NULL);
-    Item *b = Item_create("B", NULL, NULL, NULL, NULL);
-    Item *c = Item_create("C", NULL, NULL, NULL, NULL);
-    Composition *co1 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Item *a = Item_create("A", nullRange, NULL, NULL, NULL);
+    Item *b = Item_create("B", nullRange, NULL, NULL, NULL);
+    Item *c = Item_create("C", nullRange, NULL, NULL, NULL);
+    Composition *co1 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co1);
     ComposableVector *composableVector = ComposableVector_create();
     ComposableVector_push_back(composableVector, (Composable *) a);
@@ -159,10 +162,10 @@ static void otio_composition_equality_test(void **state) {
     ComposableVector_destroy(composableVector);
     composableVector = NULL;
 
-    Item *x = Item_create("X", NULL, NULL, NULL, NULL);
-    Item *y = Item_create("Y", NULL, NULL, NULL, NULL);
-    Item *z = Item_create("Z", NULL, NULL, NULL, NULL);
-    Composition *co2 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Item *x = Item_create("X", nullRange, NULL, NULL, NULL);
+    Item *y = Item_create("Y", nullRange, NULL, NULL, NULL);
+    Item *z = Item_create("Z", nullRange, NULL, NULL, NULL);
+    Composition *co2 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co2);
     composableVector = ComposableVector_create();
     ComposableVector_push_back(composableVector, (Composable *) x);
@@ -173,10 +176,10 @@ static void otio_composition_equality_test(void **state) {
     ComposableVector_destroy(composableVector);
     composableVector = NULL;
 
-    Item *a2 = Item_create("A", NULL, NULL, NULL, NULL);
-    Item *b2 = Item_create("B", NULL, NULL, NULL, NULL);
-    Item *c2 = Item_create("C", NULL, NULL, NULL, NULL);
-    Composition *co3 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Item *a2 = Item_create("A", nullRange, NULL, NULL, NULL);
+    Item *b2 = Item_create("B", nullRange, NULL, NULL, NULL);
+    Item *c2 = Item_create("C", nullRange, NULL, NULL, NULL);
+    Composition *co3 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co3);
     composableVector = ComposableVector_create();
     ComposableVector_push_back(composableVector, (Composable *) a2);
@@ -203,9 +206,10 @@ static void otio_composition_equality_test(void **state) {
 }
 
 static void otio_composition_is_parent_of_test(void **state) {
-    Composition *co = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Composition *co = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co);
-    Composition *co_2 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Composition *co_2 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co_2);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -222,8 +226,9 @@ static void otio_composition_is_parent_of_test(void **state) {
 }
 
 static void otio_composition_parent_manip_test(void **state) {
-    Item *it = Item_create(NULL, NULL, NULL, NULL, NULL);
-    Composition *co = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Item *it = Item_create(NULL, nullRange, NULL, NULL, NULL);
+    Composition *co = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co);
     ComposableVector *composableVector = ComposableVector_create();
     ComposableVector_push_back(composableVector, (Composable *) it);
@@ -241,9 +246,10 @@ static void otio_composition_parent_manip_test(void **state) {
 }
 
 static void otio_composition_parent_move_child_test(void **state) {
-    Item *it = Item_create(NULL, NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Item *it = Item_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(it);
-    Composition *co = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Composition *co = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co);
     ComposableVector *composableVector = ComposableVector_create();
     ComposableVector_push_back(composableVector, (Composable *) it);
@@ -252,7 +258,7 @@ static void otio_composition_parent_move_child_test(void **state) {
     Composition *parent = Composable_parent((Composable *) it);
     assert_ptr_equal(parent, co);
 
-    Composition *co2 = Composition_create(NULL, NULL, NULL, NULL, NULL);
+    Composition *co2 = Composition_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(co2);
 
     Composition_remove_child(co, 0, errorStatus);
@@ -274,8 +280,9 @@ static void otio_composition_parent_move_child_test(void **state) {
 }
 
 static void otio_composition_remove_actually_removes_test(void **state) {
-    Track *track = Track_create(NULL, NULL, NULL, NULL);
-    Clip *clip = Clip_create(NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *track = Track_create(NULL, nullRange, NULL, NULL);
+    Clip *clip = Clip_create(NULL, NULL, nullRange, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Composition_append_child(
             (Composition *) track, (Composable *) clip, errorStatus);
@@ -299,7 +306,8 @@ static void otio_composition_remove_actually_removes_test(void **state) {
 }
 
 static void otio_stack_constructor_test(void **state) {
-    Stack *st = Stack_create("test", NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *st = Stack_create("test", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(st);
     assert_string_equal(SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) st),
@@ -309,9 +317,10 @@ static void otio_stack_constructor_test(void **state) {
 }
 
 static void otio_stack_serialize_test(void **state) {
-    Stack *st = Stack_create("test", NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *st = Stack_create("test", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(st);
-    Clip *clip = Clip_create("testClip", NULL, NULL, NULL);
+    Clip *clip = Clip_create("testClip", NULL, nullRange, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     bool insertOK = Composition_insert_child(
             (Composition *) st, 0, (Composable *) clip, errorStatus);
@@ -340,9 +349,10 @@ static void otio_stack_serialize_test(void **state) {
 }
 
 static void otio_stack_trim_child_range_test(void **state) {
-    Track *tr = Track_create("foo", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *tr = Track_create("foo", nullRange, NULL, NULL);
     OTIO_RETAIN(tr);
-    Stack *st = Stack_create("foo", NULL, NULL, NULL, NULL);
+    Stack *st = Stack_create("foo", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(st);
 
     Composition *comp[] = {(Composition *) tr, (Composition *) st};
@@ -350,86 +360,64 @@ static void otio_stack_trim_child_range_test(void **state) {
     for (int i = 0; i < sizeof(comp) / sizeof(comp[0]); i++) {
         Composition *co = comp[i];
 
-        RationalTime *start_time = RationalTime_create(100, 24);
-        RationalTime *duration = RationalTime_create(50, 24);
-        TimeRange *tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
+        RationalTime start_time = RationalTime_create(100, 24);
+        RationalTime duration = RationalTime_create(50, 24);
+        OptionalTimeRange tr = OptionalTimeRange_create(
+                TimeRange_create_with_start_time_and_duration(start_time, duration));
         Item_set_source_range((Item *) co, tr);
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
+
         start_time = RationalTime_create(110, 24);
         duration = RationalTime_create(30, 24);
-        TimeRange *r = TimeRange_create_with_start_time_and_duration(start_time, duration);
-        TimeRange *st_trim_child_range = Composition_trim_child_range(co, r);
-        assert_true(TimeRange_equal(st_trim_child_range, r));
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
-        TimeRange_destroy(tr);
-        TimeRange_destroy(r);
-        TimeRange_destroy(st_trim_child_range);
+        TimeRange r = TimeRange_create_with_start_time_and_duration(start_time, duration);
+        OptionalTimeRange st_trim_child_range = Composition_trim_child_range(co, r);
+        assert_true(OptionalTimeRange_valid(st_trim_child_range));
+        assert_true(TimeRange_equal(OptionalTimeRange_value(st_trim_child_range), r));
 
         start_time = RationalTime_create(0, 24);
         duration = RationalTime_create(30, 24);
         r = TimeRange_create_with_start_time_and_duration(start_time, duration);
         st_trim_child_range = Composition_trim_child_range(co, r);
-        assert_null(st_trim_child_range);
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
-        TimeRange_destroy(r);
-        TimeRange_destroy(st_trim_child_range);
+        assert_false(OptionalTimeRange_valid(st_trim_child_range));
 
         start_time = RationalTime_create(1000, 24);
         duration = RationalTime_create(30, 24);
         r = TimeRange_create_with_start_time_and_duration(start_time, duration);
         st_trim_child_range = Composition_trim_child_range(co, r);
-        assert_null(st_trim_child_range);
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
-        TimeRange_destroy(r);
-        TimeRange_destroy(st_trim_child_range);
+        assert_false(OptionalTimeRange_valid(st_trim_child_range));
 
         start_time = RationalTime_create(90, 24);
         duration = RationalTime_create(30, 24);
         r = TimeRange_create_with_start_time_and_duration(start_time, duration);
         st_trim_child_range = Composition_trim_child_range(co, r);
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
+
         start_time = RationalTime_create(100, 24);
         duration = RationalTime_create(20, 24);
-        tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
-        assert_true(TimeRange_equal(tr, st_trim_child_range));
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
-        TimeRange_destroy(tr);
-        TimeRange_destroy(r);
-        TimeRange_destroy(st_trim_child_range);
+        tr = OptionalTimeRange_create(
+                TimeRange_create_with_start_time_and_duration(start_time, duration));
+        assert_true(TimeRange_equal(OptionalTimeRange_value(tr),
+                                    OptionalTimeRange_value(st_trim_child_range)));
 
         start_time = RationalTime_create(110, 24);
         duration = RationalTime_create(50, 24);
         r = TimeRange_create_with_start_time_and_duration(start_time, duration);
         st_trim_child_range = Composition_trim_child_range(co, r);
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
+
         start_time = RationalTime_create(110, 24);
         duration = RationalTime_create(40, 24);
-        tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
-        assert_true(TimeRange_equal(tr, st_trim_child_range));
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
-        TimeRange_destroy(tr);
-        TimeRange_destroy(r);
-        TimeRange_destroy(st_trim_child_range);
+        tr = OptionalTimeRange_create(
+                TimeRange_create_with_start_time_and_duration(start_time, duration));
+        assert_true(TimeRange_equal(OptionalTimeRange_value(tr),
+                                    OptionalTimeRange_value(st_trim_child_range)));
 
         start_time = RationalTime_create(90, 24);
         duration = RationalTime_create(1000, 24);
         r = TimeRange_create_with_start_time_and_duration(start_time, duration);
         st_trim_child_range = Composition_trim_child_range(co, r);
-        RationalTime_destroy(start_time);
-        RationalTime_destroy(duration);
-        TimeRange *co_source_range = Item_source_range((Item *) co);
-        assert_true(TimeRange_equal(co_source_range, st_trim_child_range));
-        TimeRange_destroy(r);
-        TimeRange_destroy(st_trim_child_range);
-        TimeRange_destroy(co_source_range);
+
+        OptionalTimeRange co_source_range = Item_source_range((Item *) co);
+        assert_true(OptionalTimeRange_valid(co_source_range));
+        assert_true(TimeRange_equal(OptionalTimeRange_value(co_source_range),
+                                    OptionalTimeRange_value(st_trim_child_range)));
     }
     OTIO_RELEASE(tr);
     tr = NULL;
@@ -438,32 +426,28 @@ static void otio_stack_trim_child_range_test(void **state) {
 }
 
 static void otio_stack_range_of_child_test(void **state) {
-    RationalTime *start_time = RationalTime_create(100, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *source_range = TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(100, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    OptionalTimeRange source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, source_range, NULL);
     OTIO_RETAIN(clip1);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    source_range = TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, source_range, NULL);
     OTIO_RETAIN(clip2);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(50, 24);
-    source_range = TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, source_range, NULL);
     OTIO_RETAIN(clip3);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
 
-    Stack *st = Stack_create("foo", NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *st = Stack_create("foo", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(st);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Composition_insert_child(
@@ -474,54 +458,30 @@ static void otio_stack_range_of_child_test(void **state) {
             (Composition *) st, 2, (Composable *) clip3, errorStatus);
 
     /** stack should be as long as longest child */
-    RationalTime *length = RationalTime_create(50, 24);
-    RationalTime *st_duration = Composable_duration((Composable *) st, errorStatus);
+    RationalTime length = RationalTime_create(50, 24);
+    RationalTime st_duration = Composable_duration((Composable *) st, errorStatus);
     assert_true(RationalTime_equal(length, st_duration));
-    RationalTime_destroy(length);
-    RationalTime_destroy(st_duration);
 
-    RationalTime *zero_time = RationalTime_create(0, 24);
+    RationalTime zero_time = RationalTime_create(0, 24);
     /** stacked items should all start at time zero */
-    TimeRange *range_at_0 = Stack_range_of_child_at_index(st, 0, errorStatus);
-    TimeRange *range_at_1 = Stack_range_of_child_at_index(st, 1, errorStatus);
-    TimeRange *range_at_2 = Stack_range_of_child_at_index(st, 2, errorStatus);
-    RationalTime *start0 = TimeRange_start_time(range_at_0);
-    RationalTime *start1 = TimeRange_start_time(range_at_1);
-    RationalTime *start2 = TimeRange_start_time(range_at_2);
+    TimeRange range_at_0 = Stack_range_of_child_at_index(st, 0, errorStatus);
+    TimeRange range_at_1 = Stack_range_of_child_at_index(st, 1, errorStatus);
+    TimeRange range_at_2 = Stack_range_of_child_at_index(st, 2, errorStatus);
+    RationalTime start0 = TimeRange_start_time(range_at_0);
+    RationalTime start1 = TimeRange_start_time(range_at_1);
+    RationalTime start2 = TimeRange_start_time(range_at_2);
     assert_true(RationalTime_equal(start0, zero_time));
     assert_true(RationalTime_equal(start1, zero_time));
     assert_true(RationalTime_equal(start2, zero_time));
-    RationalTime_destroy(start0);
-    start0 = NULL;
-    RationalTime_destroy(start1);
-    start1 = NULL;
-    RationalTime_destroy(start2);
-    start2 = NULL;
-    RationalTime_destroy(zero_time);
-    zero_time = NULL;
 
-    RationalTime *duration0 = TimeRange_duration(range_at_0);
-    RationalTime *duration1 = TimeRange_duration(range_at_1);
-    RationalTime *duration2 = TimeRange_duration(range_at_2);
-    RationalTime *duration_time = RationalTime_create(50, 24);
+    RationalTime duration0 = TimeRange_duration(range_at_0);
+    RationalTime duration1 = TimeRange_duration(range_at_1);
+    RationalTime duration2 = TimeRange_duration(range_at_2);
+    RationalTime duration_time = RationalTime_create(50, 24);
     assert_true(RationalTime_equal(duration0, duration_time));
     assert_true(RationalTime_equal(duration1, duration_time));
     assert_true(RationalTime_equal(duration2, duration_time));
 
-    RationalTime_destroy(duration0);
-    duration0 = NULL;
-    RationalTime_destroy(duration1);
-    duration1 = NULL;
-    RationalTime_destroy(duration2);
-    duration2 = NULL;
-    RationalTime_destroy(duration_time);
-    duration_time = NULL;
-    TimeRange_destroy(range_at_0);
-    range_at_0 = NULL;
-    TimeRange_destroy(range_at_1);
-    range_at_1 = NULL;
-    TimeRange_destroy(range_at_2);
-    range_at_2 = NULL;
     OTIO_RELEASE(clip1);
     OTIO_RELEASE(clip2);
     OTIO_RELEASE(clip3);
@@ -530,37 +490,31 @@ static void otio_stack_range_of_child_test(void **state) {
 }
 
 static void otio_stack_range_of_child_with_duration_test(void **state) {
-    RationalTime *start_time = RationalTime_create(100, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(100, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    OptionalTimeRange st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
 
     start_time = RationalTime_create(5, 24);
     duration = RationalTime_create(5, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
 
-    Stack *st = Stack_create("foo", NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *st = Stack_create("foo", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(st);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Composition_insert_child(
@@ -571,9 +525,6 @@ static void otio_stack_range_of_child_with_duration_test(void **state) {
             (Composition *) st, 2, (Composable *) clip3, errorStatus);
 
     Item_set_source_range((Item *) st, st_sourcerange);
-    TimeRange_destroy(st_sourcerange);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
 
     /** range always returns the pre-trimmed range.  To get the post-trim
      * range, call .trimmed_range()
@@ -585,38 +536,30 @@ static void otio_stack_range_of_child_with_duration_test(void **state) {
     RetainerComposable *retainerComposable =
             ComposableRetainerVectorIterator_value(it);
     Composable *st_0 = RetainerComposable_take_value(retainerComposable);
-    TimeRange *child_range = Composition_range_of_child((Composition *) st, st_0, errorStatus);
+    TimeRange child_range = Composition_range_of_child((Composition *) st, st_0, errorStatus);
     start_time = RationalTime_create(0, 24);
     duration = RationalTime_create(50, 24);
-    TimeRange *time_range =
+    TimeRange time_range =
             TimeRange_create_with_start_time_and_duration(start_time, duration);
     assert_true(TimeRange_equal(time_range, child_range));
-    TimeRange_destroy(time_range);
-    TimeRange_destroy(child_range);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
 
-    RationalTime *rt = RationalTime_create(25, 24);
-    RationalTime *rt2 = RationalTime_create(125, 24);
-    RationalTime *st_transformed_time =
+    RationalTime rt = RationalTime_create(25, 24);
+    RationalTime rt2 = RationalTime_create(125, 24);
+    RationalTime st_transformed_time =
             Item_transformed_time((Item *) st, rt, (Item *) st_0, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, rt2));
-    RationalTime_destroy(st_transformed_time);
 
     st_transformed_time =
             Item_transformed_time((Item *) st_0, rt2, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, rt));
-    RationalTime_destroy(st_transformed_time);
-    RationalTime_destroy(rt);
-    RationalTime_destroy(rt2);
 
     /** trimmed_ functions take into account the source_range */
-    TimeRange *st_trimmed_range_child_0 =
-            Stack_trimmed_range_of_child_at_index(st, 0, errorStatus);
+    OptionalTimeRange st_trimmed_range_child_0 = OptionalTimeRange_create(
+            Stack_trimmed_range_of_child_at_index(st, 0, errorStatus));
     st_sourcerange = Item_source_range((Item *) st);
-    assert_true(TimeRange_equal(st_trimmed_range_child_0, st_sourcerange));
-    TimeRange_destroy(st_trimmed_range_child_0);
-    TimeRange_destroy(st_sourcerange);
+    assert_true(OptionalTimeRange_valid(st_sourcerange));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(st_trimmed_range_child_0),
+                                OptionalTimeRange_value(st_sourcerange)));
 
     st_trimmed_range_child_0 = Composition_trimmed_range_of_child(
             (Composition *) st, (Composable *) st_0, errorStatus);
@@ -624,31 +567,26 @@ static void otio_stack_range_of_child_with_duration_test(void **state) {
     duration = RationalTime_create(5, 24);
     time_range =
             TimeRange_create_with_start_time_and_duration(start_time, duration);
-    assert_true(TimeRange_equal(st_trimmed_range_child_0, time_range));
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(time_range);
+    assert_true(OptionalTimeRange_valid(st_trimmed_range_child_0));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(st_trimmed_range_child_0), time_range));
 
     /** get the trimmed range in the parent */
-    TimeRange *st_0_trimmed_range_in_parent =
+    OptionalTimeRange st_0_trimmed_range_in_parent =
             Item_trimmed_range_in_parent((Item *) st_0, errorStatus);
-    assert_true(TimeRange_equal(
-            st_0_trimmed_range_in_parent, st_trimmed_range_child_0));
-    TimeRange_destroy(st_0_trimmed_range_in_parent);
+    assert_true(OptionalTimeRange_valid(st_0_trimmed_range_in_parent));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(st_0_trimmed_range_in_parent),
+                                OptionalTimeRange_value(st_trimmed_range_child_0)));
 
-    TimeRange_destroy(st_trimmed_range_child_0);
     ComposableRetainerVector_destroy(composableRetainerVector);
     ComposableRetainerVectorIterator_destroy(it);
     RetainerComposable_managed_destroy(retainerComposable);
 
-    Clip *errorClip = Clip_create(NULL, NULL, NULL, NULL);
+    Clip *errorClip = Clip_create(NULL, NULL, nullRange, NULL);
     OTIO_RETAIN(errorClip);
-    TimeRange *errorTime =
+    OptionalTimeRange errorTime =
             Item_trimmed_range_in_parent((Item *) errorClip, errorStatus);
     OTIO_ErrorStatus_Outcome outcome = OTIOErrorStatus_get_outcome(errorStatus);
     assert_int_equal(outcome, 18);
-    TimeRange_destroy(errorTime);
-    errorTime = NULL;
     OTIO_RELEASE(errorClip);
     errorClip = NULL;
 
@@ -659,36 +597,31 @@ static void otio_stack_range_of_child_with_duration_test(void **state) {
 }
 
 static void otio_stack_transformed_time_test(void **state) {
-    RationalTime *start_time = RationalTime_create(100, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(100, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    OptionalTimeRange st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
 
     start_time = RationalTime_create(5, 24);
     duration = RationalTime_create(5, 24);
-    st_sourcerange = TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
 
-    Stack *st = Stack_create("foo", NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Stack *st = Stack_create("foo", nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(st);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Composition_insert_child(
@@ -699,9 +632,6 @@ static void otio_stack_transformed_time_test(void **state) {
             (Composition *) st, 2, (Composable *) clip3, errorStatus);
 
     Item_set_source_range((Item *) st, st_sourcerange);
-    TimeRange_destroy(st_sourcerange);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
 
     ComposableRetainerVector *composableRetainerVector =
             Composition_children((Composition *) st);
@@ -726,118 +656,81 @@ static void otio_stack_transformed_time_test(void **state) {
 
     ComposableRetainerVector_destroy(composableRetainerVector);
 
-    RationalTime *test_time = RationalTime_create(0, 24);
-    RationalTime *test_time2 = RationalTime_create(100, 24);
-    RationalTime *st_transformed_time = Item_transformed_time(
+    RationalTime test_time = RationalTime_create(0, 24);
+    RationalTime test_time2 = RationalTime_create(100, 24);
+    RationalTime st_transformed_time = Item_transformed_time(
             (Item *) st, test_time, (Item *) clip1, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     /** ensure that transformed_time does not edit in place */
-    RationalTime *verify_test_time = RationalTime_create(0, 24);
+    RationalTime verify_test_time = RationalTime_create(0, 24);
     assert_true(RationalTime_equal(test_time, verify_test_time));
-    RationalTime_destroy(verify_test_time);
-    RationalTime_destroy(test_time);
 
     test_time = RationalTime_create(0, 24);
     test_time2 = RationalTime_create(101, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) st, test_time, (Item *) clip2, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(0, 24);
     test_time2 = RationalTime_create(102, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) st, test_time, (Item *) clip3, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(50, 24);
     test_time2 = RationalTime_create(150, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) st, test_time, (Item *) clip1, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(50, 24);
     test_time2 = RationalTime_create(151, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) st, test_time, (Item *) clip2, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(50, 24);
     test_time2 = RationalTime_create(152, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) st, test_time, (Item *) clip3, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(100, 24);
     test_time2 = RationalTime_create(0, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) clip1, test_time, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(101, 24);
     test_time2 = RationalTime_create(0, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) clip2, test_time, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(102, 24);
     test_time2 = RationalTime_create(0, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) clip3, test_time, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(150, 24);
     test_time2 = RationalTime_create(50, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) clip1, test_time, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(151, 24);
     test_time2 = RationalTime_create(50, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) clip2, test_time, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     test_time = RationalTime_create(152, 24);
     test_time2 = RationalTime_create(50, 24);
     st_transformed_time = Item_transformed_time(
             (Item *) clip3, test_time, (Item *) st, errorStatus);
     assert_true(RationalTime_equal(st_transformed_time, test_time2));
-    RationalTime_destroy(test_time);
-    RationalTime_destroy(test_time2);
-    RationalTime_destroy(st_transformed_time);
 
     OTIO_RELEASE(st);
     st = NULL;
@@ -846,7 +739,8 @@ static void otio_stack_transformed_time_test(void **state) {
 }
 
 static void otio_track_serialize_test(void **state) {
-    Track *sq = Track_create("foo", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create("foo", nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Any *sq_any =
@@ -872,23 +766,23 @@ static void otio_track_serialize_test(void **state) {
 }
 
 static void otio_track_instancing_test(void **state) {
-    RationalTime *length = RationalTime_create(5, 1);
-    RationalTime *zero_time = RationalTime_create(0, 1);
-    TimeRange *tr =
-            TimeRange_create_with_start_time_and_duration(zero_time, length);
+    RationalTime length = RationalTime_create(5, 1);
+    RationalTime zero_time = RationalTime_create(0, 1);
+    OptionalTimeRange tr = OptionalTimeRange_create(TimeRange_create_with_start_time_and_duration(zero_time, length));
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
     Item *it = Item_create(NULL, tr, NULL, NULL, NULL);
-    Track *sq = Track_create(NULL, NULL, NULL, NULL);
+    Track *sq = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     bool insertOK = Composition_insert_child(
             (Composition *) sq, 0, (Composable *) it, errorStatus);
     assert_true(insertOK);
-    TimeRange *sq_range_of_child_0 =
+    TimeRange sq_range_of_child_0 =
             Track_range_of_child_at_index(sq, 0, errorStatus);
-    assert_true(TimeRange_equal(sq_range_of_child_0, tr));
+    assert_true(TimeRange_equal(sq_range_of_child_0, OptionalTimeRange_value(tr)));
 
     /** Can't put item on a composition if it's already in one */
-    Track *test_track = Track_create(NULL, NULL, NULL, NULL);
+    Track *test_track = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(test_track);
     insertOK = Composition_insert_child(
             (Composition *) test_track, 0, (Composable *) it, errorStatus);
@@ -901,7 +795,7 @@ static void otio_track_instancing_test(void **state) {
     ComposableVector_push_back(composableVector, (Composable *) it);
     ComposableVector_push_back(composableVector, (Composable *) it);
     ComposableVector_push_back(composableVector, (Composable *) it);
-    Track *test_track2 = Track_create(NULL, NULL, NULL, NULL);
+    Track *test_track2 = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(test_track2);
     insertOK = Composition_set_children((Composition *) test_track2, composableVector, errorStatus);
     assert_false(insertOK);
@@ -930,18 +824,13 @@ static void otio_track_instancing_test(void **state) {
 
     OTIO_RELEASE(sq);
     sq = NULL;
-    RationalTime_destroy(length);
-    length = NULL;
-    RationalTime_destroy(zero_time);
-    zero_time = NULL;
-    TimeRange_destroy(tr);
-    tr = NULL;
 }
 
 static void otio_track_delete_parent_container_test(void **state) {
     /** deleting the parent container should null out the parent pointer */
-    Item *it = Item_create(NULL, NULL, NULL, NULL, NULL);
-    Track *sq = Track_create(NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Item *it = Item_create(NULL, nullRange, NULL, NULL, NULL);
+    Track *sq = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     bool insertOK = Composition_insert_child(
@@ -1014,20 +903,20 @@ static void otio_track_delete_parent_container_test(void **state) {
 //}
 
 static void otio_track_range_test(void **state) {
-    RationalTime *length = RationalTime_create(5, 1);
-    RationalTime *zero_time = RationalTime_create(0, 1);
-    TimeRange *tr =
-            TimeRange_create_with_start_time_and_duration(zero_time, length);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    RationalTime length = RationalTime_create(5, 1);
+    RationalTime zero_time = RationalTime_create(0, 1);
+    OptionalTimeRange tr = OptionalTimeRange_create(TimeRange_create_with_start_time_and_duration(zero_time, length));
     Item *it = Item_create(NULL, tr, NULL, NULL, NULL);
-    Track *sq = Track_create(NULL, NULL, NULL, NULL);
+    Track *sq = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     bool insertOK = Composition_append_child(
             (Composition *) sq, (Composable *) it, errorStatus);
     assert_true(insertOK);
-    TimeRange *sq_range_child_0 =
+    TimeRange sq_range_child_0 =
             Track_range_of_child_at_index(sq, 0, errorStatus);
-    assert_true(TimeRange_equal(sq_range_child_0, tr));
+    assert_true(TimeRange_equal(sq_range_child_0, OptionalTimeRange_value(tr)));
 
     Item *it2 = Item_create(NULL, tr, NULL, NULL, NULL);
     Item *it3 = Item_create(NULL, tr, NULL, NULL, NULL);
@@ -1042,64 +931,47 @@ static void otio_track_range_test(void **state) {
             (Composition *) sq, (Composable *) it4, errorStatus);
     assert_true(insertOK);
 
-    TimeRange_destroy(sq_range_child_0);
-    TimeRange_destroy(tr);
-    RationalTime_destroy(length);
-    RationalTime_destroy(zero_time);
-
-    TimeRange *sq_range_child_1 =
+    TimeRange sq_range_child_1 =
             Track_range_of_child_at_index(sq, 1, errorStatus);
-    RationalTime *start_time = RationalTime_create(5, 1);
-    RationalTime *duration = RationalTime_create(5, 1);
-    tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
-    assert_true(TimeRange_equal(tr, sq_range_child_1));
-    TimeRange_destroy(sq_range_child_1);
-    TimeRange_destroy(tr);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
+    RationalTime start_time = RationalTime_create(5, 1);
+    RationalTime duration = RationalTime_create(5, 1);
+    tr = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(tr), sq_range_child_1));
 
     sq_range_child_0 = Track_range_of_child_at_index(sq, 0, errorStatus);
     start_time = RationalTime_create(0, 1);
     duration = RationalTime_create(5, 1);
-    tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
-    assert_true(TimeRange_equal(tr, sq_range_child_0));
-    TimeRange_destroy(sq_range_child_0);
-    TimeRange_destroy(tr);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
+    tr = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(tr), sq_range_child_0));
 
-    TimeRange *sq_range_child_minus_1 =
+    TimeRange sq_range_child_minus_1 =
             Track_range_of_child_at_index(sq, -1, errorStatus);
     start_time = RationalTime_create(15, 1);
     duration = RationalTime_create(5, 1);
-    tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
-    assert_true(TimeRange_equal(tr, sq_range_child_minus_1));
-    TimeRange_destroy(sq_range_child_minus_1);
-    TimeRange_destroy(tr);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
+    tr = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(tr), sq_range_child_minus_1));
 
-    TimeRange *sq_range_child_minus_error =
+    TimeRange sq_range_child_minus_error =
             Track_range_of_child_at_index(sq, 11, errorStatus);
     OTIO_ErrorStatus_Outcome outcome = OTIOErrorStatus_get_outcome(errorStatus);
     assert_int_equal(outcome, 13);
-    TimeRange_destroy(sq_range_child_minus_error);
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = OTIOErrorStatus_create();
 
-    RationalTime *sq_duration = Item_duration((Item *) sq, errorStatus);
-    RationalTime *duration_compare = RationalTime_create(20, 1);
+    RationalTime sq_duration = Item_duration((Item *) sq, errorStatus);
+    RationalTime duration_compare = RationalTime_create(20, 1);
     assert_true(RationalTime_equal(sq_duration, duration_compare));
-    RationalTime_destroy(sq_duration);
-    RationalTime_destroy(duration_compare);
 
     /** add a transition to either side */
-    TimeRange *range_of_child_3 =
+    TimeRange range_of_child_3 =
             Track_range_of_child_at_index(sq, 3, errorStatus);
-    RationalTime *in_offset = RationalTime_create(10, 24);
-    RationalTime *out_offset = RationalTime_create(12, 24);
-    TimeRange *range_of_item =
+    OptionalRationalTime in_offset = OptionalRationalTime_create(RationalTime_create(10, 24));
+    OptionalRationalTime out_offset = OptionalRationalTime_create(RationalTime_create(12, 24));
+    TimeRange range_of_item =
             Track_range_of_child_at_index(sq, 3, errorStatus);
     Transition *trx1 =
             Transition_create(NULL, NULL, in_offset, out_offset, NULL);
@@ -1116,72 +988,55 @@ static void otio_track_range_test(void **state) {
     insertOK = Composition_append_child(
             (Composition *) sq, (Composable *) trx3, errorStatus);
     assert_true(insertOK);
-    TimeRange_destroy(range_of_item);
 
     /** range of Transition */
     start_time = RationalTime_create(230, 24);
     duration = RationalTime_create(22, 24);
-    tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
+    tr = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     range_of_item = Track_range_of_child_at_index(sq, 3, errorStatus);
-    assert_true(TimeRange_equal(tr, range_of_item));
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(tr);
-    TimeRange_destroy(range_of_item);
+    assert_true(TimeRange_equal(OptionalTimeRange_value(tr), range_of_item));
 
     start_time = RationalTime_create(470, 24);
     duration = RationalTime_create(22, 24);
-    tr = TimeRange_create_with_start_time_and_duration(start_time, duration);
+    tr = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     range_of_item = Track_range_of_child_at_index(sq, -1, errorStatus);
-    assert_true(TimeRange_equal(tr, range_of_item));
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(tr);
-    TimeRange_destroy(range_of_item);
+    assert_true(TimeRange_equal(OptionalTimeRange_value(tr), range_of_item));
 
-    tr = Track_range_of_child_at_index(sq, 5, errorStatus);
-    assert_true(TimeRange_equal(tr, range_of_child_3));
-    TimeRange_destroy(tr);
-    TimeRange_destroy(range_of_child_3);
+    tr = OptionalTimeRange_create(Track_range_of_child_at_index(sq, 5, errorStatus));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(tr), range_of_child_3));
 
     sq_duration = Item_duration((Item *) sq, errorStatus);
     /** duration_compare = length x 4 + in_offset + out_offset */
     duration_compare = RationalTime_create(20 + 22.0 / 24.0, 1);
     assert_true(RationalTime_equal(sq_duration, duration_compare));
-    RationalTime_destroy(sq_duration);
-    RationalTime_destroy(duration_compare);
 
     OTIO_RELEASE(sq);
     sq = NULL;
 }
 
 static void otio_track_range_of_child_test(void **state) {
-    Track *sq = Track_create("foo", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create("foo", nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
-    RationalTime *start_time = RationalTime_create(100, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(100, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    OptionalTimeRange st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -1196,25 +1051,19 @@ static void otio_track_range_of_child_test(void **state) {
     assert_true(appendOK);
 
     /** The Track should be as long as the children summed up */
-    RationalTime *sq_duration = Item_duration((Item *) sq, errorStatus);
-    RationalTime *duration_compare = RationalTime_create(150, 24);
+    RationalTime sq_duration = Item_duration((Item *) sq, errorStatus);
+    RationalTime duration_compare = RationalTime_create(150, 24);
     assert_true(RationalTime_equal(sq_duration, duration_compare));
-    RationalTime_destroy(sq_duration);
-    RationalTime_destroy(duration_compare);
 
     /** Sequenced items should all land end-to-end */
     duration_compare = RationalTime_create(50, 24);
-    TimeRange *range_of_child_index =
+    TimeRange range_of_child_index =
             Track_range_of_child_at_index(sq, 0, errorStatus);
-    RationalTime *range_time = TimeRange_start_time(range_of_child_index);
-    RationalTime *range_duration = TimeRange_duration(range_of_child_index);
-    RationalTime *time_compare = RationalTime_create(0, 1);
+    RationalTime range_time = TimeRange_start_time(range_of_child_index);
+    RationalTime range_duration = TimeRange_duration(range_of_child_index);
+    RationalTime time_compare = RationalTime_create(0, 1);
     assert_true(RationalTime_equal(range_time, time_compare));
     assert_true(RationalTime_equal(duration_compare, range_duration));
-    TimeRange_destroy(range_of_child_index);
-    RationalTime_destroy(range_time);
-    RationalTime_destroy(range_duration);
-    RationalTime_destroy(time_compare);
 
     range_of_child_index = Track_range_of_child_at_index(sq, 1, errorStatus);
     range_time = TimeRange_start_time(range_of_child_index);
@@ -1222,10 +1071,6 @@ static void otio_track_range_of_child_test(void **state) {
     time_compare = RationalTime_create(50, 24);
     assert_true(RationalTime_equal(range_time, time_compare));
     assert_true(RationalTime_equal(duration_compare, range_duration));
-    TimeRange_destroy(range_of_child_index);
-    RationalTime_destroy(range_time);
-    RationalTime_destroy(range_duration);
-    RationalTime_destroy(time_compare);
 
     range_of_child_index = Track_range_of_child_at_index(sq, 2, errorStatus);
     range_time = TimeRange_start_time(range_of_child_index);
@@ -1233,10 +1078,6 @@ static void otio_track_range_of_child_test(void **state) {
     time_compare = RationalTime_create(100, 24);
     assert_true(RationalTime_equal(range_time, time_compare));
     assert_true(RationalTime_equal(duration_compare, range_duration));
-    RationalTime_destroy(range_time);
-    RationalTime_destroy(range_duration);
-    RationalTime_destroy(time_compare);
-    RationalTime_destroy(duration_compare);
 
     ComposableRetainerVector *composableRetainerVector =
             Composition_children((Composition *) sq);
@@ -1244,37 +1085,29 @@ static void otio_track_range_of_child_test(void **state) {
             ComposableRetainerVector_at(composableRetainerVector, 2);
     Composable *retainerComposableValue =
             RetainerComposable_take_value(retainerComposable);
-    TimeRange *range_compare = Composition_range_of_child(
+    TimeRange range_compare = Composition_range_of_child(
             (Composition *) sq, retainerComposableValue, errorStatus);
     assert_true(TimeRange_equal(range_compare, range_of_child_index));
-    TimeRange_destroy(range_of_child_index);
-    TimeRange_destroy(range_compare);
 
     /** should trim 5 frames off the front, and 5 frames off the back */
     start_time = RationalTime_create(5, 24);
     duration = RationalTime_create(140, 24);
-    TimeRange *sq_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    OptionalTimeRange sq_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Item_set_source_range((Item *) sq, sq_sourcerange);
-    TimeRange *sq_trimmed_range_of_child_index =
+    TimeRange sq_trimmed_range_of_child_index =
             Track_trimmed_range_of_child_at_index(sq, 0, errorStatus);
-    RationalTime_destroy(duration);
+
     duration = RationalTime_create(45, 24);
     range_compare =
             TimeRange_create_with_start_time_and_duration(start_time, duration);
-    RationalTime_destroy(duration);
-    RationalTime_destroy(start_time);
+
     assert_true(TimeRange_equal(range_compare, sq_trimmed_range_of_child_index));
-    TimeRange_destroy(range_compare);
-    TimeRange_destroy(sq_trimmed_range_of_child_index);
-    TimeRange_destroy(sq_sourcerange);
 
     sq_trimmed_range_of_child_index =
             Track_trimmed_range_of_child_at_index(sq, 1, errorStatus);
     range_compare = Track_range_of_child_at_index(sq, 1, errorStatus);
     assert_true(TimeRange_equal(range_compare, sq_trimmed_range_of_child_index));
-    TimeRange_destroy(range_compare);
-    TimeRange_destroy(sq_trimmed_range_of_child_index);
 
     sq_trimmed_range_of_child_index =
             Track_trimmed_range_of_child_at_index(sq, 2, errorStatus);
@@ -1283,22 +1116,19 @@ static void otio_track_range_of_child_test(void **state) {
     range_compare =
             TimeRange_create_with_start_time_and_duration(start_time, duration);
     assert_true(TimeRange_equal(range_compare, sq_trimmed_range_of_child_index));
-    TimeRange_destroy(range_compare);
-    TimeRange_destroy(sq_trimmed_range_of_child_index);
-    RationalTime_destroy(duration);
-    RationalTime_destroy(start_time);
 
     /** get the trimmed range in the parent */
     retainerComposable =
             ComposableRetainerVector_at(composableRetainerVector, 0);
     retainerComposableValue = RetainerComposable_take_value(retainerComposable);
-    TimeRange *trimmed_range_in_parent = Item_trimmed_range_in_parent(
+    OptionalTimeRange trimmed_range_in_parent = Item_trimmed_range_in_parent(
             (Item *) retainerComposableValue, errorStatus);
-    TimeRange *trimmed_range_of_child = Composition_trimmed_range_of_child(
+    OptionalTimeRange trimmed_range_of_child = Composition_trimmed_range_of_child(
             (Composition *) sq, retainerComposableValue, errorStatus);
-    assert_true(TimeRange_equal(trimmed_range_in_parent, trimmed_range_of_child));
-    TimeRange_destroy(trimmed_range_of_child);
-    TimeRange_destroy(trimmed_range_in_parent);
+    assert_true(OptionalTimeRange_valid(trimmed_range_in_parent));
+    assert_true(OptionalTimeRange_valid(trimmed_range_of_child));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(trimmed_range_in_parent),
+                                OptionalTimeRange_value(trimmed_range_of_child)));
 
     ComposableRetainerVector_destroy(composableRetainerVector);
     composableRetainerVector = NULL;
@@ -1309,31 +1139,24 @@ static void otio_track_range_of_child_test(void **state) {
 }
 
 static void otio_track_range_trimmed_out_test(void **state) {
-    RationalTime *start_time = RationalTime_create(60, 24);
-    RationalTime *duration = RationalTime_create(10, 24);
-    TimeRange *source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(60, 24);
+    RationalTime duration = RationalTime_create(10, 24);
+    OptionalTimeRange source_range =
+            OptionalTimeRange_create(TimeRange_create_with_start_time_and_duration(start_time, duration));
     Track *sq = Track_create("top_track", source_range, NULL, NULL);
     OTIO_RETAIN(sq);
-    TimeRange_destroy(source_range);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
+
     start_time = RationalTime_create(100, 24);
     duration = RationalTime_create(50, 24);
-    TimeRange *st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    OptionalTimeRange st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -1347,28 +1170,25 @@ static void otio_track_range_trimmed_out_test(void **state) {
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = OTIOErrorStatus_create();
     /** should be trimmed out, at the moment, the sentinel for that is None */
-    TimeRange *trimmed_range_of_child_index =
+    TimeRange trimmed_range_of_child_index =
             Track_trimmed_range_of_child_at_index(sq, 0, errorStatus);
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 21);
-    TimeRange_destroy(trimmed_range_of_child_index);
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = OTIOErrorStatus_create();
 
-    TimeRange *not_nothing =
+    TimeRange not_nothing =
             Track_trimmed_range_of_child_at_index(sq, 1, errorStatus);
     source_range = Item_source_range((Item *) sq);
-    assert_true(TimeRange_equal(not_nothing, source_range));
-    TimeRange_destroy(not_nothing);
-    TimeRange_destroy(source_range);
+    assert_true(OptionalTimeRange_valid(source_range));
+    assert_true(TimeRange_equal(not_nothing, OptionalTimeRange_value(source_range)));
 
     /** should trim out second clip */
     start_time = RationalTime_create(0, 24);
     duration = RationalTime_create(10, 24);
-    source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Item_set_source_range((Item *) sq, source_range);
-    TimeRange_destroy(source_range);
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = OTIOErrorStatus_create();
@@ -1376,16 +1196,14 @@ static void otio_track_range_trimmed_out_test(void **state) {
     trimmed_range_of_child_index =
             Track_trimmed_range_of_child_at_index(sq, 1, errorStatus);
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 21);
-    TimeRange_destroy(trimmed_range_of_child_index);
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = OTIOErrorStatus_create();
 
     not_nothing = Track_trimmed_range_of_child_at_index(sq, 0, errorStatus);
     source_range = Item_source_range((Item *) sq);
-    assert_true(TimeRange_equal(not_nothing, source_range));
-    TimeRange_destroy(not_nothing);
-    TimeRange_destroy(source_range);
+    assert_true(OptionalTimeRange_valid(source_range));
+    assert_true(TimeRange_equal(not_nothing, OptionalTimeRange_value(source_range)));
 
     OTIO_RELEASE(sq);
     sq = NULL;
@@ -1394,32 +1212,26 @@ static void otio_track_range_trimmed_out_test(void **state) {
 }
 
 static void otio_track_range_nested_test(void **state) {
-    Track *sq = Track_create("inner", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create("inner", nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
-    RationalTime *start_time = RationalTime_create(100, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(100, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    OptionalTimeRange st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -1452,10 +1264,11 @@ static void otio_track_range_nested_test(void **state) {
 }
 
 static void otio_track_set_item_test(void **state) {
-    Track *sq = Track_create(NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
-    Clip *it = Clip_create(NULL, NULL, NULL, NULL);
-    Clip *it_2 = Clip_create(NULL, NULL, NULL, NULL);
+    Clip *it = Clip_create(NULL, NULL, nullRange, NULL);
+    Clip *it_2 = Clip_create(NULL, NULL, nullRange, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     bool appendOK = Composition_append_child(
             (Composition *) sq, (Composable *) it, errorStatus);
@@ -1476,32 +1289,26 @@ static void otio_track_set_item_test(void **state) {
 }
 
 static void otio_track_transformed_time_test(void **state) {
-    Track *sq = Track_create("foo", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create("foo", nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
-    RationalTime *start_time = RationalTime_create(100, 24);
-    RationalTime *duration = RationalTime_create(50, 24);
-    TimeRange *st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(100, 24);
+    RationalTime duration = RationalTime_create(50, 24);
+    OptionalTimeRange st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(50, 24);
-    st_sourcerange =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    st_sourcerange = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, st_sourcerange, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(st_sourcerange);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -1517,8 +1324,8 @@ static void otio_track_transformed_time_test(void **state) {
 
     start_time = RationalTime_create(0, 24);
     duration = RationalTime_create(50, 24);
-    TimeRange *source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    OptionalTimeRange source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Gap *fl =
             Gap_create_with_source_range(source_range, "GAP", NULL, NULL, NULL);
     assert_false(Gap_visible(fl));
@@ -1549,124 +1356,89 @@ static void otio_track_transformed_time_test(void **state) {
                                 (SerializableObjectWithMetadata *) clip3));
     ComposableRetainerVector_destroy(composableRetainerVector);
 
-    RationalTime *rationalTime = RationalTime_create(0, 24);
-    RationalTime *transformed_time = Item_transformed_time(
+    RationalTime rationalTime = RationalTime_create(0, 24);
+    RationalTime transformed_time = Item_transformed_time(
             (Item *) sq, rationalTime, (Item *) clip1, errorStatus);
-    RationalTime *compare_time = RationalTime_create(100, 24);
+    RationalTime compare_time = RationalTime_create(100, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(0, 24);
     transformed_time = Item_transformed_time(
             (Item *) sq, rationalTime, (Item *) clip2, errorStatus);
     compare_time = RationalTime_create(51, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(0, 24);
     transformed_time = Item_transformed_time(
             (Item *) sq, rationalTime, (Item *) clip3, errorStatus);
     compare_time = RationalTime_create(2, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(50, 24);
     transformed_time = Item_transformed_time(
             (Item *) sq, rationalTime, (Item *) clip1, errorStatus);
     compare_time = RationalTime_create(150, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(50, 24);
     transformed_time = Item_transformed_time(
             (Item *) sq, rationalTime, (Item *) clip2, errorStatus);
     compare_time = RationalTime_create(101, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(50, 24);
     transformed_time = Item_transformed_time(
             (Item *) sq, rationalTime, (Item *) clip3, errorStatus);
     compare_time = RationalTime_create(52, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(100, 24);
     transformed_time = Item_transformed_time(
             (Item *) clip1, rationalTime, (Item *) sq, errorStatus);
     compare_time = RationalTime_create(0, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(101, 24);
     transformed_time = Item_transformed_time(
             (Item *) clip2, rationalTime, (Item *) sq, errorStatus);
     compare_time = RationalTime_create(50, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(102, 24);
     transformed_time = Item_transformed_time(
             (Item *) clip3, rationalTime, (Item *) sq, errorStatus);
     compare_time = RationalTime_create(100, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(150, 24);
     transformed_time = Item_transformed_time(
             (Item *) clip1, rationalTime, (Item *) sq, errorStatus);
     compare_time = RationalTime_create(50, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(151, 24);
     transformed_time = Item_transformed_time(
             (Item *) clip2, rationalTime, (Item *) sq, errorStatus);
     compare_time = RationalTime_create(100, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     rationalTime = RationalTime_create(152, 24);
     transformed_time = Item_transformed_time(
             (Item *) clip3, rationalTime, (Item *) sq, errorStatus);
     compare_time = RationalTime_create(150, 24);
     assert_true(RationalTime_equal(transformed_time, compare_time));
-    RationalTime_destroy(rationalTime);
-    RationalTime_destroy(transformed_time);
-    RationalTime_destroy(compare_time);
 
     OTIO_RELEASE(sq);
     sq = NULL;
 }
 
 static void otio_track_neighbors_of_simple_test(void **state) {
-    Track *sq = Track_create(NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
 
-    RationalTime *in_offset = RationalTime_create(10, 24);
-    RationalTime *out_offset = RationalTime_create(10, 24);
+    OptionalRationalTime in_offset = OptionalRationalTime_create(RationalTime_create(10, 24));
+    OptionalRationalTime out_offset = OptionalRationalTime_create(RationalTime_create(10, 24));
 
     Transition *trans =
             Transition_create(NULL, NULL, in_offset, out_offset, NULL);
@@ -1697,9 +1469,9 @@ static void otio_track_neighbors_of_simple_test(void **state) {
             (Composable *) trans,
             errorStatus,
             OTIO_Track_NeighbourGapPolicy_around_transitions);
-    RationalTime *start_time = RationalTime_create(0, 24);
-    TimeRange *source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, in_offset);
+    RationalTime start_time = RationalTime_create(0, 24);
+    OptionalTimeRange source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, OptionalRationalTime_value(in_offset)));
     Gap *fill = Gap_create_with_source_range(source_range, NULL, NULL, NULL, NULL);
     OTIO_RETAIN(fill);
     retainerComposable = RetainerPairComposable_first(neighbors);
@@ -1726,7 +1498,8 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
     strcpy(edl_path, sample_data_dir);
     strcat(edl_path, edl_file);
 
-    Timeline *timeline = Timeline_create(NULL, NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Any *timelineAny = create_safely_typed_any_serializable_object(
             (OTIOSerializableObject *) timeline);
@@ -1785,11 +1558,11 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
 
     RetainerPairComposable_destroy(neighbors);
 
-    RationalTime *seq_0_in_offset = Transition_in_offset((Transition *) seq_0);
-    RationalTime *start_time =
+    RationalTime seq_0_in_offset = Transition_in_offset((Transition *) seq_0);
+    RationalTime start_time =
             RationalTime_create(0, RationalTime_rate(seq_0_in_offset));
-    TimeRange *source_range = TimeRange_create_with_start_time_and_duration(
-            start_time, seq_0_in_offset);
+    OptionalTimeRange source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, seq_0_in_offset));
     Gap *fill =
             Gap_create_with_source_range(source_range, NULL, NULL, NULL, NULL);
     neighbors = Track_neighbors_of(
@@ -1807,9 +1580,6 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) secondComposable,
             (OTIOSerializableObject *) seq_1));
-    RationalTime_destroy(seq_0_in_offset);
-    RationalTime_destroy(start_time);
-    TimeRange_destroy(source_range);
     RetainerPairComposable_destroy(neighbors);
 
     /** neighbor around second transition */
@@ -1861,10 +1631,10 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
 
     RetainerPairComposable_destroy(neighbors);
 
-    RationalTime *seq_5_out_offset = Transition_out_offset((Transition *) seq_5);
+    RationalTime seq_5_out_offset = Transition_out_offset((Transition *) seq_5);
     start_time = RationalTime_create(0, RationalTime_rate(seq_5_out_offset));
-    source_range = TimeRange_create_with_start_time_and_duration(
-            start_time, seq_5_out_offset);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, seq_5_out_offset));
     fill = Gap_create_with_source_range(source_range, NULL, NULL, NULL, NULL);
     neighbors = Track_neighbors_of(
             seq,
@@ -1881,9 +1651,6 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) secondComposable,
             (OTIOSerializableObject *) fill));
-    RationalTime_destroy(seq_5_out_offset);
-    RationalTime_destroy(start_time);
-    TimeRange_destroy(source_range);
     RetainerPairComposable_destroy(neighbors);
 
     OTIO_RELEASE(seq);
@@ -1900,7 +1667,8 @@ static void otio_track_range_of_all_children_test(void **state) {
     strcpy(edl_path, sample_data_dir);
     strcat(edl_path, edl_file);
 
-    Timeline *timeline = Timeline_create(NULL, NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
     OTIO_RETAIN(timeline);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Any *timelineAny = create_safely_typed_any_serializable_object(
@@ -1929,22 +1697,17 @@ static void otio_track_range_of_all_children_test(void **state) {
     Composable *vc_0 = ComposableVector_at(vc, 0);
     Composable *vc_1 = ComposableVector_at(vc, 1);
     MapComposableTimeRangeIterator *it = MapComposableTimeRange_find(mp, vc_0);
-    TimeRange *mp_vc_0 = MapComposableTimeRangeIterator_value(it);
+    TimeRange mp_vc_0 = MapComposableTimeRangeIterator_value(it);
     MapComposableTimeRangeIterator_destroy(it);
     it = MapComposableTimeRange_find(mp, vc_1);
-    TimeRange *mp_vc_1 = MapComposableTimeRangeIterator_value(it);
+    TimeRange mp_vc_1 = MapComposableTimeRangeIterator_value(it);
     MapComposableTimeRangeIterator_destroy(it);
-    RationalTime *mp_vc_0_start_time = TimeRange_start_time(mp_vc_0);
-    RationalTime *mp_vc_0_duration = TimeRange_duration(mp_vc_0);
-    RationalTime *mp_vc_1_start_time = TimeRange_start_time(mp_vc_1);
+    RationalTime mp_vc_0_start_time = TimeRange_start_time(mp_vc_0);
+    RationalTime mp_vc_0_duration = TimeRange_duration(mp_vc_0);
+    RationalTime mp_vc_1_start_time = TimeRange_start_time(mp_vc_1);
 
     assert_double_equal(RationalTime_value(mp_vc_0_start_time), 0, DBL_EPSILON);
     assert_true(RationalTime_equal(mp_vc_1_start_time, mp_vc_0_duration));
-    RationalTime_destroy(mp_vc_0_duration);
-    RationalTime_destroy(mp_vc_0_start_time);
-    RationalTime_destroy(mp_vc_1_start_time);
-    TimeRange_destroy(mp_vc_1);
-    TimeRange_destroy(mp_vc_0);
     ComposableVector_destroy(vc);
 
     ComposableRetainerVector *timeline_tracks_retainer_vector =
@@ -1973,18 +1736,14 @@ static void otio_track_range_of_all_children_test(void **state) {
                     ComposableRetainerVectorIterator_value(it_track_children);
             Composable *child = RetainerComposable_value(child_retainer);
 
-            TimeRange *child_range_in_parent =
+            TimeRange child_range_in_parent =
                     Item_range_in_parent((Item *) child, errorStatus);
 
             it = MapComposableTimeRange_find(mp, child);
-            TimeRange *range_compare = MapComposableTimeRangeIterator_value(it);
+            TimeRange range_compare = MapComposableTimeRangeIterator_value(it);
 
             assert_true(TimeRange_equal(child_range_in_parent, range_compare));
 
-            TimeRange_destroy(child_range_in_parent);
-            child_range_in_parent = NULL;
-            TimeRange_destroy(range_compare);
-            range_compare = NULL;
             MapComposableTimeRangeIterator_destroy(it);
             it = NULL;
         }
@@ -2004,7 +1763,8 @@ static void otio_track_range_of_all_children_test(void **state) {
     MapComposableTimeRange_destroy(mp);
     mp = NULL;
 
-    Track *track = Track_create(NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *track = Track_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(track);
     mp = Track_range_of_all_children(track, errorStatus);
     assert_int_equal(MapComposableTimeRange_size(mp), 0);
@@ -2018,7 +1778,8 @@ static void otio_track_range_of_all_children_test(void **state) {
 }
 
 static void otio_edge_cases_empty_composition_test(void **state) {
-    Timeline *timeline = Timeline_create(NULL, NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
     OTIO_RETAIN(timeline);
     Stack *stack = Timeline_tracks(timeline);
     ComposableRetainerVector *children = Composition_children((Composition *) stack);
@@ -2027,14 +1788,10 @@ static void otio_edge_cases_empty_composition_test(void **state) {
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
     Stack *tracks = Timeline_tracks(timeline);
-    RationalTime *duration = Item_duration((Item *) tracks, errorStatus);
-    RationalTime *duration_compare = RationalTime_create(0, 24);
+    RationalTime duration = Item_duration((Item *) tracks, errorStatus);
+    RationalTime duration_compare = RationalTime_create(0, 24);
     assert_true(RationalTime_equal(duration, duration_compare));
 
-    RationalTime_destroy(duration);
-    duration = NULL;
-    RationalTime_destroy(duration_compare);
-    duration_compare = NULL;
     ComposableRetainerVector_destroy(children);
     children = NULL;
     OTIOErrorStatus_destroy(errorStatus);
@@ -2044,19 +1801,21 @@ static void otio_edge_cases_empty_composition_test(void **state) {
 }
 
 static void otio_edge_cases_iterating_over_dupes_test(void **state) {
-    Timeline *timeline = Timeline_create(NULL, NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
     OTIO_RETAIN(timeline);
-    Track *track = Track_create(NULL, NULL, NULL, NULL);
+    Track *track = Track_create(NULL, nullRange, NULL, NULL);
     Stack *stack = Timeline_tracks(timeline);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     bool appendOK = Composition_append_child(
             (Composition *) stack, (Composable *) track, errorStatus);
     assert_true(appendOK);
 
-    RationalTime *start_time = RationalTime_create(10, 30);
-    RationalTime *duration = RationalTime_create(15, 30);
-    TimeRange *source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(10, 30);
+    RationalTime duration = RationalTime_create(15, 30);
+    OptionalTimeRange source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     /** make several identical copies */
     for (int i = 0; i < 10; ++i) {
         Clip *clip = Clip_create("Dupe", NULL, source_range, NULL);
@@ -2069,24 +1828,16 @@ static void otio_edge_cases_iterating_over_dupes_test(void **state) {
             Composition_children((Composition *) track);
     assert_int_equal(ComposableRetainerVector_size(composableRetainerVector), 10);
 
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
-
     start_time = RationalTime_create(0, 30);
     duration = RationalTime_create(150, 30);
-    TimeRange *range_compare =
+    TimeRange range_compare =
             TimeRange_create_with_start_time_and_duration(start_time, duration);
-    TimeRange *track_trimmed_range =
+    TimeRange track_trimmed_range =
             Item_trimmed_range((Item *) track, errorStatus);
     assert_true(TimeRange_equal(range_compare, track_trimmed_range));
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(range_compare);
-    TimeRange_destroy(track_trimmed_range);
 
     /** test normal iteration */
-    TimeRange *previous = NULL;
+    OptionalTimeRange previous = OptionalTimeRange_create_null();
     ComposableRetainerVectorIterator *it =
             ComposableRetainerVector_begin(composableRetainerVector);
     ComposableRetainerVectorIterator *it_end =
@@ -2097,25 +1848,21 @@ static void otio_edge_cases_iterating_over_dupes_test(void **state) {
                 ComposableRetainerVectorIterator_value(it);
         Composable *item = RetainerComposable_value(retainerComposable);
 
-        TimeRange *range_of_child =
+        TimeRange range_of_child =
                 Composition_range_of_child((Composition *) track, item, errorStatus);
-        TimeRange *range_in_parent =
+        TimeRange range_in_parent =
                 Item_range_in_parent((Item *) item, errorStatus);
 
         assert_true(TimeRange_equal(range_of_child, range_in_parent));
-        if (previous != NULL) {
-            assert_false(TimeRange_equal(previous, range_in_parent));
-            TimeRange_destroy(previous);
-            previous = NULL;
+        if (OptionalTimeRange_valid(previous)) {
+            assert_false(TimeRange_equal(OptionalTimeRange_value(previous), range_in_parent));
+            previous = OptionalTimeRange_create_null();
         }
 
-        previous = Item_range_in_parent((Item *) item, errorStatus);
+        previous = OptionalTimeRange_create(Item_range_in_parent((Item *) item, errorStatus));
 
-        TimeRange_destroy(range_in_parent);
-        TimeRange_destroy(range_of_child);
     }
-    TimeRange_destroy(previous);
-    previous = NULL;
+    previous = OptionalTimeRange_create_null();
     ComposableRetainerVectorIterator_destroy(it);
     it = NULL;
     ComposableRetainerVectorIterator_destroy(it_end);
@@ -2132,25 +1879,20 @@ static void otio_edge_cases_iterating_over_dupes_test(void **state) {
            ComposableVectorIterator_advance(clip_it, 1)) {
         Composable *item = ComposableVectorIterator_value(clip_it);
 
-        TimeRange *range_of_child =
+        TimeRange range_of_child =
                 Composition_range_of_child((Composition *) track, item, errorStatus);
-        TimeRange *range_in_parent =
+        TimeRange range_in_parent =
                 Item_range_in_parent((Item *) item, errorStatus);
 
         assert_true(TimeRange_equal(range_of_child, range_in_parent));
-        if (previous != NULL) {
-            assert_false(TimeRange_equal(previous, range_in_parent));
-            TimeRange_destroy(previous);
-            previous = NULL;
+        if (OptionalTimeRange_valid(previous)) {
+            assert_false(TimeRange_equal(OptionalTimeRange_value(previous), range_in_parent));
+            previous = OptionalTimeRange_create_null();
         }
 
-        previous = Item_range_in_parent((Item *) item, errorStatus);
-
-        TimeRange_destroy(range_in_parent);
-        TimeRange_destroy(range_of_child);
+        previous = OptionalTimeRange_create(Item_range_in_parent((Item *) item, errorStatus));
     }
-    TimeRange_destroy(previous);
-    previous = NULL;
+    previous = OptionalTimeRange_create_null();
     ComposableVectorIterator_destroy(clip_it);
     clip_it = NULL;
     ComposableVectorIterator_destroy(clip_it_end);
@@ -2166,29 +1908,23 @@ static void otio_edge_cases_iterating_over_dupes_test(void **state) {
                 ComposableRetainerVectorIterator_value(it);
         Composable *item = RetainerComposable_value(retainerComposable);
 
-        TimeRange *range_of_child =
+        TimeRange range_of_child =
                 Composition_range_of_child((Composition *) track, item, errorStatus);
-        TimeRange *range_in_parent =
+        TimeRange range_in_parent =
                 Item_range_in_parent((Item *) item, errorStatus);
-        TimeRange *range_of_child_index =
+        TimeRange range_of_child_index =
                 Track_range_of_child_at_index(track, i, errorStatus);
 
         assert_true(TimeRange_equal(range_of_child, range_in_parent));
         assert_true(TimeRange_equal(range_of_child, range_of_child_index));
-        if (previous != NULL) {
-            assert_false(TimeRange_equal(previous, range_in_parent));
-            TimeRange_destroy(previous);
-            previous = NULL;
+        if (OptionalTimeRange_valid(previous)) {
+            assert_false(TimeRange_equal(OptionalTimeRange_value(previous), range_in_parent));
+            previous = OptionalTimeRange_create_null();
         }
 
-        previous = Item_range_in_parent((Item *) item, errorStatus);
-
-        TimeRange_destroy(range_in_parent);
-        TimeRange_destroy(range_of_child);
-        TimeRange_destroy(range_of_child_index);
+        previous = OptionalTimeRange_create(Item_range_in_parent((Item *) item, errorStatus));
     }
-    TimeRange_destroy(previous);
-    previous = NULL;
+    previous = OptionalTimeRange_create_null();
     ComposableRetainerVectorIterator_destroy(it);
     it = NULL;
     ComposableRetainerVectorIterator_destroy(it_end);
@@ -2203,29 +1939,22 @@ static void otio_edge_cases_iterating_over_dupes_test(void **state) {
            ComposableVectorIterator_advance(clip_it, 1), i++) {
         Composable *item = ComposableVectorIterator_value(clip_it);
 
-        TimeRange *range_of_child =
+        TimeRange range_of_child =
                 Composition_range_of_child((Composition *) track, item, errorStatus);
-        TimeRange *range_in_parent =
+        TimeRange range_in_parent =
                 Item_range_in_parent((Item *) item, errorStatus);
-        TimeRange *range_of_child_index =
+        TimeRange range_of_child_index =
                 Track_range_of_child_at_index(track, i, errorStatus);
 
         assert_true(TimeRange_equal(range_of_child, range_in_parent));
         assert_true(TimeRange_equal(range_of_child, range_of_child_index));
-        if (previous != NULL) {
-            assert_false(TimeRange_equal(previous, range_in_parent));
-            TimeRange_destroy(previous);
-            previous = NULL;
+        if (OptionalTimeRange_valid(previous)) {
+            assert_false(TimeRange_equal(OptionalTimeRange_value(previous), range_in_parent));
+            previous = OptionalTimeRange_create_null();
         }
 
-        previous = Item_range_in_parent((Item *) item, errorStatus);
-
-        TimeRange_destroy(range_in_parent);
-        TimeRange_destroy(range_of_child);
-        TimeRange_destroy(range_of_child_index);
+        previous = OptionalTimeRange_create(Item_range_in_parent((Item *) item, errorStatus));
     }
-    TimeRange_destroy(previous);
-    previous = NULL;
     ComposableVectorIterator_destroy(clip_it);
     clip_it = NULL;
     ComposableVectorIterator_destroy(clip_it_end);
@@ -2253,28 +1982,30 @@ static void otio_nesting_deeply_nesting_test(void **state) {
      */
 
     /** here are some times in the top-level coordinate system */
-    RationalTime *zero = RationalTime_create(0, 24);
-    RationalTime *one = RationalTime_create(1, 24);
-    RationalTime *fifty = RationalTime_create(50, 24);
-    RationalTime *ninetynine = RationalTime_create(99, 24);
-    RationalTime *onehundred = RationalTime_create(100, 24);
-    TimeRange *top_level_range =
+    RationalTime zero = RationalTime_create(0, 24);
+    RationalTime one = RationalTime_create(1, 24);
+    RationalTime fifty = RationalTime_create(50, 24);
+    RationalTime ninetynine = RationalTime_create(99, 24);
+    RationalTime onehundred = RationalTime_create(100, 24);
+    TimeRange top_level_range =
             TimeRange_create_with_start_time_and_duration(zero, onehundred);
 
     /** here are some times in the media-level coordinate system */
-    RationalTime *first_frame = RationalTime_create(100, 24);
-    RationalTime *middle = RationalTime_create(150, 24);
-    RationalTime *last = RationalTime_create(199, 24);
-    TimeRange *media_range =
-            TimeRange_create_with_start_time_and_duration(first_frame, onehundred);
+    RationalTime first_frame = RationalTime_create(100, 24);
+    RationalTime middle = RationalTime_create(150, 24);
+    RationalTime last = RationalTime_create(199, 24);
+    OptionalTimeRange media_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(first_frame, onehundred));
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    Timeline *timeline = Timeline_create(NULL, NULL, NULL);
+    OptionalRationalTime nullTime = OptionalRationalTime_create_null();
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
     OTIO_RETAIN(timeline);
     Stack *stack = Timeline_tracks(timeline);
-    Track *track = Track_create(NULL, NULL, NULL, NULL);
-    Clip *clip = Clip_create(NULL, NULL, NULL, NULL);
+    Track *track = Track_create(NULL, nullRange, NULL, NULL);
+    Clip *clip = Clip_create(NULL, NULL, nullRange, NULL);
     MissingReference *media = MissingReference_create(NULL, media_range, NULL);
     Clip_set_media_reference(clip, (MediaReference *) media);
     bool appendOK = Composition_append_child(
@@ -2294,53 +2025,35 @@ static void otio_nesting_deeply_nesting_test(void **state) {
      * the clip and track should auto-size to fit the media, since we
      * haven't trimmed anything
      */
-    RationalTime *clip_duration = Item_duration((Item *) clip, errorStatus);
-    RationalTime *stack_duration = Item_duration((Item *) stack, errorStatus);
-    RationalTime *track_duration = Item_duration((Item *) track, errorStatus);
+    RationalTime clip_duration = Item_duration((Item *) clip, errorStatus);
+    RationalTime stack_duration = Item_duration((Item *) stack, errorStatus);
+    RationalTime track_duration = Item_duration((Item *) track, errorStatus);
     assert_true(RationalTime_equal(clip_duration, onehundred));
     assert_true(RationalTime_equal(stack_duration, onehundred));
     assert_true(RationalTime_equal(track_duration, onehundred));
-    RationalTime_destroy(clip_duration);
-    clip_duration = NULL;
-    RationalTime_destroy(stack_duration);
-    stack_duration = NULL;
-    RationalTime_destroy(track_duration);
-    track_duration = NULL;
 
     /** the ranges should match our expectations... */
-    TimeRange *clip_trimmed_range =
+    TimeRange clip_trimmed_range =
             Item_trimmed_range((Item *) clip, errorStatus);
-    TimeRange *stack_trimmed_range =
+    TimeRange stack_trimmed_range =
             Item_trimmed_range((Item *) stack, errorStatus);
-    TimeRange *track_trimmed_range =
+    TimeRange track_trimmed_range =
             Item_trimmed_range((Item *) track, errorStatus);
-    assert_true(TimeRange_equal(clip_trimmed_range, media_range));
+    assert_true(TimeRange_equal(clip_trimmed_range, OptionalTimeRange_value(media_range)));
     assert_true(TimeRange_equal(stack_trimmed_range, top_level_range));
     assert_true(TimeRange_equal(track_trimmed_range, top_level_range));
-    TimeRange_destroy(clip_trimmed_range);
-    clip_trimmed_range = NULL;
-    TimeRange_destroy(stack_trimmed_range);
-    stack_trimmed_range = NULL;
-    TimeRange_destroy(track_trimmed_range);
-    track_trimmed_range = NULL;
 
     /** verify that the media is where we expect */
-    RationalTime *stack_transformed_time_zero_clip =
+    RationalTime stack_transformed_time_zero_clip =
             Item_transformed_time((Item *) stack, zero, (Item *) clip, errorStatus);
-    RationalTime *stack_transformed_time_fifty_clip =
+    RationalTime stack_transformed_time_fifty_clip =
             Item_transformed_time((Item *) stack, fifty, (Item *) clip, errorStatus);
-    RationalTime *stack_transformed_time_ninetynine_clip =
+    RationalTime stack_transformed_time_ninetynine_clip =
             Item_transformed_time(
                     (Item *) stack, ninetynine, (Item *) clip, errorStatus);
     assert_true(RationalTime_equal(stack_transformed_time_zero_clip, first_frame));
     assert_true(RationalTime_equal(stack_transformed_time_fifty_clip, middle));
     assert_true(RationalTime_equal(stack_transformed_time_ninetynine_clip, last));
-    RationalTime_destroy(stack_transformed_time_zero_clip);
-    stack_transformed_time_zero_clip = NULL;
-    RationalTime_destroy(stack_transformed_time_fifty_clip);
-    stack_transformed_time_fifty_clip = NULL;
-    RationalTime_destroy(stack_transformed_time_ninetynine_clip);
-    stack_transformed_time_ninetynine_clip = NULL;
 
     int num_wrappers = 10;
     Stack *wrappers[num_wrappers];
@@ -2371,26 +2084,14 @@ static void otio_nesting_deeply_nesting_test(void **state) {
     assert_true(RationalTime_equal(clip_duration, onehundred));
     assert_true(RationalTime_equal(stack_duration, onehundred));
     assert_true(RationalTime_equal(track_duration, onehundred));
-    RationalTime_destroy(clip_duration);
-    clip_duration = NULL;
-    RationalTime_destroy(stack_duration);
-    stack_duration = NULL;
-    RationalTime_destroy(track_duration);
-    track_duration = NULL;
 
     /** the ranges should match our expectations... */
     clip_trimmed_range = Item_trimmed_range((Item *) clip, errorStatus);
     stack_trimmed_range = Item_trimmed_range((Item *) stack, errorStatus);
     track_trimmed_range = Item_trimmed_range((Item *) track, errorStatus);
-    assert_true(TimeRange_equal(clip_trimmed_range, media_range));
+    assert_true(TimeRange_equal(clip_trimmed_range, OptionalTimeRange_value(media_range)));
     assert_true(TimeRange_equal(stack_trimmed_range, top_level_range));
     assert_true(TimeRange_equal(track_trimmed_range, top_level_range));
-    TimeRange_destroy(clip_trimmed_range);
-    clip_trimmed_range = NULL;
-    TimeRange_destroy(stack_trimmed_range);
-    stack_trimmed_range = NULL;
-    TimeRange_destroy(track_trimmed_range);
-    track_trimmed_range = NULL;
 
     /** verify that the media is where we expect */
     stack_transformed_time_zero_clip =
@@ -2402,24 +2103,13 @@ static void otio_nesting_deeply_nesting_test(void **state) {
     assert_true(RationalTime_equal(stack_transformed_time_zero_clip, first_frame));
     assert_true(RationalTime_equal(stack_transformed_time_fifty_clip, middle));
     assert_true(RationalTime_equal(stack_transformed_time_ninetynine_clip, last));
-    RationalTime_destroy(stack_transformed_time_zero_clip);
-    stack_transformed_time_zero_clip = NULL;
-    RationalTime_destroy(stack_transformed_time_fifty_clip);
-    stack_transformed_time_fifty_clip = NULL;
-    RationalTime_destroy(stack_transformed_time_ninetynine_clip);
-    stack_transformed_time_ninetynine_clip = NULL;
 
     /** now trim them all by one frame at each end */
-    RationalTime *duration = RationalTime_subtract(ninetynine, one);
-    TimeRange *trim =
-            TimeRange_create_with_start_time_and_duration(one, duration);
-    RationalTime *time_compare = RationalTime_create(98, 24);
-    RationalTime *trim_duration = TimeRange_duration(trim);
+    RationalTime duration = RationalTime_subtract(ninetynine, one);
+    OptionalTimeRange trim = OptionalTimeRange_create(TimeRange_create_with_start_time_and_duration(one, duration));
+    RationalTime time_compare = RationalTime_create(98, 24);
+    RationalTime trim_duration = TimeRange_duration(OptionalTimeRange_value(trim));
     assert_true(RationalTime_equal(time_compare, trim_duration));
-    RationalTime_destroy(duration);
-    duration = NULL;
-    RationalTime_destroy(trim_duration);
-    trim_duration = NULL;
 
     for (int j = 0; j < num_wrappers; ++j) {
         Item_set_source_range((Item *) wrappers[j], trim);
@@ -2435,8 +2125,6 @@ static void otio_nesting_deeply_nesting_test(void **state) {
     /** the clip should be the same */
     clip_duration = Item_duration((Item *) clip, errorStatus);
     assert_true(RationalTime_equal(clip_duration, onehundred));
-    RationalTime_destroy(clip_duration);
-    clip_duration = NULL;
 
     /** the parents should have shrunk by only 2 frames */
 
@@ -2444,91 +2132,61 @@ static void otio_nesting_deeply_nesting_test(void **state) {
     stack_duration = Item_duration((Item *) stack, errorStatus);
     assert_true(RationalTime_equal(track_duration, time_compare));
     assert_true(RationalTime_equal(stack_duration, time_compare));
-    RationalTime_destroy(time_compare);
-    time_compare = NULL;
-    RationalTime_destroy(track_duration);
-    track_duration = NULL;
-    RationalTime_destroy(stack_duration);
-    stack_duration = NULL;
 
     /**
      * but the media should have shifted over by 1 one frame for each level
      * of nesting
      */
 
-    RationalTime *ten = RationalTime_create(num_wrappers, 24);
+    RationalTime ten = RationalTime_create(num_wrappers, 24);
     stack_transformed_time_zero_clip =
             Item_transformed_time((Item *) stack, zero, (Item *) clip, errorStatus);
     stack_transformed_time_fifty_clip =
             Item_transformed_time((Item *) stack, fifty, (Item *) clip, errorStatus);
     stack_transformed_time_ninetynine_clip = Item_transformed_time(
             (Item *) stack, ninetynine, (Item *) clip, errorStatus);
-    RationalTime *first_frame_plus_ten = RationalTime_add(first_frame, ten);
-    RationalTime *middle_plus_ten = RationalTime_add(middle, ten);
-    RationalTime *last_plus_ten = RationalTime_add(last, ten);
+    RationalTime first_frame_plus_ten = RationalTime_add(first_frame, ten);
+    RationalTime middle_plus_ten = RationalTime_add(middle, ten);
+    RationalTime last_plus_ten = RationalTime_add(last, ten);
     assert_true(RationalTime_equal(
             stack_transformed_time_zero_clip, first_frame_plus_ten));
     assert_true(RationalTime_equal(stack_transformed_time_fifty_clip, middle_plus_ten));
     assert_true(RationalTime_equal(
             stack_transformed_time_ninetynine_clip, last_plus_ten));
-    RationalTime_destroy(ten);
-    ten = NULL;
-    RationalTime_destroy(stack_transformed_time_zero_clip);
-    stack_transformed_time_zero_clip = NULL;
-    RationalTime_destroy(stack_transformed_time_fifty_clip);
-    stack_transformed_time_fifty_clip = NULL;
-    RationalTime_destroy(stack_transformed_time_ninetynine_clip);
-    stack_transformed_time_ninetynine_clip = NULL;
-    RationalTime_destroy(first_frame_plus_ten);
-    first_frame_plus_ten = NULL;
-    RationalTime_destroy(middle_plus_ten);
-    middle_plus_ten = NULL;
-    RationalTime_destroy(last_plus_ten);
-    last_plus_ten = NULL;
 
     OTIO_RELEASE(timeline);
     timeline = NULL;
 }
 
 static void otio_nesting_child_at_time_with_children_test(void **state) {
-    Track *sq = Track_create("foo", NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Track *sq = Track_create("foo", nullRange, NULL, NULL);
     OTIO_RETAIN(sq);
 
-    RationalTime *start_time = RationalTime_create(9, 24);
-    RationalTime *duration = RationalTime_create(12, 24);
-    TimeRange *source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(9, 24);
+    RationalTime duration = RationalTime_create(12, 24);
+    OptionalTimeRange source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
 
     Track *body = Track_create("body", source_range, NULL, NULL);
 
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
-
     start_time = RationalTime_create(100, 24);
     duration = RationalTime_create(10, 24);
-    source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip1 = Clip_create("clip1", NULL, source_range, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
+
     start_time = RationalTime_create(101, 24);
     duration = RationalTime_create(10, 24);
-    source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip2 = Clip_create("clip2", NULL, source_range, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
+
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(10, 24);
-    source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *clip3 = Clip_create("clip3", NULL, source_range, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -2544,21 +2202,15 @@ static void otio_nesting_child_at_time_with_children_test(void **state) {
 
     start_time = RationalTime_create(100, 24);
     duration = RationalTime_create(10, 24);
-    source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *leader = Clip_create("leader", NULL, source_range, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
 
     start_time = RationalTime_create(102, 24);
     duration = RationalTime_create(10, 24);
-    source_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    source_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
     Clip *credits = Clip_create("credits", NULL, source_range, NULL);
-    RationalTime_destroy(start_time);
-    RationalTime_destroy(duration);
-    TimeRange_destroy(source_range);
 
     appendOK = Composition_append_child(
             (Composition *) sq, (Composable *) leader, errorStatus);

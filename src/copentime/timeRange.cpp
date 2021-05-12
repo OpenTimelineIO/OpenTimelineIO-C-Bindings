@@ -14,6 +14,12 @@ OTIO_API TimeRange TimeRange_create_with_start_time(RationalTime start_time) {
     return _OTTimeRange_to_COTTimeRange(ot_timeRange);
 }
 
+OTIO_API TimeRange TimeRange_create_with_duration(RationalTime duration) {
+    opentime::RationalTime ot_duration(duration.value, duration.rate);
+    opentime::TimeRange ot_timeRange(opentime::RationalTime(), ot_duration);
+    return _OTTimeRange_to_COTTimeRange(ot_timeRange);
+}
+
 OTIO_API TimeRange TimeRange_create_with_start_time_and_duration(
         RationalTime start_time, RationalTime duration) {
     TimeRange timeRange;
