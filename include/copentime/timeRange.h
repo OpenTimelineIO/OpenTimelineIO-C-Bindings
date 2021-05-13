@@ -9,11 +9,10 @@
 # define OTIO_API
 #endif
 
-struct TimeRange {
+typedef struct {
     RationalTime start_time;
     RationalTime duration;
-};
-typedef struct TimeRange TimeRange;
+} TimeRange;
 
 OTIO_API TimeRange TimeRange_create();
 

@@ -9,11 +9,10 @@
 # define OTIO_API
 #endif
 
-struct RationalTime {
+typedef struct {
     double value;
     double rate;
-};
-typedef struct RationalTime RationalTime;
+} RationalTime;
 
 typedef enum {
     OpenTime_IsDropFrameRate_InferFromRate = -1,
