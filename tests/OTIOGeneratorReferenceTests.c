@@ -35,10 +35,10 @@ struct GeneratorReferenceTestState {
 };
 
 static int setupGeneratorReferenceTests(void **state) {
-    RationalTime *start_time = RationalTime_create(0, 24);
-    RationalTime *duration = RationalTime_create(100, 24);
-    TimeRange *available_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(0, 24);
+    RationalTime duration = RationalTime_create(100, 24);
+    OptionalTimeRange available_range = OptionalTimeRange_create(
+            TimeRange_create_with_start_time_and_duration(start_time, duration));
 
     AnyDictionary *metadata = AnyDictionary_create();
     Any *value_any = create_safely_typed_any_string("bar");
@@ -65,12 +65,6 @@ static int setupGeneratorReferenceTests(void **state) {
             "SMPTEBars", "SMPTEBars", available_range, parameters, metadata);
     testState->gen_r = RetainerSerializableObject_create((OTIOSerializableObject *) testState->gen);
 
-    RationalTime_destroy(start_time);
-    start_time = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(available_range);
-    available_range = NULL;
     AnyDictionary_destroy(metadata);
     metadata = NULL;
     AnyDictionary_destroy(parameters);
@@ -145,21 +139,16 @@ static void otio_generator_reference_constructor_test(void **state) {
     AnyDictionary_destroy(parameters_compare);
     parameters_compare = NULL;
 
-    TimeRange *gen_available_range =
+    OptionalTimeRange gen_available_range =
             MediaReference_available_range((MediaReference *) gen);
-    RationalTime *st = RationalTime_create(0, 24);
-    RationalTime *d = RationalTime_create(100, 24);
-    TimeRange *range_compare =
+    RationalTime st = RationalTime_create(0, 24);
+    RationalTime d = RationalTime_create(100, 24);
+    TimeRange range_compare =
             TimeRange_create_with_start_time_and_duration(st, d);
 
-    assert_true(TimeRange_equal(gen_available_range, range_compare));
-
-    RationalTime_destroy(st);
-    st = NULL;
-    RationalTime_destroy(d);
-    d = NULL;
-    TimeRange_destroy(range_compare);
-    range_compare = NULL;
+    assert_true(OptionalTimeRange_valid(gen_available_range));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(gen_available_range),
+                                range_compare));
 }
 
 static void otio_generator_reference_serialize_test(void **state) {

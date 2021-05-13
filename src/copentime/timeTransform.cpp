@@ -1,70 +1,67 @@
 #include "copentime/timeTransform.h"
+#include "copentime/util.h"
 #include <opentime/rationalTime.h>
 #include <opentime/timeRange.h>
 #include <opentime/timeTransform.h>
 
-TimeTransform* TimeTransform_create()
-{
-    return reinterpret_cast<TimeTransform*>(new opentime::TimeTransform());
+OTIO_API TimeTransform TimeTransform_create() {
+    opentime::TimeTransform timeTransform;
+    return CppTimeTransform_to_CTimeTransform(timeTransform);
 }
-TimeTransform* TimeTransform_create_with_offset_scale_rate(
-    RationalTime* offset, double scale, double rate)
-{
-    return reinterpret_cast<TimeTransform*>(new opentime::TimeTransform(
-        *reinterpret_cast<opentime::RationalTime*>(offset), scale, rate));
+
+OTIO_API TimeTransform TimeTransform_create_with_offset_scale_rate(
+        RationalTime offset, double scale, double rate) {
+    TimeTransform timeTransform;
+    timeTransform.offset = offset;
+    timeTransform.scale = scale;
+    timeTransform.rate = rate;
+    return timeTransform;
 }
-RationalTime* TimeTransform_offset(TimeTransform* self)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeTransform*>(self)->offset();
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API RationalTime TimeTransform_offset(TimeTransform self) {
+    return self.offset;
 }
-double TimeTransform_scale(TimeTransform* self)
-{
-    return reinterpret_cast<opentime::TimeTransform*>(self)->scale();
+
+OTIO_API double TimeTransform_scale(TimeTransform self) {
+    return self.scale;
 }
-double TimeTransform_rate(TimeTransform* self)
-{
-    return reinterpret_cast<opentime::TimeTransform*>(self)->rate();
+
+OTIO_API double TimeTransform_rate(TimeTransform self) {
+    return self.rate;
 }
-TimeRange*
-TimeTransform_applied_to_time_range(TimeTransform* self, TimeRange* other)
-{
-    opentime::TimeRange timeRange =
-        reinterpret_cast<opentime::TimeTransform*>(self)->applied_to(
-            *reinterpret_cast<opentime::TimeRange*>(other));
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(timeRange));
+
+OTIO_API TimeRange
+TimeTransform_applied_to_time_range(TimeTransform self, TimeRange other) {
+    opentime::TimeTransform ot_self = CTimeTransform_to_CppTimeTransform(self);
+    opentime::TimeRange ot_other = CTimeRange_to_CppTimeRange(other);
+    opentime::TimeRange ot_result = ot_self.applied_to(ot_other);
+    return CppTimeRange_to_CTimeRange(ot_result);
 }
-TimeTransform* TimeTransform_applied_to_time_transform(
-    TimeTransform* self, TimeTransform* other)
-{
-    opentime::TimeTransform obj =
-        reinterpret_cast<opentime::TimeTransform*>(self)->applied_to(
-            *reinterpret_cast<opentime::TimeTransform*>(other));
-    return reinterpret_cast<TimeTransform*>(
-        new opentime::TimeTransform(obj));
+
+OTIO_API TimeTransform TimeTransform_applied_to_time_transform(
+        TimeTransform self, TimeTransform other) {
+    opentime::TimeTransform ot_self = CTimeTransform_to_CppTimeTransform(self);
+    opentime::TimeTransform ot_other = CTimeTransform_to_CppTimeTransform(other);
+    opentime::TimeTransform ot_result = ot_self.applied_to(ot_other);
+    return CppTimeTransform_to_CTimeTransform(ot_result);
 }
-RationalTime* TimeTransform_applied_to_rational_time(
-    TimeTransform* self, RationalTime* other)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeTransform*>(self)->applied_to(
-            *reinterpret_cast<opentime::RationalTime*>(other));
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API RationalTime TimeTransform_applied_to_rational_time(
+        TimeTransform self, RationalTime other) {
+    opentime::TimeTransform ot_self = CTimeTransform_to_CppTimeTransform(self);
+    opentime::RationalTime ot_other = CRationalTime_to_CppRationalTime(other);
+    opentime::RationalTime ot_result = ot_self.applied_to(ot_other);
+    return CppRationalTime_to_CRationalTime(ot_result);
 }
-bool TimeTransform_equal(TimeTransform* lhs, TimeTransform* rhs)
-{
-    return *reinterpret_cast<opentime::TimeTransform*>(lhs) ==
-           *reinterpret_cast<opentime::TimeTransform*>(rhs);
+
+OTIO_API bool TimeTransform_equal(TimeTransform lhs, TimeTransform rhs) {
+    opentime::TimeTransform ot_lhs = CTimeTransform_to_CppTimeTransform(lhs);
+    opentime::TimeTransform ot_rhs = CTimeTransform_to_CppTimeTransform(rhs);
+    return ot_lhs == ot_rhs;
 }
-bool TimeTransform_not_equal(TimeTransform* lhs, TimeTransform* rhs)
-{
-    return *reinterpret_cast<opentime::TimeTransform*>(lhs) !=
-           *reinterpret_cast<opentime::TimeTransform*>(rhs);
-}
-void TimeTransform_destroy(TimeTransform* self)
-{
-    delete reinterpret_cast<opentime::TimeTransform*>(self);
+
+OTIO_API bool TimeTransform_not_equal(TimeTransform lhs, TimeTransform rhs) {
+    opentime::TimeTransform ot_lhs = CTimeTransform_to_CppTimeTransform(lhs);
+    opentime::TimeTransform ot_rhs = CTimeTransform_to_CppTimeTransform(rhs);
+    return ot_lhs != ot_rhs;
 }

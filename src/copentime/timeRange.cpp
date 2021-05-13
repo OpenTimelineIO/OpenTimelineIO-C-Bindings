@@ -1,131 +1,127 @@
 #include "copentime/timeRange.h"
+#include "copentime/util.h"
 #include <opentime/rationalTime.h>
 #include <opentime/timeRange.h>
 
-TimeRange* TimeRange_create()
-{
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange());
+OTIO_API TimeRange TimeRange_create() {
+    opentime::TimeRange ot_timeRange;
+    return CppTimeRange_to_CTimeRange(ot_timeRange);
 }
-TimeRange* TimeRange_create_with_start_time(RationalTime* start_time)
-{
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(
-        *reinterpret_cast<opentime::RationalTime*>(start_time)));
+
+OTIO_API TimeRange TimeRange_create_with_start_time(RationalTime start_time) {
+    opentime::RationalTime ot_startTime(start_time.value, start_time.rate);
+    opentime::TimeRange ot_timeRange(ot_startTime);
+    return CppTimeRange_to_CTimeRange(ot_timeRange);
 }
-TimeRange* TimeRange_create_with_start_time_and_duration(
-    RationalTime* start_time, RationalTime* duration)
-{
-    if(start_time == NULL && duration == NULL)
-    { return reinterpret_cast<TimeRange*>(new opentime::TimeRange()); }
-    opentime::RationalTime start_time_rt = opentime::RationalTime();
-    if(start_time != NULL)
-    {
-        start_time_rt =
-            *reinterpret_cast<opentime::RationalTime*>(start_time);
-    }
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(
-        start_time_rt,
-        *reinterpret_cast<opentime::RationalTime*>(duration)));
+
+OTIO_API TimeRange TimeRange_create_with_duration(RationalTime duration) {
+    opentime::RationalTime ot_duration(duration.value, duration.rate);
+    opentime::TimeRange ot_timeRange(opentime::RationalTime(), ot_duration);
+    return CppTimeRange_to_CTimeRange(ot_timeRange);
 }
-RationalTime* TimeRange_start_time(TimeRange* self)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeRange*>(self)->start_time();
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API TimeRange TimeRange_create_with_start_time_and_duration(
+        RationalTime start_time, RationalTime duration) {
+    TimeRange timeRange;
+    timeRange.start_time = start_time;
+    timeRange.duration = duration;
+    return timeRange;
 }
-RationalTime* TimeRange_duration(TimeRange* self)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeRange*>(self)->duration();
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API RationalTime TimeRange_start_time(TimeRange self) {
+    return self.start_time;
 }
-RationalTime* TimeRange_end_time_inclusive(TimeRange* self)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeRange*>(self)->end_time_inclusive();
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API RationalTime TimeRange_duration(TimeRange self) {
+    return self.duration;
 }
-RationalTime* TimeRange_end_time_exclusive(TimeRange* self)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeRange*>(self)->end_time_exclusive();
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API RationalTime TimeRange_end_time_inclusive(TimeRange self) {
+    opentime::RationalTime ot_startTime = CRationalTime_to_CppRationalTime(self.start_time);
+    opentime::RationalTime ot_duration = CRationalTime_to_CppRationalTime(self.duration);
+    opentime::TimeRange ot_self(ot_startTime, ot_duration);
+    opentime::RationalTime ot_result = ot_self.end_time_inclusive();
+    return CppRationalTime_to_CRationalTime(ot_result);
 }
-TimeRange*
-TimeRange_duration_extended_by(TimeRange* self, RationalTime* other)
-{
-    opentime::TimeRange obj =
-        reinterpret_cast<opentime::TimeRange*>(self)->duration_extended_by(
-            *reinterpret_cast<opentime::RationalTime*>(other));
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(obj));
+
+OTIO_API RationalTime TimeRange_end_time_exclusive(TimeRange self) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::RationalTime ot_result = ot_self.end_time_exclusive();
+    return CppRationalTime_to_CRationalTime(ot_result);
 }
-TimeRange* TimeRange_extended_by(TimeRange* self, TimeRange* other)
-{
-    opentime::TimeRange obj =
-        reinterpret_cast<opentime::TimeRange*>(self)->extended_by(
-            *reinterpret_cast<opentime::TimeRange*>(other));
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(obj));
+
+OTIO_API TimeRange
+TimeRange_duration_extended_by(TimeRange self, RationalTime other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::RationalTime ot_other = CRationalTime_to_CppRationalTime(other);
+    opentime::TimeRange ot_result = ot_self.duration_extended_by(ot_other);
+    return CppTimeRange_to_CTimeRange(ot_result);
 }
-RationalTime*
-TimeRange_clamped_with_rational_time(TimeRange* self, RationalTime* other)
-{
-    opentime::RationalTime rationalTime =
-        reinterpret_cast<opentime::TimeRange*>(self)->clamped(
-            *reinterpret_cast<opentime::RationalTime*>(other));
-    return reinterpret_cast<RationalTime*>(
-        new opentime::RationalTime(rationalTime));
+
+OTIO_API TimeRange TimeRange_extended_by(TimeRange self, TimeRange other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::TimeRange ot_other = CTimeRange_to_CppTimeRange(other);
+    opentime::TimeRange ot_result = ot_self.extended_by(ot_other);
+    return CppTimeRange_to_CTimeRange(ot_result);
 }
-TimeRange*
-TimeRange_clamped_with_time_range(TimeRange* self, TimeRange* other)
-{
-    opentime::TimeRange obj =
-        reinterpret_cast<opentime::TimeRange*>(self)->clamped(
-            *reinterpret_cast<opentime::TimeRange*>(other));
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(obj));
+
+OTIO_API RationalTime
+TimeRange_clamped_with_rational_time(TimeRange self, RationalTime other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::RationalTime ot_other = CRationalTime_to_CppRationalTime(other);
+    opentime::RationalTime ot_result = ot_self.clamped(ot_other);
+    return CppRationalTime_to_CRationalTime(ot_result);
 }
-bool TimeRange_contains_rational_time(TimeRange* self, RationalTime* other)
-{
-    return reinterpret_cast<opentime::TimeRange*>(self)->contains(
-        *reinterpret_cast<opentime::RationalTime*>(other));
+
+OTIO_API TimeRange
+TimeRange_clamped_with_time_range(TimeRange self, TimeRange other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::TimeRange ot_other = CTimeRange_to_CppTimeRange(other);
+    opentime::TimeRange ot_result = ot_self.clamped(ot_other);
+    return CppTimeRange_to_CTimeRange(ot_result);
 }
-bool TimeRange_contains_time_range(TimeRange* self, TimeRange* other)
-{
-    return reinterpret_cast<opentime::TimeRange*>(self)->contains(
-        *reinterpret_cast<opentime::TimeRange*>(other));
+
+OTIO_API bool TimeRange_contains_rational_time(TimeRange self, RationalTime other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::RationalTime ot_other = CRationalTime_to_CppRationalTime(other);
+    return ot_self.contains(ot_other);
 }
-bool TimeRange_overlaps_rational_time(TimeRange* self, RationalTime* other)
-{
-    return reinterpret_cast<opentime::TimeRange*>(self)->overlaps(
-        *reinterpret_cast<opentime::RationalTime*>(other));
+
+OTIO_API bool TimeRange_contains_time_range(TimeRange self, TimeRange other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::TimeRange ot_other = CTimeRange_to_CppTimeRange(other);
+    return ot_self.contains(ot_other);
 }
-bool TimeRange_overlaps_time_range(TimeRange* self, TimeRange* other)
-{
-    return reinterpret_cast<opentime::TimeRange*>(self)->overlaps(
-        *reinterpret_cast<opentime::TimeRange*>(other));
+
+OTIO_API bool TimeRange_overlaps_rational_time(TimeRange self, RationalTime other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::RationalTime ot_other = CRationalTime_to_CppRationalTime(other);
+    return ot_self.overlaps(ot_other);
 }
-bool TimeRange_equal(TimeRange* lhs, TimeRange* rhs)
-{
-    return *reinterpret_cast<opentime::TimeRange*>(lhs) ==
-           *reinterpret_cast<opentime::TimeRange*>(rhs);
+
+OTIO_API bool TimeRange_overlaps_time_range(TimeRange self, TimeRange other) {
+    opentime::TimeRange ot_self = CTimeRange_to_CppTimeRange(self);
+    opentime::TimeRange ot_other = CTimeRange_to_CppTimeRange(other);
+    return ot_self.overlaps(ot_other);
 }
-bool TimeRange_not_equal(TimeRange* lhs, TimeRange* rhs)
-{
-    return *reinterpret_cast<opentime::TimeRange*>(lhs) !=
-           *reinterpret_cast<opentime::TimeRange*>(rhs);
+
+OTIO_API bool TimeRange_equal(TimeRange lhs, TimeRange rhs) {
+    opentime::TimeRange ot_lhs = CTimeRange_to_CppTimeRange(lhs);
+    opentime::TimeRange ot_rhs = CTimeRange_to_CppTimeRange(rhs);
+    return ot_lhs == ot_rhs;
 }
-TimeRange* TimeRange_range_from_start_end_time(
-    RationalTime* start_time, RationalTime* end_time_exclusive)
-{
-    opentime::TimeRange obj =
-        opentime::TimeRange::range_from_start_end_time(
-            *reinterpret_cast<opentime::RationalTime*>(start_time),
-            *reinterpret_cast<opentime::RationalTime*>(end_time_exclusive));
-    return reinterpret_cast<TimeRange*>(new opentime::TimeRange(obj));
+
+OTIO_API bool TimeRange_not_equal(TimeRange lhs, TimeRange rhs) {
+    opentime::TimeRange ot_lhs = CTimeRange_to_CppTimeRange(lhs);
+    opentime::TimeRange ot_rhs = CTimeRange_to_CppTimeRange(rhs);
+    return ot_lhs != ot_rhs;
 }
-void TimeRange_destroy(TimeRange* self)
-{
-    delete reinterpret_cast<opentime::TimeRange*>(self);
+
+OTIO_API TimeRange TimeRange_range_from_start_end_time(
+        RationalTime start_time, RationalTime end_time_exclusive) {
+    opentime::RationalTime ot_startTime = CRationalTime_to_CppRationalTime(start_time);
+    opentime::RationalTime ot_endTimeExclusive = CRationalTime_to_CppRationalTime(end_time_exclusive);
+    opentime::TimeRange ot_result = opentime::TimeRange::range_from_start_end_time(
+            ot_startTime, ot_endTimeExclusive);
+    return CppTimeRange_to_CTimeRange(ot_result);
 }

@@ -5,56 +5,74 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
 
-    struct MapComposableTimeRangeIterator;
-    typedef struct MapComposableTimeRangeIterator
+struct MapComposableTimeRangeIterator;
+typedef struct MapComposableTimeRangeIterator
         MapComposableTimeRangeIterator;
-    struct MapComposableTimeRange;
-    typedef struct MapComposableTimeRange MapComposableTimeRange;
+struct MapComposableTimeRange;
+typedef struct MapComposableTimeRange MapComposableTimeRange;
 
-    MapComposableTimeRange* MapComposableTimeRange_create();
-    void MapComposableTimeRange_destroy(MapComposableTimeRange* self);
-    void MapComposableTimeRange_clear(MapComposableTimeRange* self);
-    MapComposableTimeRangeIterator*
-    MapComposableTimeRange_begin(MapComposableTimeRange* self);
-    MapComposableTimeRangeIterator*
-         MapComposableTimeRange_end(MapComposableTimeRange* self);
-    void MapComposableTimeRange_swap(
-        MapComposableTimeRange* self, MapComposableTimeRange* other);
-    MapComposableTimeRangeIterator* MapComposableTimeRange_erase(
-        MapComposableTimeRange* self, MapComposableTimeRangeIterator* pos);
-    MapComposableTimeRangeIterator* MapComposableTimeRange_erase_range(
-        MapComposableTimeRange*         self,
-        MapComposableTimeRangeIterator* first,
-        MapComposableTimeRangeIterator* last);
-    int MapComposableTimeRange_erase_key(
-        MapComposableTimeRange* self, Composable* key);
-    int   MapComposableTimeRange_size(MapComposableTimeRange* self);
-    int   MapComposableTimeRange_max_size(MapComposableTimeRange* self);
-    bool  MapComposableTimeRange_empty(MapComposableTimeRange* self);
-    MapComposableTimeRangeIterator*
-                                    MapComposableTimeRange_find(MapComposableTimeRange* self, Composable* key);
-    MapComposableTimeRangeIterator* MapComposableTimeRange_insert(
-        MapComposableTimeRange* self, Composable* key, TimeRange* anyObj);
-    void MapComposableTimeRangeIterator_advance(
-        MapComposableTimeRangeIterator* iter, int dist);
-    MapComposableTimeRangeIterator* MapComposableTimeRangeIterator_next(
-        MapComposableTimeRangeIterator* iter, int dist);
-    MapComposableTimeRangeIterator* MapComposableTimeRangeIterator_prev(
-        MapComposableTimeRangeIterator* iter, int dist);
-    TimeRange*
-          MapComposableTimeRangeIterator_value(MapComposableTimeRangeIterator* iter);
-    bool  MapComposableTimeRangeIterator_equal(
-        MapComposableTimeRangeIterator* lhs,
-        MapComposableTimeRangeIterator* rhs);
-    bool  MapComposableTimeRangeIterator_not_equal(
-        MapComposableTimeRangeIterator* lhs,
-        MapComposableTimeRangeIterator* rhs);
-    void MapComposableTimeRangeIterator_destroy(
-        MapComposableTimeRangeIterator* self);
-#ifdef __cplusplus
-}
-#endif
+OTIO_API MapComposableTimeRange *MapComposableTimeRange_create();
+
+OTIO_API void MapComposableTimeRange_destroy(MapComposableTimeRange *self);
+
+OTIO_API void MapComposableTimeRange_clear(MapComposableTimeRange *self);
+
+OTIO_API MapComposableTimeRangeIterator *
+MapComposableTimeRange_begin(MapComposableTimeRange *self);
+
+OTIO_API MapComposableTimeRangeIterator *
+MapComposableTimeRange_end(MapComposableTimeRange *self);
+
+OTIO_API void MapComposableTimeRange_swap(
+        MapComposableTimeRange *self, MapComposableTimeRange *other);
+
+OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRange_erase(
+        MapComposableTimeRange *self, MapComposableTimeRangeIterator *pos);
+
+OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRange_erase_range(
+        MapComposableTimeRange *self,
+        MapComposableTimeRangeIterator *first,
+        MapComposableTimeRangeIterator *last);
+
+OTIO_API int MapComposableTimeRange_erase_key(
+        MapComposableTimeRange *self, Composable *key);
+
+OTIO_API int MapComposableTimeRange_size(MapComposableTimeRange *self);
+
+OTIO_API int MapComposableTimeRange_max_size(MapComposableTimeRange *self);
+
+OTIO_API bool MapComposableTimeRange_empty(MapComposableTimeRange *self);
+
+OTIO_API MapComposableTimeRangeIterator *
+MapComposableTimeRange_find(MapComposableTimeRange *self, Composable *key);
+
+OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRange_insert(
+        MapComposableTimeRange *self, Composable *key, TimeRange anyObj);
+
+OTIO_API void MapComposableTimeRangeIterator_advance(
+        MapComposableTimeRangeIterator *iter, int dist);
+
+OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRangeIterator_next(
+        MapComposableTimeRangeIterator *iter, int dist);
+
+OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRangeIterator_prev(
+        MapComposableTimeRangeIterator *iter, int dist);
+
+OTIO_API TimeRange
+MapComposableTimeRangeIterator_value(MapComposableTimeRangeIterator *iter);
+
+OTIO_API bool MapComposableTimeRangeIterator_equal(
+        MapComposableTimeRangeIterator *lhs,
+        MapComposableTimeRangeIterator *rhs);
+
+OTIO_API bool MapComposableTimeRangeIterator_not_equal(
+        MapComposableTimeRangeIterator *lhs,
+        MapComposableTimeRangeIterator *rhs);
+
+OTIO_API void MapComposableTimeRangeIterator_destroy(
+        MapComposableTimeRangeIterator *self);

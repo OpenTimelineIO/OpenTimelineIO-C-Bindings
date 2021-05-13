@@ -19,10 +19,10 @@
 #include <copentimelineio/serialization.h>
 
 static void otio_media_reference_constructor_test(void **state) {
-    RationalTime *start_time = RationalTime_create(5, 24);
-    RationalTime *duration = RationalTime_create(10, 24);
-    TimeRange *available_range =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(5, 24);
+    RationalTime duration = RationalTime_create(10, 24);
+    OptionalTimeRange available_range =
+            OptionalTimeRange_create(TimeRange_create_with_start_time_and_duration(start_time, duration));
 
     AnyDictionary *metadata = AnyDictionary_create();
     Any *value_any = create_safely_typed_any_string("OTIOTheMovie");
@@ -32,18 +32,12 @@ static void otio_media_reference_constructor_test(void **state) {
     MissingReference *mr = MissingReference_create(NULL, available_range, metadata);
     OTIO_RETAIN(mr);
 
-    TimeRange *mr_available_range =
+    OptionalTimeRange mr_available_range =
             MediaReference_available_range((MediaReference *) mr);
-    assert_true(TimeRange_equal(mr_available_range, available_range));
+    assert_true(OptionalTimeRange_valid(mr_available_range));
+    assert_true(TimeRange_equal(OptionalTimeRange_value(mr_available_range),
+                                OptionalTimeRange_value(available_range)));
 
-    RationalTime_destroy(start_time);
-    start_time = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(available_range);
-    available_range = NULL;
-    TimeRange_destroy(mr_available_range);
-    mr_available_range = NULL;
     AnyDictionary_destroy(metadata);
     metadata = NULL;
     Any_destroy(value_any);
@@ -53,16 +47,18 @@ static void otio_media_reference_constructor_test(void **state) {
     OTIO_RELEASE(mr);
     mr = NULL;
 
-    MissingReference *mr2 = MissingReference_create(NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    MissingReference *mr2 = MissingReference_create(NULL, nullRange, NULL);
     OTIO_RETAIN(mr2);
     mr_available_range = MediaReference_available_range((MediaReference *) mr2);
-    assert_null(mr_available_range);
+    assert_false(OptionalTimeRange_valid(mr_available_range));
     OTIO_RELEASE(mr2);
     mr = NULL;
 }
 
 static void otio_media_reference_serialization_test(void **state) {
-    MissingReference *mr = MissingReference_create(NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    MissingReference *mr = MissingReference_create(NULL, nullRange, NULL);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
@@ -89,8 +85,9 @@ static void otio_media_reference_serialization_test(void **state) {
 }
 
 static void otio_media_reference_filepath_test(void **state) {
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
     ExternalReference *filepath =
-            ExternalReference_create("var/tmp/foo.mov", NULL, NULL);
+            ExternalReference_create("var/tmp/foo.mov", nullRange, NULL);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
     Any *filepath_any = create_safely_typed_any_serializable_object(
@@ -118,18 +115,19 @@ static void otio_media_reference_filepath_test(void **state) {
 }
 
 static void otio_media_reference_equality_test(void **state) {
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
     ExternalReference *filepath =
-            ExternalReference_create("var/tmp/foo.mov", NULL, NULL);
+            ExternalReference_create("var/tmp/foo.mov", nullRange, NULL);
     OTIO_RETAIN(filepath);
     ExternalReference *filepath2 =
-            ExternalReference_create("var/tmp/foo.mov", NULL, NULL);
+            ExternalReference_create("var/tmp/foo.mov", nullRange, NULL);
     OTIO_RETAIN(filepath2);
 
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) filepath, (OTIOSerializableObject *) filepath2));
     OTIO_RELEASE(filepath2);
 
-    MissingReference *bl = MissingReference_create(NULL, NULL, NULL);
+    MissingReference *bl = MissingReference_create(NULL, nullRange, NULL);
     OTIO_RETAIN(bl);
 
     assert_false(SerializableObject_is_equivalent_to(
@@ -138,9 +136,9 @@ static void otio_media_reference_equality_test(void **state) {
     OTIO_RELEASE(filepath);
     OTIO_RELEASE(bl);
 
-    ExternalReference *filepath3 = ExternalReference_create("var/tmp/foo.mov", NULL, NULL);
+    ExternalReference *filepath3 = ExternalReference_create("var/tmp/foo.mov", nullRange, NULL);
     OTIO_RETAIN(filepath3);
-    ExternalReference *filepath4 = ExternalReference_create("var/tmp/foo2.mov", NULL, NULL);
+    ExternalReference *filepath4 = ExternalReference_create("var/tmp/foo2.mov", nullRange, NULL);
     OTIO_RETAIN(filepath4);
 
     assert_false(SerializableObject_is_equivalent_to(
@@ -151,11 +149,12 @@ static void otio_media_reference_equality_test(void **state) {
 }
 
 static void otio_media_reference_is_missing_test(void **state) {
-    ExternalReference *filepath = ExternalReference_create("var/tmp/foo.mov", NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    ExternalReference *filepath = ExternalReference_create("var/tmp/foo.mov", nullRange, NULL);
     OTIO_RETAIN(filepath);
     assert_false(MediaReference_is_missing_reference((MediaReference *) filepath));
 
-    MissingReference *bl = MissingReference_create(NULL, NULL, NULL);
+    MissingReference *bl = MissingReference_create(NULL, nullRange, NULL);
     OTIO_RETAIN(bl);
     assert_true(MediaReference_is_missing_reference((MediaReference *) bl));
 

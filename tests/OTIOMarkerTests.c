@@ -18,10 +18,10 @@
 #include <copentimelineio/serialization.h>
 
 static void otio_marker_constructor_test(void **state) {
-    RationalTime *start_time = RationalTime_create(5, 24);
-    RationalTime *duration = RationalTime_create(10, 24);
-    TimeRange *tr =
-            TimeRange_create_with_start_time_and_duration(start_time, duration);
+    RationalTime start_time = RationalTime_create(5, 24);
+    RationalTime duration = RationalTime_create(10, 24);
+    OptionalTimeRange tr =
+            OptionalTimeRange_create(TimeRange_create_with_start_time_and_duration(start_time, duration));
 
     AnyDictionary *metadata = AnyDictionary_create();
     Any *value_any = create_safely_typed_any_string("bar");
@@ -53,10 +53,8 @@ static void otio_marker_constructor_test(void **state) {
     AnyDictionary_destroy(metadata_compare);
     metadata_compare = NULL;
 
-    TimeRange *marked_range = Marker_marked_range(m);
-    assert_true(TimeRange_equal(marked_range, tr));
-    TimeRange_destroy(marked_range);
-    marked_range = NULL;
+    TimeRange marked_range = Marker_marked_range(m);
+    assert_true(TimeRange_equal(marked_range, OptionalTimeRange_value(tr)));
 
     const char *color = Marker_color(m);
     assert_string_equal(color, MarkerColor_green);
@@ -86,12 +84,6 @@ static void otio_marker_constructor_test(void **state) {
     metadata = NULL;
     Any_destroy(value_any);
     value_any = NULL;
-    RationalTime_destroy(start_time);
-    start_time = NULL;
-    RationalTime_destroy(duration);
-    duration = NULL;
-    TimeRange_destroy(tr);
-    tr = NULL;
 }
 
 static void otio_marker_upgrade_test(void **state) {
@@ -128,26 +120,21 @@ static void otio_marker_upgrade_test(void **state) {
     Marker *marker = (Marker *) safely_cast_retainer_any(decoded);
     OTIO_RETAIN(marker);
 
-    RationalTime *start_time = RationalTime_create(0, 5);
-    TimeRange *range_compare =
+    RationalTime start_time = RationalTime_create(0, 5);
+    TimeRange range_compare =
             TimeRange_create_with_start_time_and_duration(start_time, start_time);
-    TimeRange *marked_range = Marker_marked_range(marker);
+    TimeRange marked_range = Marker_marked_range(marker);
     assert_true(TimeRange_equal(range_compare, marked_range));
 
-    RationalTime_destroy(start_time);
-    start_time = NULL;
-    TimeRange_destroy(range_compare);
-    range_compare = NULL;
-    TimeRange_destroy(marked_range);
-    marked_range = NULL;
     OTIO_RELEASE(marker);
     marker = NULL;
 }
 
 static void otio_marker_equality_test(void **state) {
-    Marker *m = Marker_create(NULL, NULL, NULL, NULL);
+    OptionalTimeRange nullRange = OptionalTimeRange_create_null();
+    Marker *m = Marker_create(NULL, nullRange, NULL, NULL);
     OTIO_RETAIN(m);
-    Item *bo = Item_create(NULL, NULL, NULL, NULL, NULL);
+    Item *bo = Item_create(NULL, nullRange, NULL, NULL, NULL);
     OTIO_RETAIN(bo);
 
     assert_false(SerializableObject_is_equivalent_to(

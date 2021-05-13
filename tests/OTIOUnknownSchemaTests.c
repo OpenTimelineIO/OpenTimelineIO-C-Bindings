@@ -73,6 +73,7 @@ static int setupUnknownSchemaTests(void **state) {
     OTIOErrorStatus_destroy(errorStatus);
 
     *state = testState;
+    return 0;
 }
 
 static int teardownUnknownSchemaTests(void **state) {
@@ -80,6 +81,7 @@ static int teardownUnknownSchemaTests(void **state) {
 
     RetainerSerializableObject_managed_destroy(testState->schema_r);
     testState->schema_r = NULL;
+    return 0;
 }
 
 static void otio_unknown_schema_serialize_deserialize_test(void **state) {

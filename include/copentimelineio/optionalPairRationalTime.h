@@ -1,22 +1,23 @@
 #pragma once
 
-#include "copentime/rationalTime.h"
+#include "copentime/optionalOpenTime.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct OptionalPairRationalTime;
-    typedef struct OptionalPairRationalTime OptionalPairRationalTime;
 
-    OptionalPairRationalTime*
-    OptionalPairRationalTime_create(RationalTime* first, RationalTime* second);
-    RationalTime*
-    OptionalPairRationalTime_first(OptionalPairRationalTime* self);
-    RationalTime*
-         OptionalPairRationalTime_second(OptionalPairRationalTime* self);
-    void OptionalPairRationalTime_destroy(OptionalPairRationalTime* self);
+struct OptionalPairRationalTime;
+typedef struct OptionalPairRationalTime OptionalPairRationalTime;
 
-#ifdef __cplusplus
-}
-#endif
+OTIO_API OptionalPairRationalTime *
+OptionalPairRationalTime_create(OptionalRationalTime first, OptionalRationalTime second);
+
+OTIO_API OptionalRationalTime
+OptionalPairRationalTime_first(OptionalPairRationalTime *self);
+
+OTIO_API OptionalRationalTime
+OptionalPairRationalTime_second(OptionalPairRationalTime *self);
+
+OTIO_API void OptionalPairRationalTime_destroy(OptionalPairRationalTime *self);
