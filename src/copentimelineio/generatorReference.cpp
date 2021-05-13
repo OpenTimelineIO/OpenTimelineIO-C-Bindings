@@ -32,7 +32,7 @@ OTIO_API GeneratorReference *GeneratorReference_create(
     nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
     if (available_range.valid)
         timeRangeOptional = nonstd::optional<opentime::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(available_range.value));
+                CTimeRange_to_CppTimeRange(available_range.value));
     return reinterpret_cast<GeneratorReference *>(
             new OTIO_NS::GeneratorReference(
                     name,

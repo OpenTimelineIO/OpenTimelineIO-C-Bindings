@@ -28,9 +28,9 @@ OTIO_API Transition *Transition_create(
     OTIO_NS::RationalTime in_offset_rt = opentime::RationalTime();
     OTIO_NS::RationalTime out_offset_rt = opentime::RationalTime();
     if (in_offset.valid)
-        in_offset_rt = _COTRationalTime_to_OTRationalTime(in_offset.value);
+        in_offset_rt = CRationalTime_to_CppRationalTime(in_offset.value);
     if (out_offset.valid)
-        out_offset_rt = _COTRationalTime_to_OTRationalTime(out_offset.value);
+        out_offset_rt = CRationalTime_to_CppRationalTime(out_offset.value);
 
     OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
     if (metadata != NULL)
@@ -62,27 +62,27 @@ OTIO_API void Transition_set_transition_type(
 OTIO_API RationalTime Transition_in_offset(Transition *self) {
     opentime::RationalTime rationalTime =
             reinterpret_cast<OTIO_NS::Transition *>(self)->in_offset();
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 OTIO_API void Transition_set_in_offset(Transition *self, RationalTime in_offset) {
     reinterpret_cast<OTIO_NS::Transition *>(self)->set_in_offset(
-            _COTRationalTime_to_OTRationalTime(in_offset));
+            CRationalTime_to_CppRationalTime(in_offset));
 }
 OTIO_API RationalTime Transition_out_offset(Transition *self) {
     opentime::RationalTime rationalTime =
             reinterpret_cast<OTIO_NS::Transition *>(self)->out_offset();
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 OTIO_API void Transition_set_out_offset(Transition *self, RationalTime out_offset) {
     reinterpret_cast<OTIO_NS::Transition *>(self)->set_out_offset(
-            _COTRationalTime_to_OTRationalTime(out_offset));
+            CRationalTime_to_CppRationalTime(out_offset));
 }
 OTIO_API RationalTime
 Transition_duration(Transition *self, OTIOErrorStatus *error_status) {
     opentime::RationalTime rationalTime =
             reinterpret_cast<OTIO_NS::Transition *>(self)->duration(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 OTIO_API OptionalTimeRange
 Transition_range_in_parent(Transition *self, OTIOErrorStatus *error_status) {
@@ -90,7 +90,7 @@ Transition_range_in_parent(Transition *self, OTIOErrorStatus *error_status) {
             reinterpret_cast<OTIO_NS::Transition *>(self)->range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
     if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
-    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
+    return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
         Transition *self, OTIOErrorStatus *error_status) {
@@ -99,7 +99,7 @@ OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
                     ->trimmed_range_in_parent(
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
     if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
-    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
+    return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API const char *Transition_name(Transition *self) {
     std::string returnStr =

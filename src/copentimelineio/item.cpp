@@ -28,7 +28,7 @@ OTIO_API Item *Item_create(
     nonstd::optional<OTIO_NS::TimeRange> source_range_optional = nonstd::nullopt;
     if (source_range.valid)
         source_range_optional = nonstd::optional<OTIO_NS::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(source_range.value));
+                CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -63,13 +63,13 @@ OTIO_API OptionalTimeRange Item_source_range(Item *self) {
             reinterpret_cast<OTIO_NS::Item *>(self)->source_range();
     if (timeRangeOptional == nonstd::nullopt)
         return OptionalTimeRange_create_null();
-    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
+    return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API void Item_set_source_range(Item *self, OptionalTimeRange source_range) {
     nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional = nonstd::nullopt;
     if (source_range.valid)
         timeRangeOptional = nonstd::optional<OTIO_NS::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(source_range.value));
+                CTimeRange_to_CppTimeRange(source_range.value));
     reinterpret_cast<OTIO_NS::Item *>(self)->set_source_range(
             timeRangeOptional);
 }
@@ -89,25 +89,25 @@ OTIO_API RationalTime Item_duration(Item *self, OTIOErrorStatus *error_status) {
     OTIO_NS::RationalTime rationalTime =
             reinterpret_cast<OTIO_NS::Item *>(self)->duration(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 OTIO_API TimeRange Item_available_range(Item *self, OTIOErrorStatus *error_status) {
     OTIO_NS::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Item *>(self)->available_range(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeRange Item_trimmed_range(Item *self, OTIOErrorStatus *error_status) {
     OTIO_NS::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Item *>(self)->trimmed_range(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeRange Item_visible_range(Item *self, OTIOErrorStatus *error_status) {
     OTIO_NS::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Item *>(self)->visible_range(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API OptionalTimeRange
 Item_trimmed_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
@@ -115,13 +115,13 @@ Item_trimmed_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
             reinterpret_cast<OTIO_NS::Item *>(self)->trimmed_range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
     if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
-    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
+    return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API TimeRange Item_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
     OTIO_NS::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Item *>(self)->range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API RationalTime Item_transformed_time(
         Item *self,
@@ -130,10 +130,10 @@ OTIO_API RationalTime Item_transformed_time(
         OTIOErrorStatus *error_status) {
     OTIO_NS::RationalTime rationalTime =
             reinterpret_cast<OTIO_NS::Item *>(self)->transformed_time(
-                    _COTRationalTime_to_OTRationalTime(time),
+                    CRationalTime_to_CppRationalTime(time),
                     reinterpret_cast<OTIO_NS::Item *>(to_item),
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 OTIO_API TimeRange Item_transformed_time_range(
         Item *self,
@@ -142,10 +142,10 @@ OTIO_API TimeRange Item_transformed_time_range(
         OTIOErrorStatus *error_status) {
     OTIO_NS::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Item *>(self)->transformed_time_range(
-                    _COTTimeRange_to_OTTimeRange(time_range),
+                    CTimeRange_to_CppTimeRange(time_range),
                     reinterpret_cast<OTIO_NS::Item *>(to_item),
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API Composition *Item_parent(Item *self) {
     return Composable_parent((Composable *) self);

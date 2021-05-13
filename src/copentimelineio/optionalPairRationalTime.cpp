@@ -16,12 +16,12 @@ OptionalPairRationalTime_create(OptionalRationalTime first, OptionalRationalTime
     nonstd::optional<opentime::RationalTime> secondRationalTimeOptional =
             nonstd::nullopt;
     if (first.valid) {
-        opentime::RationalTime rationalTime = _COTRationalTime_to_OTRationalTime(first.value);
+        opentime::RationalTime rationalTime = CRationalTime_to_CppRationalTime(first.value);
         firstRationalTimeOptional =
                 nonstd::optional<opentime::RationalTime>(rationalTime);
     }
     if (second.valid) {
-        opentime::RationalTime rationalTime = _COTRationalTime_to_OTRationalTime(second.value);
+        opentime::RationalTime rationalTime = CRationalTime_to_CppRationalTime(second.value);
         secondRationalTimeOptional =
                 nonstd::optional<opentime::RationalTime>(rationalTime);
     }
@@ -37,7 +37,7 @@ OTIO_API OptionalRationalTime OptionalPairRationalTime_first(OptionalPairRationa
             reinterpret_cast<PairDef *>(self)->first;
     if (rationalTimeOptional == nonstd::nullopt) return OptionalRationalTime_create_null();
     opentime::RationalTime rtValue = rationalTimeOptional.value();
-    return OptionalRationalTime_create(_OTRationalTime_to_COTRationalTime(rtValue));
+    return OptionalRationalTime_create(CppRationalTime_to_CRationalTime(rtValue));
 }
 
 OTIO_API OptionalRationalTime
@@ -46,7 +46,7 @@ OptionalPairRationalTime_second(OptionalPairRationalTime *self) {
             reinterpret_cast<PairDef *>(self)->second;
     if (rationalTimeOptional == nonstd::nullopt) return OptionalRationalTime_create_null();
     opentime::RationalTime rtValue = rationalTimeOptional.value();
-    return OptionalRationalTime_create(_OTRationalTime_to_COTRationalTime(rtValue));
+    return OptionalRationalTime_create(CppRationalTime_to_CRationalTime(rtValue));
 }
 
 OTIO_API void OptionalPairRationalTime_destroy(OptionalPairRationalTime *self) {

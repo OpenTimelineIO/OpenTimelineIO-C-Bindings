@@ -25,7 +25,7 @@ OTIO_API Stack *Stack_create(
     nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
     if (source_range.valid)
         timeRangeOptional = nonstd::optional<opentime::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(source_range.value));
+                CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -54,7 +54,7 @@ OTIO_API TimeRange Stack_range_of_child_at_index(
     opentime::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Stack *>(self)->range_of_child_at_index(
                     index, reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeRange Stack_trimmed_range_of_child_at_index(
         Stack *self, int index, OTIOErrorStatus *error_status) {
@@ -63,13 +63,13 @@ OTIO_API TimeRange Stack_trimmed_range_of_child_at_index(
                     ->trimmed_range_of_child_at_index(
                             index,
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeRange Stack_available_range(Stack *self, OTIOErrorStatus *error_status) {
     opentime::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Stack *>(self)->available_range(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API MapComposableTimeRange *
 Stack_range_of_all_children(Stack *self, OTIOErrorStatus *error_status) {

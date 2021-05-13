@@ -15,7 +15,7 @@ OTIO_API ExternalReference *ExternalReference_create(
     nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
     if (available_range.valid)
         timeRangeOptional = nonstd::optional<opentime::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(available_range.value));
+                CTimeRange_to_CppTimeRange(available_range.value));
 
     OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
     if (metadata != NULL)

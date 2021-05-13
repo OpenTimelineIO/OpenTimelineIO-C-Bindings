@@ -66,7 +66,7 @@ Composable_duration(Composable *self, OTIOErrorStatus *error_status) {
     opentime::RationalTime rationalTime =
             reinterpret_cast<OTIO_NS::Composable *>(self)->duration(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 
 OTIO_API const char *

@@ -40,18 +40,18 @@ OTIO_API Any *create_safely_typed_any_string(const char *stringValue) {
 }
 OTIO_API Any *create_safely_typed_any_rational_time(RationalTime rationalTimeValue) {
     OTIO_NS::any anyValue = OTIO_NS::create_safely_typed_any(std::move(
-            _COTRationalTime_to_OTRationalTime(rationalTimeValue)));
+            CRationalTime_to_CppRationalTime(rationalTimeValue)));
     return reinterpret_cast<Any *>(new OTIO_NS::any(anyValue));
 }
 OTIO_API Any *create_safely_typed_any_time_range(TimeRange timeRangeValue) {
     OTIO_NS::any anyValue = OTIO_NS::create_safely_typed_any(
-            _COTTimeRange_to_OTTimeRange(timeRangeValue));
+            CTimeRange_to_CppTimeRange(timeRangeValue));
     return reinterpret_cast<Any *>(new OTIO_NS::any(anyValue));
 }
 OTIO_API Any *
 create_safely_typed_any_time_transform(TimeTransform timeTransformValue) {
     OTIO_NS::any anyValue = OTIO_NS::create_safely_typed_any(std::move(
-            _COTTimeTransform_to_OTTimeTransform(timeTransformValue)));
+            CTimeTransform_to_CppTimeTransform(timeTransformValue)));
     return reinterpret_cast<Any *>(new OTIO_NS::any(anyValue));
 }
 OTIO_API Any *create_safely_typed_any_any_vector(AnyVector *anyVectorValue) {
@@ -100,18 +100,18 @@ OTIO_API RationalTime safely_cast_rational_time_any(Any *a) {
     opentime::RationalTime rationalTime =
             OTIO_NS::safely_cast_rational_time_any(
                     *reinterpret_cast<OTIO_NS::any *>(a));
-    return _OTRationalTime_to_COTRationalTime(rationalTime);
+    return CppRationalTime_to_CRationalTime(rationalTime);
 }
 OTIO_API TimeRange safely_cast_time_range_any(Any *a) {
     opentime::TimeRange timeRange = OTIO_NS::safely_cast_time_range_any(
             *reinterpret_cast<OTIO_NS::any *>(a));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeTransform safely_cast_time_transform_any(Any *a) {
     opentime::TimeTransform timeTransform =
             OTIO_NS::safely_cast_time_transform_any(
                     *reinterpret_cast<OTIO_NS::any *>(a));
-    return _OTTimeTransform_to_COTTimeTransform(timeTransform);
+    return CppTimeTransform_to_CTimeTransform(timeTransform);
 }
 OTIO_API OTIOSerializableObject *safely_cast_retainer_any(Any *a) {
     return reinterpret_cast<OTIOSerializableObject *>(

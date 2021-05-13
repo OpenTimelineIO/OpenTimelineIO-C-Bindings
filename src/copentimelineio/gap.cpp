@@ -17,7 +17,7 @@ OTIO_API Gap *Gap_create_with_source_range(
         AnyDictionary *metadata) {
     OTIO_NS::TimeRange source_range_tr = opentime::TimeRange();
     if (source_range.valid)
-        source_range_tr = _COTTimeRange_to_OTTimeRange(source_range.value);
+        source_range_tr = CTimeRange_to_CppTimeRange(source_range.value);
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
     EffectVectorDef effectVectorDef = EffectVectorDef();
@@ -47,7 +47,7 @@ OTIO_API Gap *Gap_create_with_duration(
         AnyDictionary *metadata) {
     opentime::RationalTime duration_rt = opentime::RationalTime();
     if (duration.valid)
-        duration_rt = _COTRationalTime_to_OTRationalTime(duration.value);
+        duration_rt = CRationalTime_to_CppRationalTime(duration.value);
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
     EffectVectorDef effectVectorDef = EffectVectorDef();

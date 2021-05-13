@@ -43,7 +43,7 @@ OTIO_API Composition *Composition_create(
     nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
     if (source_range.valid)
         timeRangeOptional = nonstd::optional<opentime::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(source_range.value));
+                CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -142,7 +142,7 @@ OTIO_API TimeRange Composition_range_of_child_at_index(
                     ->range_of_child_at_index(
                             index,
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeRange Composition_trimmed_range_of_child_at_index(
         Composition *self, int index, OTIOErrorStatus *error_status) {
@@ -151,7 +151,7 @@ OTIO_API TimeRange Composition_trimmed_range_of_child_at_index(
                     ->trimmed_range_of_child_at_index(
                             index,
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API TimeRange Composition_range_of_child(
         Composition *self, Composable *child, OTIOErrorStatus *error_status) {
@@ -159,7 +159,7 @@ OTIO_API TimeRange Composition_range_of_child(
             reinterpret_cast<OTIO_NS::Composition *>(self)->range_of_child(
                     reinterpret_cast<OTIO_NS::Composable *>(child),
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API OptionalTimeRange Composition_trimmed_range_of_child(
         Composition *self,
@@ -171,15 +171,15 @@ OTIO_API OptionalTimeRange Composition_trimmed_range_of_child(
                             reinterpret_cast<OTIO_NS::Composable *>(child),
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
     if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
-    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
+    return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API OptionalTimeRange
 Composition_trim_child_range(Composition *self, TimeRange child_range) {
     nonstd::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Composition *>(self)->trim_child_range(
-                    _COTTimeRange_to_OTTimeRange(child_range));
+                    CTimeRange_to_CppTimeRange(child_range));
     if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
-    return OptionalTimeRange_create(_OTTimeRange_to_COTTimeRange(timeRangeOptional.value()));
+    return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API bool Composition_has_child(Composition *self, Composable *child) {
     return reinterpret_cast<OTIO_NS::Composition *>(self)->has_child(

@@ -18,7 +18,7 @@ Clip_create(
     nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
     if (source_range.valid)
         timeRangeOptional = nonstd::optional<opentime::TimeRange>(
-                _COTTimeRange_to_OTTimeRange(source_range.value));
+                CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
     if (name != NULL) name_str = name;
@@ -51,7 +51,7 @@ Clip_available_range(Clip *self, OTIOErrorStatus *error_status) {
     opentime::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Clip *>(self)->available_range(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 
 OTIO_API OptionalTimeRange

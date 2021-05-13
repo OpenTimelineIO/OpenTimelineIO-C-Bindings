@@ -48,7 +48,7 @@ OTIO_API Marker *Marker_create(
 
     opentime::TimeRange marked_range_tr = opentime::TimeRange();
     if (marked_range.valid)
-        marked_range_tr = _COTTimeRange_to_OTTimeRange(marked_range.value);
+        marked_range_tr = CTimeRange_to_CppTimeRange(marked_range.value);
 
     std::string color_str = OTIO_NS::Marker::Color::green;
     if (color != NULL) color_str = color;
@@ -74,11 +74,11 @@ OTIO_API void Marker_set_color(Marker *self, const char *color) {
 OTIO_API TimeRange Marker_marked_range(Marker *self) {
     opentime::TimeRange timeRange =
             reinterpret_cast<OTIO_NS::Marker *>(self)->marked_range();
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 OTIO_API void Marker_set_marked_range(Marker *self, TimeRange marked_range) {
     reinterpret_cast<OTIO_NS::Marker *>(self)->set_marked_range(
-            _COTTimeRange_to_OTTimeRange(marked_range));
+            CTimeRange_to_CppTimeRange(marked_range));
 }
 OTIO_API const char *Marker_name(Marker *self) {
     return SerializableObjectWithMetadata_name(

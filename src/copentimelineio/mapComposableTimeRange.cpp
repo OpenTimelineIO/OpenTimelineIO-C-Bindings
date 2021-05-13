@@ -89,7 +89,7 @@ OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRange_insert(
     MapIterator it =
             reinterpret_cast<MapDef *>(self)
                     ->insert({reinterpret_cast<OTIO_NS::Composable *>(key),
-                              _COTTimeRange_to_OTTimeRange(anyObj)})
+                              CTimeRange_to_CppTimeRange(anyObj)})
                     .first;
     return reinterpret_cast<MapComposableTimeRangeIterator *>(
             new MapIterator(it));
@@ -118,7 +118,7 @@ OTIO_API TimeRange
 MapComposableTimeRangeIterator_value(MapComposableTimeRangeIterator *iter) {
     opentime::TimeRange timeRange =
             (*reinterpret_cast<MapIterator *>(iter))->second;
-    return _OTTimeRange_to_COTTimeRange(timeRange);
+    return CppTimeRange_to_CTimeRange(timeRange);
 }
 
 OTIO_API bool MapComposableTimeRangeIterator_equal(

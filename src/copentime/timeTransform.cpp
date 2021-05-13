@@ -6,7 +6,7 @@
 
 OTIO_API TimeTransform TimeTransform_create() {
     opentime::TimeTransform timeTransform;
-    return _OTTimeTransform_to_COTTimeTransform(timeTransform);
+    return CppTimeTransform_to_CTimeTransform(timeTransform);
 }
 
 OTIO_API TimeTransform TimeTransform_create_with_offset_scale_rate(
@@ -32,36 +32,36 @@ OTIO_API double TimeTransform_rate(TimeTransform self) {
 
 OTIO_API TimeRange
 TimeTransform_applied_to_time_range(TimeTransform self, TimeRange other) {
-    opentime::TimeTransform ot_self = _COTTimeTransform_to_OTTimeTransform(self);
-    opentime::TimeRange ot_other = _COTTimeRange_to_OTTimeRange(other);
+    opentime::TimeTransform ot_self = CTimeTransform_to_CppTimeTransform(self);
+    opentime::TimeRange ot_other = CTimeRange_to_CppTimeRange(other);
     opentime::TimeRange ot_result = ot_self.applied_to(ot_other);
-    return _OTTimeRange_to_COTTimeRange(ot_result);
+    return CppTimeRange_to_CTimeRange(ot_result);
 }
 
 OTIO_API TimeTransform TimeTransform_applied_to_time_transform(
         TimeTransform self, TimeTransform other) {
-    opentime::TimeTransform ot_self = _COTTimeTransform_to_OTTimeTransform(self);
-    opentime::TimeTransform ot_other = _COTTimeTransform_to_OTTimeTransform(other);
+    opentime::TimeTransform ot_self = CTimeTransform_to_CppTimeTransform(self);
+    opentime::TimeTransform ot_other = CTimeTransform_to_CppTimeTransform(other);
     opentime::TimeTransform ot_result = ot_self.applied_to(ot_other);
-    return _OTTimeTransform_to_COTTimeTransform(ot_result);
+    return CppTimeTransform_to_CTimeTransform(ot_result);
 }
 
 OTIO_API RationalTime TimeTransform_applied_to_rational_time(
         TimeTransform self, RationalTime other) {
-    opentime::TimeTransform ot_self = _COTTimeTransform_to_OTTimeTransform(self);
-    opentime::RationalTime ot_other = _COTRationalTime_to_OTRationalTime(other);
+    opentime::TimeTransform ot_self = CTimeTransform_to_CppTimeTransform(self);
+    opentime::RationalTime ot_other = CRationalTime_to_CppRationalTime(other);
     opentime::RationalTime ot_result = ot_self.applied_to(ot_other);
-    return _OTRationalTime_to_COTRationalTime(ot_result);
+    return CppRationalTime_to_CRationalTime(ot_result);
 }
 
 OTIO_API bool TimeTransform_equal(TimeTransform lhs, TimeTransform rhs) {
-    opentime::TimeTransform ot_lhs = _COTTimeTransform_to_OTTimeTransform(lhs);
-    opentime::TimeTransform ot_rhs = _COTTimeTransform_to_OTTimeTransform(rhs);
+    opentime::TimeTransform ot_lhs = CTimeTransform_to_CppTimeTransform(lhs);
+    opentime::TimeTransform ot_rhs = CTimeTransform_to_CppTimeTransform(rhs);
     return ot_lhs == ot_rhs;
 }
 
 OTIO_API bool TimeTransform_not_equal(TimeTransform lhs, TimeTransform rhs) {
-    opentime::TimeTransform ot_lhs = _COTTimeTransform_to_OTTimeTransform(lhs);
-    opentime::TimeTransform ot_rhs = _COTTimeTransform_to_OTTimeTransform(rhs);
+    opentime::TimeTransform ot_lhs = CTimeTransform_to_CppTimeTransform(lhs);
+    opentime::TimeTransform ot_rhs = CTimeTransform_to_CppTimeTransform(rhs);
     return ot_lhs != ot_rhs;
 }
