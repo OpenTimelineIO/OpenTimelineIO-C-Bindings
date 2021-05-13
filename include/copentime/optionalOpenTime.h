@@ -10,11 +10,10 @@
 # define OTIO_API
 #endif
 
-struct OptionalRationalTime {
+typedef struct {
     RationalTime value;
     bool valid;
-};
-typedef struct OptionalRationalTime OptionalRationalTime;
+} OptionalRationalTime;
 
 OTIO_API OptionalRationalTime OptionalRationalTime_create(RationalTime rationalTime);
 
@@ -24,11 +23,10 @@ OTIO_API bool OptionalRationalTime_valid(OptionalRationalTime optionalRationalTi
 
 OTIO_API RationalTime OptionalRationalTime_value(OptionalRationalTime optionalRationalTime);
 
-struct OptionalTimeRange {
+typedef struct {
     TimeRange value;
     bool valid;
-};
-typedef struct OptionalTimeRange OptionalTimeRange;
+} OptionalTimeRange;
 
 OTIO_API OptionalTimeRange OptionalTimeRange_create(TimeRange timeRange);
 

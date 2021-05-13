@@ -10,7 +10,7 @@
 # define OTIO_API
 #endif
 
-typedef struct TimeTransform {
+typedef struct {
     RationalTime offset;
     double scale;
     double rate;

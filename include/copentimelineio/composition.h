@@ -22,9 +22,7 @@
 # define OTIO_API
 #endif
 
-struct Composition;
 typedef struct Composition Composition;
-struct Item;
 typedef struct Item Item;
 
 OTIO_API Composition *Composition_create(

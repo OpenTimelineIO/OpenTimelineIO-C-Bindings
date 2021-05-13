@@ -22,9 +22,7 @@ extern const char *MarkerColor_purple;
 extern const char *MarkerColor_magenta;
 extern const char *MarkerColor_black;
 extern const char *MarkerColor_white;
-struct RetainerMarker;
 typedef struct RetainerMarker RetainerMarker;
-struct Marker;
 typedef struct Marker Marker;
 
 OTIO_API RetainerMarker *RetainerMarker_create(Marker *obj);

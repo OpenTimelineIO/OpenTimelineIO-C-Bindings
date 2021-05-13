@@ -17,7 +17,6 @@
 # define OTIO_API
 #endif
 
-struct Gap;
 typedef struct Gap Gap;
 
 OTIO_API Gap *Gap_create_with_source_range(

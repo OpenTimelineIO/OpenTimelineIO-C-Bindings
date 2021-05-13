@@ -12,7 +12,6 @@
 # define OTIO_API
 #endif
 
-struct ExternalReference;
 typedef struct ExternalReference ExternalReference;
 
 OTIO_API ExternalReference *ExternalReference_create(

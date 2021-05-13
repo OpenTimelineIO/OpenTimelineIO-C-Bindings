@@ -17,7 +17,6 @@
 # define OTIO_API
 #endif
 
-struct Clip;
 typedef struct Clip Clip;
 
 OTIO_API Clip *Clip_create(
@@ -65,4 +64,3 @@ OTIO_API bool Clip_is_equivalent_to(Clip *self, OTIOSerializableObject *other);
 OTIO_API Clip *Clip_clone(Clip *self, OTIOErrorStatus *error_status);
 OTIO_API const char *Clip_schema_name(Clip *self);
 OTIO_API int Clip_schema_version(Clip *self);
-
