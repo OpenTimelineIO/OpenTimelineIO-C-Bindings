@@ -8,7 +8,6 @@
 #else
 # define OTIO_API
 #endif
-struct ComposableRetainerVectorIterator;
 typedef struct ComposableRetainerVectorIterator
         ComposableRetainerVectorIterator;
 typedef struct ComposableRetainerVector ComposableRetainerVector;
