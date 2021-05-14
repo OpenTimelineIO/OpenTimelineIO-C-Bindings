@@ -23,7 +23,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #------------------------------------------------------------------------------
 # Build options
 option(COTIO_INSTALL "Install the c bindings" ON)
-option(COTIO_SHARED_LIBS "Build shared if ON, static if OFF" ON)
+option(COTIO_SHARED_LIBS "Build shared if ON, static if OFF" OFF)
 option(COTIO_AUTOMATIC_SUBMODULES "Fetch submodules automatically" ON)
 
 if (COTIO_SHARED_LIBS)
@@ -82,6 +82,7 @@ set(OTIO_INSTALL_COMMANDLINE_TOOLS OFF)
 set(OTIO_SHARED_LIBS OFF) # build otio as a static lib
 set(WITH_EXAMPLES OFF)
 set(UNIT_TESTING OFF)
+set(BUILD_SHARED_LIBS OFF) # build cmocka as a static lib
 
 enable_testing()
 
