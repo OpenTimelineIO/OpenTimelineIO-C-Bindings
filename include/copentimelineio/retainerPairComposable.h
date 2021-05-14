@@ -3,20 +3,21 @@
 #include "composable.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    struct RetainerPairComposable;
-    typedef struct RetainerPairComposable RetainerPairComposable;
 
-    RetainerPairComposable* RetainerPairComposable_create(
-        RetainerComposable* first, RetainerComposable* second);
-    RetainerComposable*
-    RetainerPairComposable_first(RetainerPairComposable* self);
-    RetainerComposable*
-         RetainerPairComposable_second(RetainerPairComposable* self);
-    void RetainerPairComposable_destroy(RetainerPairComposable* self);
+struct RetainerPairComposable;
+typedef struct RetainerPairComposable RetainerPairComposable;
 
-#ifdef __cplusplus
-}
-#endif
+OTIO_API RetainerPairComposable *RetainerPairComposable_create(
+        RetainerComposable *first, RetainerComposable *second);
+
+OTIO_API RetainerComposable *
+RetainerPairComposable_first(RetainerPairComposable *self);
+
+OTIO_API RetainerComposable *
+RetainerPairComposable_second(RetainerPairComposable *self);
+
+OTIO_API void RetainerPairComposable_destroy(RetainerPairComposable *self);

@@ -1,15 +1,12 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
 
-    struct Any;
-    typedef struct Any Any;
+struct Any;
+typedef struct Any Any;
 
-    void Any_destroy(Any* self);
-
-#ifdef __cplusplus
-}
-#endif
+OTIO_API void Any_destroy(Any *self);

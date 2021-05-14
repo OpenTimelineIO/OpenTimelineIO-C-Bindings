@@ -11,17 +11,17 @@
 # define OTIO_API
 #endif
 
-extern const char *MarkerColor_pink;
-extern const char *MarkerColor_red;
-extern const char *MarkerColor_orange;
-extern const char *MarkerColor_yellow;
-extern const char *MarkerColor_green;
-extern const char *MarkerColor_cyan;
-extern const char *MarkerColor_blue;
-extern const char *MarkerColor_purple;
-extern const char *MarkerColor_magenta;
-extern const char *MarkerColor_black;
-extern const char *MarkerColor_white;
+OTIO_API const char *MarkerColor_pink;
+OTIO_API const char *MarkerColor_red;
+OTIO_API const char *MarkerColor_orange;
+OTIO_API const char *MarkerColor_yellow;
+OTIO_API const char *MarkerColor_green;
+OTIO_API const char *MarkerColor_cyan;
+OTIO_API const char *MarkerColor_blue;
+OTIO_API const char *MarkerColor_purple;
+OTIO_API const char *MarkerColor_magenta;
+OTIO_API const char *MarkerColor_black;
+OTIO_API const char *MarkerColor_white;
 typedef struct RetainerMarker RetainerMarker;
 typedef struct Marker Marker;
 
