@@ -8,11 +8,8 @@
 #else
 # define OTIO_API
 #endif
-struct AnyVectorIterator;
 typedef struct AnyVectorIterator AnyVectorIterator;
-struct AnyVector;
 typedef struct AnyVector AnyVector;
-struct AnyVectorMutationStamp;
 typedef struct AnyVectorMutationStamp AnyVectorMutationStamp;
 
 OTIO_API AnyVector *AnyVector_create();

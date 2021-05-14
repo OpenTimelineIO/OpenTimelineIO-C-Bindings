@@ -9,9 +9,7 @@
 # define OTIO_API
 #endif
 
-struct RetainerEffect;
 typedef struct RetainerEffect RetainerEffect;
-struct Effect;
 typedef struct Effect Effect;
 
 OTIO_API RetainerEffect *RetainerEffect_create(Effect *obj);

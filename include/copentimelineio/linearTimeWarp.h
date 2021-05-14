@@ -10,7 +10,6 @@
 # define OTIO_API
 #endif
 
-struct LinearTimeWarp;
 typedef struct LinearTimeWarp LinearTimeWarp;
 
 OTIO_API LinearTimeWarp *LinearTimeWarp_create(

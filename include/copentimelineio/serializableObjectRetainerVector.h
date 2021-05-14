@@ -7,10 +7,8 @@
 #else
 # define OTIO_API
 #endif
-struct SerializableObjectRetainerVectorIterator;
 typedef struct SerializableObjectRetainerVectorIterator
         SerializableObjectRetainerVectorIterator;
-struct SerializableObjectRetainerVector;
 typedef struct SerializableObjectRetainerVector
         SerializableObjectRetainerVector;
 

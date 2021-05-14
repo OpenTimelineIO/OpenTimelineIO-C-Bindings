@@ -9,9 +9,7 @@
 # define OTIO_API
 #endif
 
-struct EffectRetainerVectorIterator;
 typedef struct EffectRetainerVectorIterator EffectRetainerVectorIterator;
-struct EffectRetainerVector;
 typedef struct EffectRetainerVector EffectRetainerVector;
 
 OTIO_API EffectRetainerVector *EffectRetainerVector_create();

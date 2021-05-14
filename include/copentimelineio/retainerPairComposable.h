@@ -8,7 +8,6 @@
 # define OTIO_API
 #endif
 
-struct RetainerPairComposable;
 typedef struct RetainerPairComposable RetainerPairComposable;
 
 OTIO_API RetainerPairComposable *RetainerPairComposable_create(

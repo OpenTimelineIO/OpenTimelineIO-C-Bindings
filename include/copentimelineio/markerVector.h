@@ -8,9 +8,7 @@
 #else
 # define OTIO_API
 #endif
-struct MarkerVectorIterator;
 typedef struct MarkerVectorIterator MarkerVectorIterator;
-struct MarkerVector;
 typedef struct MarkerVector MarkerVector;
 
 OTIO_API MarkerVector *MarkerVector_create();

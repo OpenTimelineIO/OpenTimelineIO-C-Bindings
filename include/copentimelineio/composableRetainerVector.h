@@ -11,7 +11,6 @@
 struct ComposableRetainerVectorIterator;
 typedef struct ComposableRetainerVectorIterator
         ComposableRetainerVectorIterator;
-struct ComposableRetainerVector;
 typedef struct ComposableRetainerVector ComposableRetainerVector;
 
 OTIO_API ComposableRetainerVector *ComposableRetainerVector_create();

@@ -9,7 +9,6 @@
 # define OTIO_API
 #endif
 
-struct UnknownSchema;
 typedef struct UnknownSchema UnknownSchema;
 
 OTIO_API UnknownSchema *UnknownSchema_create(

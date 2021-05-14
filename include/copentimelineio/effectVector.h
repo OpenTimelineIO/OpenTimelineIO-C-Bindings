@@ -8,9 +8,7 @@
 #else
 # define OTIO_API
 #endif
-struct EffectVectorIterator;
 typedef struct EffectVectorIterator EffectVectorIterator;
-struct EffectVector;
 typedef struct EffectVector EffectVector;
 
 OTIO_API EffectVector *EffectVector_create();

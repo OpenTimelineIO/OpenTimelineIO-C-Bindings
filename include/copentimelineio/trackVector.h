@@ -9,9 +9,7 @@
 # define OTIO_API
 #endif
 
-struct TrackVectorIterator;
 typedef struct TrackVectorIterator TrackVectorIterator;
-struct TrackVector;
 typedef struct TrackVector TrackVector;
 
 OTIO_API TrackVector *TrackVector_create();

@@ -10,7 +10,6 @@
 # define OTIO_API
 #endif
 
-struct FreezeFrame;
 typedef struct FreezeFrame FreezeFrame;
 
 OTIO_API FreezeFrame *FreezeFrame_create(const char *name, AnyDictionary *metadata);
