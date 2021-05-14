@@ -76,7 +76,7 @@ ctest
 |----------------------------|--------------|----------------------------------------------------------------------|
 | CMAKE_INSTALL_PREFIX       | {SOME PATH}  | Install the libs to this path (`usr/lib/` by default on Linux/macOS) |
 | COTIO_INSTALL              | ON/OFF       | Install the C bindings (ON by default)                               |
-| COTIO_SHARED_LIBS          | ON/OFF       | Build shared if ON, static if OFF (ON by default)                    |
+| COTIO_SHARED_LIBS          | ON/OFF       | Build shared if ON, static if OFF (OFF by default)                    |
 | COTIO_AUTOMATIC_SUBMODULES | ON/OFF       | Fetch submodules automatically (ON by default)                       |
 
 
