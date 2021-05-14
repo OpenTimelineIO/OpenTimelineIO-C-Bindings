@@ -36,8 +36,8 @@ typedef std::vector<OTIO_NS::Composable *> ComposableVectorDef;
 typedef std::vector<OTIO_NS::Composable *>::iterator ComposableVectorIteratorDef;
 
 
-const char *TrackKind_Video = OTIO_NS::Track::Kind::video;
-const char *TrackKind_Audio = OTIO_NS::Track::Kind::audio;
+OTIO_API const char *TrackKind_Video = OTIO_NS::Track::Kind::video;
+OTIO_API const char *TrackKind_Audio = OTIO_NS::Track::Kind::audio;
 
 OTIO_API Track *Track_create(
         const char *name,

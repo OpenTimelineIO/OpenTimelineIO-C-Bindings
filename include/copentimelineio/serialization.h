@@ -5,16 +5,16 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+# define OTIO_API extern "C"
+#else
+# define OTIO_API
 #endif
-    const char* serialize_json_to_string(
-        Any* value, OTIOErrorStatus* error_status, int indent);
-    bool serialize_json_to_file(
-        Any*             value,
-        const char*      file_name,
-        OTIOErrorStatus* error_status,
-        int              indent);
-#ifdef __cplusplus
-}
-#endif
+
+OTIO_API const char *serialize_json_to_string(
+        Any *value, OTIOErrorStatus *error_status, int indent);
+
+OTIO_API bool serialize_json_to_file(
+        Any *value,
+        const char *file_name,
+        OTIOErrorStatus *error_status,
+        int indent);

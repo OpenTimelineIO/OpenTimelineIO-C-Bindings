@@ -28,8 +28,8 @@ typedef enum {
 } OTIO_Track_NeighbourGapPolicy_;
 typedef int OTIO_Track_NeighbourGapPolicy;
 
-extern const char *TrackKind_Video;
-extern const char *TrackKind_Audio;
+OTIO_API const char *TrackKind_Video;
+OTIO_API const char *TrackKind_Audio;
 
 OTIO_API Track *Track_create(
         const char *name,

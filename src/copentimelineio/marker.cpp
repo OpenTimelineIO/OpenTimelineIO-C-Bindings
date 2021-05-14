@@ -11,17 +11,18 @@
 
 typedef OTIO_NS::SerializableObject::Retainer<OTIO_NS::Marker> MarkerRetainer;
 
-const char *MarkerColor_pink = "PINK";
-const char *MarkerColor_red = "RED";
-const char *MarkerColor_orange = "ORANGE";
-const char *MarkerColor_yellow = "YELLOW";
-const char *MarkerColor_green = "GREEN";
-const char *MarkerColor_cyan = "CYAN";
-const char *MarkerColor_blue = "BLUE";
-const char *MarkerColor_purple = "PURPLE";
-const char *MarkerColor_magenta = "MAGENTA";
-const char *MarkerColor_black = "BLACK";
-const char *MarkerColor_white = "WHITE";
+OTIO_API const char *MarkerColor_pink = "PINK";
+OTIO_API const char *MarkerColor_red = "RED";
+OTIO_API const char *MarkerColor_orange = "ORANGE";
+OTIO_API const char *MarkerColor_yellow = "YELLOW";
+OTIO_API const char *MarkerColor_green = "GREEN";
+OTIO_API const char *MarkerColor_cyan = "CYAN";
+OTIO_API const char *MarkerColor_blue = "BLUE";
+OTIO_API const char *MarkerColor_purple = "PURPLE";
+OTIO_API const char *MarkerColor_magenta = "MAGENTA";
+OTIO_API const char *MarkerColor_black = "BLACK";
+OTIO_API const char *MarkerColor_white = "WHITE";
+
 OTIO_API RetainerMarker *RetainerMarker_create(Marker *obj) {
     return reinterpret_cast<RetainerMarker *>(
             new MarkerRetainer(reinterpret_cast<OTIO_NS::Marker *>(obj)));
