@@ -95,7 +95,7 @@ SerializableCollection_remove_child(
             index, reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
 }
 
-OTIO_API const char*
+OTIO_API otiostr
 SerializableCollection_name(SerializableCollection* self)
 {
     return SerializableObjectWithMetadata_name(
@@ -128,7 +128,7 @@ SerializableCollection_to_json_file(
         reinterpret_cast<OTIOSerializableObject*>(self), file_name, error_status, indent);
 }
 
-OTIO_API const char*
+OTIO_API otiostr
 SerializableCollection_to_json_string(
     SerializableCollection* self, OTIOErrorStatus* error_status, int indent)
 {
@@ -152,7 +152,7 @@ SerializableCollection_clone(
         reinterpret_cast<OTIOSerializableObject*>(self), error_status);
 }
 
-OTIO_API const char*
+OTIO_API otiostr
 SerializableCollection_schema_name(SerializableCollection* self)
 {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject*>(self));

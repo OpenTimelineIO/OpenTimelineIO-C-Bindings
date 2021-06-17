@@ -150,7 +150,7 @@ OTIO_API TimeRange Item_transformed_time_range(
 OTIO_API Composition *Item_parent(Item *self) {
     return Composable_parent((Composable *) self);
 }
-OTIO_API const char *Item_name(Item *self) {
+OTIO_API otiostr Item_name(Item *self) {
     return Composable_name((Composable *) self);
 }
 OTIO_API AnyDictionary *Item_metadata(Item *self) {
@@ -168,7 +168,7 @@ OTIO_API bool Item_to_json_file(
     return Composable_to_json_file(
             (Composable *) self, file_name, error_status, indent);
 }
-OTIO_API const char *
+OTIO_API otiostr
 Item_to_json_string(Item *self, OTIOErrorStatus *error_status, int indent) {
     return Composable_to_json_string(
             (Composable *) self, error_status, indent);
@@ -179,7 +179,7 @@ OTIO_API bool Item_is_equivalent_to(Item *self, OTIOSerializableObject *other) {
 OTIO_API Item *Item_clone(Item *self, OTIOErrorStatus *error_status) {
     return (Item *) Composable_clone((Composable *) self, error_status);
 }
-OTIO_API const char *Item_schema_name(Item *self) {
+OTIO_API otiostr Item_schema_name(Item *self) {
     return Composable_schema_name((Composable *) self);
 }
 OTIO_API int Item_schema_version(Item *self) {

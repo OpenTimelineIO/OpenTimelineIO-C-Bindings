@@ -32,7 +32,7 @@ OTIO_API bool SerializableCollection_set_child(
     OTIOErrorStatus*        error_status);
 OTIO_API bool SerializableCollection_remove_child(
     SerializableCollection* self, int index, OTIOErrorStatus* error_status);
-OTIO_API const char* SerializableCollection_name(SerializableCollection* self);
+OTIO_API otiostr SerializableCollection_name(SerializableCollection* self);
 OTIO_API void        SerializableCollection_set_name(
            SerializableCollection* self, const char* name);
 OTIO_API AnyDictionary*
@@ -42,7 +42,7 @@ OTIO_API bool SerializableCollection_to_json_file(
     const char*             file_name,
     OTIOErrorStatus*        error_status,
     int                     indent);
-OTIO_API const char* SerializableCollection_to_json_string(
+OTIO_API otiostr SerializableCollection_to_json_string(
     SerializableCollection* self,
     OTIOErrorStatus*        error_status,
     int                     indent);
@@ -50,6 +50,6 @@ OTIO_API bool SerializableCollection_is_equivalent_to(
     SerializableCollection* self, OTIOSerializableObject* other);
 OTIO_API SerializableCollection* SerializableCollection_clone(
     SerializableCollection* self, OTIOErrorStatus* error_status);
-OTIO_API const char*
+OTIO_API otiostr
     SerializableCollection_schema_name(SerializableCollection* self);
 OTIO_API int SerializableCollection_schema_version(SerializableCollection* self);

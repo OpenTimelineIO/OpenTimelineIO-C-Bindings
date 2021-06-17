@@ -33,8 +33,9 @@ static void otio_marker_constructor_test(void **state) {
     AnyDictionaryIterator_destroy(it);
     it = NULL;
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) m),
+    otiostr serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) m);
+    assert_string_equal(serializableObjectName,
                         "marker_1");
 
     AnyDictionary *metadata_compare = SerializableObjectWithMetadata_metadata(
@@ -43,7 +44,7 @@ static void otio_marker_constructor_test(void **state) {
     AnyDictionaryIterator *it_end = AnyDictionary_end(metadata_compare);
     assert_true(AnyDictionaryIterator_not_equal(it, it_end));
     Any *compare_any = AnyDictionaryIterator_value(it);
-    const char *compare_value = safely_cast_string_any(compare_any);
+    otiostr compare_value = safely_cast_string_any(compare_any);
     assert_string_equal(compare_value, "bar");
     assert_int_equal(AnyDictionary_size(metadata_compare), 1);
     AnyDictionaryIterator_destroy(it);
@@ -52,6 +53,7 @@ static void otio_marker_constructor_test(void **state) {
     it_end = NULL;
     AnyDictionary_destroy(metadata_compare);
     metadata_compare = NULL;
+    otiostr_delete(compare_value);
 
     TimeRange marked_range = Marker_marked_range(m);
     assert_true(TimeRange_equal(marked_range, OptionalTimeRange_value(tr)));
@@ -63,7 +65,7 @@ static void otio_marker_constructor_test(void **state) {
 
     Any *marker_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) m);
-    const char *encoded = serialize_json_to_string(marker_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(marker_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) (m));
     bool decoded_successfully =
@@ -79,6 +81,7 @@ static void otio_marker_constructor_test(void **state) {
     marker_any = NULL;
     OTIO_RELEASE(decoded_object);
     decoded_object = NULL;
+    otiostr_delete(encoded);
 
     AnyDictionary_destroy(metadata);
     metadata = NULL;

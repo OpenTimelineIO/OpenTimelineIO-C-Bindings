@@ -17,13 +17,12 @@ OTIO_API OpenTimeErrorStatus *OpenTimeErrorStatus_create_with_outcome_and_detail
             static_cast<opentime::ErrorStatus::Outcome>(in_outcome),
             in_details));
 }
-OTIO_API const char *OpenTimeErrorStatus_outcome_to_string(
+OTIO_API otiostr OpenTimeErrorStatus_outcome_to_string(
         OpenTimeErrorStatus *self, OpenTime_ErrorStatus_Outcome var1) {
     std::string returnStr = opentime::ErrorStatus::outcome_to_string(
             static_cast<opentime::ErrorStatus::Outcome>(var1));
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr outcomeStr = otiostr_create(returnStr.c_str());
+    return outcomeStr;
 }
 OTIO_API void OpenTimeErrorStatus_destroy(OpenTimeErrorStatus *self) {
     delete reinterpret_cast<opentime::ErrorStatus *>(self);

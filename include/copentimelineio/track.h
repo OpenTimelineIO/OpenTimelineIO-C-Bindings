@@ -36,7 +36,7 @@ OTIO_API Track *Track_create(
         OptionalTimeRange source_range,
         const char *kind,
         AnyDictionary *metadata);
-OTIO_API const char *Track_kind(Track *self);
+OTIO_API otiostr Track_kind(Track *self);
 OTIO_API void Track_set_kind(Track *self, const char *kind);
 OTIO_API TimeRange Track_range_of_child_at_index(
         Track *self, int index, OTIOErrorStatus *error_status);
@@ -55,7 +55,7 @@ OTIO_API ComposableVector *Track_each_clip(Track *self);
 OTIO_API MapComposableTimeRange *
 Track_range_of_all_children(Track *self, OTIOErrorStatus *error_status);
 
-OTIO_API const char *Track_composition_kind(Track *self);
+OTIO_API otiostr Track_composition_kind(Track *self);
 OTIO_API ComposableRetainerVector *Track_children(Track *self);
 OTIO_API void Track_clear_children(Track *self);
 OTIO_API bool Track_set_children(
@@ -107,7 +107,7 @@ OTIO_API TimeRange Track_transformed_time_range(
         Item *to_item,
         OTIOErrorStatus *error_status);
 OTIO_API Composition *Track_parent(Track *self);
-OTIO_API const char *Track_name(Track *self);
+OTIO_API otiostr Track_name(Track *self);
 OTIO_API AnyDictionary *Track_metadata(Track *self);
 OTIO_API void Track_set_name(Track *self, const char *name);
 OTIO_API bool Track_to_json_file(
@@ -115,9 +115,9 @@ OTIO_API bool Track_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *Track_to_json_string(
+OTIO_API otiostr Track_to_json_string(
         Track *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool Track_is_equivalent_to(Track *self, OTIOSerializableObject *other);
 OTIO_API Track *Track_clone(Track *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Track_schema_name(Track *self);
+OTIO_API otiostr Track_schema_name(Track *self);
 OTIO_API int Track_schema_version(Track *self);

@@ -1,6 +1,7 @@
 #pragma once
 #include "any.h"
 #include <stdbool.h>
+#include <otiostr/otiostr.h>
 
 #ifdef __cplusplus
 # define OTIO_API extern "C"
@@ -37,7 +38,7 @@ OTIO_API AnyDictionaryIterator*
     AnyDictionaryIterator_next(AnyDictionaryIterator* iter, int dist);
 OTIO_API AnyDictionaryIterator*
             AnyDictionaryIterator_prev(AnyDictionaryIterator* iter, int dist);
-OTIO_API const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter);
+OTIO_API otiostr AnyDictionaryIterator_key(AnyDictionaryIterator* iter);
 OTIO_API Any*        AnyDictionaryIterator_value(AnyDictionaryIterator* iter);
 OTIO_API bool       AnyDictionaryIterator_equal(
           AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs);

@@ -31,7 +31,7 @@ static void otio_effect_constructor_test(void **state) {
 
     Any *effect_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) ef);
-    const char *encoded = serialize_json_to_string(effect_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(effect_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) ef);
     bool decoded_successfully =
@@ -44,10 +44,13 @@ static void otio_effect_constructor_test(void **state) {
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) ef, decoded_object));
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) decoded_object),
-                        "blur it");
-    assert_string_equal(Effect_effect_name((Effect *) decoded_object), "blur");
+    otiostr serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) decoded_object);
+    assert_string_equal(serializableObjectName, "blur it");
+    otiostr_delete(serializableObjectName);
+    serializableObjectName = Effect_effect_name((Effect *) decoded_object);
+    assert_string_equal(serializableObjectName, "blur");
+    otiostr_delete(serializableObjectName);
 
     AnyDictionaryIterator_destroy(it);
     it = NULL;
@@ -58,7 +61,7 @@ static void otio_effect_constructor_test(void **state) {
     AnyDictionaryIterator *it_end = AnyDictionary_end(metadata_compare);
     assert_true(AnyDictionaryIterator_not_equal(it, it_end));
     Any *compare_any = AnyDictionaryIterator_value(it);
-    const char *compare_value = safely_cast_string_any(compare_any);
+    otiostr compare_value = safely_cast_string_any(compare_any);
     assert_string_equal(compare_value, "bar");
     assert_int_equal(AnyDictionary_size(metadata_compare), 1);
     AnyDictionaryIterator_destroy(it);
@@ -81,6 +84,8 @@ static void otio_effect_constructor_test(void **state) {
     decoded_object = NULL;
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(encoded);
+    otiostr_delete(compare_value);
 }
 
 static void otio_effect_eq_test(void **state) {
@@ -118,9 +123,13 @@ static void otio_linear_time_warp_constructor_test(void **state) {
     RetainerSerializableObject *ef_r = RetainerSerializableObject_create(
             (OTIOSerializableObject *) ef);
 
-    assert_string_equal(Effect_effect_name((Effect *) ef), "LinearTimeWarp");
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) ef), "Foo");
+    otiostr serializableObjectName = Effect_effect_name((Effect *) ef);
+    assert_string_equal(serializableObjectName, "LinearTimeWarp");
+    otiostr_delete(serializableObjectName);
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) ef);
+    assert_string_equal(serializableObjectName, "Foo");
+    otiostr_delete(serializableObjectName);
 
     assert_double_equal(LinearTimeWarp_time_scalar(ef), 2.5, DBL_EPSILON);
 
@@ -132,7 +141,7 @@ static void otio_linear_time_warp_constructor_test(void **state) {
     assert_true(AnyDictionaryIterator_not_equal(it, it_end));
 
     Any *compare_any = AnyDictionaryIterator_value(it);
-    const char *compare_value = safely_cast_string_any(compare_any);
+    otiostr compare_value = safely_cast_string_any(compare_any);
     assert_string_equal(compare_value, "bar");
 
     assert_int_equal(AnyDictionary_size(metadata_compare), 1);
@@ -149,6 +158,7 @@ static void otio_linear_time_warp_constructor_test(void **state) {
     value_any = NULL;
     AnyDictionary_destroy(metadata);
     metadata = NULL;
+    otiostr_delete(compare_value);
 
     RetainerSerializableObject_managed_destroy(ef_r);
     ef = NULL;
@@ -164,10 +174,13 @@ static void otio_freeze_frame_constructor_test(void **state) {
     RetainerSerializableObject *ef_r = RetainerSerializableObject_create(
             (OTIOSerializableObject *) ef);
 
-    assert_string_equal(Effect_effect_name((Effect *) ef), "FreezeFrame");
+    otiostr serializableObjectName = Effect_effect_name((Effect *) ef);
+    assert_string_equal(serializableObjectName, "FreezeFrame");
+    otiostr_delete(serializableObjectName);
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) ef), "Foo");
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) ef);
+    assert_string_equal(serializableObjectName, "Foo");
     assert_double_equal(LinearTimeWarp_time_scalar((LinearTimeWarp *) ef), 0, DBL_EPSILON);
 
     AnyDictionary *metadata_compare = SerializableObjectWithMetadata_metadata(
@@ -178,7 +191,7 @@ static void otio_freeze_frame_constructor_test(void **state) {
     assert_true(AnyDictionaryIterator_not_equal(it, it_end));
 
     Any *compare_any = AnyDictionaryIterator_value(it);
-    const char *compare_value = safely_cast_string_any(compare_any);
+    otiostr compare_value = safely_cast_string_any(compare_any);
     assert_string_equal(compare_value, "bar");
 
     assert_double_equal(AnyDictionary_size(metadata_compare), 1, DBL_EPSILON);
@@ -195,6 +208,7 @@ static void otio_freeze_frame_constructor_test(void **state) {
     value_any = NULL;
     AnyDictionary_destroy(metadata);
     metadata = NULL;
+    otiostr_delete(compare_value);
 
     RetainerSerializableObject_managed_destroy(ef_r);
     ef = NULL;

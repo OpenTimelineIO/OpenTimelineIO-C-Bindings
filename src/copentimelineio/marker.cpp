@@ -62,12 +62,11 @@ OTIO_API Marker *Marker_create(
     return reinterpret_cast<Marker *>(new OTIO_NS::Marker(
             name_str, marked_range_tr, color_str, metdata_dictionary));
 }
-OTIO_API const char *Marker_color(Marker *self) {
+OTIO_API otiostr Marker_color(Marker *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Marker *>(self)->color();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr colorStr = otiostr_create(returnStr.c_str());
+    return colorStr;
 }
 OTIO_API void Marker_set_color(Marker *self, const char *color) {
     reinterpret_cast<OTIO_NS::Marker *>(self)->set_color(color);
@@ -81,7 +80,7 @@ OTIO_API void Marker_set_marked_range(Marker *self, TimeRange marked_range) {
     reinterpret_cast<OTIO_NS::Marker *>(self)->set_marked_range(
             CTimeRange_to_CppTimeRange(marked_range));
 }
-OTIO_API const char *Marker_name(Marker *self) {
+OTIO_API otiostr Marker_name(Marker *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
 }
@@ -103,7 +102,7 @@ OTIO_API bool Marker_to_json_file(
     return SerializableObject_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
-OTIO_API const char *Marker_to_json_string(
+OTIO_API otiostr Marker_to_json_string(
         Marker *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -116,7 +115,7 @@ OTIO_API Marker *Marker_clone(Marker *self, OTIOErrorStatus *error_status) {
     return (Marker *) SerializableObject_clone(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
-OTIO_API const char *Marker_schema_name(Marker *self) {
+OTIO_API otiostr Marker_schema_name(Marker *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 OTIO_API int Marker_schema_version(Marker *self) {

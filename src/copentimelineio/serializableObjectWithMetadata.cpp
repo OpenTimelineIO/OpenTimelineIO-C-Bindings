@@ -15,14 +15,13 @@ OTIO_API SerializableObjectWithMetadata *SerializableObjectWithMetadata_create(
             new OTIO_NS::SerializableObjectWithMetadata(
                     name_str, metadataDictionary));
 }
-OTIO_API const char *
+OTIO_API otiostr
 SerializableObjectWithMetadata_name(SerializableObjectWithMetadata *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::SerializableObjectWithMetadata *>(self)
                     ->name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr nameStr = otiostr_create(returnStr.c_str());
+    return nameStr;
 }
 OTIO_API void SerializableObjectWithMetadata_set_name(
         SerializableObjectWithMetadata *self, const char *name) {
@@ -46,7 +45,7 @@ OTIO_API bool SerializableObjectWithMetadata_to_json_file(
     return SerializableObject_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
-OTIO_API const char *SerializableObjectWithMetadata_to_json_string(
+OTIO_API otiostr SerializableObjectWithMetadata_to_json_string(
         SerializableObjectWithMetadata *self,
         OTIOErrorStatus *error_status,
         int indent) {
@@ -67,7 +66,7 @@ OTIO_API bool SerializableObjectWithMetadata_is_unknown_schema(
         SerializableObjectWithMetadata *self) {
     return SerializableObject_is_unknown_schema(reinterpret_cast<OTIOSerializableObject *>(self));
 }
-OTIO_API const char *SerializableObjectWithMetadata_schema_name(
+OTIO_API otiostr SerializableObjectWithMetadata_schema_name(
         SerializableObjectWithMetadata *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }

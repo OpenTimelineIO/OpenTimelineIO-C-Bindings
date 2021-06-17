@@ -30,7 +30,7 @@ OTIO_API TimeRange Timeline_range_of_child(
         Timeline *self, Composable *child, OTIOErrorStatus *error_status);
 OTIO_API TrackVector *Timeline_audio_tracks(Timeline *self);
 OTIO_API TrackVector *Timeline_video_tracks(Timeline *self);
-OTIO_API const char *Timeline_name(Timeline *self);
+OTIO_API otiostr Timeline_name(Timeline *self);
 OTIO_API void Timeline_set_name(Timeline *self, const char *name);
 OTIO_API AnyDictionary *Timeline_metadata(Timeline *self);
 OTIO_API bool Timeline_to_json_file(
@@ -38,10 +38,10 @@ OTIO_API bool Timeline_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *Timeline_to_json_string(
+OTIO_API otiostr Timeline_to_json_string(
         Timeline *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool Timeline_is_equivalent_to(Timeline *self, OTIOSerializableObject *other);
 OTIO_API Timeline *Timeline_clone(Timeline *self, OTIOErrorStatus *error_status);
 OTIO_API bool Timeline_is_unknown_schema(Timeline *self);
-OTIO_API const char *Timeline_schema_name(Timeline *self);
+OTIO_API otiostr Timeline_schema_name(Timeline *self);
 OTIO_API int Timeline_schema_version(Timeline *self);

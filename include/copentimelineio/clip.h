@@ -50,7 +50,7 @@ OTIO_API TimeRange Clip_transformed_time_range(
 OTIO_API bool Clip_visible(Clip *self);
 OTIO_API bool Clip_overlapping(Clip *self);
 OTIO_API Composition *Clip_parent(Clip *self);
-OTIO_API const char *Clip_name(Clip *self);
+OTIO_API otiostr Clip_name(Clip *self);
 OTIO_API AnyDictionary *Clip_metadata(Clip *self);
 OTIO_API void Clip_set_name(Clip *self, const char *name);
 OTIO_API bool Clip_to_json_file(
@@ -58,9 +58,9 @@ OTIO_API bool Clip_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *
+OTIO_API otiostr
 Clip_to_json_string(Clip *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool Clip_is_equivalent_to(Clip *self, OTIOSerializableObject *other);
 OTIO_API Clip *Clip_clone(Clip *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Clip_schema_name(Clip *self);
+OTIO_API otiostr Clip_schema_name(Clip *self);
 OTIO_API int Clip_schema_version(Clip *self);

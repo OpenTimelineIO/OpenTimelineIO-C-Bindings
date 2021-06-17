@@ -72,7 +72,7 @@ OTIO_API TimeRange Gap_transformed_time_range(
 
 OTIO_API Composition *Gap_parent(Gap *self);
 
-OTIO_API const char *Gap_name(Gap *self);
+OTIO_API otiostr Gap_name(Gap *self);
 
 OTIO_API AnyDictionary *Gap_metadata(Gap *self);
 
@@ -84,13 +84,13 @@ OTIO_API bool Gap_to_json_file(
         OTIOErrorStatus *error_status,
         int indent);
 
-OTIO_API const char *
+OTIO_API otiostr
 Gap_to_json_string(Gap *self, OTIOErrorStatus *error_status, int indent);
 
 OTIO_API bool Gap_is_equivalent_to(Gap *self, OTIOSerializableObject *other);
 
 OTIO_API Gap *Gap_clone(Gap *self, OTIOErrorStatus *error_status);
 
-OTIO_API const char *Gap_schema_name(Gap *self);
+OTIO_API otiostr Gap_schema_name(Gap *self);
 
 OTIO_API int Gap_schema_version(Gap *self);

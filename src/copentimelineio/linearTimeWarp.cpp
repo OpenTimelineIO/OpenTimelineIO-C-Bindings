@@ -33,7 +33,7 @@ LinearTimeWarp_set_time_scalar(LinearTimeWarp* self, double time_scalar)
     reinterpret_cast<OTIO_NS::LinearTimeWarp*>(self)->set_time_scalar(
         time_scalar);
 }
-OTIO_API const char* LinearTimeWarp_effect_name(LinearTimeWarp* self)
+OTIO_API otiostr LinearTimeWarp_effect_name(LinearTimeWarp* self)
 {
     return Effect_effect_name((Effect*) self);
 }
@@ -42,7 +42,7 @@ OTIO_API void LinearTimeWarp_set_effect_name(
 {
     Effect_set_name((Effect*) self, effect_name);
 }
-OTIO_API const char* LinearTimeWarp_name(LinearTimeWarp* self)
+OTIO_API otiostr LinearTimeWarp_name(LinearTimeWarp* self)
 {
     return Effect_name((Effect*) self);
 }
@@ -64,7 +64,7 @@ OTIO_API bool LinearTimeWarp_to_json_file(
     return Effect_to_json_file(
         (Effect*) self, file_name, error_status, indent);
 }
-OTIO_API const char* LinearTimeWarp_to_json_string(
+OTIO_API otiostr LinearTimeWarp_to_json_string(
     LinearTimeWarp* self, OTIOErrorStatus* error_status, int indent)
 {
     return Effect_to_json_string((Effect*) self, error_status, indent);
@@ -79,7 +79,7 @@ LinearTimeWarp_clone(LinearTimeWarp* self, OTIOErrorStatus* error_status)
 {
     return (LinearTimeWarp*) Effect_clone((Effect*) self, error_status);
 }
-OTIO_API const char* LinearTimeWarp_schema_name(LinearTimeWarp* self)
+OTIO_API otiostr LinearTimeWarp_schema_name(LinearTimeWarp* self)
 {
     return Effect_schema_name((Effect*) self);
 }

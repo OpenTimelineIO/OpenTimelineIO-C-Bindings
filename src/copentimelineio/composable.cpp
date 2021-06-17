@@ -69,7 +69,7 @@ Composable_duration(Composable *self, OTIOErrorStatus *error_status) {
     return CppRationalTime_to_CRationalTime(rationalTime);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Composable_name(Composable *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
@@ -96,7 +96,7 @@ Composable_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Composable_to_json_string(
         Composable *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
@@ -115,7 +115,7 @@ Composable_clone(Composable *self, OTIOErrorStatus *error_status) {
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Composable_schema_name(Composable *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }

@@ -2,15 +2,14 @@
 #include <opentimelineio/serialization.h>
 #include <string.h>
 
-OTIO_API const char *serialize_json_to_string(
+OTIO_API otiostr serialize_json_to_string(
         Any *value, OTIOErrorStatus *error_status, int indent) {
     std::string returnStr = OTIO_NS::serialize_json_to_string(
             *reinterpret_cast<OTIO_NS::any *>(value),
             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status),
             indent);
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr jsonStr = otiostr_create(returnStr.c_str());
+    return jsonStr;
 }
 
 OTIO_API bool serialize_json_to_file(

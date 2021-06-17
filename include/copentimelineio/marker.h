@@ -35,11 +35,11 @@ OTIO_API Marker *Marker_create(
         OptionalTimeRange marked_range,
         const char *color,
         AnyDictionary *metadata);
-OTIO_API const char *Marker_color(Marker *self);
+OTIO_API otiostr Marker_color(Marker *self);
 OTIO_API void Marker_set_color(Marker *self, const char *color);
 OTIO_API TimeRange Marker_marked_range(Marker *self);
 OTIO_API void Marker_set_marked_range(Marker *self, TimeRange marked_range);
-OTIO_API const char *Marker_name(Marker *self);
+OTIO_API otiostr Marker_name(Marker *self);
 OTIO_API void Marker_set_name(Marker *self, const char *name);
 OTIO_API AnyDictionary *Marker_metadata(Marker *self);
 OTIO_API bool Marker_to_json_file(
@@ -47,9 +47,9 @@ OTIO_API bool Marker_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *Marker_to_json_string(
+OTIO_API otiostr Marker_to_json_string(
         Marker *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool Marker_is_equivalent_to(Marker *self, OTIOSerializableObject *other);
 OTIO_API Marker *Marker_clone(Marker *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Marker_schema_name(Marker *self);
+OTIO_API otiostr Marker_schema_name(Marker *self);
 OTIO_API int Marker_schema_version(Marker *self);

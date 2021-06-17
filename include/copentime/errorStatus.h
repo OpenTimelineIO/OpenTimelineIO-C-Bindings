@@ -1,5 +1,7 @@
 #pragma once
 
+#include "otiostr/otiostr.h"
+
 #ifdef __cplusplus
 # define OTIO_API extern "C"
 #else
@@ -27,6 +29,6 @@ OTIO_API OpenTimeErrorStatus* OpenTimeErrorStatus_create_with_outcome(
              OpenTime_ErrorStatus_Outcome in_outcome);
 OTIO_API OpenTimeErrorStatus* OpenTimeErrorStatus_create_with_outcome_and_details(
              OpenTime_ErrorStatus_Outcome in_outcome, const char* in_details);
-OTIO_API const char* OpenTimeErrorStatus_outcome_to_string(
+OTIO_API otiostr OpenTimeErrorStatus_outcome_to_string(
              OpenTimeErrorStatus* self, OpenTime_ErrorStatus_Outcome var1);
 OTIO_API void OpenTimeErrorStatus_destroy(OpenTimeErrorStatus* self);
