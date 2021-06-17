@@ -54,7 +54,7 @@ SerializableObject_to_json_file(
             indent);
 }
 
-OTIO_API const char*
+OTIO_API otiostr
 SerializableObject_to_json_string(
     OTIOSerializableObject* self, OTIOErrorStatus* error_status, int indent)
 {
@@ -63,9 +63,8 @@ SerializableObject_to_json_string(
             ->to_json_string(
                 reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status),
                 indent);
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr jsonStr = otiostr_create(returnStr.c_str());
+    return jsonStr;
 }
 
 OTIO_API OTIOSerializableObject*
@@ -123,14 +122,13 @@ SerializableObject_is_unknown_schema(OTIOSerializableObject* self)
         ->is_unknown_schema();
 }
 
-OTIO_API const char*
+OTIO_API otiostr
 SerializableObject_schema_name(OTIOSerializableObject* self)
 {
     std::string returnStr =
         reinterpret_cast<OTIO_NS::SerializableObject*>(self)->schema_name();
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr schemaNameStr = otiostr_create(returnStr.c_str());
+    return schemaNameStr;
 }
 
 OTIO_API int

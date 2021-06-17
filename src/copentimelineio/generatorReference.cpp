@@ -41,13 +41,12 @@ OTIO_API GeneratorReference *GeneratorReference_create(
                     parametersDictionary,
                     metadataDictionary));
 }
-OTIO_API const char *GeneratorReference_generator_kind(GeneratorReference *self) {
+OTIO_API otiostr GeneratorReference_generator_kind(GeneratorReference *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::GeneratorReference *>(self)
                     ->generator_kind();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr generatorKindStr = otiostr_create(returnStr.c_str());
+    return generatorKindStr;
 }
 OTIO_API void GeneratorReference_set_generator_kind(
         GeneratorReference *self, const char *generator_kind) {
@@ -71,7 +70,7 @@ OTIO_API void GeneratorReference_set_available_range(
 OTIO_API bool GeneratorReference_is_missing_reference(GeneratorReference *self) {
     return MediaReference_is_missing_reference((MediaReference *) self);
 }
-OTIO_API const char *GeneratorReference_name(GeneratorReference *self) {
+OTIO_API otiostr GeneratorReference_name(GeneratorReference *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
 }
@@ -92,7 +91,7 @@ OTIO_API bool GeneratorReference_to_json_file(
     return SerializableObject_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
-OTIO_API const char *GeneratorReference_to_json_string(
+OTIO_API otiostr GeneratorReference_to_json_string(
         GeneratorReference *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -107,7 +106,7 @@ OTIO_API GeneratorReference *GeneratorReference_clone(
     return (GeneratorReference *) SerializableObject_clone(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
-OTIO_API const char *GeneratorReference_schema_name(GeneratorReference *self) {
+OTIO_API otiostr GeneratorReference_schema_name(GeneratorReference *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 OTIO_API int GeneratorReference_schema_version(GeneratorReference *self) {

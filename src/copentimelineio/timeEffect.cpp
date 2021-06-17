@@ -11,7 +11,7 @@ OTIO_API TimeEffect* TimeEffect_create(
         effect_name,
         *reinterpret_cast<OTIO_NS::AnyDictionary*>(metadata)));
 }
-OTIO_API const char* TimeEffect_effect_name(TimeEffect* self)
+OTIO_API otiostr TimeEffect_effect_name(TimeEffect* self)
 {
     return Effect_effect_name((Effect*) self);
 }
@@ -19,7 +19,7 @@ OTIO_API void TimeEffect_set_effect_name(TimeEffect* self, const char* effect_na
 {
     Effect_set_effect_name((Effect*) self, effect_name);
 }
-OTIO_API const char* TimeEffect_name(TimeEffect* self)
+OTIO_API otiostr TimeEffect_name(TimeEffect* self)
 {
     return Effect_name((Effect*) self);
 }
@@ -41,7 +41,7 @@ OTIO_API bool TimeEffect_to_json_file(
     return Effect_to_json_file(
         (Effect*) self, file_name, error_status, indent);
 }
-OTIO_API const char* TimeEffect_to_json_string(
+OTIO_API otiostr TimeEffect_to_json_string(
     TimeEffect* self, OTIOErrorStatus* error_status, int indent)
 {
     return Effect_to_json_string((Effect*) self, error_status, indent);
@@ -56,7 +56,7 @@ TimeEffect_clone(TimeEffect* self, OTIOErrorStatus* error_status)
 {
     return (TimeEffect*) Effect_clone((Effect*) self, error_status);
 }
-OTIO_API const char* TimeEffect_schema_name(TimeEffect* self)
+OTIO_API otiostr TimeEffect_schema_name(TimeEffect* self)
 {
     return Effect_schema_name((Effect*) self);
 }

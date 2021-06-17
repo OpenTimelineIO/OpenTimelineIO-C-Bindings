@@ -25,7 +25,7 @@ OTIO_API OptionalTimeRange MissingReference_available_range(MissingReference *se
 OTIO_API void MissingReference_set_available_range(
         MissingReference *self, OptionalTimeRange available_range);
 
-OTIO_API const char *MissingReference_name(MissingReference *self);
+OTIO_API otiostr MissingReference_name(MissingReference *self);
 
 OTIO_API void MissingReference_set_name(MissingReference *self, const char *name);
 
@@ -37,7 +37,7 @@ OTIO_API bool MissingReference_to_json_file(
         OTIOErrorStatus *error_status,
         int indent);
 
-OTIO_API const char *MissingReference_to_json_string(
+OTIO_API otiostr MissingReference_to_json_string(
         MissingReference *self, OTIOErrorStatus *error_status, int indent);
 
 OTIO_API bool MissingReference_is_equivalent_to(
@@ -46,6 +46,6 @@ OTIO_API bool MissingReference_is_equivalent_to(
 OTIO_API MissingReference *MissingReference_clone(
         MissingReference *self, OTIOErrorStatus *error_status);
 
-OTIO_API const char *MissingReference_schema_name(MissingReference *self);
+OTIO_API otiostr MissingReference_schema_name(MissingReference *self);
 
 OTIO_API int MissingReference_schema_version(MissingReference *self);

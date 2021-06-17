@@ -1,6 +1,7 @@
 #pragma once
 
 #include "copentime/errorStatus.h"
+#include "otiostr/otiostr.h"
 #include <stdbool.h>
 
 #ifdef __cplusplus
@@ -64,16 +65,16 @@ OTIO_API int RationalTime_to_frames_with_rate(RationalTime self, double rate);
 
 OTIO_API double RationalTime_to_seconds(RationalTime self);
 
-OTIO_API const char *RationalTime_to_timecode(
+OTIO_API otiostr RationalTime_to_timecode(
         RationalTime self,
         double rate,
         OpenTime_IsDropFrameRate drop_frame,
         OpenTimeErrorStatus *error_status);
 
-OTIO_API const char *RationalTime_to_timecode_auto(
+OTIO_API otiostr RationalTime_to_timecode_auto(
         RationalTime self, OpenTimeErrorStatus *error_status);
 
-OTIO_API const char *RationalTime_to_time_string(RationalTime self);
+OTIO_API otiostr RationalTime_to_time_string(RationalTime self);
 
 OTIO_API RationalTime RationalTime_add(RationalTime lhs, RationalTime rhs);
 

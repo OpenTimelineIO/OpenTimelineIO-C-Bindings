@@ -67,12 +67,11 @@ OTIO_API Composition *Composition_create(
             effectsVector,
             markersVector));
 }
-OTIO_API const char *Composition_composition_kind(Composition *self) {
+OTIO_API otiostr Composition_composition_kind(Composition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Composition *>(self)->composition_kind();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr compositionKindStr = otiostr_create(returnStr.c_str());
+    return compositionKindStr;
 }
 OTIO_API ComposableRetainerVector *Composition_children(Composition *self) {
     ComposableRetainerVectorDef composableRetainerVector =
@@ -257,7 +256,7 @@ OTIO_API Composition *Composition_parent(Composition *self) {
     return reinterpret_cast<Composition *>(
             reinterpret_cast<OTIO_NS::Composition *>(self)->parent());
 }
-OTIO_API const char *Composition_name(Composition *self) {
+OTIO_API otiostr Composition_name(Composition *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
 }
@@ -278,7 +277,7 @@ OTIO_API bool Composition_to_json_file(
     return SerializableObject_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
-OTIO_API const char *Composition_to_json_string(
+OTIO_API otiostr Composition_to_json_string(
         Composition *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -293,7 +292,7 @@ Composition_clone(Composition *self, OTIOErrorStatus *error_status) {
     return (Composition *) SerializableObject_clone(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
-OTIO_API const char *Composition_schema_name(Composition *self) {
+OTIO_API otiostr Composition_schema_name(Composition *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 OTIO_API int Composition_schema_version(Composition *self) {
