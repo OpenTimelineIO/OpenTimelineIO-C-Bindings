@@ -51,7 +51,7 @@ static void otio_clip_constructor_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) clip);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(clip_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(clip_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) clip);
 
@@ -68,6 +68,7 @@ static void otio_clip_constructor_test(void **state) {
     errorStatus = NULL;
     Any_destroy(decoded);
     decoded = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_clip_ranges_test(void **state) {

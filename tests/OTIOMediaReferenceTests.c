@@ -64,7 +64,7 @@ static void otio_media_reference_serialization_test(void **state) {
 
     Any *mr_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) mr);
-    const char *encoded = serialize_json_to_string(mr_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(mr_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) mr);
     bool decoded_successfully =
@@ -82,6 +82,7 @@ static void otio_media_reference_serialization_test(void **state) {
     decoded_object = NULL;
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_media_reference_filepath_test(void **state) {
@@ -92,7 +93,7 @@ static void otio_media_reference_filepath_test(void **state) {
 
     Any *filepath_any = create_safely_typed_any_serializable_object(
             (OTIOSerializableObject *) filepath);
-    const char *encoded =
+    otiostr encoded =
             serialize_json_to_string(filepath_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object(
@@ -112,6 +113,7 @@ static void otio_media_reference_filepath_test(void **state) {
     decoded_object = NULL;
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_media_reference_equality_test(void **state) {

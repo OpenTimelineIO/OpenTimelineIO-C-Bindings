@@ -196,22 +196,22 @@ static void opentime_rational_time_timecodentsc2997fps_test(void **state) {
     double frames = 1084319;
     double rate_float = 30000.0 / 1001.0;
     RationalTime t = RationalTime_create(frames, rate_float);
-    const char *dftc = RationalTime_to_timecode(
+    otiostr dftc = RationalTime_to_timecode(
             t, rate_float, OpenTime_IsDropFrameRate_ForceYes, errorStatus);
     assert_string_equal(dftc, "10:03:00;05");
 
-    const char *tc = RationalTime_to_timecode(
+    otiostr tc = RationalTime_to_timecode(
             t, rate_float, OpenTime_IsDropFrameRate_ForceNo, errorStatus);
     assert_string_equal(tc, "10:02:23:29");
 
     /* Detect DFTC from rate for backward compatibility with old versions */
-    const char *tc_auto = RationalTime_to_timecode(
+    otiostr tc_auto = RationalTime_to_timecode(
             t, rate_float, OpenTime_IsDropFrameRate_InferFromRate, errorStatus);
     assert_string_equal(tc_auto, "10:03:00;05");
 
-    free((char *) dftc);
-    free((char *) tc);
-    free((char *) tc_auto);
+    otiostr_delete(dftc);
+    otiostr_delete(tc);
+    otiostr_delete(tc_auto);
     OpenTimeErrorStatus_destroy(errorStatus);
 }
 
@@ -224,19 +224,17 @@ static void opentime_rational_time_timecode2997_test(void **state) {
     const char *ref_values_dftc[6] = {"00:05:59;29", "00:06:00;02",
                                       "00:09:59;29", "00:10:00;00",
                                       "00:10:00;01", "00:10:00;02"};
-    const char *to_dftc = "";
-    const char *to_tc = "";
-    const char *to_auto_tc = "";
+
     RationalTime t;
     RationalTime t1;
     RationalTime t2;
     for (int i = 0; i < 6; i++) {
         t = RationalTime_create(ref_values_val[i], 29.97);
-        to_dftc = RationalTime_to_timecode(
+        otiostr to_dftc = RationalTime_to_timecode(
                 t, 29.97, OpenTime_IsDropFrameRate_ForceYes, errorStatus);
-        to_tc = RationalTime_to_timecode(
+        otiostr to_tc = RationalTime_to_timecode(
                 t, 29.97, OpenTime_IsDropFrameRate_ForceNo, errorStatus);
-        to_auto_tc = RationalTime_to_timecode(
+        otiostr to_auto_tc = RationalTime_to_timecode(
                 t, 29.97, OpenTime_IsDropFrameRate_InferFromRate, errorStatus);
 
         /* 29.97 should auto-detect dftc for backward compatability */
@@ -252,11 +250,11 @@ static void opentime_rational_time_timecode2997_test(void **state) {
 
         t2 = RationalTime_from_timecode(ref_values_tc[i], 29.97, errorStatus);
         assert_true(RationalTime_equal(t2, t));
-    }
 
-    free((char *) to_dftc);
-    free((char *) to_tc);
-    free((char *) to_auto_tc);
+        otiostr_delete(to_dftc);
+        otiostr_delete(to_tc);
+        otiostr_delete(to_auto_tc);
+    }
     OpenTimeErrorStatus_destroy(errorStatus);
 }
 

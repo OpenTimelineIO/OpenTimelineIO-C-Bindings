@@ -82,7 +82,9 @@ static void otio_composition_constructor_test(void **state) {
             (SerializableObjectWithMetadata *) co),
                         "test");
 
-    assert_string_equal(Composition_composition_kind(co), "Composition");
+    otiostr compositionKind = Composition_composition_kind(co);
+    assert_string_equal(compositionKind, "Composition");
+    otiostr_delete(compositionKind);
 
     assert_true(resultOK);
 
@@ -328,7 +330,7 @@ static void otio_stack_serialize_test(void **state) {
     assert_true(insertOK);
     Any *stack_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) st);
-    const char *encoded = serialize_json_to_string(stack_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(stack_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) st);
     bool decoded_successfully =
@@ -346,6 +348,7 @@ static void otio_stack_serialize_test(void **state) {
     decoded_object = NULL;
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_stack_trim_child_range_test(void **state) {
@@ -745,7 +748,7 @@ static void otio_track_serialize_test(void **state) {
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Any *sq_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) sq);
-    const char *encoded = serialize_json_to_string(sq_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(sq_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) sq);
     bool decoded_successfully =
@@ -763,6 +766,7 @@ static void otio_track_serialize_test(void **state) {
     decoded_object = NULL;
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_track_instancing_test(void **state) {
@@ -2259,23 +2263,35 @@ static void otio_nesting_child_at_time_with_children_test(void **state) {
     ComposableRetainerVector_destroy(composableRetainerVector);
     composableRetainerVector = NULL;
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) leader), "leader");
+    otiostr serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) leader);
+    assert_string_equal(serializableObjectName, "leader");
+    otiostr_delete(serializableObjectName);
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) body), "body");
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) body);
+    assert_string_equal(serializableObjectName, "body");
+    otiostr_delete(serializableObjectName);
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) credits), "credits");
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) credits);
+    assert_string_equal(serializableObjectName, "credits");
+    otiostr_delete(serializableObjectName);
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) clip1), "clip1");
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) clip1);
+    assert_string_equal(serializableObjectName, "clip1");
+    otiostr_delete(serializableObjectName);
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) clip2), "clip2");
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) clip2);
+    assert_string_equal(serializableObjectName, "clip2");
+    otiostr_delete(serializableObjectName);
 
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) clip3), "clip3");
+    serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) clip3);
+    assert_string_equal(serializableObjectName, "clip3");
+    otiostr_delete(serializableObjectName);
 
     struct NameFrame {
         const char *name;

@@ -21,7 +21,7 @@ static void otio_composable_constructor_test(void **state) {
     AnyDictionaryIterator *it = AnyDictionary_insert(metadata, "foo", value);
     Composable *seqi =
             Composable_create_with_name_and_metadata("test", metadata);
-    const char *name = SerializableObjectWithMetadata_name(
+    otiostr name = SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) seqi);
     assert_string_equal(name, "test");
 
@@ -60,6 +60,7 @@ static void otio_composable_constructor_test(void **state) {
     itMetadataEnd = NULL;
     AnyDictionaryIterator_destroy(itMetadataResult);
     itMetadataResult = NULL;
+    otiostr_delete(name);
 }
 
 static void otio_composable_serialize_test(void **state) {
@@ -72,7 +73,7 @@ static void otio_composable_serialize_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) seqi);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(seqi_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(seqi_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) seqi);
 
@@ -94,6 +95,7 @@ static void otio_composable_serialize_test(void **state) {
     errorStatus = NULL;
     Any_destroy(decoded);
     decoded = NULL;
+    otiostr_delete(encoded);
 }
 
 int main(void) {
