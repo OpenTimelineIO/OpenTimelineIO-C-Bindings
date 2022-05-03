@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright Contributors to the OpenTimelineIO project
+
 #include "copentimelineio/composableRetainerVector.h"
 #include <opentimelineio/composable.h>
 #include <vector>

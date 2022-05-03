@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright Contributors to the OpenTimelineIO project
+
 #include "copentime/rationalTime.h"
 #include "copentime/util.h"
 #include <opentime/rationalTime.h>
