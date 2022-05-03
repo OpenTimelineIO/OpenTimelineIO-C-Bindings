@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright Contributors to the OpenTimelineIO project
+
 #include "copentimelineio/anyVector.h"
 #include <opentimelineio/anyVector.h>
 #include <opentimelineio/version.h>

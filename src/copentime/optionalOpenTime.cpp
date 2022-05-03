@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright Contributors to the OpenTimelineIO project
+
 #include "copentime/optionalOpenTime.h"
 
 OTIO_API OptionalRationalTime OptionalRationalTime_create(RationalTime rationalTime) {

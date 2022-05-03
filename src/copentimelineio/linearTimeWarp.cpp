@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright Contributors to the OpenTimelineIO project
+
 #include "copentimelineio/linearTimeWarp.h"
 #include <copentimelineio/effect.h>
 #include <opentimelineio/anyDictionary.h>
