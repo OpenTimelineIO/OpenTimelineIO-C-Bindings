@@ -39,3 +39,5 @@ inline opentime::TimeTransform CTimeTransform_to_CppTimeTransform(TimeTransform 
     opentime::RationalTime offset = CRationalTime_to_CppRationalTime(timeTransform.offset);
     return opentime::TimeTransform(offset, timeTransform.scale, timeTransform.rate);
 }
+
+OTIO_API void Opentime_Free(void *ptr);
