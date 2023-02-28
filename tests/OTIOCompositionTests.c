@@ -2058,7 +2058,7 @@ static void otio_nesting_deeply_nesting_test(void **state) {
     assert_true(RationalTime_equal(stack_transformed_time_fifty_clip, middle));
     assert_true(RationalTime_equal(stack_transformed_time_ninetynine_clip, last));
 
-    int num_wrappers = 10;
+    #define num_wrappers 10
     Stack *wrappers[num_wrappers];
     struct ClipWrapperPair clipWrapperPair;
     clipWrapperPair.clip = clip;
