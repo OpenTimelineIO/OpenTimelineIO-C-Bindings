@@ -52,3 +52,23 @@ OTIOErrorStatus_destroy(OTIOErrorStatus* self)
 {
     delete reinterpret_cast<OTIO_NS::ErrorStatus*>(self);
 }
+
+OTIO_API const char* 
+OTIOErrorStatus_details(OTIOErrorStatus* self)
+{;
+    std::string returnStr = 
+        reinterpret_cast<OTIO_NS::ErrorStatus*>(self)->details;
+    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
+    strcpy(charPtr, returnStr.c_str());
+    return charPtr;
+}
+
+OTIO_API const char* 
+OTIOErrorStatus_full_description(OTIOErrorStatus* self)
+{;
+    std::string returnStr = 
+        reinterpret_cast<OTIO_NS::ErrorStatus*>(self)->full_description;
+    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
+    strcpy(charPtr, returnStr.c_str());
+    return charPtr;
+}
