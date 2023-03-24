@@ -27,7 +27,15 @@ foreach(TEST ${TESTS})
         cmocka
         copentime
         copentimelineio
-        pthread)
+        )
+
+    if (WIN32)
+        # don't link pthread
+    else()
+        target_link_libraries(C${TEST} PUBLIC
+            pthread
+            )
+    endif()
     target_compile_definitions(C${TEST} PRIVATE
         SAMPLE_DATA_DIR=${CMAKE_CURRENT_SOURCE_DIR}/sample_data/)
     add_test(NAME C${TEST} COMMAND C${TEST})
