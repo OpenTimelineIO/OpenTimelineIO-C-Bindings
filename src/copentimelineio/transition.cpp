@@ -50,12 +50,11 @@ OTIO_API Transition *Transition_create(
 OTIO_API bool Transition_overlapping(Transition *self) {
     return reinterpret_cast<OTIO_NS::Transition *>(self)->overlapping();
 }
-OTIO_API const char *Transition_transition_type(Transition *self) {
+OTIO_API otiostr Transition_transition_type(Transition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Transition *>(self)->transition_type();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr transitionTypeStr = otiostr_create(returnStr.c_str());
+    return transitionTypeStr;
 }
 OTIO_API void Transition_set_transition_type(
         Transition *self, const char *transition_type) {
@@ -104,12 +103,11 @@ OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
     if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
-OTIO_API const char *Transition_name(Transition *self) {
+OTIO_API otiostr Transition_name(Transition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Transition *>(self)->name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr nameStr = otiostr_create(returnStr.c_str());
+    return nameStr;
 }
 OTIO_API AnyDictionary *Transition_metadata(Transition *self) {
     OTIO_NS::AnyDictionary anyDictionary =
@@ -136,7 +134,7 @@ OTIO_API bool Transition_to_json_file(
     return Composable_to_json_file(
             (Composable *) self, file_name, error_status, indent);
 }
-OTIO_API const char *Transition_to_json_string(
+OTIO_API otiostr Transition_to_json_string(
         Transition *self, OTIOErrorStatus *error_status, int indent) {
     return Composable_to_json_string(
             (Composable *) self, error_status, indent);
@@ -149,7 +147,7 @@ OTIO_API Transition *
 Transition_clone(Transition *self, OTIOErrorStatus *error_status) {
     return (Transition *) Composable_clone((Composable *) self, error_status);
 }
-OTIO_API const char *Transition_schema_name(Transition *self) {
+OTIO_API otiostr Transition_schema_name(Transition *self) {
     return Composable_schema_name((Composable *) self);
 }
 OTIO_API int Transition_schema_version(Transition *self) {

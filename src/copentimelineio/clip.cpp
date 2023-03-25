@@ -130,7 +130,7 @@ Clip_parent(Clip *self) {
     return Composable_parent((Composable *) self);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Clip_name(Clip *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
@@ -158,7 +158,7 @@ Clip_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Clip_to_json_string(Clip *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -176,7 +176,7 @@ Clip_clone(Clip *self, OTIOErrorStatus *error_status) {
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Clip_schema_name(Clip *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }

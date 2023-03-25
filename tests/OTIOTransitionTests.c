@@ -30,14 +30,16 @@ static void otio_transition_constructor_test(void **state) {
     it = NULL;
 
     assert_string_equal(Transition_transition_type(trx), "SMPTE.Dissolve");
-    assert_string_equal(Transition_name(trx), "AtoB");
+    otiostr serializableObjectName = Transition_name(trx);
+    assert_string_equal(serializableObjectName, "AtoB");
+    otiostr_delete(serializableObjectName);
 
     AnyDictionary *metadata_compare = Transition_metadata(trx);
     it = AnyDictionary_find(metadata_compare, "foo");
     AnyDictionaryIterator *it_end = AnyDictionary_end(metadata_compare);
     assert_true(AnyDictionaryIterator_not_equal(it, it_end));
     Any *compare_any = AnyDictionaryIterator_value(it);
-    const char *compare_value = safely_cast_string_any(compare_any);
+    otiostr compare_value = safely_cast_string_any(compare_any);
     assert_string_equal(compare_value, "bar");
     assert_int_equal(AnyDictionary_size(metadata_compare), 1);
     AnyDictionaryIterator_destroy(it);
@@ -50,6 +52,7 @@ static void otio_transition_constructor_test(void **state) {
     OTIO_RELEASE(trx);
     trx = NULL;
     Any_destroy(value_any);
+    otiostr_delete(compare_value);
 }
 
 int main(void) {

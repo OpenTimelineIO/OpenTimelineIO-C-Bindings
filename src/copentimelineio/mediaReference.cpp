@@ -46,7 +46,7 @@ OTIO_API bool MediaReference_is_missing_reference(MediaReference *self) {
     return reinterpret_cast<OTIO_NS::MediaReference *>(self)
             ->is_missing_reference();
 }
-OTIO_API const char *MediaReference_name(MediaReference *self) {
+OTIO_API otiostr MediaReference_name(MediaReference *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
 }
@@ -67,7 +67,7 @@ OTIO_API bool MediaReference_to_json_file(
     return SerializableObject_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
-OTIO_API const char *MediaReference_to_json_string(
+OTIO_API otiostr MediaReference_to_json_string(
         MediaReference *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -82,7 +82,7 @@ MediaReference_clone(MediaReference *self, OTIOErrorStatus *error_status) {
     return (MediaReference *) SerializableObject_clone(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
-OTIO_API const char *MediaReference_schema_name(MediaReference *self) {
+OTIO_API otiostr MediaReference_schema_name(MediaReference *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 OTIO_API int MediaReference_schema_version(MediaReference *self) {

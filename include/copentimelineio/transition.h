@@ -27,7 +27,7 @@ OTIO_API Transition *Transition_create(
         OptionalRationalTime out_offset,
         AnyDictionary *metadata);
 OTIO_API bool Transition_overlapping(Transition *self);
-OTIO_API const char *Transition_transition_type(Transition *self);
+OTIO_API otiostr Transition_transition_type(Transition *self);
 OTIO_API void Transition_set_transition_type(
         Transition *self, const char *transition_type);
 OTIO_API RationalTime Transition_in_offset(Transition *self);
@@ -42,7 +42,7 @@ Transition_range_in_parent(Transition *self,
 OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
         Transition *self,
         OTIOErrorStatus *error_status);
-OTIO_API const char *Transition_name(Transition *self);
+OTIO_API otiostr Transition_name(Transition *self);
 OTIO_API AnyDictionary *Transition_metadata(Transition *self);
 OTIO_API Composition *Transition_parent(Transition *self);
 OTIO_API bool Transition_visible(Transition *self);
@@ -52,11 +52,11 @@ OTIO_API bool Transition_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *Transition_to_json_string(
+OTIO_API otiostr Transition_to_json_string(
         Transition *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool
 Transition_is_equivalent_to(Transition *self, OTIOSerializableObject *other);
 OTIO_API Transition *
 Transition_clone(Transition *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Transition_schema_name(Transition *self);
+OTIO_API otiostr Transition_schema_name(Transition *self);
 OTIO_API int Transition_schema_version(Transition *self);

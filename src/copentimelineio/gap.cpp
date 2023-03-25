@@ -139,7 +139,7 @@ OTIO_API Composition *Gap_parent(Gap *self) {
     return Composable_parent((Composable *) self);
 }
 
-OTIO_API const char *Gap_name(Gap *self) {
+OTIO_API otiostr Gap_name(Gap *self) {
     return Composable_name((Composable *) self);
 }
 
@@ -160,7 +160,7 @@ OTIO_API bool Gap_to_json_file(
             (Composable *) self, file_name, error_status, indent);
 }
 
-OTIO_API const char *
+OTIO_API otiostr
 Gap_to_json_string(Gap *self, OTIOErrorStatus *error_status, int indent) {
     return Composable_to_json_string(
             (Composable *) self, error_status, indent);
@@ -174,7 +174,7 @@ OTIO_API Gap *Gap_clone(Gap *self, OTIOErrorStatus *error_status) {
     return (Gap *) Composable_clone((Composable *) self, error_status);
 }
 
-OTIO_API const char *Gap_schema_name(Gap *self) {
+OTIO_API otiostr Gap_schema_name(Gap *self) {
     return Composable_schema_name((Composable *) self);
 }
 

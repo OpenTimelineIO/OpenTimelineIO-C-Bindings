@@ -28,7 +28,7 @@ static void opentime_type_serializer_serialize_test(void **state) {
 
     Any *rt_any = create_safely_typed_any_rational_time(rt);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
-    const char *encoded = serialize_json_to_string(rt_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(rt_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_rational_time(rt);
 
@@ -40,6 +40,7 @@ static void opentime_type_serializer_serialize_test(void **state) {
     assert_true(RationalTime_equal(rt, decoded_rt));
     Any_destroy(decoded);
     decoded = NULL;
+    otiostr_delete(encoded);
 
     RationalTime rt_dur = RationalTime_create(10, 20);
     TimeRange tr = TimeRange_create_with_start_time_and_duration(rt, rt_dur);
@@ -56,6 +57,7 @@ static void opentime_type_serializer_serialize_test(void **state) {
     assert_true(TimeRange_equal(tr, decoded_tr));
     Any_destroy(decoded);
     decoded = NULL;
+    otiostr_delete(encoded);
 
     TimeTransform tt =
             TimeTransform_create_with_offset_scale_rate(rt, 1.5, 24);
@@ -72,6 +74,7 @@ static void opentime_type_serializer_serialize_test(void **state) {
     assert_true(TimeTransform_equal(tt, decoded_tt));
     Any_destroy(decoded);
     decoded = NULL;
+    otiostr_delete(encoded);
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
@@ -90,8 +93,9 @@ static void otio_serializable_object_constructor_test(void **state) {
     AnyDictionary *metadataResult = SerializableObjectWithMetadata_metadata(so);
     it = AnyDictionary_find(metadataResult, "foo");
     Any *fooValAny = AnyDictionaryIterator_value(it);
-    const char *fooValStr = safely_cast_string_any(fooValAny);
+    otiostr fooValStr = safely_cast_string_any(fooValAny);
     assert_string_equal(fooValStr, "bar");
+    otiostr_delete(fooValStr);
 
     AnyDictionaryIterator_destroy(it);
     it = NULL;

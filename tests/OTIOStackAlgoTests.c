@@ -681,7 +681,9 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) flattenedStack_0,
             (OTIOSerializableObject *) trackDgE_0));
-    assert_string_equal(Composable_name(flattenedStack_1), "Z");
+    otiostr serializableObjectName = Composable_name(flattenedStack_1);
+    assert_string_equal(serializableObjectName, "Z");
+    otiostr_delete(serializableObjectName);
     RationalTime start = RationalTime_create(50, 24);
     RationalTime duration = RationalTime_create(50, 24);
     TimeRange tr =
@@ -737,7 +739,9 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
     ComposableRetainerVectorIterator_destroy(trackDgEIt);
     trackDgEIt = NULL;
 
-    assert_string_equal(Composable_name(flattenedStack_0), "Z");
+    serializableObjectName = Composable_name(flattenedStack_0);
+    assert_string_equal(serializableObjectName, "Z");
+    otiostr_delete(serializableObjectName);
     start = RationalTime_create(0, 24);
     duration = RationalTime_create(50, 24);
     tr = TimeRange_create_with_start_time_and_duration(start, duration);
@@ -749,7 +753,9 @@ static void otio_stack_algo_flatten_gaps_with_trims_test(void **state) {
     assert_true(SerializableObject_is_equivalent_to(
             (OTIOSerializableObject *) flattenedStack_1,
             (OTIOSerializableObject *) trackgFg_1));
-    assert_string_equal(Composable_name(flattenedStack_2), "Z");
+    serializableObjectName = Composable_name(flattenedStack_2);
+    assert_string_equal(serializableObjectName, "Z");
+    otiostr_delete(serializableObjectName);
     start = RationalTime_create(100, 24);
     tr = TimeRange_create_with_start_time_and_duration(start, duration);
     OptionalTimeRange flattenedStack_2_source_range =
@@ -1037,7 +1043,9 @@ static void otio_stack_algo_flatten_with_transition_test(void **state) {
     RetainerComposable *flat_track_1_retainer =
             ComposableRetainerVectorIterator_value(flat_track_it);
     Composable *flat_track_1 = RetainerComposable_value(flat_track_1_retainer);
-    assert_string_equal(Composable_name(flat_track_1), "test_transition");
+    otiostr serializableObjectName = Composable_name(flat_track_1);
+    assert_string_equal(serializableObjectName, "test_transition");
+    otiostr_delete(serializableObjectName);
 
     ComposableRetainerVectorIterator_destroy(flat_track_it);
     flat_track_1 = NULL;

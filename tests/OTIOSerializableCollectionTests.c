@@ -78,7 +78,9 @@ static void otio_serializable_collection_constructor_test(void **state) {
     SerializableCollection *sc = testState->sc;
     RetainerSerializableObject *sc_r = testState->sc_r;
 
-    assert_string_equal(SerializableCollection_name(sc), "test");
+    otiostr serializableObjectName = SerializableCollection_name(sc);
+    assert_string_equal(serializableObjectName, "test");
+    otiostr_delete(serializableObjectName);
 
     SerializableObjectRetainerVector *serializableObjectRetainerVector =
             SerializableCollection_children(sc);
@@ -155,7 +157,7 @@ static void otio_serializable_collection_serialize_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) sc);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(sc_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(sc_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) sc);
 
@@ -171,6 +173,7 @@ static void otio_serializable_collection_serialize_test(void **state) {
     errorStatus = NULL;
     Any_destroy(decoded);
     decoded = NULL;
+    otiostr_delete(encoded);
 }
 
 int main(void) {

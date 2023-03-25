@@ -95,7 +95,7 @@ static void otio_unknown_schema_serialize_deserialize_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
     Any *serialize_any = create_safely_typed_any_serializable_object(schema);
-    const char *encoded =
+    otiostr encoded =
             serialize_json_to_string(serialize_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object(schema);
@@ -106,6 +106,7 @@ static void otio_unknown_schema_serialize_deserialize_test(void **state) {
     assert_true(SerializableObject_is_equivalent_to(schema, decoded_object));
     OTIO_RELEASE(decoded_object);
     decoded_object = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_unknown_schema_is_unknwon_schema_test(void **state) {

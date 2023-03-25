@@ -34,7 +34,7 @@ OTIO_API Composition *Composition_create(
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers);
-OTIO_API const char *Composition_composition_kind(Composition *self);
+OTIO_API otiostr Composition_composition_kind(Composition *self);
 OTIO_API ComposableRetainerVector *Composition_children(Composition *self);
 OTIO_API void Composition_clear_children(Composition *self);
 OTIO_API bool Composition_set_children(
@@ -104,7 +104,7 @@ OTIO_API TimeRange Composition_transformed_time_range(
         Item *to_item,
         OTIOErrorStatus *error_status);
 OTIO_API Composition *Composition_parent(Composition *self);
-OTIO_API const char *Composition_name(Composition *self);
+OTIO_API otiostr Composition_name(Composition *self);
 OTIO_API AnyDictionary *Composition_metadata(Composition *self);
 OTIO_API void Composition_set_name(Composition *self, const char *name);
 OTIO_API bool Composition_to_json_file(
@@ -112,11 +112,11 @@ OTIO_API bool Composition_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *Composition_to_json_string(
+OTIO_API otiostr Composition_to_json_string(
         Composition *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool
 Composition_is_equivalent_to(Composition *self, OTIOSerializableObject *other);
 OTIO_API Composition *
 Composition_clone(Composition *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Composition_schema_name(Composition *self);
+OTIO_API otiostr Composition_schema_name(Composition *self);
 OTIO_API int Composition_schema_version(Composition *self);

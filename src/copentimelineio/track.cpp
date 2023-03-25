@@ -67,11 +67,10 @@ OTIO_API Track *Track_create(
     return reinterpret_cast<Track *>(new OTIO_NS::Track(
             name_str, timeRangeOptional, kind_str, metadataDictionary));
 }
-OTIO_API const char *Track_kind(Track *self) {
+OTIO_API otiostr Track_kind(Track *self) {
     std::string returnStr = reinterpret_cast<OTIO_NS::Track *>(self)->kind();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr trackKindStr = otiostr_create(returnStr.c_str());
+    return trackKindStr;
 }
 OTIO_API void Track_set_kind(Track *self, const char *kind) {
     reinterpret_cast<OTIO_NS::Track *>(self)->set_kind(kind);
@@ -140,7 +139,7 @@ Track_range_of_all_children(Track *self, OTIOErrorStatus *error_status) {
     return reinterpret_cast<MapComposableTimeRange *>(
             new MapComposableTimeRangeDef(mapComposableTimeRange));
 }
-OTIO_API const char *Track_composition_kind(Track *self) {
+OTIO_API otiostr Track_composition_kind(Track *self) {
     return Composition_composition_kind((Composition *) self);
 }
 OTIO_API ComposableRetainerVector *Track_children(Track *self) {
@@ -253,7 +252,7 @@ OTIO_API TimeRange Track_transformed_time_range(
 OTIO_API Composition *Track_parent(Track *self) {
     return Composition_parent((Composition *) self);
 }
-OTIO_API const char *Track_name(Track *self) {
+OTIO_API otiostr Track_name(Track *self) {
     return Composition_name((Composition *) self);
 }
 OTIO_API AnyDictionary *Track_metadata(Track *self) {
@@ -270,7 +269,7 @@ OTIO_API bool Track_to_json_file(
     return Composition_to_json_file(
             (Composition *) self, file_name, error_status, indent);
 }
-OTIO_API const char *
+OTIO_API otiostr
 Track_to_json_string(Track *self, OTIOErrorStatus *error_status, int indent) {
     return Composition_to_json_string(
             (Composition *) self, error_status, indent);
@@ -281,7 +280,7 @@ OTIO_API bool Track_is_equivalent_to(Track *self, OTIOSerializableObject *other)
 OTIO_API Track *Track_clone(Track *self, OTIOErrorStatus *error_status) {
     return (Track *) Composition_clone((Composition *) self, error_status);
 }
-OTIO_API const char *Track_schema_name(Track *self) {
+OTIO_API otiostr Track_schema_name(Track *self) {
     return Composition_schema_name((Composition *) self);
 }
 OTIO_API int Track_schema_version(Track *self) {

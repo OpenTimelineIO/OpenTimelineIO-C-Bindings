@@ -29,7 +29,9 @@ static void otio_timeline_init_test(void **state) {
     Timeline *tl = Timeline_create("test_timeline", rt, NULL);
     OTIO_RETAIN(tl);
 
-    assert_string_equal(Timeline_name(tl), "test_timeline");
+    otiostr serializableObjectName = Timeline_name(tl);
+    assert_string_equal(serializableObjectName, "test_timeline");
+    otiostr_delete(serializableObjectName);
 
     OptionalRationalTime tl_global_start_time = Timeline_global_start_time(tl);
     assert_true(OptionalRationalTime_valid(tl_global_start_time));
@@ -54,9 +56,10 @@ static void otio_timeline_metadata_test(void **state) {
     AnyDictionary *metadataResult = Timeline_metadata(tl);
     it = AnyDictionary_find(metadataResult, "foo");
     Any *metadataResultValAny = AnyDictionaryIterator_value(it);
-    const char *metadataResultValStr =
+    otiostr metadataResultValStr =
             safely_cast_string_any(metadataResultValAny);
     assert_string_equal(metadataResultValStr, "bar");
+    otiostr_delete(metadataResultValStr);
 
     AnyDictionaryIterator_destroy(it);
     it = NULL;
@@ -69,7 +72,7 @@ static void otio_timeline_metadata_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) tl);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(tl_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(tl_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) tl);
 
@@ -91,6 +94,7 @@ static void otio_timeline_metadata_test(void **state) {
     decoded = NULL;
     OTIO_RELEASE(tl);
     tl = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_timeline_range_test(void **state) {
@@ -161,7 +165,7 @@ static void otio_timeline_serialize_test(void **state) {
     Any *tl_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) tl);
 
-    const char *encoded = serialize_json_to_string(tl_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(tl_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) tl);
 
@@ -179,6 +183,7 @@ static void otio_timeline_serialize_test(void **state) {
     decoded = NULL;
     OTIO_RELEASE(tl);
     tl = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_timeline_serialization_of_subclasses_test(void **state) {
@@ -203,7 +208,7 @@ static void otio_timeline_serialization_of_subclasses_test(void **state) {
     Any *tl_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) tl);
 
-    const char *serialized = serialize_json_to_string(tl_any, errorStatus, 4);
+    otiostr serialized = serialize_json_to_string(tl_any, errorStatus, 4);
     assert_true(serialized != NULL);
 
     Any *decoded = /* allocate memory for destinantion */
@@ -218,7 +223,11 @@ static void otio_timeline_serialization_of_subclasses_test(void **state) {
     OTIO_RETAIN(tl2);
     assert_true(tl2 != NULL);
 
-    assert_string_equal(Timeline_name(tl), Timeline_name(tl2));
+    otiostr serializableObjectName = Timeline_name(tl);
+    otiostr serializableObjectName2 = Timeline_name(tl);
+    assert_string_equal(serializableObjectName, serializableObjectName2);
+    otiostr_delete(serializableObjectName);
+    otiostr_delete(serializableObjectName2);
 
     Stack *tl_tracks = Timeline_tracks(tl);
     Stack *tl2_tracks = Timeline_tracks(tl2);
@@ -259,7 +268,11 @@ static void otio_timeline_serialization_of_subclasses_test(void **state) {
             RetainerComposable_value(clip2_retainer_composable);
     Clip *clip2 = (Clip *) clip2_composable;
 
-    assert_string_equal(Clip_name(clip1), Clip_name(clip2));
+    serializableObjectName = Clip_name(clip1);
+    serializableObjectName2 = Clip_name(clip2);
+    assert_string_equal(serializableObjectName, serializableObjectName2);
+    otiostr_delete(serializableObjectName);
+    otiostr_delete(serializableObjectName2);
 
     MediaReference *clip1_mr = Clip_media_reference(clip1);
     MediaReference *clip2_mr = Clip_media_reference(clip2);
@@ -268,6 +281,7 @@ static void otio_timeline_serialization_of_subclasses_test(void **state) {
 
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(serialized);
 
     ComposableRetainerVector_destroy(tl_tracks_vector);
     tl_tracks_vector = NULL;
@@ -324,13 +338,17 @@ static void otio_timeline_tracks_test(void **state) {
     for (int i = 0; TrackVectorIterator_not_equal(vid_it, vid_it_end);
          ++i, TrackVectorIterator_advance(vid_it, 1)) {
         Track *track = TrackVectorIterator_value(vid_it);
-        assert_string_equal(Track_name(track), videoTrackNames[i]);
+        otiostr serializableObjectName = Track_name(track);
+        assert_string_equal(serializableObjectName, videoTrackNames[i]);
+        otiostr_delete(serializableObjectName);
     }
 
     for (int i = 0; TrackVectorIterator_not_equal(aud_it, aud_it_end);
          ++i, TrackVectorIterator_advance(aud_it, 1)) {
         Track *track = TrackVectorIterator_value(aud_it);
-        assert_string_equal(Track_name(track), audioTrackNames[i]);
+        otiostr serializableObjectName = Track_name(track);
+        assert_string_equal(serializableObjectName, audioTrackNames[i]);
+        otiostr_delete(serializableObjectName);
     }
 
     OTIOErrorStatus_destroy(errorStatus);

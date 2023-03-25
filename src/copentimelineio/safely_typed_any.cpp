@@ -92,12 +92,11 @@ OTIO_API double safely_cast_double_any(Any *a) {
     return OTIO_NS::safely_cast_double_any(
             *reinterpret_cast<OTIO_NS::any *>(a));
 }
-OTIO_API const char *safely_cast_string_any(Any *a) {
+OTIO_API otiostr safely_cast_string_any(Any *a) {
     std::string returnStr = OTIO_NS::safely_cast_string_any(
             *reinterpret_cast<OTIO_NS::any *>(a));
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr anyStr = otiostr_create(returnStr.c_str());
+    return anyStr;
 }
 OTIO_API RationalTime safely_cast_rational_time_any(Any *a) {
     opentime::RationalTime rationalTime =

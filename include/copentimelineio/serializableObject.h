@@ -5,6 +5,7 @@
 
 #include "errorStatus.h"
 #include <stdbool.h>
+#include <otiostr/otiostr.h>
 
 #ifdef __cplusplus
 # define OTIO_API extern "C"
@@ -30,7 +31,7 @@ OTIO_API bool SerializableObject_to_json_file(
     const char*         file_name,
     OTIOErrorStatus*    error_status,
     int                 indent);
-OTIO_API const char* SerializableObject_to_json_string(
+OTIO_API otiostr SerializableObject_to_json_string(
     OTIOSerializableObject* self, OTIOErrorStatus* error_status, int indent);
 OTIO_API OTIOSerializableObject* SerializableObject_from_json_file(
     const char* file_name, OTIOErrorStatus* error_status);
@@ -42,7 +43,7 @@ OTIO_API OTIOSerializableObject* SerializableObject_clone(
     OTIOSerializableObject* self, OTIOErrorStatus* error_status);
 /*AnyDictionary* SerializableObject_dynamic_fields(OTIOSerializableObject* self);*/
 OTIO_API bool        SerializableObject_is_unknown_schema(OTIOSerializableObject* self);
-OTIO_API const char* SerializableObject_schema_name(OTIOSerializableObject* self);
+OTIO_API otiostr SerializableObject_schema_name(OTIOSerializableObject* self);
 OTIO_API int         SerializableObject_schema_version(OTIOSerializableObject* self);
 
 #define OTIO_RETAIN(X) RetainerSerializableObject* X##_r = RetainerSerializableObject_create((OTIOSerializableObject*) (X))

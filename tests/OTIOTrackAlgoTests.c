@@ -234,7 +234,9 @@ static void otio_track_algo_trim_front_test(void **state) {
     RetainerComposable *clipC_retainer =
             ComposableRetainerVectorIterator_value(it);
     Clip *C = (Clip *) RetainerComposable_value(clipC_retainer);
-    assert_string_equal(Clip_name(B), "B");
+    otiostr serializableObjectName = Clip_name(B);
+    assert_string_equal(serializableObjectName, "B");
+    otiostr_delete(serializableObjectName);
     TimeRange clipB_trimmed_range = Clip_trimmed_range(B, errorStatus);
     start = RationalTime_create(10, 24);
     duration = RationalTime_create(40, 24);
@@ -334,7 +336,9 @@ static void otio_track_algo_trim_end_test(void **state) {
     assert_true(Composable_is_equivalent_to(
             trimmed_0, (OTIOSerializableObject *) sample_track_0));
     /* did clip B get trimmed? */
-    assert_string_equal(Composable_name(trimmed_1), "B");
+    otiostr serializableObjectName = Composable_name(trimmed_1);
+    assert_string_equal(serializableObjectName, "B");
+    otiostr_delete(serializableObjectName);
 
     TimeRange trimmed_1_track_trimmed_range =
             Clip_trimmed_range((Clip *) trimmed_1, errorStatus);

@@ -110,13 +110,12 @@ AnyDictionaryIterator_prev(AnyDictionaryIterator* iter, int dist)
     return reinterpret_cast<AnyDictionaryIterator*>(
         new DictionaryIterator(it));
 }
-OTIO_API const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter)
+OTIO_API otiostr AnyDictionaryIterator_key(AnyDictionaryIterator* iter)
 {
     std::string returnStr =
         (*reinterpret_cast<DictionaryIterator*>(iter))->first;
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr keyStr = otiostr_create(returnStr.c_str());
+    return keyStr;
 }
 OTIO_API Any* AnyDictionaryIterator_value(AnyDictionaryIterator* iter)
 {

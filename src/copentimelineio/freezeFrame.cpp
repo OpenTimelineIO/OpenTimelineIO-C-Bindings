@@ -28,7 +28,7 @@ OTIO_API void FreezeFrame_set_time_scalar(FreezeFrame *self, double time_scalar)
     LinearTimeWarp_set_time_scalar((LinearTimeWarp *) self, time_scalar);
 }
 
-OTIO_API const char *FreezeFrame_effect_name(FreezeFrame *self) {
+OTIO_API otiostr FreezeFrame_effect_name(FreezeFrame *self) {
     return Effect_effect_name((Effect *) self);
 }
 
@@ -36,7 +36,7 @@ OTIO_API void FreezeFrame_set_effect_name(FreezeFrame *self, const char *effect_
     Effect_set_effect_name((Effect *) self, effect_name);
 }
 
-OTIO_API const char *FreezeFrame_name(FreezeFrame *self) {
+OTIO_API otiostr FreezeFrame_name(FreezeFrame *self) {
     return Effect_name((Effect *) self);
 }
 
@@ -57,7 +57,7 @@ OTIO_API bool FreezeFrame_to_json_file(
             (Effect *) self, file_name, error_status, indent);
 }
 
-OTIO_API const char *FreezeFrame_to_json_string(
+OTIO_API otiostr FreezeFrame_to_json_string(
         FreezeFrame *self, OTIOErrorStatus *error_status, int indent) {
     return Effect_to_json_string((Effect *) self, error_status, indent);
 }
@@ -72,7 +72,7 @@ FreezeFrame_clone(FreezeFrame *self, OTIOErrorStatus *error_status) {
     return (FreezeFrame *) Effect_clone((Effect *) self, error_status);
 }
 
-OTIO_API const char *FreezeFrame_schema_name(FreezeFrame *self) {
+OTIO_API otiostr FreezeFrame_schema_name(FreezeFrame *self) {
     return Effect_schema_name((Effect *) self);
 }
 

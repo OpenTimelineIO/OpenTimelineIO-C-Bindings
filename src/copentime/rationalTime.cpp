@@ -118,7 +118,7 @@ OTIO_API double RationalTime_to_seconds(RationalTime self) {
     return ot_self.to_seconds();
 }
 
-OTIO_API const char *RationalTime_to_timecode(
+OTIO_API otiostr RationalTime_to_timecode(
         RationalTime self,
         double rate,
         OpenTime_IsDropFrameRate drop_frame,
@@ -129,27 +129,24 @@ OTIO_API const char *RationalTime_to_timecode(
                     rate,
                     static_cast<opentime::IsDropFrameRate>(drop_frame),
                     reinterpret_cast<opentime::ErrorStatus *>(error_status));
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr timecodeStr = otiostr_create(returnStr.c_str());
+    return timecodeStr;
 }
 
-OTIO_API const char *RationalTime_to_timecode_auto(
+OTIO_API otiostr RationalTime_to_timecode_auto(
         RationalTime self, OpenTimeErrorStatus *error_status) {
     opentime::RationalTime ot_self = CRationalTime_to_CppRationalTime(self);
     std::string returnStr = ot_self.to_timecode(
             reinterpret_cast<opentime::ErrorStatus *>(error_status));
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr timecodeStr = otiostr_create(returnStr.c_str());
+    return timecodeStr;
 }
 
-OTIO_API const char *RationalTime_to_time_string(RationalTime self) {
+OTIO_API otiostr RationalTime_to_time_string(RationalTime self) {
     opentime::RationalTime ot_self = CRationalTime_to_CppRationalTime(self);
     std::string returnStr = ot_self.to_time_string();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr timestring = otiostr_create(returnStr.c_str());
+    return timestring;
 }
 
 OTIO_API RationalTime RationalTime_add(RationalTime lhs, RationalTime rhs) {

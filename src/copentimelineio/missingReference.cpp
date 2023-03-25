@@ -39,7 +39,7 @@ OTIO_API void MissingReference_set_available_range(
     MediaReference_set_available_range(
             (MediaReference *) self, available_range);
 }
-OTIO_API const char *MissingReference_name(MissingReference *self) {
+OTIO_API otiostr MissingReference_name(MissingReference *self) {
     return MediaReference_name((MediaReference *) self);
 }
 OTIO_API void MissingReference_set_name(MissingReference *self, const char *name) {
@@ -59,7 +59,7 @@ OTIO_API bool MissingReference_to_json_file(
     return SerializableObject_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
-OTIO_API const char *MissingReference_to_json_string(
+OTIO_API otiostr MissingReference_to_json_string(
         MissingReference *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -74,7 +74,7 @@ OTIO_API MissingReference *MissingReference_clone(
     return (MissingReference *) SerializableObject_clone(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
-OTIO_API const char *MissingReference_schema_name(MissingReference *self) {
+OTIO_API otiostr MissingReference_schema_name(MissingReference *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 OTIO_API int MissingReference_schema_version(MissingReference *self) {

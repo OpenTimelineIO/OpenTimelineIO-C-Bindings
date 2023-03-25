@@ -30,14 +30,13 @@ OTIOErrorStatus_create_with_outcome_details_serializable_object(
         reinterpret_cast<OTIO_NS::SerializableObject*>(object)));
 }
 
-OTIO_API const char*
+OTIO_API otiostr
 OTIOErrorStatus_outcome_to_string(OTIO_ErrorStatus_Outcome var1)
 {
     std::string returnStr = OTIO_NS::ErrorStatus::outcome_to_string(
         static_cast<OTIO_NS::ErrorStatus::Outcome>(var1));
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr outcomeStr = otiostr_create(returnStr.c_str());
+    return outcomeStr;
 }
 
 OTIO_API OTIO_ErrorStatus_Outcome

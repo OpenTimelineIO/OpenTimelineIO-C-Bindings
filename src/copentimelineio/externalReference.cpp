@@ -32,12 +32,11 @@ OTIO_API ExternalReference *ExternalReference_create(
                     target_url_str, timeRangeOptional, metadataDictionary));
 }
 
-OTIO_API const char *ExternalReference_target_url(ExternalReference *self) {
+OTIO_API otiostr ExternalReference_target_url(ExternalReference *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::ExternalReference *>(self)->target_url();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr urlStr = otiostr_create(returnStr.c_str());
+    return urlStr;
 }
 
 OTIO_API void ExternalReference_set_target_url(
@@ -60,7 +59,7 @@ OTIO_API bool ExternalReference_is_missing_reference(ExternalReference *self) {
     return MediaReference_is_missing_reference((MediaReference *) self);
 }
 
-OTIO_API const char *ExternalReference_name(ExternalReference *self) {
+OTIO_API otiostr ExternalReference_name(ExternalReference *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
 }
@@ -84,7 +83,7 @@ OTIO_API bool ExternalReference_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
 
-OTIO_API const char *ExternalReference_to_json_string(
+OTIO_API otiostr ExternalReference_to_json_string(
         ExternalReference *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -102,7 +101,7 @@ OTIO_API ExternalReference *ExternalReference_clone(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
 
-OTIO_API const char *ExternalReference_schema_name(ExternalReference *self) {
+OTIO_API otiostr ExternalReference_schema_name(ExternalReference *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 

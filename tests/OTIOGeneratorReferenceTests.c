@@ -93,12 +93,13 @@ static int teardownGeneratorReferenceTests(void **state) {
 static void otio_generator_reference_constructor_test(void **state) {
     struct GeneratorReferenceTestState *testState = *state;
     GeneratorReference *gen = testState->gen;
-    RetainerSerializableObject *gen_r = testState->gen_r;
-    const char *sample_data_dir = testState->sample_data_dir;
 
-    assert_string_equal(GeneratorReference_generator_kind(gen), "SMPTEBars");
-    assert_string_equal(SerializableObjectWithMetadata_name(
-            (SerializableObjectWithMetadata *) gen),
+    otiostr generatorKind = GeneratorReference_generator_kind(gen);
+    assert_string_equal(generatorKind, "SMPTEBars");
+    otiostr_delete(generatorKind);
+    otiostr serializableObjectName = SerializableObjectWithMetadata_name(
+            (SerializableObjectWithMetadata *) gen);
+    assert_string_equal(serializableObjectName,
                         "SMPTEBars");
 
     AnyDictionary *metadata_compare = SerializableObjectWithMetadata_metadata(
@@ -107,7 +108,7 @@ static void otio_generator_reference_constructor_test(void **state) {
     AnyDictionaryIterator *it_end = AnyDictionary_end(metadata_compare);
     assert_true(AnyDictionaryIterator_not_equal(it, it_end));
     Any *compare_any = AnyDictionaryIterator_value(it);
-    const char *compare_value = safely_cast_string_any(compare_any);
+    otiostr compare_value = safely_cast_string_any(compare_any);
     assert_string_equal(compare_value, "bar");
     assert_int_equal(AnyDictionary_size(metadata_compare), 1);
 
@@ -119,6 +120,7 @@ static void otio_generator_reference_constructor_test(void **state) {
     metadata_compare = NULL;
     Any_destroy(compare_any);
     compare_any = NULL;
+    otiostr_delete(compare_value);
 
     AnyDictionary *parameters_compare = GeneratorReference_parameters(gen);
     it = AnyDictionary_find(parameters_compare, "test_param");
@@ -163,7 +165,7 @@ static void otio_generator_reference_serialize_test(void **state) {
 
     Any *ref_any =
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) gen);
-    const char *encoded = serialize_json_to_string(ref_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(ref_any, errorStatus, 4);
     Any *decoded = /** allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) gen);
     bool decoded_successfully =
@@ -178,6 +180,7 @@ static void otio_generator_reference_serialize_test(void **state) {
     decoded = NULL;
     OTIOErrorStatus_destroy(errorStatus);
     errorStatus = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_generator_reference_read_file_test(void **state) {
@@ -222,9 +225,10 @@ static void otio_generator_reference_read_file_test(void **state) {
 
     MediaReference *media_reference = Clip_media_reference(clip_0);
 
-    assert_string_equal(GeneratorReference_generator_kind(
-            (GeneratorReference *) media_reference),
-                        "SMPTEBars");
+    otiostr generatorKind = GeneratorReference_generator_kind(
+            (GeneratorReference *) media_reference);
+    assert_string_equal(generatorKind, "SMPTEBars");
+    otiostr_delete(generatorKind);
 
     ComposableRetainerVector_destroy(children_retainer_vector);
     children_retainer_vector = NULL;

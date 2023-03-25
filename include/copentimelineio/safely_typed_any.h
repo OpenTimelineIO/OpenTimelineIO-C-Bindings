@@ -38,7 +38,7 @@ OTIO_API bool safely_cast_bool_any(Any *a);
 OTIO_API int safely_cast_int_any(Any *a);
 OTIO_API int64_t safely_cast_int64_any(Any *a);
 OTIO_API double safely_cast_double_any(Any *a);
-OTIO_API const char *safely_cast_string_any(Any *a);
+OTIO_API otiostr safely_cast_string_any(Any *a);
 OTIO_API RationalTime safely_cast_rational_time_any(Any *a);
 OTIO_API TimeRange safely_cast_time_range_any(Any *a);
 OTIO_API TimeTransform safely_cast_time_transform_any(Any *a);

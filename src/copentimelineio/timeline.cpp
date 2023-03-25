@@ -91,7 +91,7 @@ OTIO_API TrackVector *Timeline_video_tracks(Timeline *self) {
     return reinterpret_cast<TrackVector *>(new TrackVectorDef(trackVector));
 }
 
-OTIO_API const char *Timeline_name(Timeline *self) {
+OTIO_API otiostr Timeline_name(Timeline *self) {
     return SerializableObjectWithMetadata_name(
             (SerializableObjectWithMetadata *) self);
 }
@@ -115,7 +115,7 @@ OTIO_API bool Timeline_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
 
-OTIO_API const char *Timeline_to_json_string(
+OTIO_API otiostr Timeline_to_json_string(
         Timeline *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -131,7 +131,7 @@ OTIO_API Timeline *Timeline_clone(Timeline *self, OTIOErrorStatus *error_status)
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
 
-OTIO_API const char *Timeline_schema_name(Timeline *self) {
+OTIO_API otiostr Timeline_schema_name(Timeline *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 

@@ -55,7 +55,7 @@ OTIO_API TimeRange Item_transformed_time_range(
         Item *to_item,
         OTIOErrorStatus *error_status);
 OTIO_API Composition *Item_parent(Item *self);
-OTIO_API const char *Item_name(Item *self);
+OTIO_API otiostr Item_name(Item *self);
 OTIO_API AnyDictionary *Item_metadata(Item *self);
 OTIO_API void Item_set_name(Item *self, const char *name);
 OTIO_API bool Item_to_json_file(
@@ -63,9 +63,9 @@ OTIO_API bool Item_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *
+OTIO_API otiostr
 Item_to_json_string(Item *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool Item_is_equivalent_to(Item *self, OTIOSerializableObject *other);
 OTIO_API Item *Item_clone(Item *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Item_schema_name(Item *self);
+OTIO_API otiostr Item_schema_name(Item *self);
 OTIO_API int Item_schema_version(Item *self);

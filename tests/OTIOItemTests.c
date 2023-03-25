@@ -30,7 +30,7 @@ static void otio_gap_serialize_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) gap);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(gap_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(gap_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) gap);
 
@@ -48,6 +48,7 @@ static void otio_gap_serialize_test(void **state) {
     decoded = NULL;
     OTIO_RELEASE(gap);
     gap = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_item_constructor_test(void **state) {
@@ -58,7 +59,9 @@ static void otio_item_constructor_test(void **state) {
     Item *it = Item_create("foo", tr, NULL, NULL, NULL);
     OTIO_RETAIN(it);
 
-    assert_string_equal(Item_name(it), "foo");
+    otiostr serializableObjectName = Item_name(it);
+    assert_string_equal(serializableObjectName, "foo");
+    otiostr_delete(serializableObjectName);
 
     OptionalTimeRange it_source_range = Item_source_range(it);
     assert_true(OptionalTimeRange_valid(it_source_range));
@@ -68,7 +71,7 @@ static void otio_item_constructor_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) it);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(item_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(item_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) it);
 
@@ -86,6 +89,7 @@ static void otio_item_constructor_test(void **state) {
     decoded = NULL;
     OTIO_RELEASE(it);
     it = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_item_copy_arguments_test(void **state) {
@@ -100,7 +104,9 @@ static void otio_item_copy_arguments_test(void **state) {
     OTIO_RETAIN(it);
 
     it_name = "foobaz";
-    assert_string_not_equal(it_name, Item_name(it));
+    otiostr serializableObjectName = Item_name(it);
+    assert_string_not_equal(serializableObjectName, it_name);
+    otiostr_delete(serializableObjectName);
 
     RationalTime start2 = RationalTime_create(1, RationalTime_rate(start));
 
@@ -261,7 +267,7 @@ static void otio_item_metadata_test_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) item);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(item_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(item_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) item);
 
@@ -277,7 +283,7 @@ static void otio_item_metadata_test_test(void **state) {
     AnyDictionaryIterator *metadataResultFooIt =
             AnyDictionary_find(metadataResult, "foo");
     Any *metadataFooValue = AnyDictionaryIterator_value(metadataResultFooIt);
-    const char *metadataFooStr = safely_cast_string_any(metadataFooValue);
+    otiostr metadataFooStr = safely_cast_string_any(metadataFooValue);
 
     assert_string_equal(metadataFooStr, "bar");
 
@@ -299,6 +305,8 @@ static void otio_item_metadata_test_test(void **state) {
     stringAny = NULL;
     OTIO_RELEASE(item);
     item = NULL;
+    otiostr_delete(encoded);
+    otiostr_delete(metadataFooStr);
 }
 
 static void otio_item_markers_test(void **state) {
@@ -318,7 +326,7 @@ static void otio_item_markers_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) item);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(item_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(item_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) item);
 
@@ -338,6 +346,7 @@ static void otio_item_markers_test(void **state) {
     item = NULL;
     MarkerVector_destroy(markerVector);
     markerVector = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_item_effects_test(void **state) {
@@ -356,7 +365,7 @@ static void otio_item_effects_test(void **state) {
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) item);
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    const char *encoded = serialize_json_to_string(item_any, errorStatus, 4);
+    otiostr encoded = serialize_json_to_string(item_any, errorStatus, 4);
     Any *decoded = /* allocate memory for destinantion */
             create_safely_typed_any_serializable_object((OTIOSerializableObject *) item);
 
@@ -376,6 +385,7 @@ static void otio_item_effects_test(void **state) {
     item = NULL;
     EffectVector_destroy(effectVector);
     effectVector = NULL;
+    otiostr_delete(encoded);
 }
 
 static void otio_item_visible_range_test(void **state) {
@@ -471,7 +481,9 @@ static void otio_item_visible_range_test(void **state) {
          ComposableVectorIterator_advance(it, 1), i++) {
         Composable *clipComposable = ComposableVectorIterator_value(it);
         Clip *clipValue = (Clip *) clipComposable;
-        assert_string_equal(name_list[i], Clip_name(clipValue));
+        otiostr serializableObjectName = Clip_name(clipValue);
+        assert_string_equal(serializableObjectName, name_list[i]);
+        otiostr_delete(serializableObjectName);
         errorStatus = OTIOErrorStatus_create();
 
         TimeRange clip_trimmed_range =

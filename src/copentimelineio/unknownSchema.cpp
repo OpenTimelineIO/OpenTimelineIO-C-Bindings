@@ -12,12 +12,11 @@ OTIO_API UnknownSchema *UnknownSchema_create(
             original_schema_name, original_schema_version));
 }
 
-OTIO_API const char *UnknownSchema_original_schema_name(UnknownSchema *self) {
+OTIO_API otiostr UnknownSchema_original_schema_name(UnknownSchema *self) {
     std::string returnStr = reinterpret_cast<OTIO_NS::UnknownSchema *>(self)
             ->original_schema_name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    otiostr schemaNameStr = otiostr_create(returnStr.c_str());
+    return schemaNameStr;
 }
 
 OTIO_API int UnknownSchema_original_schema_version(UnknownSchema *self) {
@@ -39,7 +38,7 @@ OTIO_API bool UnknownSchema_to_json_file(
             reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
 }
 
-OTIO_API const char *UnknownSchema_to_json_string(
+OTIO_API otiostr UnknownSchema_to_json_string(
         UnknownSchema *self, OTIOErrorStatus *error_status, int indent) {
     return SerializableObject_to_json_string(
             reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
@@ -57,7 +56,7 @@ UnknownSchema_clone(UnknownSchema *self, OTIOErrorStatus *error_status) {
             reinterpret_cast<OTIOSerializableObject *>(self), error_status);
 }
 
-OTIO_API const char *UnknownSchema_schema_name(UnknownSchema *self) {
+OTIO_API otiostr UnknownSchema_schema_name(UnknownSchema *self) {
     return SerializableObject_schema_name(reinterpret_cast<OTIOSerializableObject *>(self));
 }
 

@@ -34,7 +34,7 @@ OTIO_API bool Composable_overlapping(Composable *self);
 OTIO_API Composition *Composable_parent(Composable *self);
 OTIO_API RationalTime
 Composable_duration(Composable *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Composable_name(Composable *self);
+OTIO_API otiostr Composable_name(Composable *self);
 OTIO_API AnyDictionary *Composable_metadata(Composable *self);
 OTIO_API void Composable_set_name(Composable *self, const char *name);
 OTIO_API bool Composable_to_json_file(
@@ -42,10 +42,10 @@ OTIO_API bool Composable_to_json_file(
         const char *file_name,
         OTIOErrorStatus *error_status,
         int indent);
-OTIO_API const char *Composable_to_json_string(
+OTIO_API otiostr Composable_to_json_string(
         Composable *self, OTIOErrorStatus *error_status, int indent);
 OTIO_API bool Composable_is_equivalent_to(Composable *self, OTIOSerializableObject *other);
 OTIO_API Composable *
 Composable_clone(Composable *self, OTIOErrorStatus *error_status);
-OTIO_API const char *Composable_schema_name(Composable *self);
+OTIO_API otiostr Composable_schema_name(Composable *self);
 OTIO_API int Composable_schema_version(Composable *self);
