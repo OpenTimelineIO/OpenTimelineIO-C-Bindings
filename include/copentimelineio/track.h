@@ -19,8 +19,12 @@
 
 #ifdef __cplusplus
 # define OTIO_API extern "C"
+# define OTIO_API_BEGIN OTIO_API {
+# define OTIO_API_END }
 #else
 # define OTIO_API
+# define OTIO_API_BEGIN
+# define OTIO_API_END
 #endif
 
 typedef struct Track Track;
@@ -31,8 +35,10 @@ typedef enum {
 } OTIO_Track_NeighbourGapPolicy_;
 typedef int OTIO_Track_NeighbourGapPolicy;
 
-OTIO_API const char *TrackKind_Video;
-OTIO_API const char *TrackKind_Audio;
+OTIO_API_BEGIN
+extern const char *TrackKind_Video;
+extern const char *TrackKind_Audio;
+OTIO_API_END
 
 OTIO_API Track *Track_create(
         const char *name,
