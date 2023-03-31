@@ -929,25 +929,25 @@ static void otio_stack_algo_flatten_example_code_test(void **state) {
 
     const char *multitrack_file = "multitrack.otio";
     const size_t multitrack_file_size = strlen(multitrack_file);
-    char *multitrack_path = (char *) calloc(
-        sample_data_dir_size + multitrack_file_size + 1,
-        sizeof(char));
+    const size_t mulitrack_path_size = sample_data_dir_size + multitrack_file_size;
+    char *multitrack_path = (char *) calloc(mulitrack_path_size + 1, sizeof(char));
     memcpy(multitrack_path, sample_data_dir, sample_data_dir_size);
     memcpy(
         multitrack_path + sample_data_dir_size,
         multitrack_file,
         multitrack_file_size);
+    multitrack_path[mulitrack_path_size] = 0;
 
     const char *preflattened_file = "preflattened.otio";
     const size_t preflattened_file_size = strlen(preflattened_file);
-    char *preflattened_path = (char *) calloc(
-        sample_data_dir_size + preflattened_file_size + 1,
-        sizeof(char));
+    const size_t preflattened_path_size = sample_data_dir_size + preflattened_file_size;
+    char *preflattened_path = (char *) calloc(preflattened_path_size + 1, sizeof(char));
     memcpy(preflattened_path, sample_data_dir, sample_data_dir_size);
     memcpy(
         preflattened_path + sample_data_dir_size,
         preflattened_file,
         preflattened_file_size);
+    preflattened_path[preflattened_path_size] = 0;
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 

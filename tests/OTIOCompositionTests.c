@@ -1496,11 +1496,11 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
     const size_t sample_data_dir_size = strlen(sample_data_dir);
     const char *edl_file = "transition_test.otio";
     const size_t edl_file_size = strlen(edl_file);
-    char *edl_path = (char *) calloc(
-        sample_data_dir_size + edl_file_size + 1,
-        sizeof(char));
+    const size_t edl_path_size = sample_data_dir_size + edl_file_size;
+    char *edl_path = (char *) calloc(edl_path_size + 1, sizeof(char));
     memcpy(edl_path, sample_data_dir, sample_data_dir_size);
     memcpy(edl_path + sample_data_dir_size, edl_file, edl_file_size);
+    edl_path[edl_path_size] = 0;
 
     OptionalRationalTime nullTime = OptionalRationalTime_create_null();
     Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
@@ -1668,11 +1668,11 @@ static void otio_track_range_of_all_children_test(void **state) {
     const size_t sample_data_dir_size = strlen(sample_data_dir);
     const char *edl_file = "transition_test.otio";
     const size_t edl_file_size = strlen(edl_file);
-    char *edl_path = (char *) calloc(
-        sample_data_dir_size + edl_file_size + 1,
-        sizeof(char));
+    const size_t edl_path_size = sample_data_dir_size + edl_file_size;
+    char *edl_path = (char *) calloc(edl_path_size + 1, sizeof(char));
     memcpy(edl_path, sample_data_dir, sample_data_dir_size);
     memcpy(edl_path + sample_data_dir_size, edl_file, edl_file_size);
+    edl_path[edl_path_size] = 0;
 
     OptionalRationalTime nullTime = OptionalRationalTime_create_null();
     Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
