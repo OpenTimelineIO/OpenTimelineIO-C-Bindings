@@ -44,8 +44,9 @@ inline opentime::TimeTransform CTimeTransform_to_CppTimeTransform(TimeTransform 
 
 inline char* CppString_to_CString(std::string const& s)
 {
-    const size_t size = s.size() + 1;
-    char* charPtr = (char*)malloc(size * sizeof(char));
+    const size_t size = s.size();
+    char* charPtr = (char*)malloc((size + 1) * sizeof(char));
     memcpy(charPtr, s.c_str(), size);
+    charPtr[size] = 0;
     return charPtr;
 }
