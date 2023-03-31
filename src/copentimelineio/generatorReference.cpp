@@ -8,7 +8,6 @@
 #include <opentime/timeRange.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/generatorReference.h>
-#include <string.h>
 
 OTIO_API GeneratorReference *GeneratorReference_create(
         const char *name,
@@ -48,9 +47,7 @@ OTIO_API const char *GeneratorReference_generator_kind(GeneratorReference *self)
     std::string returnStr =
             reinterpret_cast<OTIO_NS::GeneratorReference *>(self)
                     ->generator_kind();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 OTIO_API void GeneratorReference_set_generator_kind(
         GeneratorReference *self, const char *generator_kind) {

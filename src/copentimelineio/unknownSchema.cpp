@@ -2,9 +2,9 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/unknownSchema.h"
+#include "copentime/util.h"
 #include <copentimelineio/serializableObject.h>
 #include <opentimelineio/unknownSchema.h>
-#include <string.h>
 
 OTIO_API UnknownSchema *UnknownSchema_create(
         const char *original_schema_name, int original_schema_version) {
@@ -15,9 +15,7 @@ OTIO_API UnknownSchema *UnknownSchema_create(
 OTIO_API const char *UnknownSchema_original_schema_name(UnknownSchema *self) {
     std::string returnStr = reinterpret_cast<OTIO_NS::UnknownSchema *>(self)
             ->original_schema_name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 
 OTIO_API int UnknownSchema_original_schema_version(UnknownSchema *self) {

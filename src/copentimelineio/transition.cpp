@@ -9,7 +9,6 @@
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/transition.h>
-#include <string.h>
 
 
 const char *TransitionType_SMPTE_Dissolve =
@@ -53,9 +52,7 @@ OTIO_API bool Transition_overlapping(Transition *self) {
 OTIO_API const char *Transition_transition_type(Transition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Transition *>(self)->transition_type();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 OTIO_API void Transition_set_transition_type(
         Transition *self, const char *transition_type) {
@@ -107,9 +104,7 @@ OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
 OTIO_API const char *Transition_name(Transition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Transition *>(self)->name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 OTIO_API AnyDictionary *Transition_metadata(Transition *self) {
     OTIO_NS::AnyDictionary anyDictionary =

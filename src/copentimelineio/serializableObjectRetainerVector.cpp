@@ -43,20 +43,20 @@ SerializableObjectRetainerVector_end(SerializableObjectRetainerVector *self) {
 
 OTIO_API int SerializableObjectRetainerVector_size(
         SerializableObjectRetainerVector *self) {
-    return reinterpret_cast<SerializableObjectRetainerVectorDef *>(self)
-            ->size();
+    return static_cast<int>(
+        reinterpret_cast<SerializableObjectRetainerVectorDef *>(self)->size());
 }
 
 OTIO_API int SerializableObjectRetainerVector_max_size(
         SerializableObjectRetainerVector *self) {
-    return reinterpret_cast<SerializableObjectRetainerVectorDef *>(self)
-            ->max_size();
+    return static_cast<int>(
+        reinterpret_cast<SerializableObjectRetainerVectorDef *>(self)->max_size());
 }
 
 OTIO_API int SerializableObjectRetainerVector_capacity(
         SerializableObjectRetainerVector *self) {
-    return reinterpret_cast<SerializableObjectRetainerVectorDef *>(self)
-            ->capacity();
+    return static_cast<int>(
+        reinterpret_cast<SerializableObjectRetainerVectorDef *>(self)->capacity());
 }
 
 OTIO_API void SerializableObjectRetainerVector_resize(

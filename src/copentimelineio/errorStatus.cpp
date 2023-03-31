@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/errorStatus.h"
+#include "copentime/util.h"
 #include <opentimelineio/errorStatus.h>
-#include <string.h>
 
 OTIO_API OTIOErrorStatus*
 OTIOErrorStatus_create()
@@ -35,9 +35,7 @@ OTIOErrorStatus_outcome_to_string(OTIO_ErrorStatus_Outcome var1)
 {
     std::string returnStr = OTIO_NS::ErrorStatus::outcome_to_string(
         static_cast<OTIO_NS::ErrorStatus::Outcome>(var1));
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 
 OTIO_API OTIO_ErrorStatus_Outcome

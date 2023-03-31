@@ -586,8 +586,7 @@ static void otio_stack_range_of_child_with_duration_test(void **state) {
 
     Clip *errorClip = Clip_create(NULL, NULL, nullRange, NULL);
     OTIO_RETAIN(errorClip);
-    OptionalTimeRange errorTime =
-            Item_trimmed_range_in_parent((Item *) errorClip, errorStatus);
+    Item_trimmed_range_in_parent((Item *) errorClip, errorStatus);
     OTIO_ErrorStatus_Outcome outcome = OTIOErrorStatus_get_outcome(errorStatus);
     assert_int_equal(outcome, 18);
     OTIO_RELEASE(errorClip);
@@ -957,8 +956,7 @@ static void otio_track_range_test(void **state) {
             TimeRange_create_with_start_time_and_duration(start_time, duration));
     assert_true(TimeRange_equal(OptionalTimeRange_value(tr), sq_range_child_minus_1));
 
-    TimeRange sq_range_child_minus_error =
-            Track_range_of_child_at_index(sq, 11, errorStatus);
+    Track_range_of_child_at_index(sq, 11, errorStatus);
     OTIO_ErrorStatus_Outcome outcome = OTIOErrorStatus_get_outcome(errorStatus);
     assert_int_equal(outcome, 13);
 
@@ -1496,10 +1494,10 @@ static void otio_track_neighbors_of_simple_test(void **state) {
 static void otio_track_neighbors_of_from_data_test(void **state) {
     const char *sample_data_dir = xstr(SAMPLE_DATA_DIR);
     const char *edl_file = "transition_test.otio";
-    char *edl_path = (char *) calloc(
-            strlen(sample_data_dir) + strlen(edl_file) + 1, sizeof(char));
-    strcpy(edl_path, sample_data_dir);
-    strcat(edl_path, edl_file);
+    const size_t edl_path_size = strlen(sample_data_dir) + strlen(edl_file) + 1;
+    char *edl_path = (char *) calloc(edl_path_size, sizeof(char));
+    strcpy_s(edl_path, edl_path_size, sample_data_dir);
+    strcat_s(edl_path, edl_path_size, edl_file);
 
     OptionalRationalTime nullTime = OptionalRationalTime_create_null();
     Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
@@ -1665,10 +1663,10 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
 static void otio_track_range_of_all_children_test(void **state) {
     const char *sample_data_dir = xstr(SAMPLE_DATA_DIR);
     const char *edl_file = "transition_test.otio";
-    char *edl_path = (char *) calloc(
-            strlen(sample_data_dir) + strlen(edl_file) + 1, sizeof(char));
-    strcpy(edl_path, sample_data_dir);
-    strcat(edl_path, edl_file);
+    const size_t edl_path_size = strlen(sample_data_dir) + strlen(edl_file) + 1;
+    char *edl_path = (char *) calloc(edl_path_size, sizeof(char));
+    strcpy_s(edl_path, edl_path_size, sample_data_dir);
+    strcat_s(edl_path, edl_path_size, edl_file);
 
     OptionalRationalTime nullTime = OptionalRationalTime_create_null();
     Timeline *timeline = Timeline_create(NULL, nullTime, NULL);

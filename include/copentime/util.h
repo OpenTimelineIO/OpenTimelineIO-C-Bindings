@@ -9,6 +9,8 @@
 #include <opentime/rationalTime.h>
 #include <opentime/timeRange.h>
 #include <opentime/timeTransform.h>
+#include <stdlib.h>
+#include <string.h>
 
 inline RationalTime CppRationalTime_to_CRationalTime(opentime::RationalTime rationalTime) {
     return RationalTime_create(rationalTime.value(), rationalTime.rate());
@@ -38,4 +40,12 @@ inline TimeTransform CppTimeTransform_to_CTimeTransform(opentime::TimeTransform 
 inline opentime::TimeTransform CTimeTransform_to_CppTimeTransform(TimeTransform timeTransform) {
     opentime::RationalTime offset = CRationalTime_to_CppRationalTime(timeTransform.offset);
     return opentime::TimeTransform(offset, timeTransform.scale, timeTransform.rate);
+}
+
+inline char* CppString_to_CString(std::string const& s)
+{
+    const size_t size = s.size() + 1;
+    char* charPtr = (char*)malloc(size * sizeof(char));
+    strcpy_s(charPtr, size, s.c_str());
+    return charPtr;
 }

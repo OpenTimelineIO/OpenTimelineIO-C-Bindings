@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentime/errorStatus.h"
+#include "copentime/util.h"
 #include <opentime/errorStatus.h>
-#include <string.h>
 
 OTIO_API OpenTimeErrorStatus *OpenTimeErrorStatus_create() {
     return reinterpret_cast<OpenTimeErrorStatus *>(
@@ -24,9 +24,7 @@ OTIO_API const char *OpenTimeErrorStatus_outcome_to_string(
         OpenTimeErrorStatus *self, OpenTime_ErrorStatus_Outcome var1) {
     std::string returnStr = opentime::ErrorStatus::outcome_to_string(
             static_cast<opentime::ErrorStatus::Outcome>(var1));
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 OTIO_API void OpenTimeErrorStatus_destroy(OpenTimeErrorStatus *self) {
     delete reinterpret_cast<opentime::ErrorStatus *>(self);

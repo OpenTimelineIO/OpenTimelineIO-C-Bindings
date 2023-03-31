@@ -187,10 +187,10 @@ static void otio_generator_reference_read_file_test(void **state) {
     const char *sample_data_dir = testState->sample_data_dir;
 
     const char *ref_file = "generator_reference_test.otio";
-    char *ref_path = (char *) calloc(
-            strlen(sample_data_dir) + strlen(ref_file) + 1, sizeof(char));
-    strcpy(ref_path, sample_data_dir);
-    strcat(ref_path, ref_file);
+    const size_t ref_path_size = strlen(sample_data_dir) + strlen(ref_file) + 1;
+    char *ref_path = (char *) calloc(ref_path_size, sizeof(char));
+    strcpy_s(ref_path, ref_path_size, sample_data_dir);
+    strcat_s(ref_path, ref_path_size, ref_file);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 

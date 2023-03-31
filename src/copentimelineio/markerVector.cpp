@@ -31,15 +31,15 @@ OTIO_API MarkerVectorIterator *MarkerVector_end(MarkerVector *self) {
 }
 
 OTIO_API int MarkerVector_size(MarkerVector *self) {
-    return reinterpret_cast<MarkerVectorDef *>(self)->size();
+    return static_cast<int>(reinterpret_cast<MarkerVectorDef *>(self)->size());
 }
 
 OTIO_API int MarkerVector_max_size(MarkerVector *self) {
-    return reinterpret_cast<MarkerVectorDef *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<MarkerVectorDef *>(self)->max_size());
 }
 
 OTIO_API int MarkerVector_capacity(MarkerVector *self) {
-    return reinterpret_cast<MarkerVectorDef *>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<MarkerVectorDef *>(self)->capacity());
 }
 
 OTIO_API void MarkerVector_resize(MarkerVector *self, int n) {

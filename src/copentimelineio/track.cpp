@@ -10,8 +10,6 @@
 #include <opentimelineio/composable.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/track.h>
-#include <optional>
-#include <string.h>
 #include <utility>
 
 typedef std::map<OTIO_NS::Composable *, opentime::TimeRange>::iterator
@@ -69,9 +67,7 @@ OTIO_API Track *Track_create(
 }
 OTIO_API const char *Track_kind(Track *self) {
     std::string returnStr = reinterpret_cast<OTIO_NS::Track *>(self)->kind();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 OTIO_API void Track_set_kind(Track *self, const char *kind) {
     reinterpret_cast<OTIO_NS::Track *>(self)->set_kind(kind);

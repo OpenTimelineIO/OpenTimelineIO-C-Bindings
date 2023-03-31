@@ -2,11 +2,11 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/effect.h"
+#include "copentime/util.h"
 #include <copentimelineio/serializableObjectWithMetadata.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/effect.h>
 #include <opentimelineio/serializableObject.h>
-#include <string.h>
 
 typedef OTIO_NS::SerializableObject::Retainer<OTIO_NS::Effect> EffectRetainer;
 
@@ -49,9 +49,7 @@ OTIO_API Effect *Effect_create(
 OTIO_API const char *Effect_effect_name(Effect *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Effect *>(self)->effect_name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 
 OTIO_API void Effect_set_effect_name(Effect *self, const char *effect_name) {

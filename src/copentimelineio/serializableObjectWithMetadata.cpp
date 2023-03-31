@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/serializableObjectWithMetadata.h"
+#include "copentime/util.h"
 #include <opentimelineio/serializableObjectWithMetadata.h>
-#include <string.h>
 
 OTIO_API SerializableObjectWithMetadata *SerializableObjectWithMetadata_create(
         const char *name, AnyDictionary *metadata) {
@@ -23,9 +23,7 @@ SerializableObjectWithMetadata_name(SerializableObjectWithMetadata *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::SerializableObjectWithMetadata *>(self)
                     ->name();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 OTIO_API void SerializableObjectWithMetadata_set_name(
         SerializableObjectWithMetadata *self, const char *name) {

@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/serialization.h"
+#include "copentime/util.h"
 #include <opentimelineio/serialization.h>
-#include <string.h>
 
 OTIO_API const char *serialize_json_to_string(
         Any *value, OTIOErrorStatus *error_status, int indent) {
@@ -11,9 +11,7 @@ OTIO_API const char *serialize_json_to_string(
             *reinterpret_cast<OTIO_NS::any *>(value),
             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status),
             indent);
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return CppString_to_CString(returnStr);
 }
 
 OTIO_API bool serialize_json_to_file(
