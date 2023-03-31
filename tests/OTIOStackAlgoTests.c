@@ -913,6 +913,7 @@ static void otio_stack_algo_flatten_vector_of_tracks_test(void **state) {
 static void otio_stack_algo_flatten_example_code_test(void **state) {
     struct StackAlgoTestState *testState = *state;
     const char *sample_data_dir = testState->sample_data_dir;
+    const size_t sample_data_dir_size = strlen(sample_data_dir);
     Track *trackZ = testState->trackZ;
     Track *trackABC = testState->trackABC;
     Track *trackDgE = testState->trackDgE;
@@ -927,18 +928,26 @@ static void otio_stack_algo_flatten_example_code_test(void **state) {
     const char *trackgFgStr = testState->trackgFgStr;
 
     const char *multitrack_file = "multitrack.otio";
-    const size_t multitrack_path_size =
-        strlen(sample_data_dir) + strlen(multitrack_file) + 1;
-    char *multitrack_path = (char *) calloc(multitrack_path_size, sizeof(char));
-    strcpy_s(multitrack_path, multitrack_path_size, sample_data_dir);
-    strcat_s(multitrack_path, multitrack_path_size, multitrack_file);
+    const size_t multitrack_file_size = strlen(multitrack_file);
+    char *multitrack_path = (char *) calloc(
+        sample_data_dir_size + multitrack_file_size + 1,
+        sizeof(char));
+    memcpy(multitrack_path, sample_data_dir, sample_data_dir_size);
+    memcpy(
+        multitrack_path + sample_data_dir_size,
+        multitrack_file,
+        multitrack_file_size);
 
     const char *preflattened_file = "preflattened.otio";
-    const size_t preflattened_path_size =
-        strlen(sample_data_dir) + strlen(multitrack_file) + 1;
-    char *preflattened_path = (char *) calloc(preflattened_path_size, sizeof(char));
-    strcpy_s(preflattened_path, preflattened_path_size, sample_data_dir);
-    strcat_s(preflattened_path, preflattened_path_size, preflattened_file);
+    const size_t preflattened_file_size = strlen(preflattened_file);
+    char *preflattened_path = (char *) calloc(
+        sample_data_dir_size + preflattened_file_size + 1,
+        sizeof(char));
+    memcpy(preflattened_path, sample_data_dir, sample_data_dir_size);
+    memcpy(
+        preflattened_path + sample_data_dir_size,
+        preflattened_file,
+        preflattened_file_size);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 

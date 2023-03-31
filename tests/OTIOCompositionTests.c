@@ -1496,8 +1496,9 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
     const size_t sample_data_dir_size = strlen(sample_data_dir);
     const char *edl_file = "transition_test.otio";
     const size_t edl_file_size = strlen(edl_file);
-    const size_t edl_path_size = sample_data_dir_size + edl_file_size + 1;
-    char *edl_path = (char *) calloc(edl_path_size, sizeof(char));
+    char *edl_path = (char *) calloc(
+        sample_data_dir_size + edl_file_size + 1,
+        sizeof(char));
     memcpy(edl_path, sample_data_dir, sample_data_dir_size);
     memcpy(edl_path + sample_data_dir_size, edl_file, edl_file_size);
 
@@ -1667,8 +1668,9 @@ static void otio_track_range_of_all_children_test(void **state) {
     const size_t sample_data_dir_size = strlen(sample_data_dir);
     const char *edl_file = "transition_test.otio";
     const size_t edl_file_size = strlen(edl_file);
-    const size_t edl_path_size = sample_data_dir_size + edl_file_size + 1;
-    char *edl_path = (char *) calloc(edl_path_size, sizeof(char));
+    char *edl_path = (char *) calloc(
+        sample_data_dir_size + edl_file_size + 1,
+        sizeof(char));
     memcpy(edl_path, sample_data_dir, sample_data_dir_size);
     memcpy(edl_path + sample_data_dir_size, edl_file, edl_file_size);
 
