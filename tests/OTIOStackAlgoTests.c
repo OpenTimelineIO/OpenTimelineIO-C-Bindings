@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright Contributors to the OpenTimelineIO project
 
+#include "util.h"
+
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -913,7 +915,6 @@ static void otio_stack_algo_flatten_vector_of_tracks_test(void **state) {
 static void otio_stack_algo_flatten_example_code_test(void **state) {
     struct StackAlgoTestState *testState = *state;
     const char *sample_data_dir = testState->sample_data_dir;
-    const size_t sample_data_dir_size = strlen(sample_data_dir);
     Track *trackZ = testState->trackZ;
     Track *trackABC = testState->trackABC;
     Track *trackDgE = testState->trackDgE;
@@ -928,26 +929,10 @@ static void otio_stack_algo_flatten_example_code_test(void **state) {
     const char *trackgFgStr = testState->trackgFgStr;
 
     const char *multitrack_file = "multitrack.otio";
-    const size_t multitrack_file_size = strlen(multitrack_file);
-    const size_t mulitrack_path_size = sample_data_dir_size + multitrack_file_size;
-    char *multitrack_path = (char *) calloc(mulitrack_path_size + 1, sizeof(char));
-    memcpy(multitrack_path, sample_data_dir, sample_data_dir_size);
-    memcpy(
-        multitrack_path + sample_data_dir_size,
-        multitrack_file,
-        multitrack_file_size);
-    multitrack_path[mulitrack_path_size] = 0;
+    char* multitrack_path = append_path_and_filename(sample_data_dir, multitrack_file);
 
     const char *preflattened_file = "preflattened.otio";
-    const size_t preflattened_file_size = strlen(preflattened_file);
-    const size_t preflattened_path_size = sample_data_dir_size + preflattened_file_size;
-    char *preflattened_path = (char *) calloc(preflattened_path_size + 1, sizeof(char));
-    memcpy(preflattened_path, sample_data_dir, sample_data_dir_size);
-    memcpy(
-        preflattened_path + sample_data_dir_size,
-        preflattened_file,
-        preflattened_file_size);
-    preflattened_path[preflattened_path_size] = 0;
+    char* preflattened_path = append_path_and_filename(sample_data_dir, preflattened_file);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
