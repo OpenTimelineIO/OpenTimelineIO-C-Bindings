@@ -46,6 +46,6 @@ inline char* CppString_to_CString(std::string const& s)
 {
     const size_t size = s.size() + 1;
     char* charPtr = (char*)malloc(size * sizeof(char));
-    strcpy_s(charPtr, size, s.c_str());
+    memcpy(charPtr, s.c_str(), size);
     return charPtr;
 }
