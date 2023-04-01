@@ -66,7 +66,7 @@ SerializableObject_to_json_string(
             ->to_json_string(
                 reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status),
                 indent);
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 
 OTIO_API OTIOSerializableObject*
@@ -129,7 +129,7 @@ SerializableObject_schema_name(OTIOSerializableObject* self)
 {
     std::string returnStr =
         reinterpret_cast<OTIO_NS::SerializableObject*>(self)->schema_name();
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 
 OTIO_API int

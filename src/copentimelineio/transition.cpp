@@ -52,7 +52,7 @@ OTIO_API bool Transition_overlapping(Transition *self) {
 OTIO_API const char *Transition_transition_type(Transition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Transition *>(self)->transition_type();
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 OTIO_API void Transition_set_transition_type(
         Transition *self, const char *transition_type) {
@@ -104,7 +104,7 @@ OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
 OTIO_API const char *Transition_name(Transition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Transition *>(self)->name();
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 OTIO_API AnyDictionary *Transition_metadata(Transition *self) {
     OTIO_NS::AnyDictionary anyDictionary =

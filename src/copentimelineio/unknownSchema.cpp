@@ -15,7 +15,7 @@ OTIO_API UnknownSchema *UnknownSchema_create(
 OTIO_API const char *UnknownSchema_original_schema_name(UnknownSchema *self) {
     std::string returnStr = reinterpret_cast<OTIO_NS::UnknownSchema *>(self)
             ->original_schema_name();
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 
 OTIO_API int UnknownSchema_original_schema_version(UnknownSchema *self) {

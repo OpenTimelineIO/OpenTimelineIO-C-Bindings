@@ -23,7 +23,7 @@ SerializableObjectWithMetadata_name(SerializableObjectWithMetadata *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::SerializableObjectWithMetadata *>(self)
                     ->name();
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 OTIO_API void SerializableObjectWithMetadata_set_name(
         SerializableObjectWithMetadata *self, const char *name) {

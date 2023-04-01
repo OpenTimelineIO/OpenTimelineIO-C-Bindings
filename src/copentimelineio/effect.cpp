@@ -49,7 +49,7 @@ OTIO_API Effect *Effect_create(
 OTIO_API const char *Effect_effect_name(Effect *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Effect *>(self)->effect_name();
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 
 OTIO_API void Effect_set_effect_name(Effect *self, const char *effect_name) {

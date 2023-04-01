@@ -114,7 +114,7 @@ OTIO_API const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter)
 {
     std::string returnStr =
         (*reinterpret_cast<DictionaryIterator*>(iter))->first;
-    return _strdup(returnStr.c_str());
+    return strdup(returnStr.c_str());
 }
 OTIO_API Any* AnyDictionaryIterator_value(AnyDictionaryIterator* iter)
 {
