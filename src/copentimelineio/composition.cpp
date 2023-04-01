@@ -13,6 +13,7 @@
 #include <opentimelineio/effect.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/marker.h>
+#include <string.h>
 #include <utility>
 #include <vector>
 

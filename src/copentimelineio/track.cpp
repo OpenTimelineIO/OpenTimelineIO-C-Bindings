@@ -10,6 +10,7 @@
 #include <opentimelineio/composable.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/track.h>
+#include <string.h>
 #include <utility>
 
 typedef std::map<OTIO_NS::Composable *, opentime::TimeRange>::iterator

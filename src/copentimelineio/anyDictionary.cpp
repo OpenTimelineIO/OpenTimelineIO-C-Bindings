@@ -2,9 +2,9 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/anyDictionary.h"
-#include "copentime/util.h"
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/version.h>
+#include <string.h>
 
 typedef std::map<std::string, OTIO_NS::any>::iterator DictionaryIterator;
 

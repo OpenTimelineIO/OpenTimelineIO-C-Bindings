@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/serialization.h"
-#include "copentime/util.h"
 #include <opentimelineio/serialization.h>
+#include <string.h>
 
 OTIO_API const char *serialize_json_to_string(
         Any *value, OTIOErrorStatus *error_status, int indent) {

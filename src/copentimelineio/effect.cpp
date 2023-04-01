@@ -2,11 +2,11 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/effect.h"
-#include "copentime/util.h"
 #include <copentimelineio/serializableObjectWithMetadata.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/effect.h>
 #include <opentimelineio/serializableObject.h>
+#include <string.h>
 
 typedef OTIO_NS::SerializableObject::Retainer<OTIO_NS::Effect> EffectRetainer;
 

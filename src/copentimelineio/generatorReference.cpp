@@ -8,6 +8,7 @@
 #include <opentime/timeRange.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/generatorReference.h>
+#include <string.h>
 
 OTIO_API GeneratorReference *GeneratorReference_create(
         const char *name,

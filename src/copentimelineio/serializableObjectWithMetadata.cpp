@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/serializableObjectWithMetadata.h"
-#include "copentime/util.h"
 #include <opentimelineio/serializableObjectWithMetadata.h>
+#include <string.h>
 
 OTIO_API SerializableObjectWithMetadata *SerializableObjectWithMetadata_create(
         const char *name, AnyDictionary *metadata) {

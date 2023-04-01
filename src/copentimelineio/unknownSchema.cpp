@@ -2,9 +2,9 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/unknownSchema.h"
-#include "copentime/util.h"
 #include <copentimelineio/serializableObject.h>
 #include <opentimelineio/unknownSchema.h>
+#include <string.h>
 
 OTIO_API UnknownSchema *UnknownSchema_create(
         const char *original_schema_name, int original_schema_version) {

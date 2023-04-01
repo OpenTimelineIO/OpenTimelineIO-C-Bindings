@@ -11,6 +11,7 @@
 #include <opentimelineio/safely_typed_any.h>
 #include <opentimelineio/serializableObject.h>
 #include <opentimelineio/version.h>
+#include <string.h>
 #include <utility>
 #include <vector>
 

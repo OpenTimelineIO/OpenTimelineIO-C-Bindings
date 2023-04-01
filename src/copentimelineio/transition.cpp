@@ -9,7 +9,7 @@
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/transition.h>
-
+#include <string.h>
 
 const char *TransitionType_SMPTE_Dissolve =
         OTIO_NS::Transition::Type::SMPTE_Dissolve;

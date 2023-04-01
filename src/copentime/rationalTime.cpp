@@ -4,6 +4,7 @@
 #include "copentime/rationalTime.h"
 #include "copentime/util.h"
 #include <opentime/rationalTime.h>
+#include <string.h>
 
 OTIO_API RationalTime RationalTime_create(double value, double rate) {
     RationalTime rationalTime;

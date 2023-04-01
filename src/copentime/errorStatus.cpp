@@ -2,8 +2,8 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentime/errorStatus.h"
-#include "copentime/util.h"
 #include <opentime/errorStatus.h>
+#include <string.h>
 
 OTIO_API OpenTimeErrorStatus *OpenTimeErrorStatus_create() {
     return reinterpret_cast<OpenTimeErrorStatus *>(

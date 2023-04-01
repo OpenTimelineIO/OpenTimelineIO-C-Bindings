@@ -9,6 +9,7 @@
 #include <opentime/timeRange.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/externalReference.h>
+#include <string.h>
 
 OTIO_API ExternalReference *ExternalReference_create(
         const char *target_url,
