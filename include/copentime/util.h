@@ -9,8 +9,6 @@
 #include <opentime/rationalTime.h>
 #include <opentime/timeRange.h>
 #include <opentime/timeTransform.h>
-#include <stdlib.h>
-#include <string.h>
 
 inline RationalTime CppRationalTime_to_CRationalTime(opentime::RationalTime rationalTime) {
     return RationalTime_create(rationalTime.value(), rationalTime.rate());
