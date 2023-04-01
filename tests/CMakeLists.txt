@@ -17,7 +17,7 @@ set(TESTS
     OTIOTrackAlgoTests
 )
 foreach(TEST ${TESTS})
-    add_executable(C${TEST} ${TEST}.c epsilon.h)
+    add_executable(C${TEST} ${TEST}.c epsilon.h util.h util.c)
     target_include_directories(C${TEST} PRIVATE
         "${PROJECT_SOURCE_DIR}/include"
         "${PROJECT_SOURCE_DIR}/OpenTimelineIO/src/deps"

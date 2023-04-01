@@ -165,7 +165,7 @@ static void otio_item_copy_available_range_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    TimeRange available_range = Item_available_range(it, errorStatus);
+    Item_available_range(it, errorStatus);
 
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 1);
 
@@ -182,7 +182,7 @@ static void otio_item_copy_duration_and_source_range_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    RationalTime it_duration = Item_duration(it, errorStatus);
+    Item_duration(it, errorStatus);
 
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 1);
 
@@ -217,7 +217,7 @@ static void otio_item_copy_trimmed_range_test(void **state) {
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
-    TimeRange it_trimmed_range = Item_trimmed_range(it, errorStatus);
+    Item_trimmed_range(it, errorStatus);
 
     assert_int_equal(OTIOErrorStatus_get_outcome(errorStatus), 1);
 

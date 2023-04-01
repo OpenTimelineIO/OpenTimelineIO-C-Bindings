@@ -63,16 +63,16 @@ OTIO_API MapComposableTimeRangeIterator *MapComposableTimeRange_erase_range(
 
 OTIO_API int MapComposableTimeRange_erase_key(
         MapComposableTimeRange *self, Composable *key) {
-    return reinterpret_cast<MapDef *>(self)->erase(
-            reinterpret_cast<OTIO_NS::Composable *>(key));
+    return static_cast<int>(reinterpret_cast<MapDef *>(self)->erase(
+            reinterpret_cast<OTIO_NS::Composable *>(key)));
 }
 
 OTIO_API int MapComposableTimeRange_size(MapComposableTimeRange *self) {
-    return reinterpret_cast<MapDef *>(self)->size();
+    return static_cast<int>(reinterpret_cast<MapDef *>(self)->size());
 }
 
 OTIO_API int MapComposableTimeRange_max_size(MapComposableTimeRange *self) {
-    return reinterpret_cast<MapDef *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<MapDef *>(self)->max_size());
 }
 
 OTIO_API bool MapComposableTimeRange_empty(MapComposableTimeRange *self) {

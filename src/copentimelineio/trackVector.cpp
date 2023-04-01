@@ -31,15 +31,15 @@ OTIO_API TrackVectorIterator *TrackVector_end(TrackVector *self) {
 }
 
 OTIO_API int TrackVector_size(TrackVector *self) {
-    return reinterpret_cast<TrackVectorDef *>(self)->size();
+    return static_cast<int>(reinterpret_cast<TrackVectorDef *>(self)->size());
 }
 
 OTIO_API int TrackVector_max_size(TrackVector *self) {
-    return reinterpret_cast<TrackVectorDef *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<TrackVectorDef *>(self)->max_size());
 }
 
 OTIO_API int TrackVector_capacity(TrackVector *self) {
-    return reinterpret_cast<TrackVectorDef *>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<TrackVectorDef *>(self)->capacity());
 }
 
 OTIO_API void TrackVector_resize(TrackVector *self, int n) {
