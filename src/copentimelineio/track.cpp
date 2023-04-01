@@ -67,7 +67,7 @@ OTIO_API Track *Track_create(
 }
 OTIO_API const char *Track_kind(Track *self) {
     std::string returnStr = reinterpret_cast<OTIO_NS::Track *>(self)->kind();
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 OTIO_API void Track_set_kind(Track *self, const char *kind) {
     reinterpret_cast<OTIO_NS::Track *>(self)->set_kind(kind);

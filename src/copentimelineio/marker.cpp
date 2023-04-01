@@ -67,7 +67,7 @@ OTIO_API Marker *Marker_create(
 OTIO_API const char *Marker_color(Marker *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Marker *>(self)->color();
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 OTIO_API void Marker_set_color(Marker *self, const char *color) {
     reinterpret_cast<OTIO_NS::Marker *>(self)->set_color(color);

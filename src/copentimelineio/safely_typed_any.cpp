@@ -94,7 +94,7 @@ OTIO_API double safely_cast_double_any(Any *a) {
 OTIO_API const char *safely_cast_string_any(Any *a) {
     std::string returnStr = OTIO_NS::safely_cast_string_any(
             *reinterpret_cast<OTIO_NS::any *>(a));
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 OTIO_API RationalTime safely_cast_rational_time_any(Any *a) {
     opentime::RationalTime rationalTime =

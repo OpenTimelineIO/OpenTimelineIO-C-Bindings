@@ -128,7 +128,7 @@ OTIO_API const char *RationalTime_to_timecode(
                     rate,
                     static_cast<opentime::IsDropFrameRate>(drop_frame),
                     reinterpret_cast<opentime::ErrorStatus *>(error_status));
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 
 OTIO_API const char *RationalTime_to_timecode_auto(
@@ -136,13 +136,13 @@ OTIO_API const char *RationalTime_to_timecode_auto(
     opentime::RationalTime ot_self = CRationalTime_to_CppRationalTime(self);
     std::string returnStr = ot_self.to_timecode(
             reinterpret_cast<opentime::ErrorStatus *>(error_status));
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 
 OTIO_API const char *RationalTime_to_time_string(RationalTime self) {
     opentime::RationalTime ot_self = CRationalTime_to_CppRationalTime(self);
     std::string returnStr = ot_self.to_time_string();
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 
 OTIO_API RationalTime RationalTime_add(RationalTime lhs, RationalTime rhs) {

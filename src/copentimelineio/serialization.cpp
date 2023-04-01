@@ -11,7 +11,7 @@ OTIO_API const char *serialize_json_to_string(
             *reinterpret_cast<OTIO_NS::any *>(value),
             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status),
             indent);
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 
 OTIO_API bool serialize_json_to_file(

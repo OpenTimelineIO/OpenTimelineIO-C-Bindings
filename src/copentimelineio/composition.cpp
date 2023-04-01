@@ -72,7 +72,7 @@ OTIO_API Composition *Composition_create(
 OTIO_API const char *Composition_composition_kind(Composition *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::Composition *>(self)->composition_kind();
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 OTIO_API ComposableRetainerVector *Composition_children(Composition *self) {
     ComposableRetainerVectorDef composableRetainerVector =

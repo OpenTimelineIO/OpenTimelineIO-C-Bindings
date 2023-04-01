@@ -47,7 +47,7 @@ OTIO_API const char *GeneratorReference_generator_kind(GeneratorReference *self)
     std::string returnStr =
             reinterpret_cast<OTIO_NS::GeneratorReference *>(self)
                     ->generator_kind();
-    return CppString_to_CString(returnStr);
+    return _strdup(returnStr.c_str());
 }
 OTIO_API void GeneratorReference_set_generator_kind(
         GeneratorReference *self, const char *generator_kind) {

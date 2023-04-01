@@ -41,12 +41,3 @@ inline opentime::TimeTransform CTimeTransform_to_CppTimeTransform(TimeTransform 
     opentime::RationalTime offset = CRationalTime_to_CppRationalTime(timeTransform.offset);
     return opentime::TimeTransform(offset, timeTransform.scale, timeTransform.rate);
 }
-
-inline char* CppString_to_CString(std::string const& s)
-{
-    const size_t size = s.size();
-    char* charPtr = (char*)malloc((size + 1) * sizeof(char));
-    memcpy(charPtr, s.c_str(), size);
-    charPtr[size] = 0;
-    return charPtr;
-}
