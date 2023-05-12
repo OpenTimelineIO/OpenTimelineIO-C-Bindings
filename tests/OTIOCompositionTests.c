@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright Contributors to the OpenTimelineIO project
 
+#include "util.h"
+
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -586,8 +588,7 @@ static void otio_stack_range_of_child_with_duration_test(void **state) {
 
     Clip *errorClip = Clip_create(NULL, NULL, nullRange, NULL);
     OTIO_RETAIN(errorClip);
-    OptionalTimeRange errorTime =
-            Item_trimmed_range_in_parent((Item *) errorClip, errorStatus);
+    Item_trimmed_range_in_parent((Item *) errorClip, errorStatus);
     OTIO_ErrorStatus_Outcome outcome = OTIOErrorStatus_get_outcome(errorStatus);
     assert_int_equal(outcome, 18);
     OTIO_RELEASE(errorClip);
@@ -957,8 +958,7 @@ static void otio_track_range_test(void **state) {
             TimeRange_create_with_start_time_and_duration(start_time, duration));
     assert_true(TimeRange_equal(OptionalTimeRange_value(tr), sq_range_child_minus_1));
 
-    TimeRange sq_range_child_minus_error =
-            Track_range_of_child_at_index(sq, 11, errorStatus);
+    Track_range_of_child_at_index(sq, 11, errorStatus);
     OTIO_ErrorStatus_Outcome outcome = OTIOErrorStatus_get_outcome(errorStatus);
     assert_int_equal(outcome, 13);
 
@@ -1496,10 +1496,7 @@ static void otio_track_neighbors_of_simple_test(void **state) {
 static void otio_track_neighbors_of_from_data_test(void **state) {
     const char *sample_data_dir = xstr(SAMPLE_DATA_DIR);
     const char *edl_file = "transition_test.otio";
-    char *edl_path = (char *) calloc(
-            strlen(sample_data_dir) + strlen(edl_file) + 1, sizeof(char));
-    strcpy(edl_path, sample_data_dir);
-    strcat(edl_path, edl_file);
+    char* edl_path = append_path_and_filename(sample_data_dir, edl_file);
 
     OptionalRationalTime nullTime = OptionalRationalTime_create_null();
     Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
@@ -1665,10 +1662,7 @@ static void otio_track_neighbors_of_from_data_test(void **state) {
 static void otio_track_range_of_all_children_test(void **state) {
     const char *sample_data_dir = xstr(SAMPLE_DATA_DIR);
     const char *edl_file = "transition_test.otio";
-    char *edl_path = (char *) calloc(
-            strlen(sample_data_dir) + strlen(edl_file) + 1, sizeof(char));
-    strcpy(edl_path, sample_data_dir);
-    strcat(edl_path, edl_file);
+    char* edl_path = append_path_and_filename(sample_data_dir, edl_file);
 
     OptionalRationalTime nullTime = OptionalRationalTime_create_null();
     Timeline *timeline = Timeline_create(NULL, nullTime, NULL);
@@ -2058,7 +2052,7 @@ static void otio_nesting_deeply_nesting_test(void **state) {
     assert_true(RationalTime_equal(stack_transformed_time_fifty_clip, middle));
     assert_true(RationalTime_equal(stack_transformed_time_ninetynine_clip, last));
 
-    int num_wrappers = 10;
+    #define num_wrappers 10
     Stack *wrappers[num_wrappers];
     struct ClipWrapperPair clipWrapperPair;
     clipWrapperPair.clip = clip;

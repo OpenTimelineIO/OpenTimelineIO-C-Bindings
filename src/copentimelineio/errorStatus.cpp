@@ -35,9 +35,7 @@ OTIOErrorStatus_outcome_to_string(OTIO_ErrorStatus_Outcome var1)
 {
     std::string returnStr = OTIO_NS::ErrorStatus::outcome_to_string(
         static_cast<OTIO_NS::ErrorStatus::Outcome>(var1));
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return strdup(returnStr.c_str());
 }
 
 OTIO_API OTIO_ErrorStatus_Outcome

@@ -21,6 +21,10 @@ target_include_directories(copentime PUBLIC
 
 target_link_libraries(copentime opentime)
 
+if(WIN32)
+    target_compile_definitions(copentime PRIVATE _CRT_NONSTDC_NO_WARNINGS)
+endif()
+
 set_target_properties(copentime PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib"
         MACOSX_RPATH true WINDOWS_EXPORT_ALL_SYMBOLS true)
 

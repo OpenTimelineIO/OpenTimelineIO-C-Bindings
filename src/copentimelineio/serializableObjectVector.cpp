@@ -36,15 +36,15 @@ SerializableObjectVector_end(SerializableObjectVector* self)
 }
 OTIO_API int SerializableObjectVector_size(SerializableObjectVector* self)
 {
-    return reinterpret_cast<SerializableObjectVectorDef*>(self)->size();
+    return static_cast<int>(reinterpret_cast<SerializableObjectVectorDef*>(self)->size());
 }
 OTIO_API int SerializableObjectVector_max_size(SerializableObjectVector* self)
 {
-    return reinterpret_cast<SerializableObjectVectorDef*>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<SerializableObjectVectorDef*>(self)->max_size());
 }
 OTIO_API int SerializableObjectVector_capacity(SerializableObjectVector* self)
 {
-    return reinterpret_cast<SerializableObjectVectorDef*>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<SerializableObjectVectorDef*>(self)->capacity());
 }
 OTIO_API void SerializableObjectVector_resize(SerializableObjectVector* self, int n)
 {

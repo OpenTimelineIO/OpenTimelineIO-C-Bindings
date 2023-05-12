@@ -103,6 +103,10 @@ target_link_libraries(copentimelineio
         opentimelineio
         copentime)
 
+if(WIN32)
+    target_compile_definitions(copentimelineio PRIVATE _CRT_NONSTDC_NO_WARNINGS)
+endif()
+
 set_target_properties(copentimelineio PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib"
         MACOSX_RPATH true WINDOWS_EXPORT_ALL_SYMBOLS true)
 

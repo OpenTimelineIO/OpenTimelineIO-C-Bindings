@@ -37,15 +37,15 @@ EffectRetainerVector_end(EffectRetainerVector *self) {
 }
 
 OTIO_API int EffectRetainerVector_size(EffectRetainerVector *self) {
-    return reinterpret_cast<EffectRetainerVectorDef *>(self)->size();
+    return static_cast<int>(reinterpret_cast<EffectRetainerVectorDef *>(self)->size());
 }
 
 OTIO_API int EffectRetainerVector_max_size(EffectRetainerVector *self) {
-    return reinterpret_cast<EffectRetainerVectorDef *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<EffectRetainerVectorDef *>(self)->max_size());
 }
 
 OTIO_API int EffectRetainerVector_capacity(EffectRetainerVector *self) {
-    return reinterpret_cast<EffectRetainerVectorDef *>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<EffectRetainerVectorDef *>(self)->capacity());
 }
 
 OTIO_API void EffectRetainerVector_resize(EffectRetainerVector *self, int n) {

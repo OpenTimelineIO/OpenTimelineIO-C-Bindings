@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright Contributors to the OpenTimelineIO project
 
+#include "util.h"
+
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -187,10 +189,7 @@ static void otio_generator_reference_read_file_test(void **state) {
     const char *sample_data_dir = testState->sample_data_dir;
 
     const char *ref_file = "generator_reference_test.otio";
-    char *ref_path = (char *) calloc(
-            strlen(sample_data_dir) + strlen(ref_file) + 1, sizeof(char));
-    strcpy(ref_path, sample_data_dir);
-    strcat(ref_path, ref_file);
+    char* ref_path = append_path_and_filename(sample_data_dir, ref_file);
 
     OTIOErrorStatus *errorStatus = OTIOErrorStatus_create();
 
