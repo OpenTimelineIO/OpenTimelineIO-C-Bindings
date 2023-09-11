@@ -58,15 +58,15 @@ OTIO_API AnyDictionaryIterator* AnyDictionary_erase_range(
 }
 OTIO_API int AnyDictionary_erase_key(AnyDictionary* self, const char* key)
 {
-    return reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->erase(key);
+    return static_cast<int>(reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->erase(key));
 }
 OTIO_API int AnyDictionary_size(AnyDictionary* self)
 {
-    return reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->size();
+    return static_cast<int>(reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->size());
 }
 OTIO_API int AnyDictionary_max_size(AnyDictionary* self)
 {
-    return reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<OTIO_NS::AnyDictionary*>(self)->max_size());
 }
 OTIO_API bool AnyDictionary_empty(AnyDictionary* self)
 {
@@ -114,9 +114,7 @@ OTIO_API const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter)
 {
     std::string returnStr =
         (*reinterpret_cast<DictionaryIterator*>(iter))->first;
-    char* charPtr = (char*) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return strdup(returnStr.c_str());
 }
 OTIO_API Any* AnyDictionaryIterator_value(AnyDictionaryIterator* iter)
 {

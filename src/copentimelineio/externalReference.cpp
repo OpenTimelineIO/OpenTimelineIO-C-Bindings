@@ -35,9 +35,7 @@ OTIO_API ExternalReference *ExternalReference_create(
 OTIO_API const char *ExternalReference_target_url(ExternalReference *self) {
     std::string returnStr =
             reinterpret_cast<OTIO_NS::ExternalReference *>(self)->target_url();
-    char *charPtr = (char *) malloc((returnStr.size() + 1) * sizeof(char));
-    strcpy(charPtr, returnStr.c_str());
-    return charPtr;
+    return strdup(returnStr.c_str());
 }
 
 OTIO_API void ExternalReference_set_target_url(

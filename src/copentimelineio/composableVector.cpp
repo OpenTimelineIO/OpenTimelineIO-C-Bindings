@@ -32,15 +32,15 @@ OTIO_API ComposableVectorIterator* ComposableVector_end(ComposableVector* self)
 }
 OTIO_API int ComposableVector_size(ComposableVector* self)
 {
-    return reinterpret_cast<ComposableVectorDef*>(self)->size();
+    return static_cast<int>(reinterpret_cast<ComposableVectorDef*>(self)->size());
 }
 OTIO_API int ComposableVector_max_size(ComposableVector* self)
 {
-    return reinterpret_cast<ComposableVectorDef*>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<ComposableVectorDef*>(self)->max_size());
 }
 OTIO_API int ComposableVector_capacity(ComposableVector* self)
 {
-    return reinterpret_cast<ComposableVectorDef*>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<ComposableVectorDef*>(self)->capacity());
 }
 OTIO_API void ComposableVector_resize(ComposableVector* self, int n)
 {

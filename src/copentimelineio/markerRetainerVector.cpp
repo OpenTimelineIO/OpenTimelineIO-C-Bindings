@@ -37,15 +37,15 @@ MarkerRetainerVector_end(MarkerRetainerVector *self) {
 }
 
 OTIO_API int MarkerRetainerVector_size(MarkerRetainerVector *self) {
-    return reinterpret_cast<MarkerRetainerVectorDef *>(self)->size();
+    return static_cast<int>(reinterpret_cast<MarkerRetainerVectorDef *>(self)->size());
 }
 
 OTIO_API int MarkerRetainerVector_max_size(MarkerRetainerVector *self) {
-    return reinterpret_cast<MarkerRetainerVectorDef *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<MarkerRetainerVectorDef *>(self)->max_size());
 }
 
 OTIO_API int MarkerRetainerVector_capacity(MarkerRetainerVector *self) {
-    return reinterpret_cast<MarkerRetainerVectorDef *>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<MarkerRetainerVectorDef *>(self)->capacity());
 }
 
 OTIO_API void MarkerRetainerVector_resize(MarkerRetainerVector *self, int n) {

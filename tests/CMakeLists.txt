@@ -17,7 +17,7 @@ set(TESTS
     OTIOTrackAlgoTests
 )
 foreach(TEST ${TESTS})
-    add_executable(C${TEST} ${TEST}.c epsilon.h)
+    add_executable(C${TEST} ${TEST}.c epsilon.h util.h util.c)
     target_include_directories(C${TEST} PRIVATE
         "${PROJECT_SOURCE_DIR}/include"
         "${PROJECT_SOURCE_DIR}/OpenTimelineIO/src/deps"
@@ -26,7 +26,16 @@ foreach(TEST ${TESTS})
     target_link_libraries(C${TEST} PUBLIC
         cmocka
         copentime
-        copentimelineio)
+        copentimelineio
+        )
+
+    if (WIN32)
+        # don't link pthread
+    else()
+        target_link_libraries(C${TEST} PUBLIC
+            pthread
+            )
+    endif()
     target_compile_definitions(C${TEST} PRIVATE
         SAMPLE_DATA_DIR=${CMAKE_CURRENT_SOURCE_DIR}/sample_data/)
     add_test(NAME C${TEST} COMMAND C${TEST})

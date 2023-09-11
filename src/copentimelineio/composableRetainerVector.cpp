@@ -39,15 +39,15 @@ ComposableRetainerVector_end(ComposableRetainerVector* self)
 }
 OTIO_API int ComposableRetainerVector_size(ComposableRetainerVector* self)
 {
-    return reinterpret_cast<ComposableRetainerVectorDef*>(self)->size();
+    return static_cast<int>(reinterpret_cast<ComposableRetainerVectorDef*>(self)->size());
 }
 OTIO_API int ComposableRetainerVector_max_size(ComposableRetainerVector* self)
 {
-    return reinterpret_cast<ComposableRetainerVectorDef*>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<ComposableRetainerVectorDef*>(self)->max_size());
 }
 OTIO_API int ComposableRetainerVector_capacity(ComposableRetainerVector* self)
 {
-    return reinterpret_cast<ComposableRetainerVectorDef*>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<ComposableRetainerVectorDef*>(self)->capacity());
 }
 OTIO_API void ComposableRetainerVector_resize(ComposableRetainerVector* self, int n)
 {

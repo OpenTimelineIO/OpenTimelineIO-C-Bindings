@@ -31,15 +31,15 @@ OTIO_API EffectVectorIterator *EffectVector_end(EffectVector *self) {
 }
 
 OTIO_API int EffectVector_size(EffectVector *self) {
-    return reinterpret_cast<EffectVectorDef *>(self)->size();
+    return static_cast<int>(reinterpret_cast<EffectVectorDef *>(self)->size());
 }
 
 OTIO_API int EffectVector_max_size(EffectVector *self) {
-    return reinterpret_cast<EffectVectorDef *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<EffectVectorDef *>(self)->max_size());
 }
 
 OTIO_API int EffectVector_capacity(EffectVector *self) {
-    return reinterpret_cast<EffectVectorDef *>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<EffectVectorDef *>(self)->capacity());
 }
 
 OTIO_API void EffectVector_resize(EffectVector *self, int n) {

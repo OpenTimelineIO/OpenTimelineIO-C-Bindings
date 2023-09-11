@@ -26,15 +26,15 @@ OTIO_API AnyVectorIterator *AnyVector_end(AnyVector *self) {
 }
 
 OTIO_API int AnyVector_size(AnyVector *self) {
-    return reinterpret_cast<OTIO_NS::AnyVector *>(self)->size();
+    return static_cast<int>(reinterpret_cast<OTIO_NS::AnyVector *>(self)->size());
 }
 
 OTIO_API int AnyVector_max_size(AnyVector *self) {
-    return reinterpret_cast<OTIO_NS::AnyVector *>(self)->max_size();
+    return static_cast<int>(reinterpret_cast<OTIO_NS::AnyVector *>(self)->max_size());
 }
 
 OTIO_API int AnyVector_capacity(AnyVector *self) {
-    return reinterpret_cast<OTIO_NS::AnyVector *>(self)->capacity();
+    return static_cast<int>(reinterpret_cast<OTIO_NS::AnyVector *>(self)->capacity());
 }
 
 OTIO_API void AnyVector_resize(AnyVector *self, int n) {
