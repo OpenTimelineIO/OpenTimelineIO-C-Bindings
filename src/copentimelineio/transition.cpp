@@ -10,6 +10,7 @@
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/transition.h>
 #include <string.h>
+#include <optional>
 
 const char *TransitionType_SMPTE_Dissolve =
         OTIO_NS::Transition::Type::SMPTE_Dissolve;
@@ -86,19 +87,19 @@ Transition_duration(Transition *self, OTIOErrorStatus *error_status) {
 }
 OTIO_API OptionalTimeRange
 Transition_range_in_parent(Transition *self, OTIOErrorStatus *error_status) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Transition *>(self)->range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
         Transition *self, OTIOErrorStatus *error_status) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Transition *>(self)
                     ->trimmed_range_in_parent(
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API const char *Transition_name(Transition *self) {
@@ -127,14 +128,25 @@ OTIO_API bool Transition_to_json_file(
         Transition *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return Composable_to_json_file(
-            (Composable *) self, file_name, error_status, indent);
+            (Composable *) self,
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *Transition_to_json_string(
-        Transition *self, OTIOErrorStatus *error_status, int indent) {
+        Transition *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return Composable_to_json_string(
-            (Composable *) self, error_status, indent);
+            (Composable *) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool
 Transition_is_equivalent_to(Transition *self, OTIOSerializableObject *other) {

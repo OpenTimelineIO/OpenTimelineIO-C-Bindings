@@ -55,9 +55,13 @@ OTIO_API bool Marker_to_json_file(
         Marker *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Marker_to_json_string(
-        Marker *self, OTIOErrorStatus *error_status, int indent);
+        Marker *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool Marker_is_equivalent_to(Marker *self, OTIOSerializableObject *other);
 OTIO_API Marker *Marker_clone(Marker *self, OTIOErrorStatus *error_status);
 OTIO_API const char *Marker_schema_name(Marker *self);

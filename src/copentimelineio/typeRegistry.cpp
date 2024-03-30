@@ -4,6 +4,7 @@
 #include "copentimelineio/typeRegistry.h"
 #include <opentimelineio/typeRegistry.h>
 
+
 OTIO_API TypeRegistry* TypeRegistry_instance()
 {
     return reinterpret_cast<TypeRegistry*>(
@@ -70,6 +71,14 @@ OTIO_API bool TypeRegistry_set_type_record(
         reinterpret_cast<OTIO_NS::SerializableObject*>(var1),
         schema_name,
         reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status));
+}
+OTIO_API void
+TypeRegistry_type_version_map(
+    TypeRegistry* self,
+    OTIOSchemaVersionMap& result)
+{
+    return reinterpret_cast<OTIO_NS::TypeRegistry*>(self)->type_version_map(
+        reinterpret_cast<OTIO_NS::schema_version_map&>(result));
 }
 OTIO_API void TypeRegistry_destroy(TypeRegistry* self)
 {

@@ -10,6 +10,7 @@
 #include <opentimelineio/composable.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/stack.h>
+#include <optional>
 
 typedef std::vector<OTIO_NS::Effect *> EffectVectorDef;
 typedef std::vector<OTIO_NS::Effect *>::iterator EffectVectorIteratorDef;
@@ -25,9 +26,9 @@ OTIO_API Stack *Stack_create(
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (source_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
@@ -213,14 +214,26 @@ OTIO_API bool Stack_to_json_file(
         Stack *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return Composition_to_json_file(
-            (Composition *) self, file_name, error_status, indent);
+            (Composition *) self,
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *
-Stack_to_json_string(Stack *self, OTIOErrorStatus *error_status, int indent) {
+Stack_to_json_string(
+        Stack *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return Composition_to_json_string(
-            (Composition *) self, error_status, indent);
+            (Composition *) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool Stack_is_equivalent_to(Stack *self, OTIOSerializableObject *other) {
     return Composition_is_equivalent_to((Composition *) self, other);

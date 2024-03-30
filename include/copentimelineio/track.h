@@ -123,9 +123,13 @@ OTIO_API bool Track_to_json_file(
         Track *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Track_to_json_string(
-        Track *self, OTIOErrorStatus *error_status, int indent);
+        Track *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool Track_is_equivalent_to(Track *self, OTIOSerializableObject *other);
 OTIO_API Track *Track_clone(Track *self, OTIOErrorStatus *error_status);
 OTIO_API const char *Track_schema_name(Track *self);

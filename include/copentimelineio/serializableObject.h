@@ -5,6 +5,7 @@
 
 #include "errorStatus.h"
 #include <stdbool.h>
+//#include <opentimelineio/typeRegistry.h>
 
 #ifdef __cplusplus
 # define OTIO_API extern "C"
@@ -12,6 +13,8 @@
 # define OTIO_API
 #endif
 
+//typedef OTIO_NS::schema_version_map OTIOSchemaVersionMap;
+typedef struct OTIOSchemaVersionMap OTIOSchemaVersionMap;
 typedef struct RetainerSerializableObject RetainerSerializableObject;
 typedef struct OTIOSerializableObject OTIOSerializableObject;
 typedef struct OTIOErrorStatus OTIOErrorStatus;
@@ -27,11 +30,15 @@ OTIO_API void RetainerSerializableObject_managed_destroy(
 OTIO_API OTIOSerializableObject* SerializableObject_create();
 OTIO_API bool SerializableObject_to_json_file(
     OTIOSerializableObject* self,
-    const char*         file_name,
-    OTIOErrorStatus*    error_status,
-    int                 indent);
+    const char*          file_name,
+    OTIOErrorStatus*     error_status,
+    OTIOSchemaVersionMap *schema_version_targets,
+    int                  indent);
 OTIO_API const char* SerializableObject_to_json_string(
-    OTIOSerializableObject* self, OTIOErrorStatus* error_status, int indent);
+    OTIOSerializableObject* self,
+    OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap    *schema_version_targets,
+    int                     indent);
 OTIO_API OTIOSerializableObject* SerializableObject_from_json_file(
     const char* file_name, OTIOErrorStatus* error_status);
 OTIO_API OTIOSerializableObject* SerializableObject_from_json_string(

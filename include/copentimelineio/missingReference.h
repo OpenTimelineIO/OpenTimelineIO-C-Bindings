@@ -38,10 +38,14 @@ OTIO_API bool MissingReference_to_json_file(
         MissingReference *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 
 OTIO_API const char *MissingReference_to_json_string(
-        MissingReference *self, OTIOErrorStatus *error_status, int indent);
+        MissingReference *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 
 OTIO_API bool MissingReference_is_equivalent_to(
         MissingReference *self, OTIOSerializableObject *other);

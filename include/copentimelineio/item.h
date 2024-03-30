@@ -62,9 +62,13 @@ OTIO_API bool Item_to_json_file(
         Item *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *
-Item_to_json_string(Item *self, OTIOErrorStatus *error_status, int indent);
+Item_to_json_string(Item *self,
+                    OTIOErrorStatus *error_status,
+                    OTIOSchemaVersionMap *schema_version_targets,
+                    int indent);
 OTIO_API bool Item_is_equivalent_to(Item *self, OTIOSerializableObject *other);
 OTIO_API Item *Item_clone(Item *self, OTIOErrorStatus *error_status);
 OTIO_API const char *Item_schema_name(Item *self);

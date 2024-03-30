@@ -27,10 +27,14 @@ OTIO_API bool UnknownSchema_to_json_file(
         UnknownSchema *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 
 OTIO_API const char *UnknownSchema_to_json_string(
-        UnknownSchema *self, OTIOErrorStatus *error_status, int indent);
+        UnknownSchema *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 
 OTIO_API bool UnknownSchema_is_equivalent_to(
         UnknownSchema *self, OTIOSerializableObject *other);

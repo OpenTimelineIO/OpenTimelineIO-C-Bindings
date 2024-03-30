@@ -85,10 +85,14 @@ OTIO_API bool Gap_to_json_file(
         Gap *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 
 OTIO_API const char *
-Gap_to_json_string(Gap *self, OTIOErrorStatus *error_status, int indent);
+Gap_to_json_string(Gap *self,
+                   OTIOErrorStatus *error_status,
+                   OTIOSchemaVersionMap *schema_version_targets,
+                   int indent);
 
 OTIO_API bool Gap_is_equivalent_to(Gap *self, OTIOSerializableObject *other);
 

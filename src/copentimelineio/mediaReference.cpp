@@ -8,12 +8,13 @@
 #include <opentime/timeRange.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/mediaReference.h>
+#include <optional>
 
 OTIO_API MediaReference *MediaReference_create(
         const char *name, OptionalTimeRange available_range, AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (available_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(available_range.value));
 
     std::string name_str = std::string();
@@ -28,16 +29,16 @@ OTIO_API MediaReference *MediaReference_create(
             name_str, timeRangeOptional, metadataDictionary));
 }
 OTIO_API OptionalTimeRange MediaReference_available_range(MediaReference *self) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::MediaReference *>(self)->available_range();
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API void MediaReference_set_available_range(
         MediaReference *self, OptionalTimeRange available_range) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (available_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(available_range.value));
     reinterpret_cast<OTIO_NS::MediaReference *>(self)->set_available_range(
             timeRangeOptional);
@@ -63,14 +64,25 @@ OTIO_API bool MediaReference_to_json_file(
         MediaReference *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *MediaReference_to_json_string(
-        MediaReference *self, OTIOErrorStatus *error_status, int indent) {
+        MediaReference *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool MediaReference_is_equivalent_to(
         MediaReference *self, OTIOSerializableObject *other) {

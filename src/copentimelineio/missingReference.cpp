@@ -9,12 +9,13 @@
 #include <opentime/timeRange.h>
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/missingReference.h>
+#include <optional>
 
 OTIO_API MissingReference *MissingReference_create(
         const char *name, OptionalTimeRange available_range, AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (available_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(available_range.value));
     OTIO_NS::AnyDictionary metadataDictionary = OTIO_NS::AnyDictionary();
     if (metadata != NULL)
@@ -55,14 +56,25 @@ OTIO_API bool MissingReference_to_json_file(
         MissingReference *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *MissingReference_to_json_string(
-        MissingReference *self, OTIOErrorStatus *error_status, int indent) {
+        MissingReference *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool MissingReference_is_equivalent_to(
         MissingReference *self, OTIOSerializableObject *other) {

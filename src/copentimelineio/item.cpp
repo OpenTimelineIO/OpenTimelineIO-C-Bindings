@@ -8,6 +8,7 @@
 #include <opentimelineio/item.h>
 #include <opentimelineio/marker.h>
 #include <opentimelineio/serializableObject.h>
+#include <optional>
 
 typedef std::vector<OTIO_NS::Effect *> EffectVectorDef;
 typedef std::vector<OTIO_NS::Effect *>::iterator EffectVectorIteratorDef;
@@ -28,9 +29,9 @@ OTIO_API Item *Item_create(
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers) {
-    nonstd::optional<OTIO_NS::TimeRange> source_range_optional = nonstd::nullopt;
+    std::optional<OTIO_NS::TimeRange> source_range_optional = std::nullopt;
     if (source_range.valid)
-        source_range_optional = nonstd::optional<OTIO_NS::TimeRange>(
+        source_range_optional = std::optional<OTIO_NS::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
@@ -62,16 +63,16 @@ OTIO_API bool Item_overlapping(Item *self) {
     return reinterpret_cast<OTIO_NS::Item *>(self)->overlapping();
 }
 OTIO_API OptionalTimeRange Item_source_range(Item *self) {
-    nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional =
+    std::optional<OTIO_NS::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Item *>(self)->source_range();
-    if (timeRangeOptional == nonstd::nullopt)
+    if (timeRangeOptional == std::nullopt)
         return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API void Item_set_source_range(Item *self, OptionalTimeRange source_range) {
-    nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<OTIO_NS::TimeRange> timeRangeOptional = std::nullopt;
     if (source_range.valid)
-        timeRangeOptional = nonstd::optional<OTIO_NS::TimeRange>(
+        timeRangeOptional = std::optional<OTIO_NS::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
     reinterpret_cast<OTIO_NS::Item *>(self)->set_source_range(
             timeRangeOptional);
@@ -114,10 +115,10 @@ OTIO_API TimeRange Item_visible_range(Item *self, OTIOErrorStatus *error_status)
 }
 OTIO_API OptionalTimeRange
 Item_trimmed_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
-    nonstd::optional<OTIO_NS::TimeRange> timeRangeOptional =
+    std::optional<OTIO_NS::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Item *>(self)->trimmed_range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API TimeRange Item_range_in_parent(Item *self, OTIOErrorStatus *error_status) {
@@ -167,14 +168,26 @@ OTIO_API bool Item_to_json_file(
         Item *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return Composable_to_json_file(
-            (Composable *) self, file_name, error_status, indent);
+            (Composable *) self,
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *
-Item_to_json_string(Item *self, OTIOErrorStatus *error_status, int indent) {
+Item_to_json_string(
+        Item *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return Composable_to_json_string(
-            (Composable *) self, error_status, indent);
+            (Composable *) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool Item_is_equivalent_to(Item *self, OTIOSerializableObject *other) {
     return Composable_is_equivalent_to((Composable *) self, other);

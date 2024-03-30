@@ -31,9 +31,13 @@ OTIO_API bool MediaReference_to_json_file(
         MediaReference *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *MediaReference_to_json_string(
-        MediaReference *self, OTIOErrorStatus *error_status, int indent);
+        MediaReference *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool MediaReference_is_equivalent_to(
         MediaReference *self, OTIOSerializableObject *other);
 OTIO_API MediaReference *

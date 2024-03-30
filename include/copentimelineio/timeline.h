@@ -40,9 +40,13 @@ OTIO_API bool Timeline_to_json_file(
         Timeline *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Timeline_to_json_string(
-        Timeline *self, OTIOErrorStatus *error_status, int indent);
+        Timeline *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool Timeline_is_equivalent_to(Timeline *self, OTIOSerializableObject *other);
 OTIO_API Timeline *Timeline_clone(Timeline *self, OTIOErrorStatus *error_status);
 OTIO_API bool Timeline_is_unknown_schema(Timeline *self);

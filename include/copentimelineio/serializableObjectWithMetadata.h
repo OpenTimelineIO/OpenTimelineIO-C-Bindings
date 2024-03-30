@@ -14,8 +14,8 @@
 #endif
 
 struct SerializableObjectWithMetadata;
-typedef struct SerializableObjectWithMetadata
-                                SerializableObjectWithMetadata;
+typedef struct SerializableObjectWithMetadata SerializableObjectWithMetadata;
+
 OTIO_API SerializableObjectWithMetadata*
 SerializableObjectWithMetadata_create(const char* name, AnyDictionary* metadata);
 OTIO_API const char*
@@ -29,11 +29,13 @@ SerializableObjectWithMetadata_to_json_file(
     SerializableObjectWithMetadata* self,
     const char*                     file_name,
     OTIOErrorStatus*                error_status,
+    OTIOSchemaVersionMap            *schema_version_targets,
     int                             indent);
 OTIO_API const char*
 SerializableObjectWithMetadata_to_json_string(
     SerializableObjectWithMetadata* self,
     OTIOErrorStatus*                error_status,
+    OTIOSchemaVersionMap            *schema_version_targets,
     int                             indent);
 OTIO_API bool
 SerializableObjectWithMetadata_is_equivalent_to(

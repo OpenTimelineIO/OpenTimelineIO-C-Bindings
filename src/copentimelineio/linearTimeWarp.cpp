@@ -59,18 +59,30 @@ OTIO_API AnyDictionary* LinearTimeWarp_metadata(LinearTimeWarp* self)
 }
 
 OTIO_API bool LinearTimeWarp_to_json_file(
-    LinearTimeWarp*  self,
-    const char*      file_name,
-    OTIOErrorStatus* error_status,
-    int              indent)
+    LinearTimeWarp*         self,
+    const char*             file_name,
+    OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap*   schema_version_targets,
+    int                     indent)
 {
     return Effect_to_json_file(
-        (Effect*) self, file_name, error_status, indent);
+        (Effect*) self,
+        file_name,
+        error_status,
+        schema_version_targets,
+        indent);
 }
 OTIO_API const char* LinearTimeWarp_to_json_string(
-    LinearTimeWarp* self, OTIOErrorStatus* error_status, int indent)
+    LinearTimeWarp*         self,
+    OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap*   schema_version_targets,
+    int                     indent)
 {
-    return Effect_to_json_string((Effect*) self, error_status, indent);
+    return Effect_to_json_string(
+        (Effect*) self,
+        error_status,
+        schema_version_targets,
+        indent);
 }
 OTIO_API bool LinearTimeWarp_is_equivalent_to(
     LinearTimeWarp* self, OTIOSerializableObject* other)

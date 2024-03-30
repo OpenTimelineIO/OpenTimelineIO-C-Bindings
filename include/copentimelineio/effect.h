@@ -40,10 +40,14 @@ OTIO_API bool Effect_to_json_file(
         Effect *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 
 OTIO_API const char *Effect_to_json_string(
-        Effect *self, OTIOErrorStatus *error_status, int indent);
+        Effect *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 
 OTIO_API bool Effect_is_equivalent_to(Effect *self, OTIOSerializableObject *other);
 

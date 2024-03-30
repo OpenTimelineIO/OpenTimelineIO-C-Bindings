@@ -155,15 +155,27 @@ OTIO_API bool Gap_to_json_file(
         Gap *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return Composable_to_json_file(
-            (Composable *) self, file_name, error_status, indent);
+            (Composable *) self,
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API const char *
-Gap_to_json_string(Gap *self, OTIOErrorStatus *error_status, int indent) {
+Gap_to_json_string(
+        Gap *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return Composable_to_json_string(
-            (Composable *) self, error_status, indent);
+            (Composable *) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API bool Gap_is_equivalent_to(Gap *self, OTIOSerializableObject *other) {

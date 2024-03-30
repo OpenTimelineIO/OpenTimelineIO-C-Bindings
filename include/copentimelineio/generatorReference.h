@@ -39,9 +39,13 @@ OTIO_API bool GeneratorReference_to_json_file(
         GeneratorReference *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *GeneratorReference_to_json_string(
-        GeneratorReference *self, OTIOErrorStatus *error_status, int indent);
+        GeneratorReference *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool GeneratorReference_is_equivalent_to(
         GeneratorReference *self, OTIOSerializableObject *other);
 OTIO_API GeneratorReference *GeneratorReference_clone(

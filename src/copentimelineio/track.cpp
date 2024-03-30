@@ -12,6 +12,7 @@
 #include <opentimelineio/track.h>
 #include <string.h>
 #include <utility>
+#include <optional>
 
 typedef std::map<OTIO_NS::Composable *, opentime::TimeRange>::iterator
         MapComposableTimeRangeIteratorDef;
@@ -19,8 +20,8 @@ typedef std::map<OTIO_NS::Composable *, opentime::TimeRange>
         MapComposableTimeRangeDef;
 
 typedef std::pair<
-        nonstd::optional<opentime::RationalTime>,
-        nonstd::optional<opentime::RationalTime>>
+        std::optional<opentime::RationalTime>,
+        std::optional<opentime::RationalTime>>
         OptionalPairRationalTimeDef;
 typedef std::pair<
         OTIO_NS::Composable::Retainer<OTIO_NS::Composable>,
@@ -46,9 +47,9 @@ OTIO_API Track *Track_create(
         OptionalTimeRange source_range,
         const char *kind,
         AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (source_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
@@ -263,14 +264,26 @@ OTIO_API bool Track_to_json_file(
         Track *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return Composition_to_json_file(
-            (Composition *) self, file_name, error_status, indent);
+            (Composition *) self,
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *
-Track_to_json_string(Track *self, OTIOErrorStatus *error_status, int indent) {
+Track_to_json_string(
+        Track *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return Composition_to_json_string(
-            (Composition *) self, error_status, indent);
+            (Composition *) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool Track_is_equivalent_to(Track *self, OTIOSerializableObject *other) {
     return Composition_is_equivalent_to((Composition *) self, other);

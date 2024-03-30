@@ -100,14 +100,25 @@ OTIO_API bool Marker_to_json_file(
         Marker *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *Marker_to_json_string(
-        Marker *self, OTIOErrorStatus *error_status, int indent) {
+        Marker *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool Marker_is_equivalent_to(Marker *self, OTIOSerializableObject *other) {
     return SerializableObject_is_equivalent_to(

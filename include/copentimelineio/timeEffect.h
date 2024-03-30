@@ -23,12 +23,16 @@ OTIO_API const char*    TimeEffect_name(TimeEffect* self);
 OTIO_API void           TimeEffect_set_name(TimeEffect* self, const char* name);
 OTIO_API AnyDictionary* TimeEffect_metadata(TimeEffect* self);
 OTIO_API bool          TimeEffect_to_json_file(
-             TimeEffect*      self,
-             const char*      file_name,
-             OTIOErrorStatus* error_status,
-             int              indent);
+    TimeEffect*            self,
+    const char*            file_name,
+    OTIOErrorStatus*       error_status,
+    OTIOSchemaVersionMap*  schema_version_targets,
+    int                    indent);
 OTIO_API const char* TimeEffect_to_json_string(
-    TimeEffect* self, OTIOErrorStatus* error_status, int indent);
+    TimeEffect*            self,
+    OTIOErrorStatus*       error_status,
+    OTIOSchemaVersionMap*  schema_version_targets,
+    int                    indent);
 OTIO_API bool
     TimeEffect_is_equivalent_to(TimeEffect* self, OTIOSerializableObject* other);
 OTIO_API TimeEffect*

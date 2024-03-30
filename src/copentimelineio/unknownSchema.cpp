@@ -32,15 +32,26 @@ OTIO_API bool UnknownSchema_to_json_file(
         UnknownSchema *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API const char *UnknownSchema_to_json_string(
-        UnknownSchema *self, OTIOErrorStatus *error_status, int indent) {
+        UnknownSchema *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API bool UnknownSchema_is_equivalent_to(

@@ -43,16 +43,25 @@ OTIO_API bool SerializableObjectWithMetadata_to_json_file(
         SerializableObjectWithMetadata *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap* schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *SerializableObjectWithMetadata_to_json_string(
         SerializableObjectWithMetadata *self,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap* schema_version_targets,
         int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool SerializableObjectWithMetadata_is_equivalent_to(
         SerializableObjectWithMetadata *self, OTIOSerializableObject *other) {

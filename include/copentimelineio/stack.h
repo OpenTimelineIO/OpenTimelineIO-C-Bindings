@@ -101,9 +101,13 @@ OTIO_API bool Stack_to_json_file(
         Stack *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Stack_to_json_string(
-        Stack *self, OTIOErrorStatus *error_status, int indent);
+        Stack *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool Stack_is_equivalent_to(Stack *self, OTIOSerializableObject *other);
 OTIO_API Stack *Stack_clone(Stack *self, OTIOErrorStatus *error_status);
 OTIO_API const char *Stack_schema_name(Stack *self);

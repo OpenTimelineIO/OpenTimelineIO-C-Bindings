@@ -44,10 +44,14 @@ OTIO_API bool ExternalReference_to_json_file(
         ExternalReference *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 
 OTIO_API const char *ExternalReference_to_json_string(
-        ExternalReference *self, OTIOErrorStatus *error_status, int indent);
+        ExternalReference *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 
 OTIO_API bool ExternalReference_is_equivalent_to(
         ExternalReference *self, OTIOSerializableObject *other);

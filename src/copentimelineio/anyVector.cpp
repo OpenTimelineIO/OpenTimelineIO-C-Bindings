@@ -4,8 +4,9 @@
 #include "copentimelineio/anyVector.h"
 #include <opentimelineio/anyVector.h>
 #include <opentimelineio/version.h>
+#include <any>
 
-typedef std::vector<OTIO_NS::any>::iterator VectorIterator;
+typedef std::vector<std::any>::iterator VectorIterator;
 
 OTIO_API AnyVector *AnyVector_create() {
     return reinterpret_cast<AnyVector *>(new OTIO_NS::AnyVector());
@@ -59,14 +60,14 @@ OTIO_API void AnyVector_swap(AnyVector *self, AnyVector *other) {
 }
 
 OTIO_API Any *AnyVector_at(AnyVector *self, int pos) {
-    OTIO_NS::any value =
+    std::any value =
             reinterpret_cast<OTIO_NS::AnyVector *>(self)->at(pos);
-    return reinterpret_cast<Any *>(new OTIO_NS::any(value));
+    return reinterpret_cast<Any *>(new std::any(value));
 }
 
 OTIO_API void AnyVector_push_back(AnyVector *self, Any *value) {
     reinterpret_cast<OTIO_NS::AnyVector *>(self)->push_back(
-            *reinterpret_cast<OTIO_NS::any *>(value));
+            *reinterpret_cast<std::any *>(value));
 }
 
 OTIO_API void AnyVector_pop_back(AnyVector *self) {
@@ -77,7 +78,7 @@ OTIO_API AnyVectorIterator *
 AnyVector_insert(AnyVector *self, AnyVectorIterator *pos, Any *val) {
     VectorIterator it = reinterpret_cast<OTIO_NS::AnyVector *>(self)->insert(
             *reinterpret_cast<VectorIterator *>(pos),
-            *reinterpret_cast<OTIO_NS::any *>(val));
+            *reinterpret_cast<std::any *>(val));
     return reinterpret_cast<AnyVectorIterator *>(new VectorIterator(it));
 }
 
@@ -116,8 +117,8 @@ OTIO_API AnyVectorIterator *AnyVectorIterator_prev(AnyVectorIterator *iter, int 
 }
 
 OTIO_API Any *AnyVectorIterator_value(AnyVectorIterator *iter) {
-    OTIO_NS::any value = *reinterpret_cast<VectorIterator *>(iter);
-    return reinterpret_cast<Any *>(new OTIO_NS::any(value));
+    std::any value = *reinterpret_cast<VectorIterator *>(iter);
+    return reinterpret_cast<Any *>(new std::any(value));
 }
 
 OTIO_API bool

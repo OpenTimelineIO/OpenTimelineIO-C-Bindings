@@ -36,10 +36,14 @@ OTIO_API bool FreezeFrame_to_json_file(
         FreezeFrame *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 
 OTIO_API const char *FreezeFrame_to_json_string(
-        FreezeFrame *self, OTIOErrorStatus *error_status, int indent);
+        FreezeFrame *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 
 OTIO_API bool
 FreezeFrame_is_equivalent_to(FreezeFrame *self, OTIOSerializableObject *other);

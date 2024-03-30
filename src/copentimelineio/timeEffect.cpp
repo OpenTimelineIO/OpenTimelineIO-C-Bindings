@@ -36,18 +36,30 @@ OTIO_API AnyDictionary* TimeEffect_metadata(TimeEffect* self)
 }
 
 OTIO_API bool TimeEffect_to_json_file(
-    TimeEffect*      self,
-    const char*      file_name,
-    OTIOErrorStatus* error_status,
-    int              indent)
+    TimeEffect*             self,
+    const char*             file_name,
+    OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap*   schema_version_targets,
+    int                     indent)
 {
     return Effect_to_json_file(
-        (Effect*) self, file_name, error_status, indent);
+        (Effect*) self,
+        file_name,
+        error_status,
+        schema_version_targets,
+        indent);
 }
 OTIO_API const char* TimeEffect_to_json_string(
-    TimeEffect* self, OTIOErrorStatus* error_status, int indent)
+    TimeEffect*             self,
+    OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap*   schema_version_targets,
+    int                     indent)
 {
-    return Effect_to_json_string((Effect*) self, error_status, indent);
+    return Effect_to_json_string(
+            (Effect*) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool
 TimeEffect_is_equivalent_to(TimeEffect* self, OTIOSerializableObject* other)

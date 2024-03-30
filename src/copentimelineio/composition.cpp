@@ -16,6 +16,7 @@
 #include <string.h>
 #include <utility>
 #include <vector>
+#include <optional>
 
 typedef std::vector<OTIO_NS::Marker *> MarkerVectorDef;
 typedef std::vector<OTIO_NS::Marker *>::iterator MarkerVectorIteratorDef;
@@ -33,8 +34,8 @@ typedef OTIO_NS::SerializableObject::Retainer<OTIO_NS::Composable>
 typedef std::vector<OTIO_NS::Composable *> ComposableVectorDef;
 typedef std::vector<OTIO_NS::Composable *>::iterator ComposableVectorIteratorDef;
 typedef std::pair<
-        nonstd::optional<opentime::RationalTime>,
-        nonstd::optional<opentime::RationalTime>>
+        std::optional<opentime::RationalTime>,
+        std::optional<opentime::RationalTime>>
         PairDef;
 
 OTIO_API Composition *Composition_create(
@@ -43,9 +44,9 @@ OTIO_API Composition *Composition_create(
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (source_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
@@ -166,20 +167,20 @@ OTIO_API OptionalTimeRange Composition_trimmed_range_of_child(
         Composition *self,
         Composable *child,
         OTIOErrorStatus *error_status) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Composition *>(self)
                     ->trimmed_range_of_child(
                             reinterpret_cast<OTIO_NS::Composable *>(child),
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API OptionalTimeRange
 Composition_trim_child_range(Composition *self, TimeRange child_range) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Composition *>(self)->trim_child_range(
                     CTimeRange_to_CppTimeRange(child_range));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API bool Composition_has_child(Composition *self, Composable *child) {
@@ -275,14 +276,25 @@ OTIO_API bool Composition_to_json_file(
         Composition *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API const char *Composition_to_json_string(
-        Composition *self, OTIOErrorStatus *error_status, int indent) {
+        Composition *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 OTIO_API bool
 Composition_is_equivalent_to(Composition *self, OTIOSerializableObject *other) {

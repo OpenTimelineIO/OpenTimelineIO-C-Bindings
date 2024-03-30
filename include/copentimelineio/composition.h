@@ -111,9 +111,13 @@ OTIO_API bool Composition_to_json_file(
         Composition *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Composition_to_json_string(
-        Composition *self, OTIOErrorStatus *error_status, int indent);
+        Composition *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool
 Composition_is_equivalent_to(Composition *self, OTIOSerializableObject *other);
 OTIO_API Composition *

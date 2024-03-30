@@ -52,14 +52,26 @@ OTIO_API bool FreezeFrame_to_json_file(
         FreezeFrame *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return Effect_to_json_file(
-            (Effect *) self, file_name, error_status, indent);
+            (Effect *) self,
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API const char *FreezeFrame_to_json_string(
-        FreezeFrame *self, OTIOErrorStatus *error_status, int indent) {
-    return Effect_to_json_string((Effect *) self, error_status, indent);
+        FreezeFrame *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
+    return Effect_to_json_string(
+            (Effect *) self,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API bool

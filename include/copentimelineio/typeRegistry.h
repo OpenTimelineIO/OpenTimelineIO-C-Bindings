@@ -15,6 +15,9 @@
 # define OTIO_API
 #endif
 
+typedef struct OTIOErrorStatus OTIOErrorStatus;
+typedef struct OTIOSerializableObject OTIOSerializableObject;
+
 typedef OTIOSerializableObject* (*TypeRegistryCreateFunction)();
 typedef void (*TypeRegistryUpgradeFunction)(AnyDictionary*);
 typedef struct TypeRegistry TypeRegistry;
@@ -49,4 +52,7 @@ OTIO_API bool TypeRegistry_set_type_record(
     OTIOSerializableObject* var1,
     const char*         schema_name,
     OTIOErrorStatus*    error_status);
+OTIO_API void TypeRegistry_type_version_map(
+    TypeRegistry* self,
+    OTIOSchemaVersionMap& result);
 OTIO_API void TypeRegistry_destroy(TypeRegistry* self);

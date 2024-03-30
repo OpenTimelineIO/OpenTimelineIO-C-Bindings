@@ -11,6 +11,7 @@
 #include <opentimelineio/clip.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/mediaReference.h>
+#include <optional>
 
 OTIO_API Clip *
 Clip_create(
@@ -18,9 +19,9 @@ Clip_create(
         MediaReference *media_reference,
         OptionalTimeRange source_range,
         AnyDictionary *metadata) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (source_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
@@ -153,15 +154,27 @@ Clip_to_json_file(
         Clip *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent) {
     return SerializableObject_to_json_file(
-            reinterpret_cast<OTIOSerializableObject *>(self), file_name, error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            file_name,
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API const char *
-Clip_to_json_string(Clip *self, OTIOErrorStatus *error_status, int indent) {
+Clip_to_json_string(
+        Clip *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent) {
     return SerializableObject_to_json_string(
-            reinterpret_cast<OTIOSerializableObject *>(self), error_status, indent);
+            reinterpret_cast<OTIOSerializableObject *>(self),
+            error_status,
+            schema_version_targets,
+            indent);
 }
 
 OTIO_API bool

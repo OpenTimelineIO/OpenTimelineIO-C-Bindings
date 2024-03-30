@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "typeRegistry.h"
 #include "errorStatus.h"
 #include "any.h"
 #include <stdbool.h>
@@ -14,10 +15,14 @@
 #endif
 
 OTIO_API const char *serialize_json_to_string(
-        Any *value, OTIOErrorStatus *error_status, int indent);
+        Any *value,
+        OTIOSchemaVersionMap *schema_version_targets,
+        OTIOErrorStatus *error_status,
+        int indent);
 
 OTIO_API bool serialize_json_to_file(
         Any *value,
         const char *file_name,
+        OTIOSchemaVersionMap *schema_version_targets,
         OTIOErrorStatus *error_status,
         int indent);

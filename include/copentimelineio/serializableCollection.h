@@ -44,10 +44,12 @@ OTIO_API bool SerializableCollection_to_json_file(
     SerializableCollection* self,
     const char*             file_name,
     OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap*   schema_version_targets,
     int                     indent);
 OTIO_API const char* SerializableCollection_to_json_string(
     SerializableCollection* self,
     OTIOErrorStatus*        error_status,
+    OTIOSchemaVersionMap*   schema_version_targets,
     int                     indent);
 OTIO_API bool SerializableCollection_is_equivalent_to(
     SerializableCollection* self, OTIOSerializableObject* other);

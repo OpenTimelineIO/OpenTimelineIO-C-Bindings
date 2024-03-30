@@ -48,23 +48,29 @@ SerializableObject_to_json_file(
     OTIOSerializableObject* self,
     const char*         file_name,
     OTIOErrorStatus*    error_status,
+    OTIOSchemaVersionMap *schema_version_targets,
     int                 indent)
 {
     return reinterpret_cast<OTIO_NS::SerializableObject*>(self)
         ->to_json_file(
             file_name,
             reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status),
+            reinterpret_cast<OTIO_NS::schema_version_map*>(schema_version_targets),
             indent);
 }
 
 OTIO_API const char*
 SerializableObject_to_json_string(
-    OTIOSerializableObject* self, OTIOErrorStatus* error_status, int indent)
+    OTIOSerializableObject* self,
+    OTIOErrorStatus* error_status,
+    OTIOSchemaVersionMap *schema_version_targets,
+    int indent)
 {
     std::string returnStr =
         reinterpret_cast<OTIO_NS::SerializableObject*>(self)
             ->to_json_string(
                 reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status),
+                reinterpret_cast<OTIO_NS::schema_version_map*>(schema_version_targets),
                 indent);
     return strdup(returnStr.c_str());
 }

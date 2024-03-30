@@ -51,9 +51,13 @@ OTIO_API bool Transition_to_json_file(
         Transition *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Transition_to_json_string(
-        Transition *self, OTIOErrorStatus *error_status, int indent);
+        Transition *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool
 Transition_is_equivalent_to(Transition *self, OTIOSerializableObject *other);
 OTIO_API Transition *

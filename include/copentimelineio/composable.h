@@ -41,9 +41,13 @@ OTIO_API bool Composable_to_json_file(
         Composable *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
 OTIO_API const char *Composable_to_json_string(
-        Composable *self, OTIOErrorStatus *error_status, int indent);
+        Composable *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool Composable_is_equivalent_to(Composable *self, OTIOSerializableObject *other);
 OTIO_API Composable *
 Composable_clone(Composable *self, OTIOErrorStatus *error_status);

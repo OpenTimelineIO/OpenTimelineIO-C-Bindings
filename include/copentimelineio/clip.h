@@ -60,9 +60,13 @@ OTIO_API bool Clip_to_json_file(
         Clip *self,
         const char *file_name,
         OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
         int indent);
-OTIO_API const char *
-Clip_to_json_string(Clip *self, OTIOErrorStatus *error_status, int indent);
+OTIO_API const char * Clip_to_json_string(
+        Clip *self,
+        OTIOErrorStatus *error_status,
+        OTIOSchemaVersionMap *schema_version_targets,
+        int indent);
 OTIO_API bool Clip_is_equivalent_to(Clip *self, OTIOSerializableObject *other);
 OTIO_API Clip *Clip_clone(Clip *self, OTIOErrorStatus *error_status);
 OTIO_API const char *Clip_schema_name(Clip *self);
