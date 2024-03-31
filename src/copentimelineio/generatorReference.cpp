@@ -9,6 +9,7 @@
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/generatorReference.h>
 #include <string.h>
+#include <optional>
 
 OTIO_API GeneratorReference *GeneratorReference_create(
         const char *name,
@@ -32,9 +33,9 @@ OTIO_API GeneratorReference *GeneratorReference_create(
         metadataDictionary =
                 *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
 
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (available_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(available_range.value));
     return reinterpret_cast<GeneratorReference *>(
             new OTIO_NS::GeneratorReference(
