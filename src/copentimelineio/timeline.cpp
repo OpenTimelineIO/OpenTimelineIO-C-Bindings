@@ -11,6 +11,7 @@
 #include <opentimelineio/timeline.h>
 #include <opentimelineio/track.h>
 #include <vector>
+#include <optional>
 
 typedef std::vector<OTIO_NS::Track *> TrackVectorDef;
 typedef std::vector<OTIO_NS::Track *>::iterator TrackVectorIteratorDef;
@@ -27,9 +28,9 @@ OTIO_API Timeline *Timeline_create(
         metadataDictionary =
                 *reinterpret_cast<OTIO_NS::AnyDictionary *>(metadata);
 
-    nonstd::optional<opentime::RationalTime> rationalTimeOptional = nonstd::nullopt;
+    std::optional<opentime::RationalTime> rationalTimeOptional = std::nullopt;
     if (global_start_time.valid)
-        rationalTimeOptional = nonstd::optional<opentime::RationalTime>(
+        rationalTimeOptional = std::optional<opentime::RationalTime>(
                 CRationalTime_to_CppRationalTime(global_start_time.value));
     return reinterpret_cast<Timeline *>(new OTIO_NS::Timeline(
             name_str, rationalTimeOptional, metadataDictionary));
@@ -46,17 +47,17 @@ OTIO_API void Timeline_set_tracks(Timeline *self, Stack *stack) {
 }
 
 OTIO_API OptionalRationalTime Timeline_global_start_time(Timeline *self) {
-    nonstd::optional<opentime::RationalTime> rationalTimeOptional =
+    std::optional<opentime::RationalTime> rationalTimeOptional =
             reinterpret_cast<OTIO_NS::Timeline *>(self)->global_start_time();
-    if (rationalTimeOptional == nonstd::nullopt) return OptionalRationalTime_create_null();
+    if (rationalTimeOptional == std::nullopt) return OptionalRationalTime_create_null();
     return OptionalRationalTime_create(CppRationalTime_to_CRationalTime(rationalTimeOptional.value()));
 }
 
 OTIO_API void Timeline_set_global_start_time(
         Timeline *self, OptionalRationalTime global_start_time) {
-    nonstd::optional<opentime::RationalTime> rationalTimeOptional = nonstd::nullopt;
+    std::optional<opentime::RationalTime> rationalTimeOptional = std::nullopt;
     if (global_start_time.valid)
-        rationalTimeOptional = nonstd::optional<opentime::RationalTime>(
+        rationalTimeOptional = std::optional<opentime::RationalTime>(
                 CRationalTime_to_CppRationalTime(global_start_time.value));
     reinterpret_cast<OTIO_NS::Timeline *>(self)->set_global_start_time(
             rationalTimeOptional);

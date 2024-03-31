@@ -10,6 +10,7 @@
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/transition.h>
 #include <string.h>
+#include <optional>
 
 const char *TransitionType_SMPTE_Dissolve =
         OTIO_NS::Transition::Type::SMPTE_Dissolve;
@@ -86,19 +87,19 @@ Transition_duration(Transition *self, OTIOErrorStatus *error_status) {
 }
 OTIO_API OptionalTimeRange
 Transition_range_in_parent(Transition *self, OTIOErrorStatus *error_status) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Transition *>(self)->range_in_parent(
                     reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API OptionalTimeRange Transition_trimmed_range_in_parent(
         Transition *self, OTIOErrorStatus *error_status) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional =
+    std::optional<opentime::TimeRange> timeRangeOptional =
             reinterpret_cast<OTIO_NS::Transition *>(self)
                     ->trimmed_range_in_parent(
                             reinterpret_cast<OTIO_NS::ErrorStatus *>(error_status));
-    if (timeRangeOptional == nonstd::nullopt) return OptionalTimeRange_create_null();
+    if (timeRangeOptional == std::nullopt) return OptionalTimeRange_create_null();
     return OptionalTimeRange_create(CppTimeRange_to_CTimeRange(timeRangeOptional.value()));
 }
 OTIO_API const char *Transition_name(Transition *self) {
