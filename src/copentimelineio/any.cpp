@@ -2,7 +2,6 @@
 // Copyright Contributors to the OpenTimelineIO project
 
 #include "copentimelineio/any.h"
-//#include <opentimelineio/any.h>
 #include <opentimelineio/version.h>
 #include <any>
 
