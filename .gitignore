@@ -1,6 +1,7 @@
 *.swp
 *.pyc
 build*
+compile_commands.json
 cmake-build*
 dist*
 *.egg-info

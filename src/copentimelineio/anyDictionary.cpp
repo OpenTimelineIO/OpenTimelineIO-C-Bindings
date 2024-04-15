@@ -5,8 +5,9 @@
 #include <opentimelineio/anyDictionary.h>
 #include <opentimelineio/version.h>
 #include <string.h>
+#include <any>
 
-typedef std::map<std::string, OTIO_NS::any>::iterator DictionaryIterator;
+typedef std::map<std::string, std::any>::iterator DictionaryIterator;
 
 OTIO_API AnyDictionary* AnyDictionary_create()
 {
@@ -85,7 +86,7 @@ AnyDictionary_insert(AnyDictionary* self, const char* key, Any* anyObj)
 {
     DictionaryIterator it =
         reinterpret_cast<OTIO_NS::AnyDictionary*>(self)
-            ->insert({ key, *reinterpret_cast<OTIO_NS::any*>(anyObj) })
+            ->insert({ key, *reinterpret_cast<std::any*>(anyObj) })
             .first;
     return reinterpret_cast<AnyDictionaryIterator*>(
         new DictionaryIterator(it));
@@ -118,9 +119,9 @@ OTIO_API const char* AnyDictionaryIterator_key(AnyDictionaryIterator* iter)
 }
 OTIO_API Any* AnyDictionaryIterator_value(AnyDictionaryIterator* iter)
 {
-    OTIO_NS::any value =
+    std::any value =
         (*reinterpret_cast<DictionaryIterator*>(iter))->second;
-    return reinterpret_cast<Any*>(new OTIO_NS::any(value));
+    return reinterpret_cast<Any*>(new std::any(value));
 }
 OTIO_API bool AnyDictionaryIterator_equal(
     AnyDictionaryIterator* lhs, AnyDictionaryIterator* rhs)

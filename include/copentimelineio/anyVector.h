@@ -73,9 +73,9 @@ AnyVectorIterator_not_equal(AnyVectorIterator *lhs, AnyVectorIterator *rhs);
 
 OTIO_API void AnyVectorIterator_destroy(AnyVectorIterator *self);
 
-OTIO_API AnyVectorMutationStamp *MutationStamp_create(AnyVector *v);
+OTIO_API AnyVectorMutationStamp *AnyVectorMutationStamp_create(AnyVector *v);
 
-OTIO_API void MutationStamp_destroy(AnyVectorMutationStamp *self);
+OTIO_API void AnyVectorMutationStamp_destroy(AnyVectorMutationStamp *self);
 
 OTIO_API AnyVectorMutationStamp *
 AnyVector_get_or_create_mutation_stamp(AnyVector *self);

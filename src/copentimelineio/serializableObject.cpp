@@ -54,6 +54,7 @@ SerializableObject_to_json_file(
         ->to_json_file(
             file_name,
             reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status),
+            {},
             indent);
 }
 
@@ -65,6 +66,7 @@ SerializableObject_to_json_string(
         reinterpret_cast<OTIO_NS::SerializableObject*>(self)
             ->to_json_string(
                 reinterpret_cast<OTIO_NS::ErrorStatus*>(error_status),
+                {},
                 indent);
     return strdup(returnStr.c_str());
 }

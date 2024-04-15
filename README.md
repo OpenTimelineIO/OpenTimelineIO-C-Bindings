@@ -20,6 +20,10 @@ some essential features and there are large changes planned. During this phase
 we actively encourage you to provide feedback, requests, comments, and/or
 contributions.
 
+NOTE: One of these missing features is support for the downgrade versioning
+map in the JSON serialization and deserialization. This can be addressed in
+the future, but for now an empty map is passed to the underlying C++ calls.
+
 Overview
 --------
 

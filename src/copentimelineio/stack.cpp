@@ -10,6 +10,7 @@
 #include <opentimelineio/composable.h>
 #include <opentimelineio/errorStatus.h>
 #include <opentimelineio/stack.h>
+#include <optional>
 
 typedef std::vector<OTIO_NS::Effect *> EffectVectorDef;
 typedef std::vector<OTIO_NS::Effect *>::iterator EffectVectorIteratorDef;
@@ -25,9 +26,9 @@ OTIO_API Stack *Stack_create(
         AnyDictionary *metadata,
         EffectVector *effects,
         MarkerVector *markers) {
-    nonstd::optional<opentime::TimeRange> timeRangeOptional = nonstd::nullopt;
+    std::optional<opentime::TimeRange> timeRangeOptional = std::nullopt;
     if (source_range.valid)
-        timeRangeOptional = nonstd::optional<opentime::TimeRange>(
+        timeRangeOptional = std::optional<opentime::TimeRange>(
                 CTimeRange_to_CppTimeRange(source_range.value));
 
     std::string name_str = std::string();
