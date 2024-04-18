@@ -21,10 +21,16 @@ OTIO_API OpenTimeErrorStatus *OpenTimeErrorStatus_create_with_outcome_and_detail
             in_details));
 }
 OTIO_API const char *OpenTimeErrorStatus_outcome_to_string(
-        OpenTimeErrorStatus *self, OpenTime_ErrorStatus_Outcome var1) {
+        OpenTime_ErrorStatus_Outcome var1) {
     std::string returnStr = opentime::ErrorStatus::outcome_to_string(
             static_cast<opentime::ErrorStatus::Outcome>(var1));
     return strdup(returnStr.c_str());
+}
+OTIO_API OpenTime_ErrorStatus_Outcome
+OpenTimeErrorStatus_get_outcome(OpenTimeErrorStatus* self)
+{
+    return static_cast<OpenTime_ErrorStatus_Outcome>(
+        reinterpret_cast<opentime::ErrorStatus*>(self)->outcome);
 }
 OTIO_API void OpenTimeErrorStatus_destroy(OpenTimeErrorStatus *self) {
     delete reinterpret_cast<opentime::ErrorStatus *>(self);
