@@ -12,7 +12,7 @@
 # define OTIO_API
 #endif
 
-typedef class UnknownSchema UnknownSchema;
+typedef struct UnknownSchema UnknownSchema;
 
 OTIO_API UnknownSchema *UnknownSchema_create(
         const char *original_schema_name, int original_schema_version);
